@@ -1,0 +1,18 @@
+﻿
+
+<nav class="section-rail">
+    <a class="section-rail__item@(this._activeSection == "about" ? "--active" : "")" @onclick='() => this.SetActiveSection("about")' Href="#about" Match="NavLinkMatch.All" Icon="@Icons.Material.Filled.Home"></a>
+    <a class="section-rail__item@(this._activeSection == "stack" ? "--active" : "")" @onclick='() => this.SetActiveSection("stack")' Href="#stack" Match="NavLinkMatch.Prefix" Icon="@Icons.Material.Filled.Add"></a>
+    <a class="section-rail__item@(this._activeSection == "projects" ? "--active" : "")" @onclick='() => this.SetActiveSection("projects")' Href="#projects" Match="NavLinkMatch.Prefix" Icon="@Icons.Material.Filled.List"></a>
+    <a class="section-rail__item@(this._activeSection == "contacts" ? "--active" : "")" @onclick='() => this.SetActiveSection("contacts")' Href="#contacts" Match="NavLinkMatch.Prefix" Icon="@Icons.Material.Filled.List"></a>
+</nav>
+
+
+@code {
+    private string _activeSection = "about";
+
+    private void SetActiveSection(string section)
+    {
+        this._activeSection = section;
+    }
+}
