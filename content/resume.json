@@ -1,0 +1,16 @@
+{
+  "about": {
+    "title": "Обо мне",
+    "text": "Я начинающий C# разработчик, фокусирующийся на .NET..."
+  },
+  "stack": [
+    {
+      "name": "C#",
+      "description": "Main language"
+    },
+    {
+      "name": ".NET",
+      "description": "Backend and web platform"
+    }
+  ]
+}
