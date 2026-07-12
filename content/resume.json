@@ -1,16 +1,108 @@
 {
+  "hero": {
+    "name": "Филипп",
+    "title": "Junior C# / .NET разработчик",
+    "subtitle": "Разрабатываю приложения на C# - WPF, Blazor.",
+    "description": "Я начинающий разработчик, который фокусируется на экосистеме .NET. Мне интересно разбираться, как устроены веб-приложения, писать понятный C# код и доводить небольшие проекты до рабочего состояния."
+  },
   "about": {
     "title": "Обо мне",
-    "text": "Я начинающий C# разработчик, фокусирующийся на .NET..."
+    "paragraphs": [
+      "Я junior C# разработчик без коммерческого опыта, но с устойчивым интересом к backend-разработке, веб-приложениям и практической архитектуре кода.",
+      "Сейчас я изучаю ASP.NET Core, WPF, Blazor WebAssembly, PostgreSQL и стараюсь делать проекты, которые помогают закреплять реальные навыки разработки.",
+      "Мне нравится аккуратный код, понятная структура проекта."
+    ]
   },
-  "stack": [
-    {
-      "name": "C#",
-      "description": "Main language"
-    },
-    {
-      "name": ".NET",
-      "description": "Backend and web platform"
-    }
-  ]
+  "stack": {
+    "title": "Мой стек",
+    "groups": [
+      {
+        "title": "Основное направление",
+        "items": [
+          "C#",
+          ".NET",
+          "Entity Framework Core",
+          "ASP.NET Core",
+          "Blazor WebAssembly",
+          "PostgreSQL",
+          "WPF",
+          "WinForms"
+        ]
+      },
+      {
+        "title": "Инструменты",
+        "items": [
+          "Git",
+          "GitHub",
+          "Visual Studio",
+          "Visual Studio Code"
+        ]
+      },
+      {
+        "title": "Изучаю",
+        "items": [
+          "Entity Framework Core",
+          "Основы чистой архитектуры",
+          "Основы backend-разработки",
+          "Основы frontend-разработки"
+        ]
+      }
+    ]
+  },
+  "projects": {
+    "title": "Проекты",
+    "items": [
+      {
+        "name": "Расширение для Visual Studio Code",
+        "description": "Опубликованное в Marketplace расширение для Visual Studio Code, написанное с использованием TypeScript",
+        "stack": [
+          "TypeScript",
+          "VS Code Extenstions"
+        ],
+        "highlights": [
+          "Вроде что-то прикольное, хоть и не C#"
+        ],
+        "githubUrl": "https://github.com/filiandun/docx-markdown-editor",
+        "demoUrl": "https://marketplace.visualstudio.com/items?itemName=filian.docx-markdown-editor"
+      },
+      {
+        "name": "Личный сайт-резюме",
+        "description": "Одностраничный сайт-портфолио, разработанный на Blazor WebAssembly с использованием MudBlazor.",
+        "stack": [
+          "C#",
+          "Blazor WebAssembly",
+          "MudBlazor",
+          "GitHub Pages"
+        ],
+        "highlights": [
+          "Компонентная структура страницы",
+          "Публикация статического сайта на GitHub Pages",
+          "Адаптивная одностраничная верстка"
+        ],
+        "githubUrl": "https://github.com/filiandun/philipp-website",
+        "demoUrl": "https://philipp.website"
+      }
+    ]
+  },
+  "contacts": {
+    "title": "Контакты",
+    "description": "Открыт к junior C#/.NET вакансиям, стажировкам и проектной работе.",
+    "items": [
+      {
+        "label": "GitHub",
+        "value": "github.com/filiandun",
+        "url": "https://github.com/filiandun"
+      },
+      {
+        "label": "Email",
+        "value": "filiandun@gmail.com",
+        "url": "mailto:filiandun@gmail.com"
+      },
+      {
+        "label": "Сайт",
+        "value": "philipp.website",
+        "url": "https://philipp.website"
+      }
+    ]
+  }
 }

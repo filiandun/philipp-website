@@ -1,3 +1,50 @@
+/* /Components/SectionRail.razor.rz.scp.css */
+/* CSS for SectionRail component */
+
+.section-rail[b-h4bfs6h00w] {
+    position: fixed;
+
+    display: flex;
+    flex-direction: column;
+
+    z-index: 10;
+
+    gap: 100px;
+    left: 48px;
+    top: 50%;
+
+    transform: translateY(-50%);
+}
+
+    .section-rail__item[b-h4bfs6h00w] {
+        scroll-snap-align: start;
+
+        width: 100px;
+        height: 4px;
+
+        background: rgba(255, 255, 255, 0.35);
+
+        border-radius: 10px;
+
+        transition: all 0.3s ease-in-out;
+    }
+
+        .section-rail__item--active[b-h4bfs6h00w] {
+            width: 120px;
+            height: 6px;
+
+            background: rgba(255, 255, 255, 1);
+
+            border-radius: 10px;
+        }
+/* /Components/Sections/AboutSection.razor.rz.scp.css */
+/* CSS for AboutSection component */
+/* /Components/Sections/ContactsSection.razor.rz.scp.css */
+/* CSS for ContactsSection component */
+/* /Components/Sections/ProjectsSection.razor.rz.scp.css */
+/* CSS for ProjectsSection component */
+/* /Components/Sections/StackSection.razor.rz.scp.css */
+/* CSS for StackSection component */
 /* /Layout/MainLayout.razor.rz.scp.css */
 .page[b-i4x3zxr084] {
     position: relative;
@@ -75,4 +122,27 @@ main[b-i4x3zxr084] {
         padding-left: 2rem !important;
         padding-right: 1.5rem !important;
     }
+}
+/* /Pages/Home.razor.rz.scp.css */
+/* CSS for Home component */
+.resume-page[b-i8ybeye7gv] {
+    height: 100vh;
+
+    overflow-y: auto;
+
+    scroll-snap-type: y mandatory;
+    scroll-behavior: smooth;
+}
+
+.resume-section[b-i8ybeye7gv] {
+    display: flex;
+    align-items: center;
+
+    padding: 50px 100px;
+    padding-left: 225px;
+
+    min-height: 100vh;
+
+    scroll-snap-align: start;
+    scroll-snap-stop: always;
 }
