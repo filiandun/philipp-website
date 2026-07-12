@@ -1,13 +1,52 @@
-﻿@page "/projects"
+﻿@using PhilippWebsite.Models
 
-<PageTitle>My projects</PageTitle>
+@* "items": [
+{
+"name": "Расширение для Visual Studio Code",
+"description": "Опубликованное в Marketplace расширение для Visual Studio Code, написанное с использованием TypeScript",
+"stack": [
+"TypeScript",
+"VS Code Extenstions"
+],
+"highlights": [
+"Вроде что-то прикольное, хоть и не C#"
+],
+"githubUrl": "https://github.com/filiandun/docx-markdown-editor",
+"demoUrl": "https://marketplace.visualstudio.com/items?itemName=filian.docx-markdown-editor"
+}, *@
 
-<div>
-    <MudText Typo="Typo.h1" GutterBottom="true">Projects</MudText>
+<div class="section-content projects-section" style="padding: 50px; background-color: rgb(26, 26, 55); border-radius: 50px">
+    <MudText Typo="Typo.h1" Color="Color.Surface" GutterBottom="true">@Content.Title</MudText>
 
-    <MudText Typo="Typo.h6" GutterBottom="true">nothing :(</MudText>
+    @foreach (var item in Content.Items)
+    {
+        <p><MudText Typo="Typo.h3" Color="Color.Secondary" GutterBottom="true">@item.Name</MudText></p>
+        <p><MudText Typo="Typo.h4" GutterBottom="true">@item.Description</MudText></p>
+
+        <MudTHeadRow></MudTHeadRow>
+
+        foreach (var stack in item.Stack)
+        {
+            <p><MudText Typo="Typo.h6" GutterBottom="true">@stack</MudText></p>
+        }
+
+        <MudTHeadRow></MudTHeadRow>
+
+        foreach (var highlight in item.Highlights)
+        {
+            <p><MudText Typo="Typo.h6" GutterBottom="true">@highlight</MudText></p>
+        }
+
+        <MudTHeadRow ></MudTHeadRow>
+
+        <p>
+            <MudText Typo="Typo.h6" GutterBottom="true">@item.GithubUrl</MudText>
+            <MudText Typo="Typo.h6" GutterBottom="true">@item.DemoUrl</MudText>
+        </p>
+    }
 </div>
 
 @code {
-
+    [Parameter]
+    public required ProjectsContent Content { get; set; }
 }

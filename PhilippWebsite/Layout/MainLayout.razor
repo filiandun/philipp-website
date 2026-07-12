@@ -1,55 +1,56 @@
 @using Microsoft.AspNetCore.Components.Sections
+
 @using PhilippWebsite.Components
+
 
 @inherits LayoutComponentBase
 
-<MudThemeProvider Theme="@_theme" IsDarkMode="_isDarkMode" />
+<MudThemeProvider Theme="@this._theme" IsDarkMode="@this._isDarkMode" />
 <MudPopoverProvider />
 <MudDialogProvider />
 <MudSnackbarProvider />
 
 <MudLayout>
-    <MudAppBar Elevation="1">
-        <MudText Typo="Typo.h6" Class="ml-2">my resume</MudText>
-        <MudSpacer />
+    @* <MudAppBar Elevation="1">
         <MudIconButton Icon="@(DarkLightModeButtonIcon)" Color="Color.Inherit" OnClick="@DarkModeToggle" />
-    </MudAppBar>
+    </MudAppBar> *@
 
-    <MudMainContent Class="pt-16 pa-4">
+    <MudMainContent>
         @Body
     </MudMainContent>
 
-    <MudTFootRow Elevation="1">
-        <MudText >@@philipp</MudText>
-    </MudTFootRow>
+  @*   <MudTFootRow>
+        <MudText>@@philipp</MudText>
+    </MudTFootRow> *@
 </MudLayout>
 
+
 @code {
-    private bool _drawerOpen = true;
-    private bool _isDarkMode = true;
+    private bool _drawerOpen;
+    private bool _isDarkMode;
+
     private MudTheme? _theme;
 
     protected override void OnInitialized()
     {
         base.OnInitialized();
 
-        _theme = new()
+        this._drawerOpen = true;
+        this._isDarkMode = true;
+
+        this._theme = new MudTheme()
         {
-            PaletteLight = _lightPalette,
-            PaletteDark = _darkPalette,
+            PaletteLight = this._lightPalette,
+            PaletteDark = this._darkPalette,
+
             LayoutProperties = new LayoutProperties()
         };
     }
 
-    private void DrawerToggle()
-    {
-        _drawerOpen = !_drawerOpen;
-    }
+    private void DrawerToggle() => this._drawerOpen = !this._drawerOpen;
 
-    private void DarkModeToggle()
-    {
-        _isDarkMode = !_isDarkMode;
-    }
+    private void DarkModeToggle() => this._isDarkMode = !this._isDarkMode;
+
 
     private readonly PaletteLight _lightPalette = new()
     {
@@ -90,7 +91,7 @@
         OverlayLight = "#1e1e2d80",
     };
 
-    public string DarkLightModeButtonIcon => _isDarkMode switch
+    public string DarkLightModeButtonIcon => this._isDarkMode switch
     {
         true => Icons.Material.Outlined.LightMode,
         false => Icons.Material.Outlined.DarkMode,

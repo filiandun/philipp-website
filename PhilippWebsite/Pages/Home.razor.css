@@ -1,0 +1,22 @@
+/* CSS for Home component */
+.resume-page {
+    height: 100vh;
+
+    overflow-y: auto;
+
+    scroll-snap-type: y mandatory;
+    scroll-behavior: smooth;
+}
+
+.resume-section {
+    display: flex;
+    align-items: center;
+
+    padding: 50px 100px;
+    padding-left: 225px;
+
+    min-height: 100vh;
+
+    scroll-snap-align: start;
+    scroll-snap-stop: always;
+}

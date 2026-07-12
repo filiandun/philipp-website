@@ -1,30 +1,85 @@
 ﻿@page "/"
 
+@using PhilippWebsite.Models;
 @using PhilippWebsite.Components
 @using PhilippWebsite.Components.Sections
 
+@implements IAsyncDisposable
 
-<main class="resume-page">
-    <SectionRail/>
+@inject HttpClient Http
 
-    <section id="about" class="resume-section">
-        <AboutSection />
-    </section>
+@inject ILogger<Home> Logger
+@inject IJSRuntime JSRuntime
 
-    <section id="stack" class="resume-section">
-        <StackSection />
-    </section>
+<PageTitle>Philipp's website</PageTitle>
 
-    <section id="projects" class="resume-section">
-        <ProjectsSection />
-    </section>
+@if (this._content is null)
+{
+    <p>Загрузка...</p>
+}
+else
+{
+    <main class="resume-page">
+        <SectionRail ActiveSection="@this._activeSection"/>
 
-    <section id="contacts" class="resume-section">
-        <ContactsSection />
-    </section>
-</main>
+        <section id="about" class="resume-section">
+            <AboutSection Content="@this._content.About"/>
+        </section>
+
+        <section id="stack" class="resume-section">
+            <StackSection Content="@this._content.Stack"/>
+        </section>
+
+        <section id="projects" class="resume-section">
+            <ProjectsSection Content="@this._content.Projects"/>
+        </section>
+
+        <section id="contacts" class="resume-section">
+            <ContactsSection Content="@this._content.Contacts"/>
+        </section>
+    </main>
+}
 
 
 @code {
+    private ResumeContent? _content;
 
+    protected override async Task OnInitializedAsync()
+    {
+        this._content = await this.Http.GetFromJsonAsync<ResumeContent>("content/resume.json");
+    }
+
+
+    private string _activeSection = "about";
+
+    private DotNetObjectReference<Home>? dotNetRef;
+
+    private bool _isObserverSet = false;
+
+    protected override async Task OnAfterRenderAsync(bool firstRender)
+    {
+        if (this._content != null && !this._isObserverSet)
+        {
+            this._isObserverSet = true;
+
+            this.dotNetRef = DotNetObjectReference.Create(this);
+
+            await this.JSRuntime.InvokeVoidAsync("sectionObserver.observe", this.dotNetRef, ".resume-section");
+        }
+    }
+
+    [JSInvokable]
+    public void SetActiveSection(string sectionId)
+    {
+        this.Logger.LogInformation("SetActiveSection");
+
+        this._activeSection = sectionId;
+        StateHasChanged();
+    }
+
+    public async ValueTask DisposeAsync()
+    {
+        await this.JSRuntime.InvokeVoidAsync("sectionObserver.disconnect");
+        this.dotNetRef?.Dispose();
+    }
 }

@@ -1,14 +1,44 @@
-﻿@page "/stack"
+﻿@using PhilippWebsite.Models
 
-<PageTitle>Stack</PageTitle>
+@* "groups": [
+{
+"title": "Основное направление",
+"items": [
+"C#",
+".NET",
+"Entity Framework Core",
+"ASP.NET Core",
+"Blazor WebAssembly",
+"PostgreSQL",
+"WPF",
+"WinForms"
+] *@
 
-<div>
-    <MudText Typo="Typo.h1" GutterBottom="true">My stack</MudText>
+<div class="section-content stack-section" style="height: 80vh; width: 100%;">
+    <MudText Typo="Typo.h1" Color="Color.Surface" GutterBottom="true">@Content.Title</MudText>
 
-    <MudImage Src="images/stock.png" Width="400"></MudImage>
+    <MudCarousel Class="mud-width-full" Style="height: 80%; width: 100%; border-radius: 50px;" ShowArrows="true" ShowBullets="false" EnableSwipeGesture="true" AutoCycle="false" TData="object">
+        @foreach (var group in Content.Groups)
+        {
+            <MudCarouselItem Transition="Transition.Fade" Color="@Color.Dark">
+                <div class="" style="height:100%;  padding: 50px;">
+
+                    <MudText Typo="Typo.h2" Color="Color.Secondary" GutterBottom="true">@group.Title</MudText>
+
+                    @foreach (var item in group.Items)
+                    {
+                        <div class="d-flex justify-space-between">
+                            <MudText Typo="Typo.h4" GutterBottom="true">@item</MudText>
+                            <MudIcon Icon="@Icons.Custom.Brands.MudBlazor" Size="@Size.Large" />
+                        </div>
+                    }
+                </div>
+            </MudCarouselItem>
+        }
+    </MudCarousel>
 </div>
 
-
 @code {
-
+    [Parameter]
+    public required StackContent Content { get; set; }
 }

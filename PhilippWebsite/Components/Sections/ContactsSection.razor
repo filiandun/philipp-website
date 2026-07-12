@@ -1,7 +1,4 @@
-﻿@page "/contacts"
-
-<PageTitle>Contacts</PageTitle>
-
+﻿@using PhilippWebsite.Models
 
 <div>
     <MudText Typo="Typo.h1" GutterBottom="true">Contacts</MudText>
@@ -10,5 +7,6 @@
 </div>
 
 @code {
-
+    [Parameter]
+    public required ContactsContent Content { get; set; }
 }

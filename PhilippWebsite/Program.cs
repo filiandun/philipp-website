@@ -1,6 +1,8 @@
 using Microsoft.AspNetCore.Components.Web;
 using Microsoft.AspNetCore.Components.WebAssembly.Hosting;
+
 using MudBlazor.Services;
+
 
 namespace PhilippWebsite
 {
@@ -9,6 +11,9 @@ namespace PhilippWebsite
         public static async Task Main(string[] args)
         {
             var builder = WebAssemblyHostBuilder.CreateDefault(args);
+
+            builder.Logging.SetMinimumLevel(LogLevel.Debug);
+
             builder.RootComponents.Add<App>("#app");
             builder.RootComponents.Add<HeadOutlet>("head::after");
 

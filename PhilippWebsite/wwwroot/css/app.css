@@ -2,6 +2,16 @@ html, body {
     font-family: 'Roboto', Helvetica, Arial, sans-serif;
 }
 
+/* 
+    есть баг с тем, что два колеса прокрутки справа
+    а это его фикс.
+*/
+.mud-main-content {
+    height: 100vh;
+    margin: 0px;
+    padding: 0px;
+}
+
 #blazor-error-ui {
     color-scheme: light;
     background: rgba(30, 30, 45, 0.95);

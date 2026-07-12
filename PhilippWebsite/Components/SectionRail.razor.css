@@ -1,0 +1,38 @@
+/* CSS for SectionRail component */
+
+.section-rail {
+    position: fixed;
+
+    display: flex;
+    flex-direction: column;
+
+    z-index: 10;
+
+    gap: 100px;
+    left: 48px;
+    top: 50%;
+
+    transform: translateY(-50%);
+}
+
+    .section-rail__item {
+        scroll-snap-align: start;
+
+        width: 100px;
+        height: 4px;
+
+        background: rgba(255, 255, 255, 0.35);
+
+        border-radius: 10px;
+
+        transition: all 0.3s ease-in-out;
+    }
+
+        .section-rail__item--active {
+            width: 120px;
+            height: 6px;
+
+            background: rgba(255, 255, 255, 1);
+
+            border-radius: 10px;
+        }
