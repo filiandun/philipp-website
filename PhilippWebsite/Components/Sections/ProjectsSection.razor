@@ -1,50 +1,42 @@
 ﻿@using PhilippWebsite.Models
 
-@* "items": [
-{
-"name": "Расширение для Visual Studio Code",
-"description": "Опубликованное в Marketplace расширение для Visual Studio Code, написанное с использованием TypeScript",
-"stack": [
-"TypeScript",
-"VS Code Extenstions"
-],
-"highlights": [
-"Вроде что-то прикольное, хоть и не C#"
-],
-"githubUrl": "https://github.com/filiandun/docx-markdown-editor",
-"demoUrl": "https://marketplace.visualstudio.com/items?itemName=filian.docx-markdown-editor"
-}, *@
 
-<div class="section-content projects-section" style="padding: 50px; background-color: rgb(26, 26, 55); border-radius: 50px">
-    <MudText Typo="Typo.h1" Color="Color.Surface" GutterBottom="true">@Content.Title</MudText>
+<MudPaper MaxWidth="MaxWidth.Large" Class="section-content about-section rounded-xl pa-20" Elevation="10">
+    <MudText Typo="Typo.h1" Color="Color.Primary" GutterBottom="true">@Content.Title</MudText>
 
-    @foreach (var item in Content.Items)
-    {
-        <p><MudText Typo="Typo.h3" Color="Color.Secondary" GutterBottom="true">@item.Name</MudText></p>
-        <p><MudText Typo="Typo.h4" GutterBottom="true">@item.Description</MudText></p>
-
-        <MudTHeadRow></MudTHeadRow>
-
-        foreach (var stack in item.Stack)
+    <MudTimeline>
+        @foreach (var item in Content.Items)
         {
-            <p><MudText Typo="Typo.h6" GutterBottom="true">@stack</MudText></p>
+        <MudTimelineItem Icon="@Icons.Material.Filled.Rocket" Color="Color.Primary" Variant="Variant.Filled" Size="Size.Large">
+            <div class="my-20">
+                <p><MudText Typo="Typo.h3" Color="Color.Secondary" GutterBottom="true">@item.Name</MudText></p>
+                <p><MudText Typo="Typo.body1" Color="Color.Surface" GutterBottom="true">@item.Description</MudText></p>
+
+                <div>
+                    @foreach (var stack in item.Stack)
+                    {
+                        <MudChip T="string" Variant="Variant.Filled" Color="Color.Primary" Size="Size.Medium">@stack</MudChip>
+                    }
+  
+                    @foreach (var highlight in item.Highlights)
+                    {
+                        <MudChip T="string" Variant="Variant.Outlined" Color="Color.Default" Size="Size.Medium">@highlight</MudChip>
+                    }
+                </div>
+
+                <div class="ma-4">
+                    <p>
+                        <MudLink Href="@item.DemoUrl" StartIcon="@Icons.Material.Filled.Link">Demonstration</MudLink>
+                    </p>
+                    <p>
+                        <MudLink Href="@item.GithubUrl" StartIcon="@Icons.Custom.Brands.GitHub">GitHub</MudLink>
+                    </p>
+                </div>
+            </div>
+        </MudTimelineItem>
         }
-
-        <MudTHeadRow></MudTHeadRow>
-
-        foreach (var highlight in item.Highlights)
-        {
-            <p><MudText Typo="Typo.h6" GutterBottom="true">@highlight</MudText></p>
-        }
-
-        <MudTHeadRow ></MudTHeadRow>
-
-        <p>
-            <MudText Typo="Typo.h6" GutterBottom="true">@item.GithubUrl</MudText>
-            <MudText Typo="Typo.h6" GutterBottom="true">@item.DemoUrl</MudText>
-        </p>
-    }
-</div>
+    </MudTimeline>
+</MudPaper>
 
 @code {
     [Parameter]

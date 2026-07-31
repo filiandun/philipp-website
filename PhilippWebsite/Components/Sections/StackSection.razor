@@ -1,42 +1,104 @@
 ﻿@using PhilippWebsite.Models
 
-@* "groups": [
-{
-"title": "Основное направление",
-"items": [
-"C#",
-".NET",
-"Entity Framework Core",
-"ASP.NET Core",
-"Blazor WebAssembly",
-"PostgreSQL",
-"WPF",
-"WinForms"
-] *@
 
-<div class="section-content stack-section" style="height: 80vh; width: 100%;">
-    <MudText Typo="Typo.h1" Color="Color.Surface" GutterBottom="true">@Content.Title</MudText>
-
-    <MudCarousel Class="mud-width-full" Style="height: 80%; width: 100%; border-radius: 50px;" ShowArrows="true" ShowBullets="false" EnableSwipeGesture="true" AutoCycle="false" TData="object">
-        @foreach (var group in Content.Groups)
+<MudContainer MaxWidth="MaxWidth.Large" Class="pa-0">
+    <MudText Typo="Typo.h1" Color="Color.Primary" Class="pa-4">@Content.Title</MudText>
+    
+    <MudGrid Spacing="6">
+        @foreach (var group in this.Content.Groups)
         {
-            <MudCarouselItem Transition="Transition.Fade" Color="@Color.Dark">
-                <div class="" style="height:100%;  padding: 50px;">
-
-                    <MudText Typo="Typo.h2" Color="Color.Secondary" GutterBottom="true">@group.Title</MudText>
-
-                    @foreach (var item in group.Items)
-                    {
-                        <div class="d-flex justify-space-between">
-                            <MudText Typo="Typo.h4" GutterBottom="true">@item</MudText>
-                            <MudIcon Icon="@Icons.Custom.Brands.MudBlazor" Size="@Size.Large" />
+            <MudItem xs="12" md="4">
+                <MudPaper Class="pa-10 d-flex flex-column justify-space-between rounded-xl" Elevation="10" Style="height: 100%; min-height: 320px;">
+                    <div>
+                        <div class="d-flex align-center gap-3 mb-4">
+                            <MudIcon Icon="@Icons.Material.Filled.Code" Color="Color.Primary" Size="Size.Large" />
+                            <MudText Typo="Typo.h3">@group.Title</MudText>
                         </div>
-                    }
-                </div>
-            </MudCarouselItem>
+
+                        <MudText Typo="Typo.body1" Color="Color.Secondary" Class="mb-4">
+                            ---------------------------------------------
+                            @* Базовый фундамент, с которым работаю каждый день. @* @group.Description *@
+                        </MudText>
+                    </div>
+
+                    <div class="d-flex flex-wrap gap-2">
+                        @for (int i = 0; i < group.Items.Length - 1; i++)
+                        {
+                            var item = group.Items[i];
+                            bool isFirstElements = i < 2;
+
+                            <MudChip @key='$"chip_{i}_{item}"'
+                                     T="string"
+                                     Variant="@(isFirstElements ? Variant.Filled : Variant.Outlined)"
+                                     Color="@(isFirstElements ? Color.Primary : Color.Default)"
+                                     Size="Size.Large">
+                                @item
+                            </MudChip>
+                        }
+                    </div>
+                </MudPaper>
+            </MudItem>
         }
-    </MudCarousel>
-</div>
+
+      @*   <MudItem xs="12" md="8">
+            <MudPaper Class="pa-10 d-flex flex-column justify-space-between rounded-xl" Elevation="10" Style="height: 100%; min-height: 320px;">
+                <div>
+                    <div class="d-flex align-center gap-3 mb-4">
+                        <MudIcon Icon="@Icons.Material.Filled.Code" Color="Color.Primary" Size="Size.Large" />
+                        <MudText Typo="Typo.h3">Основное направление</MudText>
+                    </div>
+                    <MudText Typo="Typo.body1" Color="Color.Secondary" Class="mb-4">
+                        Базовый фундамент, с которым работаю каждый день.
+                    </MudText>
+                </div>
+
+                <div class="d-flex flex-wrap gap-2">
+                    <MudChip T="string" Variant="Variant.Filled" Color="Color.Primary" Size="Size.Large">C#</MudChip>
+                    <MudChip T="string" Variant="Variant.Filled" Color="Color.Primary" Size="Size.Large">.NET</MudChip>
+                    <MudChip T="string" Variant="Variant.Outlined" Size="Size.Large">ASP.NET Core</MudChip>
+                    <MudChip T="string" Variant="Variant.Outlined" Size="Size.Large">Entity Framework Core</MudChip>
+                    <MudChip T="string" Variant="Variant.Outlined" Size="Size.Large">PostgreSQL</MudChip>
+                    <MudChip T="string" Variant="Variant.Outlined" Size="Size.Large">Blazor WASM</MudChip>
+                </div>
+            </MudPaper>
+        </MudItem>
+
+        <MudItem xs="12" md="4">
+            <MudPaper Class="pa-10 d-flex flex-column justify-space-between rounded-xl" Elevation="10" Style="height: 100%; min-height: 320px;">
+                <div>
+                    <div class="d-flex align-center gap-3 mb-4">
+                        <MudIcon Icon="@Icons.Material.Filled.Build" Color="Color.Secondary" Size="Size.Large" />
+                        <MudText Typo="Typo.h4">Инструменты</MudText>
+                    </div>
+                </div>
+
+                <div class="d-flex flex-wrap gap-2">
+                    <MudChip T="string" Variant="Variant.Text" Color="Color.Secondary" Size="Size.Large">Git</MudChip>
+                    <MudChip T="string" Variant="Variant.Text" Color="Color.Secondary" Size="Size.Large">GitHub</MudChip>
+                    <MudChip T="string" Variant="Variant.Text" Color="Color.Secondary" Size="Size.Large">Visual Studio</MudChip>
+                    <MudChip T="string" Variant="Variant.Text" Color="Color.Secondary" Size="Size.Large">VS Code</MudChip>
+                </div>
+            </MudPaper>
+        </MudItem>
+
+        <MudItem xs="12">
+            <MudPaper Class="pa-10 rounded-xl" Elevation="10">
+                <div class="d-flex align-center gap-3 mb-3">
+                    <MudIcon Icon="@Icons.Material.Filled.AutoStories" Color="Color.Info" Size="Size.Large" />
+                    <MudText Typo="Typo.h4">Сейчас углубляюсь</MudText>
+                </div>
+
+                <div class="d-flex flex-wrap gap-2">
+                    <MudChip T="string" Variant="Variant.Outlined" Color="Color.Info" Size="Size.Large">Основы чистой архитектуры</MudChip>
+                    <MudChip T="string" Variant="Variant.Outlined" Color="Color.Info" Size="Size.Large">Основы backend-разработки</MudChip>
+                    <MudChip T="string" Variant="Variant.Outlined" Color="Color.Info" Size="Size.Large">Основы frontend-разработки</MudChip>
+                </div>
+            </MudPaper>
+        </MudItem> *@
+
+    </MudGrid>
+</MudContainer>
+
 
 @code {
     [Parameter]

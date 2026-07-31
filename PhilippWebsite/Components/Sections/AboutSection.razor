@@ -1,17 +1,24 @@
 @using PhilippWebsite.Models
 
-<div class="section-content about-section" style="padding: 50px; background-color: rgb(26, 26, 55); border-radius: 50px">
-    <MudText Typo="Typo.h1" Color="Color.Surface" GutterBottom="true">@Content.Title</MudText>
+<MudPaper MaxWidth="MaxWidth.Large" Class="section-content about-section rounded-xl pa-20" Elevation="10">
+    <MudText Typo="Typo.h1" Color="Color.Primary" GutterBottom="false">@Content.Title</MudText>
     
-    <MudDivider Class="border-width-2" />
-
     <MudText Typo="Typo.h3" GutterBottom="true">@Content.Paragraphs[0]</MudText>
 
-    @foreach (var paragraph in Content.Paragraphs.Skip(1))
+    @foreach (var paragraph in Content.Paragraphs.Skip(1)) // TODO n(много)
     {
-        <p><MudText Typo="Typo.h4" GutterBottom="true">@paragraph</MudText></p>
+        <p><MudText Typo="Typo.body1" GutterBottom="true">@paragraph</MudText></p>
     }
-</div>
+
+    <div class="py-4">
+        <MudChip T="string" Variant="Variant.Filled" Color="Color.Primary" Size="Size.Large">C#</MudChip>
+        <MudChip T="string" Variant="Variant.Filled" Color="Color.Primary" Size="Size.Large">.NET</MudChip>
+        <MudChip T="string" Variant="Variant.Outlined" Size="Size.Large">ASP.NET Core</MudChip>
+        <MudChip T="string" Variant="Variant.Outlined" Size="Size.Large">Entity Framework Core</MudChip>
+        <MudChip T="string" Variant="Variant.Outlined" Size="Size.Large">PostgreSQL</MudChip>
+        <MudChip T="string" Variant="Variant.Outlined" Size="Size.Large">Blazor WASM</MudChip>
+    </div>
+</MudPaper>
 
 @code {
     [Parameter]

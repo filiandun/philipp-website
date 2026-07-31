@@ -8,7 +8,7 @@
   "about": {
     "title": "Обо мне",
     "paragraphs": [
-      "Я junior C# разработчик без коммерческого опыта, но с устойчивым интересом к backend-разработке, веб-приложениям и практической архитектуре кода.",
+      "      Я начинающий C# разработчик без коммерческого опыта, но с устойчивым интересом к backend-разработке, веб-приложениям и практической архитектуре кода.",
       "Сейчас я изучаю ASP.NET Core, WPF, Blazor WebAssembly, PostgreSQL и стараюсь делать проекты, которые помогают закреплять реальные навыки разработки.",
       "Мне нравится аккуратный код, понятная структура проекта."
     ]
@@ -39,7 +39,7 @@
         ]
       },
       {
-        "title": "Изучаю",
+        "title": "Сейчас углубляюсь",
         "items": [
           "Entity Framework Core",
           "Основы чистой архитектуры",
@@ -57,7 +57,7 @@
         "description": "Опубликованное в Marketplace расширение для Visual Studio Code, написанное с использованием TypeScript",
         "stack": [
           "TypeScript",
-          "VS Code Extenstions"
+          "API VS Code"
         ],
         "highlights": [
           "Вроде что-то прикольное, хоть и не C#"
@@ -81,12 +81,29 @@
         ],
         "githubUrl": "https://github.com/filiandun/philipp-website",
         "demoUrl": "https://philipp.website"
+      },
+      {
+        "name": "Hook Binder Recorder",
+        "description": "Приложение на WPF, которое ловит все Global Hook с таймингами, сохраняет всё как запись и после позволяет воспроизвести эту самую запись.",
+        "stack": [
+          "C#",
+          "WPF",
+          "Modern WPF"
+        ],
+        "highlights": [
+          "Сохранение записи в .json и добавление в общий список записей",
+          "Возможность отключать отдельные hook при записи/воспроизведении",
+          "Выбор языка",
+          "Выбор темы"
+        ],
+        "githubUrl": "https://github.com/filiandun/recbinder",
+        "demoUrl": "/"
       }
     ]
   },
   "contacts": {
     "title": "Контакты",
-    "description": "Открыт к junior C#/.NET вакансиям, стажировкам и проектной работе.",
+    "description": "Открыт к junior C#/.NET вакансиям и стажировкам. TG @filiandun",
     "items": [
       {
         "label": "GitHub",

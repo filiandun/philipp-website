@@ -43,6 +43,51 @@
             PaletteLight = this._lightPalette,
             PaletteDark = this._darkPalette,
 
+            Typography = new Typography()
+            {
+                Default = new DefaultTypography()
+                {
+                    // FontFamily = new[] { "Inter", "Helvetica", "Arial", "sans-serif" },
+                    FontSize = "1rem",
+                    LineHeight = "1.6"
+                },
+
+                H1 = new H1Typography()
+                {
+                    FontSize = "9rem",
+                    FontWeight = "700",
+                    LineHeight = "1.3"
+                },
+
+                H2 = new H2Typography()
+                {
+                    FontSize = "7rem",
+                    FontWeight = "700",
+                    LineHeight = "1.3"
+                },
+
+                H3 = new H3Typography()
+                {
+                    FontSize = "2rem",
+                    FontWeight = "380",
+                    LineHeight = "1.3"
+                },
+
+                H4 = new H4Typography()
+                {
+                    FontSize = "1.7rem",
+                    FontWeight = "300",
+                    LineHeight = "1.3"
+                },
+
+                Body1 = new Body1Typography()
+                {
+                    FontSize = "1.5rem",
+                    FontWeight = "200",
+                    LineHeight = "1.3"
+                }
+            },
+
             LayoutProperties = new LayoutProperties()
         };
     }

@@ -1,10 +1,10 @@
 ﻿@using PhilippWebsite.Models
 
-<div>
-    <MudText Typo="Typo.h1" GutterBottom="true">Contacts</MudText>
+<MudPaper Class="section-content about-section rounded-xl pa-20" Width="100%" Elevation="10">
+    <MudText Typo="Typo.h1" Color="Color.Primary" GutterBottom="true">@Content.Title</MudText>
 
-    <MudText Typo="Typo.h6" GutterBottom="true">secret info</MudText>
-</div>
+    <MudText Typo="Typo.h4" GutterBottom="true">@Content.Description</MudText>
+</MudPaper>
 
 @code {
     [Parameter]
