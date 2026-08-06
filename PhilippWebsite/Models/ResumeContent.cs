@@ -1,4 +1,6 @@
-﻿namespace PhilippWebsite.Models
+﻿using MudBlazor;
+
+namespace PhilippWebsite.Models
 {
     public sealed class ResumeContent
     {
@@ -38,8 +40,13 @@
     public sealed class StackGroup
     {
         public string Title { get; set; } = string.Empty;
+        public string Icon { get; set; } = string.Empty;
 
         public string[] Items { get; set; } = [];
+
+        public int ColSpan { get; set; } = 0;
+        public Color ThemeColor { get; set; } = Color.Default;
+        public Variant ChipVariant { get; set; } = Variant.Text;
     }
 
 
@@ -54,6 +61,7 @@
     {
         public string Name { get; set; } = string.Empty;
         public string Description { get; set; } = string.Empty;
+        public string Image { get; set; } = string.Empty;
 
         public string[] Stack { get; set; } = [];
         public string[] Highlights { get; set; } = [];
@@ -75,7 +83,8 @@
     {
         public string Label { get; set; } = string.Empty;
         public string Value { get; set; } = string.Empty;
-
         public string Url { get; set; } = string.Empty;
+
+        public string IconName { get; set; } = string.Empty;
     }
 }

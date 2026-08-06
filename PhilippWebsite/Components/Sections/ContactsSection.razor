@@ -1,10 +1,80 @@
 ﻿@using PhilippWebsite.Models
 
-<MudPaper Class="section-content about-section rounded-xl pa-20" Width="100%" Elevation="10">
-    <MudText Typo="Typo.h1" Color="Color.Primary" GutterBottom="true">@Content.Title</MudText>
 
-    <MudText Typo="Typo.h4" GutterBottom="true">@Content.Description</MudText>
-</MudPaper>
+<MudContainer MaxWidth="MaxWidth.Large" Class="section-content contacts-section pa-0">
+    <MudPaper Class="rounded-xl pa-20 relative overflow-hidden" Elevation="20" Style="position: relative;">
+        
+        <div style="position: absolute; right: 60px; bottom: -80px; font-size: 16rem; font-weight: 900; opacity: 0.03; line-height: 1; user-select: none; pointer-events: none;">
+            <MudIcon Icon="@Icons.Material.Filled.People" style="font-size: 32rem; font-weight: 900;" />
+        </div>
+
+
+        <div class="d-flex align-center gap-2 px-4 py-2 rounded-pill" style="text-transform: uppercase; position: absolute; right: 60px; top: 80px; background: rgba(76, 175, 80, 0.1); border: 1px solid rgba(76, 175, 80, 0.3);">
+            <div style="width: 8px; height: 8px; border-radius: 50%; background: #4CAF50;"></div>
+            <MudText Typo="Typo.caption" Style="color: #4CAF50; font-weight: 700;">OPEN TO WORK</MudText>
+        </div>
+
+        <div class="d-flex justify-space-between align-center mb-4">
+            <MudText Typo="Typo.h1" Color="Color.Primary">@this.Content.Title</MudText>
+        </div>
+
+        <MudText Typo="Typo.body1" Class="mb-10">@this.Content.Description</MudText>
+
+        <MudGrid Spacing="4">
+
+            <MudItem xs="12" md="6">
+                <a href="https://t.me/filiandun" target="_blank" style="text-decoration: none;">
+                    <MudPaper Class="pa-6 rounded-xl d-flex align-center justify-space-between transition-all" Elevation="0" 
+                              Style="background: var(--mud-palette-primary); color: white; cursor: pointer;">
+                        <div class="d-flex align-center gap-4">
+                            <MudIcon Icon="@Icons.Custom.Brands.Telegram" Size="Size.Large" />
+                            <div>
+                                <MudText Typo="Typo.h6" Style="font-weight: 700; line-height: 1.2;">Telegram</MudText>
+                                <MudText Typo="Typo.body2" Style="opacity: 0.8;">@@filiandun</MudText>
+                            </div>
+                        </div>
+                        <MudIcon Icon="@Icons.Material.Filled.ArrowOutward" Size="Size.Medium" />
+                    </MudPaper>
+                </a>
+            </MudItem>
+
+            @* GitHub *@
+            <MudItem xs="12" md="6">
+                <a href="https://github.com/filiandun" target="_blank" style="text-decoration: none;">
+                    <MudPaper Class="pa-6 rounded-xl d-flex align-center justify-space-between border-solid border-1 mud-border-lines-default" Elevation="0" 
+                              Style="background: rgba(255, 255, 255, 0.03); color: white; cursor: pointer;">
+                        <div class="d-flex align-center gap-4">
+                            <MudIcon Icon="@Icons.Custom.Brands.GitHub" Size="Size.Large" />
+                            <div>
+                                <MudText Typo="Typo.h6" Style="font-weight: 700; line-height: 1.2;">GitHub</MudText>
+                                <MudText Typo="Typo.body2" Color="Color.Secondary">github.com/filiandun</MudText>
+                            </div>
+                        </div>
+                        <MudIcon Icon="@Icons.Material.Filled.ArrowOutward" Size="Size.Medium" Color="Color.Secondary" />
+                    </MudPaper>
+                </a>
+            </MudItem>
+
+            @* Email *@
+            <MudItem xs="12" md="12">
+                <a href="mailto:filiandun@gmail.com" style="text-decoration: none;">
+                    <MudPaper Class="pa-6 rounded-xl d-flex align-center justify-space-between border-solid border-1 mud-border-lines-default" Elevation="0" 
+                              Style="background: rgba(255, 255, 255, 0.03); color: white; cursor: pointer;">
+                        <div class="d-flex align-center gap-4">
+                            <MudIcon Icon="@Icons.Material.Filled.Email" Size="Size.Large" />
+                            <div>
+                                <MudText Typo="Typo.h6" Style="font-weight: 700; line-height: 1.2;">Email</MudText>
+                                <MudText Typo="Typo.body2" Color="Color.Secondary">filiandun@gmail.com</MudText>
+                            </div>
+                        </div>
+                        <MudIcon Icon="@Icons.Material.Filled.ArrowOutward" Size="Size.Medium" Color="Color.Secondary" />
+                    </MudPaper>
+                </a>
+            </MudItem>
+        </MudGrid>
+
+    </MudPaper>
+</MudContainer>
 
 @code {
     [Parameter]

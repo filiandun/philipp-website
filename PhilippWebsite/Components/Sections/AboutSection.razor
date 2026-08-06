@@ -1,24 +1,32 @@
 @using PhilippWebsite.Models
 
-<MudPaper MaxWidth="MaxWidth.Large" Class="section-content about-section rounded-xl pa-20" Elevation="10">
-    <MudText Typo="Typo.h1" Color="Color.Primary" GutterBottom="false">@Content.Title</MudText>
+<MudContainer MaxWidth="MaxWidth.Large" Class="section-content about-section pa-0">
+    <MudPaper Class="rounded-xl pa-20 relative overflow-hidden" Elevation="10">
+        <MudText Typo="Typo.h4" Color="Color.Secondary" Style="text-transform: uppercase; position: absolute; right: 60px" GutterBottom="false">@Content.Title</MudText>
+
+        <MudText Typo="Typo.h1" Color="Color.Primary"  Class="mb-2" Style="text-transform: uppercase" GutterBottom="false">.NET <br/> DEVELOPER</MudText>
     
-    <MudText Typo="Typo.h3" GutterBottom="true">@Content.Paragraphs[0]</MudText>
+        <MudText Typo="Typo.h3" Class="mb-4" GutterBottom="true">@Content.Paragraphs[0]</MudText>
 
-    @foreach (var paragraph in Content.Paragraphs.Skip(1)) // TODO n(много)
-    {
-        <p><MudText Typo="Typo.body1" GutterBottom="true">@paragraph</MudText></p>
-    }
+        @foreach (var paragraph in Content.Paragraphs.Skip(1))
+        {
+            <MudText Typo="Typo.body1" Class="mb-4" GutterBottom="true">@paragraph</MudText>
+        }
 
-    <div class="py-4">
-        <MudChip T="string" Variant="Variant.Filled" Color="Color.Primary" Size="Size.Large">C#</MudChip>
-        <MudChip T="string" Variant="Variant.Filled" Color="Color.Primary" Size="Size.Large">.NET</MudChip>
-        <MudChip T="string" Variant="Variant.Outlined" Size="Size.Large">ASP.NET Core</MudChip>
-        <MudChip T="string" Variant="Variant.Outlined" Size="Size.Large">Entity Framework Core</MudChip>
-        <MudChip T="string" Variant="Variant.Outlined" Size="Size.Large">PostgreSQL</MudChip>
-        <MudChip T="string" Variant="Variant.Outlined" Size="Size.Large">Blazor WASM</MudChip>
-    </div>
-</MudPaper>
+        <div class="d-flex flex-wrap gap-2 py-4">
+            <MudChip T="string" Variant="Variant.Filled" Color="Color.Primary" Size="Size.Large">C#</MudChip>
+            <MudChip T="string" Variant="Variant.Filled" Color="Color.Primary" Size="Size.Large">.NET</MudChip>
+            <MudChip T="string" Variant="Variant.Outlined" Size="Size.Large">ASP.NET Core</MudChip>
+            <MudChip T="string" Variant="Variant.Outlined" Size="Size.Large">Entity Framework Core</MudChip>
+            <MudChip T="string" Variant="Variant.Outlined" Size="Size.Large">PostgreSQL</MudChip>
+            <MudChip T="string" Variant="Variant.Outlined" Size="Size.Large">Blazor WASM</MudChip>
+        </div>
+
+        <div style="position: absolute; right: -150px; bottom: -150px; font-size: 40rem; font-weight: 1000; opacity: 0.03; line-height: 1; user-select: none; pointer-events: none; color: var(--mud-palette-text-primary);">
+            C#
+        </div>
+    </MudPaper>
+</MudContainer>
 
 @code {
     [Parameter]

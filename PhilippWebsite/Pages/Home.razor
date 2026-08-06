@@ -1,8 +1,10 @@
 ﻿@page "/"
 
-@using PhilippWebsite.Models;
+@using System.Text.Json
+@using System.Text.Json.Serialization
 @using PhilippWebsite.Components
 @using PhilippWebsite.Components.Sections
+@using PhilippWebsite.Models;
 
 @implements IAsyncDisposable
 
@@ -46,7 +48,13 @@ else
 
     protected override async Task OnInitializedAsync()
     {
-        this._content = await this.Http.GetFromJsonAsync<ResumeContent>("content/resume.json");
+        var options = new JsonSerializerOptions
+        {
+            PropertyNameCaseInsensitive = true,
+            Converters = { new JsonStringEnumConverter() } // for string enums
+        };
+
+        this._content = await this.Http.GetFromJsonAsync<ResumeContent>("content/resume.json", options);
     }
 
 
@@ -69,12 +77,12 @@ else
     }
 
     [JSInvokable]
-    public void SetActiveSection(string sectionId)
+    public async void SetActiveSection(string sectionId)
     {
         this.Logger.LogInformation("SetActiveSection");
 
         this._activeSection = sectionId;
-        StateHasChanged();
+        await InvokeAsync(StateHasChanged);
     }
 
     public async ValueTask DisposeAsync()
