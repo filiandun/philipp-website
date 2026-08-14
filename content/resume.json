@@ -8,7 +8,7 @@
   "about": {
     "title": "Обо мне",
     "paragraphs": [
-      "      Я начинающий C# разработчик без коммерческого опыта, но с устойчивым интересом к backend-разработке, веб-приложениям и практической архитектуре кода.",
+      "Я начинающий C# разработчик без коммерческого опыта, но с устойчивым интересом к backend-разработке, веб-приложениям и практической архитектуре кода.",
       "Сейчас я изучаю ASP.NET Core, WPF, Blazor WebAssembly, PostgreSQL и стараюсь делать проекты, которые помогают закреплять реальные навыки разработки.",
       "Мне нравится аккуратный код, понятная структура проекта."
     ]
@@ -18,6 +18,7 @@
     "groups": [
       {
         "title": "Основное направление",
+        "icon": "Code",
         "items": [
           "C#",
           ".NET",
@@ -27,25 +28,37 @@
           "PostgreSQL",
           "WPF",
           "WinForms"
-        ]
+        ],
+        "columnSpan": 8,
+        "chipVariant": "Outlined",
+        "themeColor": "Default"
       },
       {
         "title": "Инструменты",
+        "icon": "Build",
         "items": [
           "Git",
           "GitHub",
           "Visual Studio",
-          "Visual Studio Code"
-        ]
+          "Visual Studio Code",
+          "PgAdmin"
+        ],
+        "columnSpan": 4,
+        "chipVariant": "Text",
+        "themeColor": "Secondary"
       },
       {
         "title": "Сейчас углубляюсь",
+        "icon": "AutoStories",
         "items": [
           "Entity Framework Core",
           "Основы чистой архитектуры",
           "Основы backend-разработки",
           "Основы frontend-разработки"
-        ]
+        ],
+        "columnSpan": 12,
+        "chipVariant": "Outlined",
+        "themeColor": "Info"
       }
     ]
   },
@@ -55,6 +68,7 @@
       {
         "name": "Расширение для Visual Studio Code",
         "description": "Опубликованное в Marketplace расширение для Visual Studio Code, написанное с использованием TypeScript",
+        "image": "images/docxeditor.png",
         "stack": [
           "TypeScript",
           "API VS Code"
@@ -68,6 +82,7 @@
       {
         "name": "Личный сайт-резюме",
         "description": "Одностраничный сайт-портфолио, разработанный на Blazor WebAssembly с использованием MudBlazor.",
+        "image": "images/website.png",
         "stack": [
           "C#",
           "Blazor WebAssembly",
@@ -85,6 +100,7 @@
       {
         "name": "Hook Binder Recorder",
         "description": "Приложение на WPF, которое ловит все Global Hook с таймингами, сохраняет всё как запись и после позволяет воспроизвести эту самую запись.",
+        "image": "images/hockbinder.png",
         "stack": [
           "C#",
           "WPF",
@@ -103,22 +119,28 @@
   },
   "contacts": {
     "title": "Контакты",
-    "description": "Открыт к junior C#/.NET вакансиям и стажировкам. TG @filiandun",
+    "description": "Открыт к junior C#/.NET вакансиям и стажировкам.",
     "items": [
+      {
+        "label": "Telegram",
+        "value": "@filiandun",
+        "url": "https://t.me/filiandun",
+        "iconName": "Telegram",
+        "columnSpan": 6
+      },
       {
         "label": "GitHub",
         "value": "github.com/filiandun",
-        "url": "https://github.com/filiandun"
+        "url": "https://github.com/filiandun",
+        "iconName": "GitHub",
+        "columnSpan": 6
       },
       {
         "label": "Email",
         "value": "filiandun@gmail.com",
-        "url": "mailto:filiandun@gmail.com"
-      },
-      {
-        "label": "Сайт",
-        "value": "philipp.website",
-        "url": "https://philipp.website"
+        "url": "mailto:filiandun@gmail.com",
+        "iconName": "Email",
+        "columnSpan": 12
       }
     ]
   }

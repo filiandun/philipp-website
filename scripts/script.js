@@ -41,6 +41,6 @@
     disconnect() {
         this.observer?.disconnect();
         this.observer = null;
-        this.visibleSections.clear(); // Не забываем чистить память при выходе
+        this.visibleSections.clear();
     }
 };
