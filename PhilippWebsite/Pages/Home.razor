@@ -2,9 +2,10 @@
 
 @using System.Text.Json
 @using System.Text.Json.Serialization
+
+@using PhilippWebsite.Models;
 @using PhilippWebsite.Components
 @using PhilippWebsite.Components.Sections
-@using PhilippWebsite.Models;
 
 @implements IAsyncDisposable
 
@@ -64,6 +65,7 @@ else
 
     private bool _isObserverSet = false;
 
+
     protected override async Task OnAfterRenderAsync(bool firstRender)
     {
         if (this._content != null && !this._isObserverSet)
@@ -82,8 +84,9 @@ else
         this.Logger.LogInformation("SetActiveSection");
 
         this._activeSection = sectionId;
-        await InvokeAsync(StateHasChanged);
+        await this.InvokeAsync(this.StateHasChanged);
     }
+
 
     public async ValueTask DisposeAsync()
     {

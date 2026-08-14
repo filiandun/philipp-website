@@ -44,7 +44,7 @@ namespace PhilippWebsite.Models
 
         public string[] Items { get; set; } = [];
 
-        public int ColSpan { get; set; } = 0;
+        public int ColumnSpan { get; set; } = 0;
         public Color ThemeColor { get; set; } = Color.Default;
         public Variant ChipVariant { get; set; } = Variant.Text;
     }
@@ -86,5 +86,7 @@ namespace PhilippWebsite.Models
         public string Url { get; set; } = string.Empty;
 
         public string IconName { get; set; } = string.Empty;
+
+        public int ColumnSpan { get; set; } = 0;
     }
 }

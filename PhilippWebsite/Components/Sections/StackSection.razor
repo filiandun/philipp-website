@@ -5,9 +5,11 @@
     <MudText Typo="Typo.h1" Color="Color.Primary" Class="pa-4">@Content.Title</MudText>
     
     <MudGrid Spacing="6">
-        @foreach (var group in this.Content.Groups)
+        @foreach (StackGroup group in this.Content.Groups)
         {
-            <MudItem xs="12" md="@group.ColSpan">
+            bool isFirstGroup = ReferenceEquals(group, this.Content.Groups[0]);
+
+            <MudItem xs="12" md="@group.ColumnSpan">
                 <MudPaper Class="pa-10 d-flex flex-column justify-space-between rounded-xl" Elevation="20">
                     <div>
                         <div class="d-flex align-center gap-3 mb-4">
@@ -20,80 +22,21 @@
                     </div>
 
                     <div class="d-flex flex-wrap gap-2">
-                        @for (int i = 0; i < group.Items.Length; i++)
+                        @foreach (string item in group.Items)
                         {
-                            var item = group.Items[i];
-                            bool isFirstElements = i < 2;
-
-                            <MudChip @key='$"chip_{i}_{item}"'
-                                     T="string"
+                            bool isFirstElements = isFirstGroup && group.Items.IndexOf(item) < 2;
+                                
+                            <MudChip T="string"
                                      Variant="@(isFirstElements ? Variant.Filled : group.ChipVariant)"
                                      Color="@(isFirstElements ? Color.Primary : group.ThemeColor)"
                                      Size="Size.Large">
-                                @item
+                                     @item
                             </MudChip>
                         }
                     </div>
                 </MudPaper>
             </MudItem>
         }
-
-        @* <MudItem xs="12" md="8">
-            <MudPaper Class="pa-10 d-flex flex-column justify-space-between rounded-xl" Elevation="10" Style="height: 100%; min-height: 320px;">
-                <div>
-                    <div class="d-flex align-center gap-3 mb-4">
-                        <MudIcon Icon="@Icons.Material.Filled.Code" Color="Color.Primary" Size="Size.Large" />
-                        <MudText Typo="Typo.h3">Основное направление</MudText>
-                    </div>
-                    <MudText Typo="Typo.body1" Color="Color.Secondary" Class="mb-4">
-                        Базовый фундамент, с которым работаю каждый день.
-                    </MudText>
-                </div>
-
-                <div class="d-flex flex-wrap gap-2">
-                    <MudChip T="string" Variant="Variant.Filled" Color="Color.Primary" Size="Size.Large">C#</MudChip>
-                    <MudChip T="string" Variant="Variant.Filled" Color="Color.Primary" Size="Size.Large">.NET</MudChip>
-                    <MudChip T="string" Variant="Variant.Outlined" Size="Size.Large">ASP.NET Core</MudChip>
-                    <MudChip T="string" Variant="Variant.Outlined" Size="Size.Large">Entity Framework Core</MudChip>
-                    <MudChip T="string" Variant="Variant.Outlined" Size="Size.Large">PostgreSQL</MudChip>
-                    <MudChip T="string" Variant="Variant.Outlined" Size="Size.Large">Blazor WASM</MudChip>
-                </div>
-            </MudPaper>
-        </MudItem>
-
-        <MudItem xs="12" md="4">
-            <MudPaper Class="pa-10 d-flex flex-column justify-space-between rounded-xl" Elevation="10" Style="height: 100%; min-height: 320px;">
-                <div>
-                    <div class="d-flex align-center gap-3 mb-4">
-                        <MudIcon Icon="@Icons.Material.Filled.Build" Color="Color.Secondary" Size="Size.Large" />
-                        <MudText Typo="Typo.h4">Инструменты</MudText>
-                    </div>
-                </div>
-
-                <div class="d-flex flex-wrap gap-2">
-                    <MudChip T="string" Variant="Variant.Text" Color="Color.Secondary" Size="Size.Large">Git</MudChip>
-                    <MudChip T="string" Variant="Variant.Text" Color="Color.Secondary" Size="Size.Large">GitHub</MudChip>
-                    <MudChip T="string" Variant="Variant.Text" Color="Color.Secondary" Size="Size.Large">Visual Studio</MudChip>
-                    <MudChip T="string" Variant="Variant.Text" Color="Color.Secondary" Size="Size.Large">VS Code</MudChip>
-                </div>
-            </MudPaper>
-        </MudItem>
-
-        <MudItem xs="12">
-            <MudPaper Class="pa-10 rounded-xl" Elevation="10">
-                <div class="d-flex align-center gap-3 mb-3">
-                    <MudIcon Icon="@Icons.Material.Filled.AutoStories" Color="Color.Info" Size="Size.Large" />
-                    <MudText Typo="Typo.h4">Сейчас углубляюсь</MudText>
-                </div>
-
-                <div class="d-flex flex-wrap gap-2">
-                    <MudChip T="string" Variant="Variant.Outlined" Color="Color.Info" Size="Size.Large">Основы чистой архитектуры</MudChip>
-                    <MudChip T="string" Variant="Variant.Outlined" Color="Color.Info" Size="Size.Large">Основы backend-разработки</MudChip>
-                    <MudChip T="string" Variant="Variant.Outlined" Color="Color.Info" Size="Size.Large">Основы frontend-разработки</MudChip>
-                </div>
-            </MudPaper>
-        </MudItem> *@
-
     </MudGrid>
 </MudContainer>
 
