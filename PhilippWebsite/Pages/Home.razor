@@ -16,11 +16,7 @@
 
 <PageTitle>Philipp's website</PageTitle>
 
-@if (this._content is null)
-{
-    <p>Загрузка...</p>
-}
-else
+@if (this._content is not null)
 {
     <main class="resume-page">
         <SectionRail ActiveSection="@this._activeSection"/>
