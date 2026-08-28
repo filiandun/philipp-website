@@ -133,7 +133,16 @@ main[b-i4x3zxr084] {
 
     scroll-snap-type: y mandatory;
     scroll-behavior: smooth;
+
+    opacity: 0;
+    animation: fadeIn-b-i8ybeye7gv 1s ease-in-out forwards;
 }
+
+    @keyframes fadeIn-b-i8ybeye7gv {
+        to {
+            opacity: 1;
+        }
+    }
 
 .resume-section[b-i8ybeye7gv] {
     display: flex;
