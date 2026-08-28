@@ -2,12 +2,20 @@ html, body {
     font-family: 'Roboto', Helvetica, Arial, sans-serif;
 }
 
+body {
+    margin: 0;
+    padding: 0;
+
+    background-color: rgba(26, 26, 39, 1);
+}
+
 /* 
     есть баг с тем, что два колеса прокрутки справа
     а это его фикс.
 */
 .mud-main-content {
     height: 100vh;
+
     margin: 0px;
     padding: 0px;
 }
@@ -72,39 +80,27 @@ html, body {
         content: "An error has occurred."
     }
 
-.loading-progress {
-    position: absolute;
-    display: block;
-    width: 8rem;
-    height: 8rem;
-    inset: 20vh 0 auto 0;
-    margin: 0 auto 0 auto;
+
+.skeleton {
+    width: 100vw;
+    height: 100vh;
+
+    background: linear-gradient(90deg, rgba(30, 30, 45, 1) 25%, rgba(26, 26, 39, 1) 50%, rgba(30, 30, 45, 1) 75%);
+    background-size: 200% 100%;
+
+    animation: skeleton-loading 1s infinite;
 }
 
-    .loading-progress circle {
-        fill: none;
-        stroke: #e0e0e0;
-        stroke-width: 0.6rem;
-        transform-origin: 50% 50%;
-        transform: rotate(-90deg);
-    }
-
-        .loading-progress circle:last-child {
-            stroke: #594AE2;
-            stroke-dasharray: calc(3.141 * var(--blazor-load-percentage, 0%) * 0.8), 500%;
-            transition: stroke-dasharray 0.05s ease-in-out;
+    @keyframes skeleton-loading {
+        0% {
+            background-position: 200% 0;
         }
 
-.loading-progress-text {
-    position: absolute;
-    text-align: center;
-    font-weight: bold;
-    inset: calc(20vh + 3.25rem) 0 auto 0.2rem;
-}
-
-    .loading-progress-text:after {
-        content: var(--blazor-load-percentage-text, "Loading");
+        100% {
+            background-position: -200% 0;
+        }
     }
+
 
 code {
     color: #c02d76;
