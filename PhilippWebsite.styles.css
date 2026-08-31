@@ -126,7 +126,26 @@ main[b-i4x3zxr084] {
 /* /Pages/Home.razor.rz.scp.css */
 /* CSS for Home component */
 
-.resume-page[b-i8ybeye7gv] {
+.grid-background[b-i8ybeye7gv] {
+    position: fixed;
+    inset: 0;
+
+    background-image: radial-gradient(rgba(255, 255, 255, 0.05) 1.5px, transparent 1.5px);
+    background-size: 24px 24px;
+
+    pointer-events: none;
+    z-index: 0;
+/*    animation: drift 2s linear infinite;*/
+}
+
+    @keyframes drift-b-i8ybeye7gv {
+        from { background-position: 0 0; }
+        to { background-position: 24px 24px; }
+    }
+
+
+.scroll-container[b-i8ybeye7gv] {
+    position: relative;
     height: 100vh;
 
     overflow-y: auto;
@@ -144,12 +163,15 @@ main[b-i4x3zxr084] {
         }
     }
 
+.content-wrapper[b-i8ybeye7gv] {
+    padding-left: 120px;
+}
+
 .resume-section[b-i8ybeye7gv] {
     display: flex;
     align-items: center;
 
-    padding: 50px 100px;
-    padding-left: 225px;
+    padding: 40px 100px;
 
     min-height: 100vh;
 
