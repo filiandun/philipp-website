@@ -18,24 +18,28 @@
 
 @if (this._content is not null)
 {
-    <main class="resume-page">
+    <div class="grid-background"></div>
+
+    <main class="scroll-container">
         <SectionRail ActiveSection="@this._activeSection"/>
 
-        <section id="about" class="resume-section">
-            <AboutSection Content="@this._content.About"/>
-        </section>
+        <div class="content-wrapper">
+            <section id="about" class="resume-section">
+                <AboutSection Content="@this._content.About"/>
+            </section>
 
-        <section id="stack" class="resume-section">
-            <StackSection Content="@this._content.Stack"/>
-        </section>
+            <section id="stack" class="resume-section">
+                <StackSection Content="@this._content.Stack"/>
+            </section>
 
-        <section id="projects" class="resume-section">
-            <ProjectsSection Content="@this._content.Projects"/>
-        </section>
+            <section id="projects" class="resume-section">
+                <ProjectsSection Content="@this._content.Projects"/>
+            </section>
 
-        <section id="contacts" class="resume-section">
-            <ContactsSection Content="@this._content.Contacts"/>
-        </section>
+            <section id="contacts" class="resume-section">
+                <ContactsSection Content="@this._content.Contacts"/>
+            </section>
+        </div>
     </main>
 }
 

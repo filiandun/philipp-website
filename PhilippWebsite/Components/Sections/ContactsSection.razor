@@ -7,11 +7,6 @@
 
         <MudText Typo="Typo.body1" Class="mb-10">@this.Content.Description</MudText>
 
-        <div class="d-flex align-center gap-2 px-4 py-2 rounded-pill" style="text-transform: uppercase; position: absolute; right: 60px; top: 80px; background: rgba(76, 175, 80, 0.1); border: 1px solid rgba(76, 175, 80, 0.3);">
-            <div style="width: 8px; height: 8px; border-radius: 50%; background: #4CAF50;"></div>
-            <MudText Typo="Typo.caption" Style="color: #4CAF50; font-weight: 700;">OPEN TO WORK</MudText>
-        </div>
-
         <MudGrid Spacing="4">
             @foreach (ContactContent contact in this.Content.Items)
             {
@@ -36,10 +31,9 @@
             }
         </MudGrid>
 
-        <div style="position: absolute; right: 60px; bottom: -80px; font-size: 16rem; font-weight: 900; opacity: 0.03; line-height: 1; user-select: none; pointer-events: none;">
-            <MudIcon Icon="@Icons.Material.Filled.People" style="font-size: 32rem; font-weight: 900;" />
+        <div style="position: absolute; right: 20px; bottom: -60px; font-size: 16rem; font-weight: 900; opacity: 0.03; line-height: 1; user-select: none; pointer-events: none;">
+            <MudIcon Icon="@Icons.Material.Outlined.AlternateEmail" style="font-size: 32rem; font-weight: 900;" />
         </div>
-
     </MudPaper>
 </MudContainer>
 

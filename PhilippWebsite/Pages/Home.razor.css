@@ -1,6 +1,25 @@
 /* CSS for Home component */
 
-.resume-page {
+.grid-background {
+    position: fixed;
+    inset: 0;
+
+    background-image: radial-gradient(rgba(255, 255, 255, 0.05) 1.5px, transparent 1.5px);
+    background-size: 24px 24px;
+
+    pointer-events: none;
+    z-index: 0;
+/*    animation: drift 2s linear infinite;*/
+}
+
+    @keyframes drift {
+        from { background-position: 0 0; }
+        to { background-position: 24px 24px; }
+    }
+
+
+.scroll-container {
+    position: relative;
     height: 100vh;
 
     overflow-y: auto;
@@ -18,12 +37,15 @@
         }
     }
 
+.content-wrapper {
+    padding-left: 120px;
+}
+
 .resume-section {
     display: flex;
     align-items: center;
 
-    padding: 50px 100px;
-    padding-left: 225px;
+    padding: 40px 100px;
 
     min-height: 100vh;
 
