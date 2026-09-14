@@ -1,10 +1,12 @@
 html, body {
     font-family: 'Roboto', Helvetica, Arial, sans-serif;
+
+    overscroll-behavior: none;
 }
 
 body {
     margin: 0;
-    padding: 0;
+    padding: 0; 
 
     background-color: rgba(26, 26, 39, 1);
 }
