@@ -1,96 +1,11 @@
 ﻿@page "/"
 
-@using System.Text.Json
-@using System.Text.Json.Serialization
-
-@using PhilippWebsite.Models;
-@using PhilippWebsite.Components
 @using PhilippWebsite.Components.Sections
-
-@implements IAsyncDisposable
-
-@inject HttpClient Http
-
-@inject ILogger<Home> Logger
-@inject IJSRuntime JSRuntime
 
 <PageTitle>Philipp's website</PageTitle>
 
-@if (this._content is not null)
-{
-    <div class="grid-background"></div>
-
-    <main class="scroll-container">
-        <SectionRail ActiveSection="@this._activeSection"/>
-
-        <div class="content-wrapper">
-            <section id="about" class="resume-section">
-                <AboutSection Content="@this._content.About"/>
-            </section>
-
-            <section id="stack" class="resume-section">
-                <StackSection Content="@this._content.Stack"/>
-            </section>
-
-            <section id="projects" class="resume-section">
-                <ProjectsSection Content="@this._content.Projects"/>
-            </section>
-
-            <section id="contacts" class="resume-section">
-                <ContactsSection Content="@this._content.Contacts"/>
-            </section>
-        </div>
-    </main>
-}
-
+<AboutSection />
 
 @code {
-    private ResumeContent? _content;
-
-    protected override async Task OnInitializedAsync()
-    {
-        var options = new JsonSerializerOptions
-        {
-            PropertyNameCaseInsensitive = true,
-            Converters = { new JsonStringEnumConverter() } // for string enums
-        };
-
-        this._content = await this.Http.GetFromJsonAsync<ResumeContent>("content/resume.json", options);
-    }
-
-
-    private string _activeSection = "about";
-
-    private DotNetObjectReference<Home>? dotNetRef;
-
-    private bool _isObserverSet = false;
-
-
-    protected override async Task OnAfterRenderAsync(bool firstRender)
-    {
-        if (this._content != null && !this._isObserverSet)
-        {
-            this._isObserverSet = true;
-
-            this.dotNetRef = DotNetObjectReference.Create(this);
-
-            await this.JSRuntime.InvokeVoidAsync("sectionObserver.observe", this.dotNetRef, ".resume-section");
-        }
-    }
-
-    [JSInvokable]
-    public async void SetActiveSection(string sectionId)
-    {
-        this.Logger.LogInformation("SetActiveSection");
-
-        this._activeSection = sectionId;
-        await this.InvokeAsync(this.StateHasChanged);
-    }
-
-
-    public async ValueTask DisposeAsync()
-    {
-        await this.JSRuntime.InvokeVoidAsync("sectionObserver.disconnect");
-        this.dotNetRef?.Dispose();
-    }
+    
 }
