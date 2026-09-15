@@ -1,1 +1,51 @@
 /* CSS for AboutSection component */
+
+.pre {
+    color: #d4d4d4;
+
+    margin: 0px;
+    padding: 0px;
+
+    font-family: 'Courier New', Courier, monospace;
+    font-weight: 900;
+
+    box-sizing: border-box;
+    line-height: 1;
+
+    counter-reset: line;
+}
+
+code-line {
+    display: block;
+
+    margin: 0;
+    padding: 2px 20px;
+
+    line-height: inherit;
+    vertical-align: top; 
+}
+
+    code-line::before {
+        counter-increment: line;
+        content: counter(line);
+
+        display: inline-block;
+
+        width: 25px;
+        text-align: right;
+
+        padding: 0;
+        padding-right: 20px;
+
+        color: #858585;
+
+        user-select: none;
+
+        vertical-align: top;
+    }
+
+    code-line:hover {
+        background: var(--mud-palette-surface);
+
+        box-shadow: inset 3px 0 0 0 var(--mud-palette-primary);
+    }

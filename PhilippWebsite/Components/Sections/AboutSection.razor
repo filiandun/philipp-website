@@ -1,34 +1,106 @@
-@using PhilippWebsite.Models
+@page "/about"
 
-<MudContainer MaxWidth="MaxWidth.Large" Class="section-content pa-0">
-    <MudPaper Class="about-section rounded-xl pa-20 relative overflow-hidden" Elevation="10">
-        <MudText Typo="Typo.h4" Color="Color.Secondary" Style="text-transform: uppercase; position: absolute; right: 60px" GutterBottom="false">@Content.Title</MudText>
+@using PhilippWebsite.Services
 
-        <MudText Typo="Typo.h1" Color="Color.Primary"  Class="mb-2" Style="text-transform: uppercase" GutterBottom="false">.NET <br/> DEVELOPER</MudText>
+@inject ResumeContentService _contentService;
+
+
+@if (this._contentService.IsLoaded)
+{
+    @* <MudContainer MaxWidth="MaxWidth.Large" Class="section-content pa-0">
+        <MudPaper Class="about-section rounded-xl pa-20 relative overflow-hidden" Elevation="10">
+            <MudText Typo="Typo.h4" Color="Color.Secondary" Style="text-transform: uppercase; position: absolute; right: 60px" GutterBottom="false">@this._contentService.ResumeContent!.About.Title</MudText>
+
+            <MudText Typo="Typo.h1" Color="Color.Primary"  Class="mb-2" Style="text-transform: uppercase" GutterBottom="false">.NET <br/> DEVELOPER</MudText>
     
-        <MudText Typo="Typo.h3" Class="mb-4" GutterBottom="true">@Content.Paragraphs[0]</MudText>
+            <MudText Typo="Typo.h3" Class="mb-4" GutterBottom="true">@this._contentService.ResumeContent!.About.Paragraphs[0]</MudText>
 
-        @foreach (var paragraph in Content.Paragraphs.Skip(1))
-        {
-            <MudText Typo="Typo.body1" Class="mb-4" GutterBottom="true">@paragraph</MudText>
-        }
+            @foreach (var paragraph in this._contentService.ResumeContent!.About.Paragraphs.Skip(1))
+            {
+                <MudText Typo="Typo.body1" Class="mb-4" GutterBottom="true">@paragraph</MudText>
+            }
 
-        <div class="d-flex flex-wrap gap-2 py-4">
-            <MudChip T="string" Variant="Variant.Filled" Color="Color.Primary" Size="Size.Large">C#</MudChip>
-            <MudChip T="string" Variant="Variant.Filled" Color="Color.Primary" Size="Size.Large">.NET</MudChip>
-            <MudChip T="string" Variant="Variant.Outlined" Size="Size.Large">ASP.NET Core</MudChip>
-            <MudChip T="string" Variant="Variant.Outlined" Size="Size.Large">Entity Framework Core</MudChip>
-            <MudChip T="string" Variant="Variant.Outlined" Size="Size.Large">PostgreSQL</MudChip>
-            <MudChip T="string" Variant="Variant.Outlined" Size="Size.Large">Blazor WASM</MudChip>
-        </div>
+            <div class="d-flex flex-wrap gap-2 py-4">
+                <MudChip T="string" Variant="Variant.Filled" Color="Color.Primary" Size="Size.Large">C#</MudChip>
+                <MudChip T="string" Variant="Variant.Filled" Color="Color.Primary" Size="Size.Large">.NET</MudChip>
+                <MudChip T="string" Variant="Variant.Outlined" Size="Size.Large">ASP.NET Core</MudChip>
+                <MudChip T="string" Variant="Variant.Outlined" Size="Size.Large">Entity Framework Core</MudChip>
+                <MudChip T="string" Variant="Variant.Outlined" Size="Size.Large">PostgreSQL</MudChip>
+                <MudChip T="string" Variant="Variant.Outlined" Size="Size.Large">Blazor WASM</MudChip>
+            </div>
 
-        <div style="position: absolute; right: 120px; bottom: -30px; font-size: 14rem; writing-mode: vertical-lr; text-orientation: mixed; font-weight: 900; -webkit-text-stroke: 15px currentColor; opacity: 0.025; line-height: 1; user-select: none; pointer-events: none; color: var(--mud-palette-text-primary);">
-            CSHARP
-        </div>
-    </MudPaper>
-</MudContainer>
+            <div style="position: absolute; right: 120px; bottom: -30px; font-size: 14rem; writing-mode: vertical-lr; text-orientation: mixed; font-weight: 900; -webkit-text-stroke: 15px currentColor; opacity: 0.025; line-height: 1; user-select: none; pointer-events: none; color: var(--mud-palette-text-primary);">
+                CSHARP
+            </div>
+        </MudPaper>
+    </MudContainer> *@
 
-@code {
-    [Parameter]
-    public required AboutContent Content { get; set; }
+
+    <div class="pre">
+        <code-line>&lt;!DOCTYPE html&gt;</code-line>
+        <code-line>&lt;html&gt;</code-line>
+        <code-line>&lt;head&gt;</code-line>
+        <code-line>&lt;title&gt;Мой сайт&lt;/title&gt;</code-line>
+        <code-line>&lt;/head&gt;</code-line>
+
+        <code-line>&lt;body&gt;</code-line>
+        <code-line>     &lt;h1&gt;Привет, мир!&lt;/h1&gt;</code-line>
+        <code-line>         &lt;/body&gt;</code-line>
+        <code-line>         &lt;/html&gt;</code-line>
+        <code-line>&lt;head&gt;</code-line>
+
+        <code-line>&lt;title&gt;Мой сайт&lt;/title&gt;</code-line>
+        <code-line>&lt;/head&gt;</code-line>
+        <code-line>&lt;body&gt;</code-line>
+        <code-line>     &lt;h1&gt;Привет, мир авыро рвылф пф ырдвлопр лфдывтпл одвыф иплвыдф плывфвоыф дпор ыф!&lt;/h1&gt;</code-line>
+        <code-line>     &lt;h1&gt;Привет, мир авыро рвылф пф ырдвлопр лфдывтпл одвыф иплвыдф плывфвоыф дпор ыф!&lt;/h1&gt;</code-line>
+        <code-line>     &lt;h1&gt;Привет, мир авыро рвылф пф ырдвлопр лфдывтпл плывфвоыф дпор ыф!&lt;/h1&gt;</code-line>
+        <code-line>     &lt;h1&gt;Привет, мир авыро одвыф иплвыдф плывфвоыф дпор ыф!&lt;/h1&gt;</code-line>
+        <code-line>&lt;/body&gt;</code-line>
+        <code-line>&lt;/html&gt;</code-line>        <code-line>&lt;head&gt;</code-line>
+        <code-line>&lt;title&gt;Мой сайт&lt;/title&gt;</code-line>
+        <code-line>     &lt;h1&gt;Привет, мир авыро рвылф пф ырдвлопр лфдывтпл одвыф иплвыдф плывфвоыф дпор ыф!&lt;/h1&gt;</code-line>
+        <code-line>&lt;h1&gt;Привет, мир авыро рвылф пф ырдвлопр лфдывтпл плывфвоыф дпор ыф!&lt;/h1&gt;</code-line>
+        <code-line>&lt;/head&gt;</code-line>
+        <code-line>&lt;body&gt;</code-line>
+
+        <code-line>&lt;h1&gt;Привет, мир!&lt;/h1&gt;</code-line>
+        <code-line>&lt;/body&gt;</code-line>
+        <code-line>&lt;/html&gt;</code-line>
+        <code-line>&lt;!DOCTYPE html&gt;</code-line>
+        <code-line>&lt;html&gt;</code-line>
+        <code-line>&lt;head&gt;</code-line>
+        <code-line>&lt;title&gt;Мой сайт&lt;/title&gt;</code-line>
+        <code-line>&lt;/head&gt;</code-line>
+
+        <code-line>&lt;body&gt;</code-line>
+        <code-line>     &lt;h1&gt;Привет, мир!&lt;/h1&gt;</code-line>
+        <code-line>         &lt;/body&gt;</code-line>
+        <code-line>         &lt;/html&gt;</code-line>
+        <code-line>&lt;head&gt;</code-line>
+
+        <code-line>&lt;title&gt;Мой сайт&lt;/title&gt;</code-line>
+        <code-line>&lt;/head&gt;</code-line>
+        <code-line>&lt;body&gt;</code-line>
+        <code-line>     &lt;h1&gt;Привет, мир авыро рвылф пф ырдвлопр лфдывтпл одвыф иплвыдф плывфвоыф дпор ыф!&lt;/h1&gt;</code-line>
+        <code-line>     &lt;h1&gt;Привет, мир авыро рвылф пф ырдвлопр лфдывтпл одвыф иплвыдф плывфвоыф дпор ыф!&lt;/h1&gt;</code-line>
+        <code-line>     &lt;h1&gt;Привет, мир авыро рвылф пф ырдвлопр лфдывтпл плывфвоыф дпор ыф!&lt;/h1&gt;</code-line>
+        <code-line>     &lt;h1&gt;Привет, мир авыро одвыф иплвыдф плывфвоыф дпор ыф!&lt;/h1&gt;</code-line>
+        <code-line>&lt;/body&gt;</code-line>
+        <code-line>&lt;/html&gt;</code-line>        <code-line>&lt;head&gt;</code-line>
+        <code-line>&lt;title&gt;Мой сайт&lt;/title&gt;</code-line>
+        <code-line>     &lt;h1&gt;Привет, мир авыро рвылф пф ырдвлопр лфдывтпл одвыф иплвыдф плывфвоыф дпор ыф!&lt;/h1&gt;</code-line>
+        <code-line>&lt;h1&gt;Привет, мир авыро рвылф пф ырдвлопр лфдывтпл плывфвоыф дпор ыф!&lt;/h1&gt;</code-line>
+        <code-line>&lt;/head&gt;</code-line>
+        <code-line>&lt;body&gt;</code-line>
+
+
+        <code-line>&lt;h1&gt;Привет, мир!&lt;/h1&gt;</code-line>
+        <code-line>&lt;/body&gt;</code-line>
+        <code-line>&lt;/html&gt;</code-line>
+    </div>
+}
+else
+{
+    <h2>Content load error</h2>
 }
