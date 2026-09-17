@@ -1,0 +1,37 @@
+@page "/about"
+
+@using ColorCode
+
+@using PhilippWebsite.Components
+
+
+<VsCodeEditor Code="@this._code" Language="@this._language"></VsCodeEditor>
+
+
+@code {
+    private ILanguage _language = Languages.CSharp;
+
+    private string _code = @"using System;
+using System.Threading.Tasks;
+
+namespace PhilippWebsite;
+
+public class DeveloperProfile
+{
+    public string Name => ""Филипп"";
+    public int Age => 22;
+    public string Specialization => ""C# Backend Developer"";
+
+    public async Task GetCurrentStatusAsync()
+    {
+        await Education.School21.StudyAsync(
+            stack: [""C#"", ""ASP.NET Core"", ""EF Core"", ""PostgreSQL""]
+        );
+        
+        /* 
+            Больше всего ценю строгую типизацию, чистую архитектуру 
+            и понятную структуру проектов.
+        */
+    }
+}";
+}

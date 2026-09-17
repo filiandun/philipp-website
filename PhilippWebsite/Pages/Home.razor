@@ -1,11 +1,14 @@
 ﻿@page "/"
 
-@using PhilippWebsite.Components.Sections
+@inject NavigationManager NavigationManager
+
 
 <PageTitle>Philipp's website</PageTitle>
 
-<AboutSection />
 
 @code {
-    
+    protected override void OnInitialized()
+    {
+        this.NavigationManager.NavigateTo("/about");
+    }
 }
