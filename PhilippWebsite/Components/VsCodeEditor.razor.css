@@ -1,0 +1,68 @@
+/* CSS for VsCodeEditor component */
+
+/* TODO надо шрифт сюда подходящий */
+.vs-editor-root {
+    display: flex;
+    position: relative;
+
+    width: max-content;
+    height: 100%;
+
+    user-select: none;
+}
+
+
+.vs-editor-gutter {
+    position: absolute;
+
+    width: 100%;
+    height: 100%;
+
+    box-sizing: border-box;
+
+    z-index: 1;
+}
+
+.vs-editor-guiter-line {
+    padding-left: 15px;
+
+    line-height: 20px;
+
+    box-sizing: border-box;
+
+    color: var(--mud-palette-text-secondary);
+}
+
+    .vs-editor-guiter-line:hover {
+        background: var(--mud-palette-surface);
+        color: var(--mud-palette-text-primary);
+
+        box-shadow: inset 3px 0 0 0 var(--mud-palette-primary);
+    }
+
+
+.vs-editor-code {
+    margin-left: 40px;
+
+    pointer-events: none;
+    z-index: 2;
+}
+
+
+
+::deep .vs-editor-code > div {
+    background-color: transparent !important;
+}
+
+::deep .vs-editor-code pre {
+    margin: 0 !important;
+    padding: 0 !important;
+
+    line-height: 20px !important;
+
+    background: transparent !important;
+}
+
+    ::deep .vs-editor-code pre code {
+        line-height: 20px !important;
+    }

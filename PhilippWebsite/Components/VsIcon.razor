@@ -1,0 +1,20 @@
+﻿@* VsIcon.razor *@
+
+
+<svg viewBox="0 0 16 16" class="vs-icon @this.Class" style="@this.ComputedStyle" width="@this.IconSize" height="@this.IconSize" aria-hidden="true">
+    @((MarkupString)Icon)
+</svg>
+
+
+@code {
+    [Parameter] public string Icon { get; set; } = string.Empty;
+
+    [Parameter] public string? Class { get; set; } = null;
+    [Parameter] public string? Style { get; set; } = null;
+
+    [Parameter] public int IconSize { get; set; } = 20;
+    [Parameter] public string IconColor { get; set; } = "var(--mud-palette-text-primary)";
+
+
+    private string ComputedStyle => $"color: {IconColor}; fill: currentColor; {Style}";
+}

@@ -1,0 +1,21 @@
+﻿@* VsMenuItem.razor *@
+
+
+<div class="vs-menu-item-root" @onclick="this.OnClick">
+    <VsIcon Class="vs-menu-item-icon" Icon="@this.ItemIcon" IconColor="@this.IconColor"></VsIcon>
+
+    @if (this.ItemText is not null)
+    {
+        <span class="vs-menu-item-text">@this.ItemText</span>
+    }
+</div>
+
+
+@code {
+    [Parameter] public string ItemIcon { get; set; } = string.Empty;
+    [Parameter] public string IconColor { get; set; } = "var(--mud-palette-text-primary)";
+
+    [Parameter] public string? ItemText { get; set; } = null;
+
+    [Parameter] public EventCallback OnClick { get; set; }
+}

@@ -1,0 +1,25 @@
+/* CSS for VsMenuItem component */
+
+.vs-menu-item-root {
+    display: inline-flex;
+    align-items: center;
+
+    width: stretch;
+
+    padding: 5px 10px;
+
+    border-radius: var(--mud-default-borderradius);
+}
+
+    .vs-menu-item-root:hover {
+        background-color: var(--mud-palette-action-disabled);
+    }
+
+::deep .vs-menu-item-icon {
+    margin-right: 10px;
+    padding: 2px;
+}
+
+.vs-menu-item-text {
+    text-wrap: nowrap;
+}

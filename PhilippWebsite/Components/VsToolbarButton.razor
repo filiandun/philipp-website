@@ -1,0 +1,24 @@
+﻿@* VsToolbarButton.razor *@
+
+
+<button class="vs-toolbar-btn">
+    <VsIcon Icon="@this.Icon" IconColor="@this.IconColor" IconSize="@this.IconSize" Class="@this.Class" Style="@this.Style" />
+
+    @if (this.Text is not null)
+    {
+        <span class="vs-toolbar-text" style="color: @this.TextColor">@Text</span>
+    }
+</button>
+
+
+@code {
+    [Parameter] public string Icon { get; set; } = string.Empty;
+    [Parameter] public string? Text { get; set; }
+
+    [Parameter] public string? Class { get; set; }
+    [Parameter] public string? Style { get; set; }
+
+    [Parameter] public int IconSize { get; set; } = 20;
+    [Parameter] public string IconColor { get; set; } = "var(--mud-palette-text-primary)";
+    [Parameter] public string TextColor { get; set; } = "var(--mud-palette-text-primary)";
+}

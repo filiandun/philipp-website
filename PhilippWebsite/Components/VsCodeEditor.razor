@@ -1,0 +1,41 @@
+﻿@* VsCodeEditor.razor *@
+
+
+@using ColorCode
+@using ColorCode.Styling;
+
+
+<div class="vs-editor-root">
+    <div class="vs-editor-gutter">
+        @for (int i = 1; i <= this._lineCount; i++)
+        {
+            <div class="vs-editor-guiter-line">@i</div>
+        }
+    </div>
+
+    <div class="vs-editor-code">
+        @((MarkupString)this._htmlString)
+    </div>
+</div>
+
+
+@code {
+    [Parameter] public string Code { get; set; } = string.Empty;
+    [Parameter] public ILanguage Language { get; set; } = Languages.CSharp;
+
+    private static HtmlFormatter _formatter = new HtmlFormatter(StyleDictionary.DefaultDark);
+
+    private int _lineCount;
+
+    private string _htmlString = string.Empty;
+
+
+    protected override void OnParametersSet()
+    {
+        if (string.IsNullOrEmpty(this.Code)) return;
+
+        this._lineCount = this.Code.Split('\n').Length;
+
+        this._htmlString = _formatter.GetHtmlString(this.Code, this.Language);
+    }
+}

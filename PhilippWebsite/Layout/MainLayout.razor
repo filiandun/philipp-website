@@ -1,4 +1,5 @@
-﻿@using PhilippWebsite.Resources
+﻿@using PhilippWebsite.Components
+@using PhilippWebsite.Resources
 @using PhilippWebsite.Services
 
 
@@ -14,30 +15,65 @@
 <div class="vs-window">
     <header class="vs-header">
         <div class="vs-titlebar">
-            <MudIcon Icon="@AppIcons.VisualStudio" Size="Size.Large" Color="@Color.Primary"></MudIcon>
 
-            <span class="vs-solution-name">PhilippPortfolio.sln - Microsoft Visual Studio</span>
+            <div class="vs-titlebar-left">
+                <VsIcon Icon="@AppIcons.VisualStudio" IconSize="32" IconColor="var(--mud-palette-primary)"></VsIcon>
+
+                <div class="vs-menu-list">
+                    <VsMenu Label="File">
+                        <VsMenuItem ItemIcon="@AppIcons.RunOutline" ItemText="Download CV (.pdf)"></VsMenuItem>
+                        <VsMenuItem ItemIcon="@AppIcons.PushPin" ItemText="Print"></VsMenuItem>
+                    </VsMenu>
+
+                    <VsMenu Label="Git">
+                        <VsMenuItem ItemIcon="@AppIcons.Run" ItemText="Open GitHub"></VsMenuItem>
+                    </VsMenu>
+
+                    <VsMenu Label="Help">
+                        <VsMenuItem ItemIcon="@AppIcons.Refresh" ItemText="About This Portfolio"></VsMenuItem>
+                    </VsMenu>
+
+                    <VsMenu Label="Search">
+                        <VsMenuItem ItemIcon="@AppIcons.Search" ItemText="PhilippWebsite (Ctrl+Q)"></VsMenuItem>
+                    </VsMenu>
+                </div>
+
+                <span class="vs-solution-name">PhilippPortfolio.sln - Microsoft Visual Studio</span>
+            </div>
+
+            <div class="vs-titlebar-rigth">
+                <VsToolbarButton Icon="@AppIcons.Close" IconSize="24" Class="vs-close-btn"></VsToolbarButton>
+            </div>
         </div>
 
-        <div class="vs-toolbar">
-            <div class="vs-toolbar-nav">
-                <MudButton StartIcon="@AppIcons.Backwards" Size="Size.Large"></MudButton>
-                <MudButton StartIcon="@AppIcons.Forwards" Size="Size.Large"></MudButton>
-            </div>
+        <div class="vs-toolbars">
+            <VsToolbar>
+                <VsToolbarButton Icon="@AppIcons.Backwards" IconColor="#3EA0E5"></VsToolbarButton>
+                <VsToolbarButton Icon="@AppIcons.Forwards" IconColor="#3EA0E5"></VsToolbarButton>
 
-            <div class="vs-toolbar-save">
-                <MudButton StartIcon="@Icons.Material.Rounded.Save" Size="Size.Large"></MudButton>
-            </div>
+                <MudDivider Vertical="true" FlexItem="true"></MudDivider>
 
-            <div class="vs-toolbar-start">
-                <MudButton StartIcon="@Icons.Material.Rounded.Start" Size="Size.Large"></MudButton>
-            </div>
+                <VsToolbarButton Icon="@AppIcons.Home"></VsToolbarButton>
+
+                <MudDivider Vertical="true" FlexItem="true"></MudDivider>
+
+                <VsToolbarButton Icon="@AppIcons.Save" IconColor="#3EA0E5"></VsToolbarButton>
+            </VsToolbar>
+
+            <VsToolbar>
+                <VsToolbarButton Icon="@AppIcons.Run" Text="debug" IconColor="#85E876"></VsToolbarButton>
+                <VsToolbarButton Icon="@AppIcons.RunOutline" IconColor="#85E876"></VsToolbarButton>
+
+                <MudDivider Vertical="true" FlexItem="true"></MudDivider>
+
+                <VsToolbarButton Icon="@AppIcons.Refresh"></VsToolbarButton>
+            </VsToolbar>
         </div>
         
         <nav class="vs-tabsbar">
             <NavLink href="about" Match="NavLinkMatch.All" class="vs-tab">
                 <span class="vs-tab-title">AboutMe.cs</span>
-                <MudIcon class="vs-tab-icon cs" Icon="@AppIcons.PushPin" Size="@Size.Small"></MudIcon>
+                <VsIcon Icon="@AppIcons.PushPin" IconSize="16"></VsIcon>
             </NavLink>
 
             <NavLink href="stack" class="vs-tab">
@@ -47,12 +83,12 @@
 
             <NavLink href="projects" class="vs-tab">
                 <span class="vs-tab-icon sln"></span>
-                <span class="vs-tab-title">MyProjects.cs</span>
+                <span class="vs-tab-title">MyProjects.md</span>
             </NavLink>
 
             <NavLink href="contacts" class="vs-tab">
                 <span class="vs-tab-icon md"></span>
-                <span class="vs-tab-title">Contacts.md</span>
+                <span class="vs-tab-title">Contacts.cs</span>
             </NavLink>
         </nav>
     </header>
@@ -82,8 +118,8 @@
 
         <div class="vs-footer-status-right">
             <span class="status-item">UTF-8</span>
-            <span class="status-item">C# 12</span>
-            <span class="status-item">.NET 8.0</span>
+            <span class="status-item">C# 15</span>
+            <span class="status-item">.NET 10.0</span>
         </div>
     </footer>
 </div>
@@ -107,10 +143,18 @@
             {
                 Default = new DefaultTypography()
                 {
-                    // FontFamily = new[] { "Inter", "Helvetica", "Arial", "sans-serif" },
-                    FontSize = "1rem",
-                    LineHeight = "1.6"
+                    FontFamily = new[] { "Segoe UI", "-apple-system", "sans-serif" },
+                    FontSize = "12px"
                 },
+
+                Button = new ButtonTypography()
+                {
+                    FontFamily = new[] { "Segoe UI", "-apple-system", "sans-serif" },
+                    FontSize = "12px",
+                    TextTransform = "none",
+                    FontWeight = "400",
+                },
+
 
                 H1 = new H1Typography()
                 {

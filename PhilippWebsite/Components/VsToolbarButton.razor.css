@@ -1,0 +1,27 @@
+/* CSS for VsIconButton component */
+
+.vs-toolbar-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+
+    min-width: 30px;
+    height: 30px;
+
+    padding: 1px;
+    margin: 0 5px;
+
+    box-sizing: border-box;
+
+    cursor: pointer;
+
+    border-radius: var(--mud-default-borderradius);
+}
+
+    .vs-toolbar-btn:hover {
+        background-color: var(--mud-palette-action-disabled);
+    }
+
+.vs-toolbar-text {
+    padding: 5px
+}

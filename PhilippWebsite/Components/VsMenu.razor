@@ -1,0 +1,26 @@
+﻿@* VsMenu.razor *@
+
+
+<div class="vs-menu-root" @onclick="this.Toggle" @onfocusout="this.Close" tabindex="0">
+    <span class="vs-menu-label">@Label</span>
+
+    @if (this._isOpen)
+    {
+        <div class="vs-menu-dropdown">
+            @this.ChildContent
+        </div>
+    }
+</div>
+
+
+@code {
+    [Parameter] public string Label { get; set; } = string.Empty;
+
+    [Parameter] public RenderFragment? ChildContent { get; set; }
+
+    private bool _isOpen;
+
+    private void Toggle() => this._isOpen = !this._isOpen;
+
+    private void Close() => this._isOpen = false;
+}
