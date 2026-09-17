@@ -1,50 +1,192 @@
-/* /Components/SectionRail.razor.rz.scp.css */
-/* CSS for SectionRail component */
+/* /Components/VsCodeEditor.razor.rz.scp.css */
+/* CSS for VsCodeEditor component */
 
-.section-rail[b-h4bfs6h00w] {
-    position: fixed;
-
+/* TODO надо шрифт сюда подходящий */
+.vs-editor-root[b-qsmi0xrggo] {
     display: flex;
-    flex-direction: column;
+    position: relative;
 
-    z-index: 10;
+    width: max-content;
+    height: 100%;
 
-    gap: 100px;
-    left: 48px;
-    top: 50%;
-
-    transform: translateY(-50%);
+    user-select: none;
 }
 
-    .section-rail__item[b-h4bfs6h00w] {
-        scroll-snap-align: start;
 
-        width: 100px;
-        height: 4px;
+.vs-editor-gutter[b-qsmi0xrggo] {
+    position: absolute;
 
-        background: rgba(255, 255, 255, 0.35);
+    width: 100%;
+    height: 100%;
 
-        border-radius: 10px;
+    box-sizing: border-box;
 
-        transition: all 0.3s ease-in-out;
+    z-index: 1;
+}
+
+.vs-editor-guiter-line[b-qsmi0xrggo] {
+    padding-left: 15px;
+
+    line-height: 20px;
+
+    box-sizing: border-box;
+
+    color: var(--mud-palette-text-secondary);
+}
+
+    .vs-editor-guiter-line:hover[b-qsmi0xrggo] {
+        background: var(--mud-palette-surface);
+        color: var(--mud-palette-text-primary);
+
+        box-shadow: inset 3px 0 0 0 var(--mud-palette-primary);
     }
 
-        .section-rail__item--active[b-h4bfs6h00w] {
-            width: 120px;
-            height: 6px;
 
-            background: rgba(255, 255, 255, 1);
+.vs-editor-code[b-qsmi0xrggo] {
+    margin-left: 40px;
 
-            border-radius: 10px;
-        }
-/* /Components/Sections/AboutSection.razor.rz.scp.css */
-/* CSS for AboutSection component */
-/* /Components/Sections/ContactsSection.razor.rz.scp.css */
-/* CSS for ContactsSection component */
-/* /Components/Sections/ProjectsSection.razor.rz.scp.css */
-/* CSS for ProjectsSection component */
-/* /Components/Sections/StackSection.razor.rz.scp.css */
-/* CSS for StackSection component */
+    pointer-events: none;
+    z-index: 2;
+}
+
+
+
+[b-qsmi0xrggo] .vs-editor-code > div {
+    background-color: transparent !important;
+}
+
+[b-qsmi0xrggo] .vs-editor-code pre {
+    margin: 0 !important;
+    padding: 0 !important;
+
+    line-height: 20px !important;
+
+    background: transparent !important;
+}
+
+    [b-qsmi0xrggo] .vs-editor-code pre code {
+        line-height: 20px !important;
+    }
+/* /Components/VsMenu.razor.rz.scp.css */
+/* CSS for VsMenu component */
+
+.vs-menu-root[b-sdoda66hoy] {
+    position: relative;
+    display: inline-block;
+
+    margin: 5px;
+    padding: 5px 10px;
+
+    font-size: 15px;
+    font-weight: 300;
+    color: white;
+
+    border-radius: var(--mud-default-borderradius);
+}
+
+    .vs-menu-root:hover[b-sdoda66hoy] {
+        background-color: var(--mud-palette-surface);
+    }
+
+    /*TODO надо сделать, чтобы когда меню было активно (содержимое dropdown открыто), то стиль был такой же как и у :hover*/
+
+.vs-menu-label[b-sdoda66hoy] {
+
+}
+
+.vs-menu-dropdown[b-sdoda66hoy] {
+    position: absolute;
+/*    top: 0;*/
+    left: 0;
+
+    min-width: 200px;
+    margin-top: 10px;
+    padding: 5px;
+
+    font-size: 12px;
+
+    background-color: var(--mud-palette-surface);
+        
+    border-radius: var(--mud-default-borderradius);
+    box-shadow: 0px 0px 2px 1px rgba(0, 0, 0, 0.3);
+
+    z-index: 999;
+}
+/* /Components/VsMenuItem.razor.rz.scp.css */
+/* CSS for VsMenuItem component */
+
+.vs-menu-item-root[b-tzfqst5hpt] {
+    display: inline-flex;
+    align-items: center;
+
+    width: stretch;
+
+    padding: 5px 10px;
+
+    border-radius: var(--mud-default-borderradius);
+}
+
+    .vs-menu-item-root:hover[b-tzfqst5hpt] {
+        background-color: var(--mud-palette-action-disabled);
+    }
+
+[b-tzfqst5hpt] .vs-menu-item-icon {
+    margin-right: 10px;
+    padding: 2px;
+}
+
+.vs-menu-item-text[b-tzfqst5hpt] {
+    text-wrap: nowrap;
+}
+/* /Components/VsToolbar.razor.rz.scp.css */
+/* CSS for VsToolbar component */
+
+.vs-toolbar[b-j875o60wic] {
+    display: flex;
+
+    flex-direction: row;
+
+    width: fit-content;
+
+    margin: 5px;
+    padding: 3px;
+
+    color: var(--mud-pallete-textprimary);
+
+    background: var(--mud-palette-surface);
+
+    border: 1px solid rgb(0, 0, 0);
+    border-left-width: 4px;
+    border-radius: var(--mud-default-borderradius);
+}
+/* /Components/VsToolbarButton.razor.rz.scp.css */
+/* CSS for VsIconButton component */
+
+.vs-toolbar-btn[b-ienoxxvqq9] {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+
+    min-width: 30px;
+    height: 30px;
+
+    padding: 1px;
+    margin: 0 5px;
+
+    box-sizing: border-box;
+
+    cursor: pointer;
+
+    border-radius: var(--mud-default-borderradius);
+}
+
+    .vs-toolbar-btn:hover[b-ienoxxvqq9] {
+        background-color: var(--mud-palette-action-disabled);
+    }
+
+.vs-toolbar-text[b-ienoxxvqq9] {
+    padding: 5px
+}
 /* /Layout/MainLayout.razor.rz.scp.css */
 .page[b-i4x3zxr084] {
     position: relative;
@@ -123,60 +265,184 @@ main[b-i4x3zxr084] {
         padding-right: 1.5rem !important;
     }
 }
-/* /Pages/Home.razor.rz.scp.css */
-/* CSS for Home component */
-
-.grid-background[b-i8ybeye7gv] {
-    position: fixed;
-    inset: 0;
-
-    background-image: radial-gradient(rgba(255, 255, 255, 0.05) 1.5px, transparent 1.5px);
-    background-size: 24px 24px;
-
-    pointer-events: none;
-    z-index: 0;
-/*    animation: drift 2s linear infinite;*/
-
-    box-shadow: inset 0 0 80px 40px rgba(0, 0, 0, 0.4);
-}
-
-    @keyframes drift-b-i8ybeye7gv {
-        from { background-position: 0 0; }
-        to { background-position: 24px 24px; }
-    }
 
 
-.scroll-container[b-i8ybeye7gv] {
-    position: relative;
+/* styles */
+
+.vs-window[b-i4x3zxr084] {
     height: 100vh;
+    width: 100vw;
 
-    overflow-y: auto;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
 
-    scroll-snap-type: y mandatory;
-    scroll-behavior: smooth;
+    color: #d4d4d4;
 
-    opacity: 0;
-    animation: fadeIn-b-i8ybeye7gv 1s ease-in-out forwards;
+    background-color: #1e1e1e;
+    user-select: none;
 }
 
-    @keyframes fadeIn-b-i8ybeye7gv {
-        to {
-            opacity: 1;
-        }
+
+.vs-header[b-i4x3zxr084] {
+    margin-top: 10px;
+
+    flex-shrink: 0;
+        
+    background: var(--mud-palette-background);
+}
+
+.vs-titlebar[b-i4x3zxr084] {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    padding: 0 10px;
+    
+    font-size: 12px;
+}
+
+.vs-titlebar-left[b-i4x3zxr084] {
+    display: inline-flex;
+    align-items: center;
+}
+
+    .vs-menu-list[b-i4x3zxr084] {
+
     }
 
-.content-wrapper[b-i8ybeye7gv] {
-    padding-left: 120px;
+    .vs-solution-name[b-i4x3zxr084] {
+        padding: 5px 10px;
+
+        color: var(--mud-palette-textprimary);
+
+        background: var(--mud-palette-surface);
+
+        border: 1px solid rgb(0, 0, 0);
+        border-radius: var(--mud-default-borderradius);
+    }
+
+    [b-i4x3zxr084] .vs-close-btn {
+        margin-left: auto;
+    }
+
+
+
+.vs-toolbars[b-i4x3zxr084] {
+    display: flex;
+    flex-wrap: wrap;
+    margin-bottom: 10px;
 }
 
-.resume-section[b-i8ybeye7gv] {
+
+.vs-tabsbar[b-i4x3zxr084] {
+    position: relative;
+    display: flex;
+
+    margin: 5px 5px 0px 5px;
+
+    background: var(--mud-palette-surface);
+
+    border-top-left-radius: var(--mud-default-borderradius);
+    border-top-right-radius: var(--mud-default-borderradius);
+
+    z-index: 2;
+}
+
+[b-i4x3zxr084] .vs-tab {
     display: flex;
     align-items: center;
 
-    padding: 40px 100px;
+    padding: 6px 14px;
 
-    min-height: 100vh;
+    font-size: 13px;
+    color: var(--mud-palette-text-secondary);
 
-    scroll-snap-align: start;
-    scroll-snap-stop: always;
+    text-decoration: none;
 }
+
+    [b-i4x3zxr084] .vs-tab.active {
+        margin-bottom: -1px;
+
+        color: var(--mud-palette-white);
+
+        font-weight: 600;
+
+        border: 1px solid var(--mud-palette-primary);
+        border-bottom: 2px solid var(--mud-palette-surface);
+    
+        border-top-left-radius: var(--mud-default-borderradius);
+        border-top-right-radius: var(--mud-default-borderradius);
+    
+        z-index: 10;
+    }
+
+
+.vs-right-bar[b-i4x3zxr084] {
+
+}
+
+
+.vs-editor-viewport[b-i4x3zxr084] {
+    position: relative;
+    display: flex;
+
+    width: 100%;
+    height: 50vh; /* TODO временные костыли */
+
+    margin: 0 5px;
+
+    border: 1px solid var(--mud-palette-primary);
+    border-radius: var(--mud-default-borderradius);
+
+    background-color: #1e1e1e;
+
+}
+
+.vs-editor-content[b-i4x3zxr084] {
+    position: relative;
+    overflow: hidden;
+
+    width: 100%;
+    min-height: 100%;
+    margin: 0 auto;
+
+    overflow-y: auto;
+    overflow-x: auto;
+
+    user-select: text;
+}
+
+.vs-statusbar[b-i4x3zxr084] {
+    height: 24px;
+    background-color: #854cc7;
+    color: #ffffff;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 10px;
+    font-size: 12px;
+    flex-shrink: 0;
+}
+
+.vs-footer[b-i4x3zxr084] {
+    display: flex;
+    flex-direction: row;
+
+    justify-content: space-between;
+}
+
+.vs-footer-status-left[b-i4x3zxr084], .vs-footer-status-right[b-i4x3zxr084] {
+    display: flex;
+    gap: 16px;
+}
+/* /Pages/About.razor.rz.scp.css */
+/* CSS for AboutSection component */
+/* /Pages/Contacts.razor.rz.scp.css */
+/* CSS for ContactsSection component */
+/* /Pages/Home.razor.rz.scp.css */
+/* CSS for Home component */
+/* /Pages/Projects.razor.rz.scp.css */
+/* CSS for ProjectsSection component */
+/* /Pages/Stack.razor.rz.scp.css */
+/* CSS for StackSection component */
