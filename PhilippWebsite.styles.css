@@ -7,7 +7,7 @@
     position: relative;
 
     min-width: 100%;
-    height: 100%;
+    min-height: 100%;
 
     user-select: none;
 }
@@ -389,8 +389,9 @@ main[b-i4x3zxr084] {
     position: relative;
     display: flex;
 
-    width: 100%;
-    height: 100%;
+    flex: 1;
+    min-width: 0;
+    min-height: 0;
 
     margin-bottom: 5px;
 
@@ -398,22 +399,19 @@ main[b-i4x3zxr084] {
 
     border: 1px solid var(--mud-palette-primary);
     border-radius: var(--mud-default-borderradius);
-
-    background-color: #1e1e1e;
 }
 
 .vs-editor-content[b-i4x3zxr084] {
-/*    position: relative;*/
-    overflow: hidden;
+    position: relative;
+    flex: 1;
 
-    width: 100%;
-    min-height: 100%;
+    min-width: 0; 
+    min-height: 0;
+
     margin: 0;
 
     overflow-y: auto;
     overflow-x: auto;
-
-    user-select: text;
 }
 
 .vs-statusbar[b-i4x3zxr084] {
