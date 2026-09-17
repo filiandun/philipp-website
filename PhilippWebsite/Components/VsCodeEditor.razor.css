@@ -2,10 +2,10 @@
 
 /* TODO надо шрифт сюда подходящий */
 .vs-editor-root {
-    display: flex;
+    display: inline-block;
     position: relative;
 
-    width: max-content;
+    min-width: 100%;
     height: 100%;
 
     user-select: none;
@@ -42,6 +42,8 @@
 
 
 .vs-editor-code {
+    position: relative;
+
     margin-left: 40px;
 
     pointer-events: none;

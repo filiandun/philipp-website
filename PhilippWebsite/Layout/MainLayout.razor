@@ -73,7 +73,7 @@
         <nav class="vs-tabsbar">
             <NavLink href="about" Match="NavLinkMatch.All" class="vs-tab">
                 <span class="vs-tab-title">AboutMe.cs</span>
-                <VsIcon Icon="@AppIcons.PushPin" IconSize="16"></VsIcon>
+                @* <VsIcon Icon="@AppIcons.PushPin" IconSize="16"></VsIcon> *@
             </NavLink>
 
             <NavLink href="stack" class="vs-tab">
@@ -102,10 +102,6 @@
             @if (this._contentService.IsLoaded)
             {     
                 @Body
-            }
-            else 
-            {
-                <h1 class="vs-editor-content-error">Произошла ошибка при загрузке данных</h1>
             }
         </div>
     </main>
