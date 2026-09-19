@@ -47,7 +47,7 @@
         </div>
 
         <div class="vs-toolbars">
-            <VsToolbar>
+            <VsToolbar Class="vs-toolbar"> @* TODO тут снаружи, и внутри, повторяются именна классов, тут класс нужен, так как margin добавляется, чтобы не липли друг к другу они*@
                 <VsToolbarButton Icon="@AppIcons.Backwards" IconColor="#3EA0E5"></VsToolbarButton>
                 <VsToolbarButton Icon="@AppIcons.Forwards" IconColor="#3EA0E5"></VsToolbarButton>
 
@@ -60,7 +60,7 @@
                 <VsToolbarButton Icon="@AppIcons.Save" IconColor="#3EA0E5"></VsToolbarButton>
             </VsToolbar>
 
-            <VsToolbar>
+            <VsToolbar Class="vs-toolbar">
                 <VsToolbarButton Icon="@AppIcons.Run" Text="debug" IconColor="#85E876"></VsToolbarButton>
                 <VsToolbarButton Icon="@AppIcons.RunOutline" IconColor="#85E876"></VsToolbarButton>
 

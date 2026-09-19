@@ -143,6 +143,10 @@ main {
     flex-wrap: wrap;
     margin-bottom: 10px;
 }
+    
+    ::deep .vs-toolbar {
+        margin-right: 5px;
+    }
 
 
 .vs-tabsbar {

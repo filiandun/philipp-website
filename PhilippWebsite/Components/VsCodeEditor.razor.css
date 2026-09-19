@@ -20,29 +20,62 @@
 
     box-sizing: border-box;
 
-    z-index: 1;
+    z-index: 3;
+    pointer-events: none;
 }
 
-.vs-editor-guiter-line {
-    padding-left: 15px;
+    .vs-editor-gutter-line {
+        position: sticky;
+        left: 0;
 
-    line-height: 20px;
+        width: 60px;
+        line-height: 20px;
+
+        flex-shrink: 0;
+
+        padding-right: 20px;
+
+        text-align: right;
+        box-sizing: border-box;
+
+        color: var(--mud-palette-text-secondary);
+
+        background-color: var(--mud-palette-background);
+    }   
+
+        .vs-editor-highlighter-line:hover .vs-editor-gutter-line {
+            color: var(--mud-palette-text-primary);
+            background-color: var(--mud-palette-surface);
+
+            box-shadow: inset 3px 0 0 0 var(--mud-palette-primary);
+        }
+
+
+.vs-editor-highlighter {
+    position: absolute  ;
+
+    width: 100%;
+    height: 100%;
 
     box-sizing: border-box;
 
-    color: var(--mud-palette-text-secondary);
+    z-index: 1;
 }
 
-    .vs-editor-guiter-line:hover {
-        background: var(--mud-palette-surface);
-        color: var(--mud-palette-text-primary);
-
-        box-shadow: inset 3px 0 0 0 var(--mud-palette-primary);
+    .vs-editor-highlighter-line {
+        width: 100%;
+        line-height: 20px;
     }
 
+        .vs-editor-highlighter-line:hover {
+            background-color: var(--mud-palette-surface);
+        }
 
-.vs-editor-code {
-    margin-left: 40px;
+
+.vs-editor-content {
+    position: relative;
+
+    margin-left: 60px;
 
     pointer-events: none;
     z-index: 2;
@@ -50,11 +83,11 @@
 
 
 
-::deep .vs-editor-code > div {
+::deep .vs-editor-content > div {
     background-color: transparent !important;
 }
 
-::deep .vs-editor-code pre {
+::deep .vs-editor-content pre {
     margin: 0 !important;
     padding: 0 !important;
 
@@ -63,6 +96,6 @@
     background: transparent !important;
 }
 
-    ::deep .vs-editor-code pre code {
+    ::deep .vs-editor-content pre code {
         line-height: 20px !important;
     }
