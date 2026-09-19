@@ -1,0 +1,45 @@
+﻿@* VsActivityBar.razor *@
+
+
+@using PhilippWebsite.Models
+@using PhilippWebsite.Services
+
+@inject IProjectExplorerService _projectExplorerService
+
+
+<div class="vs-activitybar-root"> @* @onfocusout="this.Close" *@
+    <VsActivityBarButton Class="vs-activity-btn" Text="Solution Explorer" OnClick="@this.Toggle"></VsActivityBarButton>
+
+    @if (this._explorerIsOpen)
+    {
+        <VsActivityBarPanel Title="Solution Explorer" OnCloseClick="@this.Close">
+            @if (this._treeResponse is not null)
+            {
+                @foreach (var treeItem in this._treeResponse.Tree)
+                {
+                    <div>@treeItem.Path</div>
+                }
+            }
+            else
+            {
+                <span>Не удалось загрузть контент</span>
+            }
+        </VsActivityBarPanel>
+    }
+</div>
+
+
+@code {
+    private GitHubTreeResponse? _treeResponse;
+
+
+    protected override async Task OnInitializedAsync()
+    {
+        this._treeResponse = await this._projectExplorerService.GetProjectTreeContentAsync();
+    }
+
+    private bool _explorerIsOpen = true;
+
+    private void Toggle() => this._explorerIsOpen = !this._explorerIsOpen;
+    private void Close() => this._explorerIsOpen = false;
+}

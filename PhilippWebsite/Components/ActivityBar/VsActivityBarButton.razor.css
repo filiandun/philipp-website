@@ -1,0 +1,25 @@
+/* CSS for VsActivityBarButton component */
+
+.vs-activitybar-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+
+    margin-bottom: 5px;
+
+    width: 30px;
+    min-height: 30px;
+
+    writing-mode: vertical-rl;
+
+    box-sizing: border-box;
+
+    cursor: pointer;
+
+    border-right: 5px solid var(--mud-palette-surface);
+/*    border-radius: var(--mud-default-borderradius);*/
+}
+
+    .vs-activitybar-btn:hover {
+        border-right: 5px solid var(--mud-palette-primary);
+    }
