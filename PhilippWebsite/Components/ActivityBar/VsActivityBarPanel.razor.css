@@ -1,0 +1,50 @@
+/* CSS for VsSolutionExplorerPanel component */
+
+
+.vs-activitybar-panel-root {
+    position: absolute;
+    top: 0;
+    right: 30px;
+
+    display: flex;
+    flex-direction: column;
+
+    width: 280px;
+    height: 100%;
+
+    overflow: hidden;
+
+    background: var(--mud-palette-surface);
+
+    border: 1px solid var(--mud-palette-primary);
+    border-radius: var(--mud-default-borderradius);
+
+    box-shadow: -5px 0 0 2.5px var(--mud-palette-background);
+
+    z-index: 10;
+}
+
+    .vs-activitybar-panel-header {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        flex-shrink: 0; 
+
+        padding: 5px 10px;
+
+        background: var(--mud-palette-surface);
+    }
+
+    .vs-activitybar-panel-content {
+        position: relative;
+
+        flex: 1;
+        width: 100%;
+        height: 100%;
+
+        padding: 5px 10px;
+
+        box-sizing: padding-box;
+
+        overflow: auto;
+    }

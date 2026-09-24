@@ -1,7 +1,7 @@
 ﻿@* VsToolbar.razor *@
 
 
-<div class="vs-toolbar">
+<div class="vs-toolbar @this.Class">
     @if (this.ChildContent is not null)
     {
         @this.ChildContent
@@ -10,5 +10,7 @@
 
 
 @code {
+    [Parameter] public string? Class { get; set; } = null;
+
     [Parameter] public RenderFragment? ChildContent { get; set; }
 }

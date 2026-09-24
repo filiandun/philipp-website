@@ -1,0 +1,14 @@
+﻿@* VsActivityBarButton.razor *@
+
+
+<button class="vs-activitybar-btn @Class" @onclick="@OnClick">
+    @Text
+</button>
+
+
+@code {
+    [Parameter] public string Text { get; set; } = string.Empty;
+    [Parameter] public string? Class { get; set; }
+
+    [Parameter] public EventCallback OnClick { get; set; }
+}

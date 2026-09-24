@@ -1,8 +1,8 @@
 /* CSS for VsToolbar component */
 
+
 .vs-toolbar {
     display: flex;
-
     flex-direction: row;
 
     width: fit-content;

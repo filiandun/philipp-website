@@ -1,0 +1,9 @@
+/* CSS for VsActivityBar component */
+
+.vs-activitybar-root {
+    display: flex;
+
+    padding: 0px;
+
+    flex-shrink: 0;
+}

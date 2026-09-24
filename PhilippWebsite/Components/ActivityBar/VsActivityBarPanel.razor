@@ -1,0 +1,27 @@
+@* VsActivityBarPanel.razor *@
+
+
+@using PhilippWebsite.Resources
+
+
+<div class="vs-activitybar-panel-root">
+    <div class="vs-activitybar-panel-header">
+        <span class="vs-activitybar-panel-header-title">@this.Title</span>
+
+        <button class="vs-activity-panel-header-close" @onclick="this.OnCloseClick">
+            <VsIcon Icon="@AppIcons.Close" IconSize="16" />
+        </button>
+    </div>
+
+    <div class="vs-activitybar-panel-content">
+        @this.ChildContent
+    </div>
+</div>
+
+
+@code {
+    [Parameter] public string Title { get; set; } = string.Empty;
+    [Parameter] public RenderFragment? ChildContent { get; set; }
+
+    [Parameter] public EventCallback OnCloseClick { get; set; }
+}

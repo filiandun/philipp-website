@@ -6,14 +6,21 @@
 
 
 <div class="vs-editor-root">
-    <div class="vs-editor-gutter">
+    <div class="vs-editor-highlighter">
         @for (int i = 1; i <= this._lineCount; i++)
         {
-            <div class="vs-editor-guiter-line">@i</div>
+            <div class="vs-editor-highlighter-line">@i</div>
         }
     </div>
 
-    <div class="vs-editor-code">
+    <div class="vs-editor-gutter">
+        @for (int i = 1; i <= this._lineCount; i++)
+        {
+            <div class="vs-editor-gutter-line">@i</div>
+        }
+    </div>
+
+    <div class="vs-editor-content">
         @((MarkupString)this._htmlString)
     </div>
 </div>
