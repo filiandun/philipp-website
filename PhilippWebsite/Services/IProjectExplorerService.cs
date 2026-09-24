@@ -1,10 +1,10 @@
-﻿using PhilippWebsite.Models;
+﻿using PhilippWebsite.Services.GitHubProjectExplorer;
 
 
 namespace PhilippWebsite.Services
 {
     public interface IProjectExplorerService
     {
-        public Task<GitHubTreeResponse?> GetProjectTreeContentAsync();
+        public Task<List<ProjectNode>?> GetProjectTreeAsync();
     }
 }

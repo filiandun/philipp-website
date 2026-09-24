@@ -1,0 +1,551 @@
+{
+  "sha": "72902659c268b4115a2f229d925722f61486ddc8",
+  "url": "https://api.github.com/repos/filiandun/philipp-website/git/trees/72902659c268b4115a2f229d925722f61486ddc8",
+  "tree": [
+    {
+      "path": ".github",
+      "mode": "040000",
+      "type": "tree",
+      "sha": "6a0068d5499095ba1b72a5089e9d2a7f974a252c",
+      "url": "https://api.github.com/repos/filiandun/philipp-website/git/trees/6a0068d5499095ba1b72a5089e9d2a7f974a252c"
+    },
+    {
+      "path": ".github/workflows",
+      "mode": "040000",
+      "type": "tree",
+      "sha": "222fd029903c5d3af5c569a99d2968effb9ffd74",
+      "url": "https://api.github.com/repos/filiandun/philipp-website/git/trees/222fd029903c5d3af5c569a99d2968effb9ffd74"
+    },
+    {
+      "path": ".github/workflows/deploy.yml",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "5997b0042275fa8f1da05d9b8b54cc48948c82e8",
+      "size": 765,
+      "url": "https://api.github.com/repos/filiandun/philipp-website/git/blobs/5997b0042275fa8f1da05d9b8b54cc48948c82e8"
+    },
+    {
+      "path": ".gitignore",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "d5a18deed8813c6c817c9090bf0443d7fad48a9d",
+      "size": 7454,
+      "url": "https://api.github.com/repos/filiandun/philipp-website/git/blobs/d5a18deed8813c6c817c9090bf0443d7fad48a9d"
+    },
+    {
+      "path": "CNAME",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "2741fb86cad001c678a2eeb5792644ab78e179ae",
+      "size": 15,
+      "url": "https://api.github.com/repos/filiandun/philipp-website/git/blobs/2741fb86cad001c678a2eeb5792644ab78e179ae"
+    },
+    {
+      "path": "PhilippWebsite",
+      "mode": "040000",
+      "type": "tree",
+      "sha": "28233e3694ece29a9de386f285786b172852210f",
+      "url": "https://api.github.com/repos/filiandun/philipp-website/git/trees/28233e3694ece29a9de386f285786b172852210f"
+    },
+    {
+      "path": "PhilippWebsite/App.razor",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "a8a79e51c0202c5fb0de5ba9f389d457d6e268e5",
+      "size": 286,
+      "url": "https://api.github.com/repos/filiandun/philipp-website/git/blobs/a8a79e51c0202c5fb0de5ba9f389d457d6e268e5"
+    },
+    {
+      "path": "PhilippWebsite/Components",
+      "mode": "040000",
+      "type": "tree",
+      "sha": "a229bda0958c4962df378328268bb36796c3d2f2",
+      "url": "https://api.github.com/repos/filiandun/philipp-website/git/trees/a229bda0958c4962df378328268bb36796c3d2f2"
+    },
+    {
+      "path": "PhilippWebsite/Components/ActivityBar",
+      "mode": "040000",
+      "type": "tree",
+      "sha": "cfaf6e752efd6e720d075d6d49ccaf4cba662570",
+      "url": "https://api.github.com/repos/filiandun/philipp-website/git/trees/cfaf6e752efd6e720d075d6d49ccaf4cba662570"
+    },
+    {
+      "path": "PhilippWebsite/Components/ActivityBar/VsActivityBar.razor",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "c13bb9a8ccf8d4fe3bc4d0f12bc52abeaabd6dbf",
+      "size": 1248,
+      "url": "https://api.github.com/repos/filiandun/philipp-website/git/blobs/c13bb9a8ccf8d4fe3bc4d0f12bc52abeaabd6dbf"
+    },
+    {
+      "path": "PhilippWebsite/Components/ActivityBar/VsActivityBar.razor.css",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "dee924e891a10ea9ebe542f05663c192c9a58af7",
+      "size": 123,
+      "url": "https://api.github.com/repos/filiandun/philipp-website/git/blobs/dee924e891a10ea9ebe542f05663c192c9a58af7"
+    },
+    {
+      "path": "PhilippWebsite/Components/ActivityBar/VsActivityBarButton.razor",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "e5e15c80fce001f6bcda76882141a4ef3ce2a826",
+      "size": 308,
+      "url": "https://api.github.com/repos/filiandun/philipp-website/git/blobs/e5e15c80fce001f6bcda76882141a4ef3ce2a826"
+    },
+    {
+      "path": "PhilippWebsite/Components/ActivityBar/VsActivityBarButton.razor.css",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "fab983fd7adedf9087e1ba2c5da3e0754ca1262d",
+      "size": 508,
+      "url": "https://api.github.com/repos/filiandun/philipp-website/git/blobs/fab983fd7adedf9087e1ba2c5da3e0754ca1262d"
+    },
+    {
+      "path": "PhilippWebsite/Components/ActivityBar/VsActivityBarPanel.razor",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "c024e547a8f5b7690a388eb641377487bb695ded",
+      "size": 705,
+      "url": "https://api.github.com/repos/filiandun/philipp-website/git/blobs/c024e547a8f5b7690a388eb641377487bb695ded"
+    },
+    {
+      "path": "PhilippWebsite/Components/ActivityBar/VsActivityBarPanel.razor.css",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "40d79588e3a30ea2e371bb126c2fd14e7e009491",
+      "size": 925,
+      "url": "https://api.github.com/repos/filiandun/philipp-website/git/blobs/40d79588e3a30ea2e371bb126c2fd14e7e009491"
+    },
+    {
+      "path": "PhilippWebsite/Components/VsCodeEditor.razor",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "c95322261d22c9f6ed144c761624083822b7d238",
+      "size": 1134,
+      "url": "https://api.github.com/repos/filiandun/philipp-website/git/blobs/c95322261d22c9f6ed144c761624083822b7d238"
+    },
+    {
+      "path": "PhilippWebsite/Components/VsCodeEditor.razor.css",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "3d53a1be86d6dccb7715aa5cf874f02d56478c60",
+      "size": 1795,
+      "url": "https://api.github.com/repos/filiandun/philipp-website/git/blobs/3d53a1be86d6dccb7715aa5cf874f02d56478c60"
+    },
+    {
+      "path": "PhilippWebsite/Components/VsIcon.razor",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "457262e349133690f277fa92ff6b1b0d1759936c",
+      "size": 639,
+      "url": "https://api.github.com/repos/filiandun/philipp-website/git/blobs/457262e349133690f277fa92ff6b1b0d1759936c"
+    },
+    {
+      "path": "PhilippWebsite/Components/VsMenu.razor",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "75d1209b75dd86d4ed5dedb78d09818e886487ce",
+      "size": 569,
+      "url": "https://api.github.com/repos/filiandun/philipp-website/git/blobs/75d1209b75dd86d4ed5dedb78d09818e886487ce"
+    },
+    {
+      "path": "PhilippWebsite/Components/VsMenu.razor.css",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "42aafcbb1a932b41c7d5c424b9c5e00ed4ba32e1",
+      "size": 912,
+      "url": "https://api.github.com/repos/filiandun/philipp-website/git/blobs/42aafcbb1a932b41c7d5c424b9c5e00ed4ba32e1"
+    },
+    {
+      "path": "PhilippWebsite/Components/VsMenuItem.razor",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "df96e8298a1e5bf589542f734412c0a794715023",
+      "size": 595,
+      "url": "https://api.github.com/repos/filiandun/philipp-website/git/blobs/df96e8298a1e5bf589542f734412c0a794715023"
+    },
+    {
+      "path": "PhilippWebsite/Components/VsMenuItem.razor.css",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "a651a759bde1dd1941d343214b45472e3ed73935",
+      "size": 428,
+      "url": "https://api.github.com/repos/filiandun/philipp-website/git/blobs/a651a759bde1dd1941d343214b45472e3ed73935"
+    },
+    {
+      "path": "PhilippWebsite/Components/VsToolbar.razor",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "3d6bf549917cfcb9e1de05acc23f0d8dc5d32605",
+      "size": 288,
+      "url": "https://api.github.com/repos/filiandun/philipp-website/git/blobs/3d6bf549917cfcb9e1de05acc23f0d8dc5d32605"
+    },
+    {
+      "path": "PhilippWebsite/Components/VsToolbar.razor.css",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "34a09833c349e2b7fb6c128fdeef522027af645f",
+      "size": 345,
+      "url": "https://api.github.com/repos/filiandun/philipp-website/git/blobs/34a09833c349e2b7fb6c128fdeef522027af645f"
+    },
+    {
+      "path": "PhilippWebsite/Components/VsToolbarButton.razor",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "5f50da3bebb05dadabeb446554ea519f43881dc1",
+      "size": 798,
+      "url": "https://api.github.com/repos/filiandun/philipp-website/git/blobs/5f50da3bebb05dadabeb446554ea519f43881dc1"
+    },
+    {
+      "path": "PhilippWebsite/Components/VsToolbarButton.razor.css",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "eb60754932d9d9f30e955bdda29d6166de3d5857",
+      "size": 455,
+      "url": "https://api.github.com/repos/filiandun/philipp-website/git/blobs/eb60754932d9d9f30e955bdda29d6166de3d5857"
+    },
+    {
+      "path": "PhilippWebsite/Layout",
+      "mode": "040000",
+      "type": "tree",
+      "sha": "d5c07f100e16dcfd09e55b0543d08503865816af",
+      "url": "https://api.github.com/repos/filiandun/philipp-website/git/trees/d5c07f100e16dcfd09e55b0543d08503865816af"
+    },
+    {
+      "path": "PhilippWebsite/Layout/MainLayout.razor",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "e9ae439d7acf16ff6a60b5a13d53ebe2f6cd68ec",
+      "size": 9142,
+      "url": "https://api.github.com/repos/filiandun/philipp-website/git/blobs/e9ae439d7acf16ff6a60b5a13d53ebe2f6cd68ec"
+    },
+    {
+      "path": "PhilippWebsite/Layout/MainLayout.razor.css",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "f7f5ba97dcc8d479b3e6f25dd22845f54a82ea42",
+      "size": 4910,
+      "url": "https://api.github.com/repos/filiandun/philipp-website/git/blobs/f7f5ba97dcc8d479b3e6f25dd22845f54a82ea42"
+    },
+    {
+      "path": "PhilippWebsite/Models",
+      "mode": "040000",
+      "type": "tree",
+      "sha": "8157122236417229b38795d23b3c0fa49002fb98",
+      "url": "https://api.github.com/repos/filiandun/philipp-website/git/trees/8157122236417229b38795d23b3c0fa49002fb98"
+    },
+    {
+      "path": "PhilippWebsite/Models/GitHubTreeItem.cs",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "4703b0cceae20d56c6b9d1b2e54821e3b2568d99",
+      "size": 661,
+      "url": "https://api.github.com/repos/filiandun/philipp-website/git/blobs/4703b0cceae20d56c6b9d1b2e54821e3b2568d99"
+    },
+    {
+      "path": "PhilippWebsite/Models/GitHubTreeResponse.cs",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "6f27b8aae0aa414ae222a7735f4008d0c3248758",
+      "size": 493,
+      "url": "https://api.github.com/repos/filiandun/philipp-website/git/blobs/6f27b8aae0aa414ae222a7735f4008d0c3248758"
+    },
+    {
+      "path": "PhilippWebsite/Models/ResumeContent.cs",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "d1212015dab2665c1d19409f8305c0431353f4b0",
+      "size": 2617,
+      "url": "https://api.github.com/repos/filiandun/philipp-website/git/blobs/d1212015dab2665c1d19409f8305c0431353f4b0"
+    },
+    {
+      "path": "PhilippWebsite/Pages",
+      "mode": "040000",
+      "type": "tree",
+      "sha": "40f3460b95a59ad44e30761202ec52a4a2bce54a",
+      "url": "https://api.github.com/repos/filiandun/philipp-website/git/trees/40f3460b95a59ad44e30761202ec52a4a2bce54a"
+    },
+    {
+      "path": "PhilippWebsite/Pages/About.razor",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "e9e6efe9799f950223d9ab84b7a64bf5c4a30cd1",
+      "size": 889,
+      "url": "https://api.github.com/repos/filiandun/philipp-website/git/blobs/e9e6efe9799f950223d9ab84b7a64bf5c4a30cd1"
+    },
+    {
+      "path": "PhilippWebsite/Pages/About.razor.css",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "ab2fdad389750e8c2c98b2c11dd8708a8f8e91f5",
+      "size": 37,
+      "url": "https://api.github.com/repos/filiandun/philipp-website/git/blobs/ab2fdad389750e8c2c98b2c11dd8708a8f8e91f5"
+    },
+    {
+      "path": "PhilippWebsite/Pages/Contacts.razor",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "31f33335ad6bf0a02819c5c292fb0869a070193e",
+      "size": 34,
+      "url": "https://api.github.com/repos/filiandun/philipp-website/git/blobs/31f33335ad6bf0a02819c5c292fb0869a070193e"
+    },
+    {
+      "path": "PhilippWebsite/Pages/Contacts.razor.css",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "f76337fbbaed4498364eaa8bf53e112f06cbafc3",
+      "size": 40,
+      "url": "https://api.github.com/repos/filiandun/philipp-website/git/blobs/f76337fbbaed4498364eaa8bf53e112f06cbafc3"
+    },
+    {
+      "path": "PhilippWebsite/Pages/Home.razor",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "851b6ae4f28cbfc0619588bcba57e0810262505a",
+      "size": 222,
+      "url": "https://api.github.com/repos/filiandun/philipp-website/git/blobs/851b6ae4f28cbfc0619588bcba57e0810262505a"
+    },
+    {
+      "path": "PhilippWebsite/Pages/Home.razor.css",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "4f07c20e6c15e02189149186be0219cc15114e04",
+      "size": 29,
+      "url": "https://api.github.com/repos/filiandun/philipp-website/git/blobs/4f07c20e6c15e02189149186be0219cc15114e04"
+    },
+    {
+      "path": "PhilippWebsite/Pages/NotFound.razor",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "56c8cc4f28351eac0d044d77fe2b78a0421904f1",
+      "size": 326,
+      "url": "https://api.github.com/repos/filiandun/philipp-website/git/blobs/56c8cc4f28351eac0d044d77fe2b78a0421904f1"
+    },
+    {
+      "path": "PhilippWebsite/Pages/Projects.razor",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "19766a21e311db47a9b36ae295478a5f0446fbbc",
+      "size": 35,
+      "url": "https://api.github.com/repos/filiandun/philipp-website/git/blobs/19766a21e311db47a9b36ae295478a5f0446fbbc"
+    },
+    {
+      "path": "PhilippWebsite/Pages/Projects.razor.css",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "2a3860c2755a9f4a3a05ed8b0182163258b083db",
+      "size": 40,
+      "url": "https://api.github.com/repos/filiandun/philipp-website/git/blobs/2a3860c2755a9f4a3a05ed8b0182163258b083db"
+    },
+    {
+      "path": "PhilippWebsite/Pages/Stack.razor",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "e8a9781d6b91947b6a64c045e093f4aa49d34775",
+      "size": 1274,
+      "url": "https://api.github.com/repos/filiandun/philipp-website/git/blobs/e8a9781d6b91947b6a64c045e093f4aa49d34775"
+    },
+    {
+      "path": "PhilippWebsite/Pages/Stack.razor.css",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "8709cb1d924a36c652b694aa7050d55bb95c1c8d",
+      "size": 37,
+      "url": "https://api.github.com/repos/filiandun/philipp-website/git/blobs/8709cb1d924a36c652b694aa7050d55bb95c1c8d"
+    },
+    {
+      "path": "PhilippWebsite/PhilippWebsite.csproj",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "5e1d7525e0ec92df5971ffd178324888df64a341",
+      "size": 728,
+      "url": "https://api.github.com/repos/filiandun/philipp-website/git/blobs/5e1d7525e0ec92df5971ffd178324888df64a341"
+    },
+    {
+      "path": "PhilippWebsite/PhilippWebsite.slnx",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "24cce87804c235d02e8b7e21fa0353f291a2857e",
+      "size": 66,
+      "url": "https://api.github.com/repos/filiandun/philipp-website/git/blobs/24cce87804c235d02e8b7e21fa0353f291a2857e"
+    },
+    {
+      "path": "PhilippWebsite/Program.cs",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "d9c4fe8e486c7103d10a320898bbc5e4447492e7",
+      "size": 937,
+      "url": "https://api.github.com/repos/filiandun/philipp-website/git/blobs/d9c4fe8e486c7103d10a320898bbc5e4447492e7"
+    },
+    {
+      "path": "PhilippWebsite/Properties",
+      "mode": "040000",
+      "type": "tree",
+      "sha": "2e9aa91797c1f57b7f02d27dea0196ede1d07bba",
+      "url": "https://api.github.com/repos/filiandun/philipp-website/git/trees/2e9aa91797c1f57b7f02d27dea0196ede1d07bba"
+    },
+    {
+      "path": "PhilippWebsite/Properties/launchSettings.json",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "224d880d657bfb944e8c13a066fdd2c2c298eec3",
+      "size": 852,
+      "url": "https://api.github.com/repos/filiandun/philipp-website/git/blobs/224d880d657bfb944e8c13a066fdd2c2c298eec3"
+    },
+    {
+      "path": "PhilippWebsite/Resources",
+      "mode": "040000",
+      "type": "tree",
+      "sha": "910ac69481b7617010439097fd893a6ce3525b38",
+      "url": "https://api.github.com/repos/filiandun/philipp-website/git/trees/910ac69481b7617010439097fd893a6ce3525b38"
+    },
+    {
+      "path": "PhilippWebsite/Resources/AppIcons.cs",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "cc95a1f03b8c2a0b1f3080fa4fe4e9f9f8e68dcb",
+      "size": 8202,
+      "url": "https://api.github.com/repos/filiandun/philipp-website/git/blobs/cc95a1f03b8c2a0b1f3080fa4fe4e9f9f8e68dcb"
+    },
+    {
+      "path": "PhilippWebsite/Services",
+      "mode": "040000",
+      "type": "tree",
+      "sha": "d493b25a201be08afd9f2203cbdb57bcd3720d15",
+      "url": "https://api.github.com/repos/filiandun/philipp-website/git/trees/d493b25a201be08afd9f2203cbdb57bcd3720d15"
+    },
+    {
+      "path": "PhilippWebsite/Services/GitHubProjectExplorerService.cs",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "d0af123fd9136d5af77672bd847c97326caa490b",
+      "size": 1393,
+      "url": "https://api.github.com/repos/filiandun/philipp-website/git/blobs/d0af123fd9136d5af77672bd847c97326caa490b"
+    },
+    {
+      "path": "PhilippWebsite/Services/IProjectExplorerService.cs",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "e95984cce17fc0caf94d2faa252dbd99126b3939",
+      "size": 200,
+      "url": "https://api.github.com/repos/filiandun/philipp-website/git/blobs/e95984cce17fc0caf94d2faa252dbd99126b3939"
+    },
+    {
+      "path": "PhilippWebsite/Services/ResumeContentService.cs",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "059b2affe1fc2c0c8e5ff4638b6498ce6e31827e",
+      "size": 1287,
+      "url": "https://api.github.com/repos/filiandun/philipp-website/git/blobs/059b2affe1fc2c0c8e5ff4638b6498ce6e31827e"
+    },
+    {
+      "path": "PhilippWebsite/_Imports.razor",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "0f19c04c3e6bde5f790787de1c658ab301c9a4f1",
+      "size": 402,
+      "url": "https://api.github.com/repos/filiandun/philipp-website/git/blobs/0f19c04c3e6bde5f790787de1c658ab301c9a4f1"
+    },
+    {
+      "path": "PhilippWebsite/wwwroot",
+      "mode": "040000",
+      "type": "tree",
+      "sha": "31eb97cb1d72f2f2bceb215f7fc42da719d9b096",
+      "url": "https://api.github.com/repos/filiandun/philipp-website/git/trees/31eb97cb1d72f2f2bceb215f7fc42da719d9b096"
+    },
+    {
+      "path": "PhilippWebsite/wwwroot/content",
+      "mode": "040000",
+      "type": "tree",
+      "sha": "8874b4ba2c6481dc7b17d2c3e00f47d8d395bb67",
+      "url": "https://api.github.com/repos/filiandun/philipp-website/git/trees/8874b4ba2c6481dc7b17d2c3e00f47d8d395bb67"
+    },
+    {
+      "path": "PhilippWebsite/wwwroot/content/resume.json",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "4c5ffe69dcd52a4271a7578c5aba343b027958a1",
+      "size": 5661,
+      "url": "https://api.github.com/repos/filiandun/philipp-website/git/blobs/4c5ffe69dcd52a4271a7578c5aba343b027958a1"
+    },
+    {
+      "path": "PhilippWebsite/wwwroot/css",
+      "mode": "040000",
+      "type": "tree",
+      "sha": "1247363318eff85b757056987c0f81bcd3bb8ffc",
+      "url": "https://api.github.com/repos/filiandun/philipp-website/git/trees/1247363318eff85b757056987c0f81bcd3bb8ffc"
+    },
+    {
+      "path": "PhilippWebsite/wwwroot/css/app.css",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "13c6648bd374492c9ee685ddc23c4f1e94f8b599",
+      "size": 4258,
+      "url": "https://api.github.com/repos/filiandun/philipp-website/git/blobs/13c6648bd374492c9ee685ddc23c4f1e94f8b599"
+    },
+    {
+      "path": "PhilippWebsite/wwwroot/icon.ico",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "7a16c5b12ede3cc86c4fb5a5ba83ae80a83e91dc",
+      "size": 193462,
+      "url": "https://api.github.com/repos/filiandun/philipp-website/git/blobs/7a16c5b12ede3cc86c4fb5a5ba83ae80a83e91dc"
+    },
+    {
+      "path": "PhilippWebsite/wwwroot/images",
+      "mode": "040000",
+      "type": "tree",
+      "sha": "35769d6867046a5c242b9456b4a75a26e9888063",
+      "url": "https://api.github.com/repos/filiandun/philipp-website/git/trees/35769d6867046a5c242b9456b4a75a26e9888063"
+    },
+    {
+      "path": "PhilippWebsite/wwwroot/images/docxeditor.png",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "67e9108aabb30207ae648e77db9ebed75c5ddd71",
+      "size": 883895,
+      "url": "https://api.github.com/repos/filiandun/philipp-website/git/blobs/67e9108aabb30207ae648e77db9ebed75c5ddd71"
+    },
+    {
+      "path": "PhilippWebsite/wwwroot/images/hockbinder.png",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "4080ca6e1ba2b48c831962081bf3f0e2b4df7959",
+      "size": 505962,
+      "url": "https://api.github.com/repos/filiandun/philipp-website/git/blobs/4080ca6e1ba2b48c831962081bf3f0e2b4df7959"
+    },
+    {
+      "path": "PhilippWebsite/wwwroot/images/website.png",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "0927f9b1b860bef909307503069a16c7da8bde78",
+      "size": 630225,
+      "url": "https://api.github.com/repos/filiandun/philipp-website/git/blobs/0927f9b1b860bef909307503069a16c7da8bde78"
+    },
+    {
+      "path": "PhilippWebsite/wwwroot/index.html",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "09c221b2e1547864aade8309a207a19d0b7f9239",
+      "size": 1129,
+      "url": "https://api.github.com/repos/filiandun/philipp-website/git/blobs/09c221b2e1547864aade8309a207a19d0b7f9239"
+    },
+    {
+      "path": "PhilippWebsite/wwwroot/scripts",
+      "mode": "040000",
+      "type": "tree",
+      "sha": "e439d67f982ec4b5ff6c0e7d1093578482574249",
+      "url": "https://api.github.com/repos/filiandun/philipp-website/git/trees/e439d67f982ec4b5ff6c0e7d1093578482574249"
+    },
+    {
+      "path": "PhilippWebsite/wwwroot/scripts/script.js",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "a04e9be75f3fdd3802dfa7bb69bf6ebfba65ec1f",
+      "size": 1391,
+      "url": "https://api.github.com/repos/filiandun/philipp-website/git/blobs/a04e9be75f3fdd3802dfa7bb69bf6ebfba65ec1f"
+    }
+  ],
+  "truncated": false
+}

@@ -1,0 +1,23 @@
+﻿@* VsProjectTreeNode.razor *@
+
+
+@using PhilippWebsite.Services.GitHubProjectExplorer
+
+@inject ILogger<VsProjectTreeNode> Logger;
+
+
+<div>
+    <span>@this.Node.Name</span>
+
+    <div style="padding-left: 10px;">
+        @foreach (var childNode in this.Node.Children)
+        {
+            <VsProjectTreeNode Node="@childNode"></VsProjectTreeNode>
+        }
+    </div>
+</div>
+
+
+@code {
+    [Parameter] public required ProjectNode Node { get; set; }
+}

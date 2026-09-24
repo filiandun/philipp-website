@@ -1,8 +1,10 @@
 ﻿@* VsActivityBar.razor *@
 
 
-@using PhilippWebsite.Models
+@using PhilippWebsite.Components.ActivityBar.ProjectSolution
+
 @using PhilippWebsite.Services
+@using PhilippWebsite.Services.GitHubProjectExplorer
 
 @inject IProjectExplorerService _projectExplorerService
 
@@ -13,11 +15,11 @@
     @if (this._explorerIsOpen)
     {
         <VsActivityBarPanel Title="Solution Explorer" OnCloseClick="@this.Close">
-            @if (this._treeResponse is not null)
+            @if (this._projectTree is not null)
             {
-                @foreach (var treeItem in this._treeResponse.Tree)
+                @foreach (var node in this._projectTree)
                 {
-                    <div>@treeItem.Path</div>
+                    <VsProjectTreeNode Node="node"></VsProjectTreeNode>
                 }
             }
             else
@@ -30,12 +32,12 @@
 
 
 @code {
-    private GitHubTreeResponse? _treeResponse;
+    private List<ProjectNode>? _projectTree;
 
 
     protected override async Task OnInitializedAsync()
     {
-        this._treeResponse = await this._projectExplorerService.GetProjectTreeContentAsync();
+        this._projectTree = await this._projectExplorerService.GetProjectTreeAsync();
     }
 
     private bool _explorerIsOpen = true;

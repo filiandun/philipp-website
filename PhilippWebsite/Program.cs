@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.Components.WebAssembly.Hosting;
 using MudBlazor.Services;
 
 using PhilippWebsite.Services;
+using PhilippWebsite.Services.GitHubProjectExplorer;
 
 
 namespace PhilippWebsite
