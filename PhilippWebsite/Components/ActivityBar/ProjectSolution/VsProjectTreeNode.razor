@@ -1,23 +1,54 @@
 ﻿@* VsProjectTreeNode.razor *@
 
 
+@using PhilippWebsite.Resources
 @using PhilippWebsite.Services.GitHubProjectExplorer
 
 @inject ILogger<VsProjectTreeNode> Logger;
 
 
-<div>
-    <span>@this.Node.Name</span>
+<div class="vs-project-tree-node-root">
+    <div class="vs-project-tree-node-head" style="padding-left: @(this.Depth * 15)px;" @onclick="this.OnClick">
+        <div class="vs-project-tree-node-head-expand">
+            @if (this.Node.Children.Any())
+            {
+                <VsIcon Icon="@(this._isExpanded ? AppIcons.ExpandDown : AppIcons.ExpandRight)" IconSize="16"></VsIcon>
+            }
+        </div>
 
-    <div style="padding-left: 10px;">
-        @foreach (var childNode in this.Node.Children)
-        {
-            <VsProjectTreeNode Node="@childNode"></VsProjectTreeNode>
-        }
+        <div class="vs-project-tree-node-head-icon">
+            @if (this.Node.Type == ProjectNodeType.File)
+            {
+                <VsIcon Icon="@AppIcons.CSFileNode" IconSize="16"></VsIcon>
+            } 
+            else
+            {
+                <VsIcon Icon="@AppIcons.Folder" IconSize="16"></VsIcon>
+            }
+        </div>
+
+        <div class="vs-project-tree-node-head-content">
+            <span>@this.Node.Name</span>
+        </div>
     </div>
+
+    @if (this._isExpanded)
+    {  
+        <div class="vs-project-tree-node-child">
+            @foreach (var childNode in this.Node.Children)
+            {
+                <VsProjectTreeNode Node="childNode" Depth="(this.Depth + 1)"></VsProjectTreeNode>
+            }
+        </div>
+    }
 </div>
 
 
 @code {
     [Parameter] public required ProjectNode Node { get; set; }
+    [Parameter] public int Depth { get; set; } = 0;
+
+    private bool _isExpanded = false;
+
+    private void OnClick() => this._isExpanded = !this._isExpanded;
 }

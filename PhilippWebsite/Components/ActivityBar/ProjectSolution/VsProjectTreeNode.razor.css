@@ -1,0 +1,58 @@
+/* CSS for VsProjectTreeNode component */
+
+
+.vs-project-tree-node-root {
+    flex: 1;
+    min-width: 100%;
+    width: max-content;
+}
+
+    .vs-project-tree-node-head {
+        display: flex;
+        flex-direction: row;
+        justify-content: start;
+        align-items: center;  
+
+        padding: 0 50px;
+
+        border-radius: var(--mud-default-borderradius);
+    }
+
+        .vs-project-tree-node-head:hover {
+            background-color: var(--mud-palette-action-disabled);
+        }
+
+        .vs-project-tree-node-head-expand {
+            display: flex;
+            justify-content: center;
+            align-items: center;  
+
+            width: 20px;
+
+            flex-shrink: 0;
+        }
+
+        .vs-project-tree-node-head-icon {
+            display: flex;
+            justify-content: center;
+            align-items: center;  
+
+            padding: 5px;
+
+            flex-shrink: 0;
+        }
+
+        .vs-project-tree-node-head-content {
+
+        }   
+
+            .vs-project-tree-node-head-content span {
+                overflow: hidden;
+
+                white-space: nowrap;
+                text-overflow: ellipsis;
+            }
+
+    .vs-project-tree-node-child {
+        
+    }

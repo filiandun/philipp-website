@@ -98,17 +98,17 @@ namespace PhilippWebsite.Services.GitHubProjectExplorer
 
         private void SortTree(List<ProjectNode> nodeList)
         {
-            //nodeList.Sort((a, b) =>
-            //{
-            //    if (a.Type != b.Type) return b.Type.CompareTo(a.Type);
+            nodeList.Sort((a, b) =>
+            {
+                if (a.Type != b.Type) return a.Type.CompareTo(b.Type);
 
-            //    return a.Name.CompareTo(b.Name);
-            //});
+                return a.Name.CompareTo(b.Name);
+            });
 
-            //foreach (var node in nodeList.Where(n => n.Children.Any()))
-            //{
-            //    this.SortTree(node.Children);
-            //}
+            foreach (var node in nodeList.Where(n => n.Children.Any()))
+            {
+                this.SortTree(node.Children);
+            }
         }
     }
 }
