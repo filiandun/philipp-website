@@ -1,0 +1,38 @@
+﻿@* VsTabsBar.razor *@
+
+@using PhilippWebsite.Resources
+@using PhilippWebsite.Services.VsTabState
+
+
+@inject VsTabStateService VsTabStateService
+
+
+<div class="vs-tabsbar-root">
+    @foreach (var tab in this.VsTabStateService.OpenTabs)
+    {
+        <div class="vs-tabsbar-tab @(VsTabStateService.ActiveTab == tab ? "active" : "")" @onclick="() => this.VsTabStateService.SetActive(tab)">
+            <span class="vs-tabsbar-tab-content">@tab.Name</span>
+
+            <span class="vs-tabsbar-tab-pin" @onclick:stopPropagation="true">
+                <VsIcon Class="vs-tabsbar-tab-pin-icon" Icon="@AppIcons.PushPin" IconSize="16"/>
+            </span>
+
+            <span class="vs-tabsbar-tab-close" @onclick="() => this.VsTabStateService.Close(tab)" @onclick:stopPropagation="true">
+                <VsIcon Class="vs-tabsbar-tab-close-icon" Icon="@AppIcons.Close" IconSize="16"/>
+            </span>
+        </div>        
+    }
+</div>
+
+
+@code {
+    protected override void OnInitialized()
+    {
+        this.VsTabStateService.OnChange += this.StateHasChanged;
+    }
+
+    public void Dispose()
+    {
+        this.VsTabStateService.OnChange -= this.StateHasChanged;
+    }
+}

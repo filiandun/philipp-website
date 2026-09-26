@@ -76,27 +76,7 @@
 
     <div class="vs-workbench">
         <main class="vs-editor-viewport">
-            <nav class="vs-tabsbar">
-                <NavLink href="about" Match="NavLinkMatch.All" class="vs-tab">
-                    <span class="vs-tab-title">AboutMe.cs</span>
-                    <VsIcon Icon="@AppIcons.PushPin" IconSize="16"></VsIcon>
-                </NavLink>
-
-                <NavLink href="stack" class="vs-tab">
-                    <span class="vs-tab-icon json"></span>
-                    <span class="vs-tab-title">TechStack.json</span>
-                </NavLink>
-
-                <NavLink href="projects" class="vs-tab">
-                    <span class="vs-tab-icon sln"></span>
-                    <span class="vs-tab-title">MyProjects.md</span>
-                </NavLink>
-
-                <NavLink href="contacts" class="vs-tab">
-                    <span class="vs-tab-icon md"></span>
-                    <span class="vs-tab-title">Contacts.cs</span>
-                </NavLink>
-            </nav>
+            <VsTabsBar></VsTabsBar>
 
             @* TODO сломанные highlightedline*@
             <div class="vs-editor-content">

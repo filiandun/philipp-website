@@ -2,14 +2,19 @@
 
 
 @using PhilippWebsite.Resources
+
 @using PhilippWebsite.Services.GitHubProjectExplorer
+@using PhilippWebsite.Services.VsTabState
+
 
 @inject ILogger<VsProjectTreeNode> Logger;
 
+@inject VsTabStateService VsTabStateService;
+
 
 <div class="vs-project-tree-node-root">
-    <div class="vs-project-tree-node-head" style="padding-left: @(this.Depth * 15)px;" @onclick="this.OnClick">
-        <div class="vs-project-tree-node-head-expand">
+    <div class="vs-project-tree-node-head" style="padding-left: @(this.Depth * 15)px;">
+        <div class="vs-project-tree-node-head-expand" @onclick="this.OnExpandClick">
             @if (this.Node.Children.Any())
             {
                 <VsIcon Icon="@(this._isExpanded ? AppIcons.ExpandDown : AppIcons.ExpandRight)" IconSize="16"></VsIcon>
@@ -27,7 +32,7 @@
             }
         </div>
 
-        <div class="vs-project-tree-node-head-content">
+        <div class="vs-project-tree-node-head-content" @onclick="this.OnContentClick">
             <span>@this.Node.Name</span>
         </div>
     </div>
@@ -50,5 +55,6 @@
 
     private bool _isExpanded = false;
 
-    private void OnClick() => this._isExpanded = !this._isExpanded;
+    private void OnExpandClick() => this._isExpanded = !this._isExpanded;
+    private void OnContentClick() => this.VsTabStateService.Open(new TabModel() { Name = this.Node.Name, Content = this.Node.Path });
 }

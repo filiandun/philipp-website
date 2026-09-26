@@ -1,0 +1,105 @@
+/* CSS for VsTabsBar component */
+
+
+.vs-tabsbar-root {
+    position: relative;
+    display: flex;
+    flex-wrap: wrap;
+
+    min-height: 30px;
+
+    background: var(--mud-palette-surface);
+
+    border-top-left-radius: var(--mud-default-borderradius);
+    border-top-right-radius: var(--mud-default-borderradius);
+
+    z-index: 2;
+}
+
+    .vs-tabsbar-tab {
+        display: flex;
+        align-items: center;
+
+        font-size: 13px;
+        color: var(--mud-palette-text-secondary);
+
+        text-decoration: none;
+    }
+
+        .vs-tabsbar-tab:hover {
+            background-color: var(--mud-palette-gray-light);
+            border-radius: var(--mud-default-borderradius);
+        }
+
+
+        .vs-tabsbar-tab.active {
+            margin-bottom: -1px;
+
+            color: var(--mud-palette-white);
+
+            font-weight: 600;
+
+            border: 1px solid var(--mud-palette-primary);
+            border-bottom: 2px solid var(--mud-palette-surface);
+    
+            border-top-left-radius: var(--mud-default-borderradius);
+            border-top-right-radius: var(--mud-default-borderradius);
+    
+            z-index: 3;
+        }
+
+            .vs-tabsbar-tab.active:hover {
+                background-color: transparent;
+            }
+
+            .vs-tabsbar-tab.active * {
+                visibility: visible;
+            }
+
+
+
+        .vs-tabsbar-tab-content {
+            padding: 5px 10px; 
+        }
+
+        .vs-tabsbar-tab-pin {
+            display: flex;
+            align-items: center;
+
+            visibility: hidden;
+
+            width: stretch;
+            height: stretch;
+
+            padding: 5px 10px;   
+        }
+
+            .vs-tabsbar-tab-pin:hover {
+                background-color: var(--mud-palette-action-disabled);
+                border-radius: var(--mud-default-borderradius);
+            }
+
+            .vs-tabsbar-tab:hover .vs-tabsbar-tab-pin {
+                visibility: visible;
+            }
+
+        .vs-tabsbar-tab-close {
+            display: flex;
+            align-items: center;
+
+            visibility: hidden;
+
+            width: stretch;
+            height: stretch;
+
+            padding: 5px 10px;   
+        }
+
+            .vs-tabsbar-tab-close:hover {
+                background-color: var(--mud-palette-action-disabled);
+                border-radius: var(--mud-default-borderradius);
+            }
+
+            .vs-tabsbar-tab:hover .vs-tabsbar-tab-close {
+                visibility: visible;
+            }

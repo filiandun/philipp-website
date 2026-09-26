@@ -5,6 +5,7 @@ using MudBlazor.Services;
 
 using PhilippWebsite.Services;
 using PhilippWebsite.Services.GitHubProjectExplorer;
+using PhilippWebsite.Services.VsTabState;
 
 
 namespace PhilippWebsite
@@ -25,6 +26,7 @@ namespace PhilippWebsite
 
             builder.Services.AddScoped<ResumeContentService>();
             builder.Services.AddScoped<IProjectExplorerService, GitHubProjectExplorerService>();
+            builder.Services.AddScoped<VsTabStateService>();
 
             await builder.Build().RunAsync();
         }
