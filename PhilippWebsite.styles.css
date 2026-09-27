@@ -1,3 +1,67 @@
+/* /Components/ActivityBar/ProjectSolution/VsProjectTreeNode.razor.rz.scp.css */
+/* CSS for VsProjectTreeNode component */
+
+
+.vs-project-tree-node-root[b-wnuwlibzww] {
+    flex: 1;
+    min-width: 100%;
+    width: max-content;
+}
+
+    .vs-project-tree-node-head[b-wnuwlibzww] {
+        display: flex;
+        flex-direction: row;
+        justify-content: start;
+        align-items: center;  
+
+        padding: 0 50px;
+
+        border-radius: var(--mud-default-borderradius);
+    }
+
+        .vs-project-tree-node-head:hover[b-wnuwlibzww] {
+            background-color: var(--mud-palette-action-disabled);
+        }
+
+        .vs-project-tree-node-head-expand[b-wnuwlibzww] {
+            display: flex;
+            justify-content: center;
+            align-items: center;  
+
+            width: 20px;
+
+            flex-shrink: 0;
+        }
+
+        .vs-project-tree-node-head-icon[b-wnuwlibzww] {
+            display: flex;
+            justify-content: center;
+            align-items: center;  
+
+            padding: 5px;
+
+            flex-shrink: 0;
+        }
+
+        /* TODO косяк с тем, что кликать для открытия нужно именно по тексту (это сделано специально, чтобы кнопки expand активными оставались)
+            однако, после content идёт большое пустое простанство, которое не кликаблильно, а надо сделать его кликабильным.
+            Также надо сделать открытие по двум кликам, а не по одному.
+        */
+
+        .vs-project-tree-node-head-content[b-wnuwlibzww] {
+
+        }   
+
+            .vs-project-tree-node-head-content span[b-wnuwlibzww] {
+                overflow: hidden;
+
+                white-space: nowrap;
+                text-overflow: ellipsis;
+            }
+
+    .vs-project-tree-node-child[b-wnuwlibzww] {
+        
+    }
 /* /Components/ActivityBar/VsActivityBar.razor.rz.scp.css */
 /* CSS for VsActivityBar component */
 
@@ -46,8 +110,9 @@
     display: flex;
     flex-direction: column;
 
-    width: 280px;
+    width: 300px;
     height: 100%;
+    min-width: 0;
 
     overflow: hidden;
 
@@ -258,6 +323,116 @@
 .vs-menu-item-text[b-tzfqst5hpt] {
     text-wrap: nowrap;
 }
+/* /Components/VsTabsBar.razor.rz.scp.css */
+/* CSS for VsTabsBar component */
+
+
+.vs-tabsbar-root[b-ho2ynsgrb3] {
+    position: relative;
+    display: flex;
+    flex-wrap: wrap;
+
+    min-height: 30px;
+
+    background: var(--mud-palette-surface);
+
+    border-top-left-radius: var(--mud-default-borderradius);
+    border-top-right-radius: var(--mud-default-borderradius);
+
+    z-index: 2;
+}
+
+    .vs-tabsbar-tab[b-ho2ynsgrb3] {
+        display: flex;
+        align-items: center;
+
+        font-size: 13px;
+        color: var(--mud-palette-text-secondary);
+
+        text-decoration: none;
+    }
+
+        .vs-tabsbar-tab:hover[b-ho2ynsgrb3] {
+            background-color: var(--mud-palette-gray-light);
+            border-radius: var(--mud-default-borderradius);
+        }
+
+
+        .vs-tabsbar-tab.active[b-ho2ynsgrb3] {
+            margin-bottom: -1px;
+
+            color: var(--mud-palette-white);
+
+            font-weight: 600;
+
+            border: 1px solid var(--mud-palette-primary);
+            border-bottom: 2px solid var(--mud-palette-surface);
+    
+            border-top-left-radius: var(--mud-default-borderradius);
+            border-top-right-radius: var(--mud-default-borderradius);
+    
+            z-index: 3;
+        }
+
+            .vs-tabsbar-tab.active:hover[b-ho2ynsgrb3] {
+                background-color: var(--mud-palette-surface);
+
+                border-radius: 0;
+                border-top-left-radius: var(--mud-default-borderradius);
+                border-top-right-radius: var(--mud-default-borderradius);
+            }
+
+            .vs-tabsbar-tab.active *[b-ho2ynsgrb3] {
+                visibility: visible;
+            }
+
+
+
+        .vs-tabsbar-tab-content[b-ho2ynsgrb3] {
+            padding: 5px 10px; 
+        }
+
+        .vs-tabsbar-tab-pin[b-ho2ynsgrb3] {
+            display: flex;
+            align-items: center;
+
+            visibility: hidden;
+
+            width: stretch;
+            height: stretch;
+
+            padding: 5px 10px;   
+        }
+
+            .vs-tabsbar-tab-pin:hover[b-ho2ynsgrb3] {
+                background-color: var(--mud-palette-action-disabled);
+                border-radius: var(--mud-default-borderradius);
+            }
+
+            .vs-tabsbar-tab:hover .vs-tabsbar-tab-pin[b-ho2ynsgrb3] {
+                visibility: visible;
+            }
+
+        .vs-tabsbar-tab-close[b-ho2ynsgrb3] {
+            display: flex;
+            align-items: center;
+
+            visibility: hidden;
+
+            width: stretch;
+            height: stretch;
+
+            padding: 5px 10px;   
+        }
+
+            .vs-tabsbar-tab-close:hover[b-ho2ynsgrb3] {
+                background-color: var(--mud-palette-action-disabled);
+                border-radius: var(--mud-default-borderradius);
+            }
+
+            .vs-tabsbar-tab:hover .vs-tabsbar-tab-close[b-ho2ynsgrb3] {
+                visibility: visible;
+            }
 /* /Components/VsToolbar.razor.rz.scp.css */
 /* CSS for VsToolbar component */
 
@@ -393,7 +568,7 @@ main[b-i4x3zxr084] {
     flex-direction: column;
     overflow: hidden;
 
-    padding: 0 5px 10px 10px;
+    padding: 10px 5px 10px 10px;
 
     height: 100vh;
     width: 100vw;
@@ -489,44 +664,9 @@ main[b-i4x3zxr084] {
     
         .vs-tabsbar[b-i4x3zxr084] {
             position: relative;
-            display: flex;
-            flex-wrap: wrap;
-
-            background: var(--mud-palette-surface);
-
-            border-top-left-radius: var(--mud-default-borderradius);
-            border-top-right-radius: var(--mud-default-borderradius);
 
             z-index: 2;
         }
-
-        [b-i4x3zxr084] .vs-tab {
-            display: flex;
-            align-items: center;
-
-            padding: 6px 14px;
-
-            font-size: 13px;
-            color: var(--mud-palette-text-secondary);
-
-            text-decoration: none;
-        }
-
-            [b-i4x3zxr084] .vs-tab.active {
-                margin-bottom: -1px;
-
-                color: var(--mud-palette-white);
-
-                font-weight: 600;
-
-                border: 1px solid var(--mud-palette-primary);
-                border-bottom: 2px solid var(--mud-palette-surface);
-    
-                border-top-left-radius: var(--mud-default-borderradius);
-                border-top-right-radius: var(--mud-default-borderradius);
-    
-                z-index: 10;
-            }
 
 
         .vs-editor-content[b-i4x3zxr084] {
