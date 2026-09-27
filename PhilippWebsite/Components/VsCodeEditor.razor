@@ -4,6 +4,13 @@
 @using ColorCode
 @using ColorCode.Styling;
 
+@using PhilippWebsite.Services.VsTabState
+@using PhilippWebsite.Services.GitHubFileContent
+
+
+@inject VsTabStateService VsTabStateService
+@inject GitHubFileContentService FileContentService
+
 
 <div class="vs-editor-root">
     <div class="vs-editor-highlighter">
@@ -37,6 +44,27 @@
     private string _htmlString = string.Empty;
 
 
+    protected override void OnInitialized()
+    {
+        this.VsTabStateService.OnChange += this.OnTabChange;
+    }
+
+
+    // TODO надо сделать отдельное событие ActiveTabChange
+    private async void OnTabChange()
+    {
+        if (this.VsTabStateService.ActiveTab is null) return;
+
+        string content = await this.FileContentService.GetFileContentAsync(this.VsTabStateService.ActiveTab.Content);
+
+
+        this._lineCount = content.Split('\n').Length;
+
+        this._htmlString = _formatter.GetHtmlString(content, this.Language);
+
+        this.StateHasChanged();
+    }
+
     protected override void OnParametersSet()
     {
         if (string.IsNullOrEmpty(this.Code)) return;
@@ -45,4 +73,10 @@
 
         this._htmlString = _formatter.GetHtmlString(this.Code, this.Language);
     }
-}
+
+
+    public void Dispose()
+    {
+        this.VsTabStateService.OnChange -= this.OnTabChange;
+    }
+} 

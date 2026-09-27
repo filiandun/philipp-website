@@ -4,8 +4,9 @@ using Microsoft.AspNetCore.Components.WebAssembly.Hosting;
 using MudBlazor.Services;
 
 using PhilippWebsite.Services;
-using PhilippWebsite.Services.GitHubProjectExplorer;
 using PhilippWebsite.Services.VsTabState;
+using PhilippWebsite.Services.GitHubFileContent;
+using PhilippWebsite.Services.GitHubProjectExplorer;
 
 
 namespace PhilippWebsite
@@ -27,6 +28,7 @@ namespace PhilippWebsite
             builder.Services.AddScoped<ResumeContentService>();
             builder.Services.AddScoped<IProjectExplorerService, GitHubProjectExplorerService>();
             builder.Services.AddScoped<VsTabStateService>();
+            builder.Services.AddScoped<GitHubFileContentService>();
 
             await builder.Build().RunAsync();
         }
