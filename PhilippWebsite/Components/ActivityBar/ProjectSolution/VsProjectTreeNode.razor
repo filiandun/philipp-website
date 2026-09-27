@@ -17,18 +17,18 @@
         <div class="vs-project-tree-node-head-expand" @onclick="this.OnExpandClick">
             @if (this.Node.Children.Any())
             {
-                <VsIcon Icon="@(this._isExpanded ? AppIcons.ExpandDown : AppIcons.ExpandRight)" IconSize="16"></VsIcon>
+                <VsIcon Icon="@(this._isExpanded ? VsIcons.ExpandDown : VsIcons.ExpandRight)" IconSize="16"></VsIcon>
             }
         </div>
 
         <div class="vs-project-tree-node-head-icon">
             @if (this.Node.Type == ProjectNodeType.File)
             {
-                <VsIcon Icon="@AppIcons.CSFileNode" IconSize="16"></VsIcon>
+                <VsIcon Icon="@VsIcons.CSFileNode" IconSize="16"></VsIcon>
             } 
             else
             {
-                <VsIcon Icon="@AppIcons.Folder" IconSize="16"></VsIcon>
+                <VsIcon Icon="@VsIcons.Folder" IconSize="16"></VsIcon>
             }
         </div>
 

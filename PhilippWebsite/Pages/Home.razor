@@ -1,14 +1,101 @@
 ﻿@page "/"
 
-@inject NavigationManager NavigationManager
+@using PhilippWebsite.Components
+@using PhilippWebsite.Components.ActivityBar
+
+@using PhilippWebsite.Resources
 
 
-<PageTitle>Philipp's website</PageTitle>
+<div class="vs-window">
+    <header class="vs-header">
+        <div class="vs-titlebar">
+
+            <div class="vs-titlebar-left">
+                <VsIcon Icon="@VsIcons.VisualStudio" IconSize="32" IconColor="var(--mud-palette-primary)"></VsIcon>
+
+                <div class="vs-menu-list">
+                    <VsMenu Label="File">
+                        <VsMenuItem ItemIcon="@VsIcons.RunOutline" ItemText="Download CV (.pdf)"></VsMenuItem>
+                        <VsMenuItem ItemIcon="@VsIcons.PushPin" ItemText="Print"></VsMenuItem>
+                    </VsMenu>
+
+                    <VsMenu Label="Git">
+                        <VsMenuItem ItemIcon="@VsIcons.Run" ItemText="Open GitHub"></VsMenuItem>
+                    </VsMenu>
+
+                    <VsMenu Label="Help">
+                        <VsMenuItem ItemIcon="@VsIcons.Refresh" ItemText="About This Portfolio"></VsMenuItem>
+                    </VsMenu>
+
+                    <VsMenu Label="Search">
+                        <VsMenuItem ItemIcon="@VsIcons.Search" ItemText="PhilippWebsite (Ctrl+Q)"></VsMenuItem>
+                    </VsMenu>
+                </div>
+
+                <span class="vs-solution-name">PhilippPortfolio.sln - Microsoft Visual Studio</span>
+            </div>
+
+            <div class="vs-titlebar-rigth">
+                <VsToolbarButton Icon="@VsIcons.Close" IconSize="24" Class="vs-close-btn"></VsToolbarButton>
+            </div>
+        </div>
+
+        <div class="vs-toolbars">
+            <VsToolbar Class="vs-toolbar"> @* TODO тут снаружи, и внутри, повторяются именна классов, тут класс нужен, так как margin добавляется, чтобы не липли друг к другу они*@
+                <VsToolbarButton Icon="@VsIcons.Backwards" IconColor="#3EA0E5"></VsToolbarButton>
+                <VsToolbarButton Icon="@VsIcons.Forwards" IconColor="#3EA0E5"></VsToolbarButton>
+
+                <MudDivider Vertical="true" FlexItem="true"></MudDivider>
+
+                <VsToolbarButton Icon="@VsIcons.Home"></VsToolbarButton>
+
+                <MudDivider Vertical="true" FlexItem="true"></MudDivider>
+
+                <VsToolbarButton Icon="@VsIcons.Save" IconColor="#3EA0E5"></VsToolbarButton>
+            </VsToolbar>
+
+            <VsToolbar Class="vs-toolbar">
+                <VsToolbarButton Icon="@VsIcons.Run" Text="debug" IconColor="#85E876"></VsToolbarButton>
+                <VsToolbarButton Icon="@VsIcons.RunOutline" IconColor="#85E876"></VsToolbarButton>
+
+                <MudDivider Vertical="true" FlexItem="true"></MudDivider>
+
+                <VsToolbarButton Icon="@VsIcons.Refresh"></VsToolbarButton>
+            </VsToolbar>
+        </div>
+    </header>
+
+
+    <div class="vs-workbench">
+        <main class="vs-editor-viewport">
+            <VsTabsBar></VsTabsBar>
+
+            @* TODO сломанные highlightedline*@
+            <div class="vs-editor-content">
+                <VsCodeEditor></VsCodeEditor>
+            </div>
+        </main>
+
+        <div class="vs-activitybar">
+            <VsActivityBar></VsActivityBar>
+        </div>
+    </div>
+
+    <footer class="vs-footer">
+        <div class="vs-footer-status-left">
+            <span class="status-item ready">Ready</span>
+            <span class="status-item">main*</span>
+        </div>
+
+        <div class="vs-footer-status-right">
+            <span class="status-item">UTF-8</span>
+            <span class="status-item">C# 15</span>
+            <span class="status-item">.NET 10.0</span>
+        </div>
+    </footer>
+</div>
 
 
 @code {
-    protected override void OnInitialized()
-    {
-        this.NavigationManager.NavigateTo("/about");
-    }
+
 }
