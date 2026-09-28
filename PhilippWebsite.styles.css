@@ -1,14 +1,14 @@
-/* /Components/ActivityBar/ProjectSolution/VsProjectTreeNode.razor.rz.scp.css */
+/* /Components/ActivityBar/SolutionExplorer/VsProjectTreeItem.razor.rz.scp.css */
 /* CSS for VsProjectTreeNode component */
 
 
-.vs-project-tree-node-root[b-wnuwlibzww] {
+.vs-project-tree-node-root[b-eincok09fq] {
     flex: 1;
     min-width: 100%;
     width: max-content;
 }
 
-    .vs-project-tree-node-head[b-wnuwlibzww] {
+    .vs-project-tree-node-head[b-eincok09fq] {
         display: flex;
         flex-direction: row;
         justify-content: start;
@@ -19,11 +19,11 @@
         border-radius: var(--mud-default-borderradius);
     }
 
-        .vs-project-tree-node-head:hover[b-wnuwlibzww] {
+        .vs-project-tree-node-head:hover[b-eincok09fq] {
             background-color: var(--mud-palette-action-disabled);
         }
 
-        .vs-project-tree-node-head-expand[b-wnuwlibzww] {
+        .vs-project-tree-node-head-expand[b-eincok09fq] {
             display: flex;
             justify-content: center;
             align-items: center;  
@@ -33,7 +33,7 @@
             flex-shrink: 0;
         }
 
-        .vs-project-tree-node-head-icon[b-wnuwlibzww] {
+        .vs-project-tree-node-head-icon[b-eincok09fq] {
             display: flex;
             justify-content: center;
             align-items: center;  
@@ -48,18 +48,18 @@
             Также надо сделать открытие по двум кликам, а не по одному.
         */
 
-        .vs-project-tree-node-head-content[b-wnuwlibzww] {
+        .vs-project-tree-node-head-content[b-eincok09fq] {
 
         }   
 
-            .vs-project-tree-node-head-content span[b-wnuwlibzww] {
+            .vs-project-tree-node-head-content span[b-eincok09fq] {
                 overflow: hidden;
 
                 white-space: nowrap;
                 text-overflow: ellipsis;
             }
 
-    .vs-project-tree-node-child[b-wnuwlibzww] {
+    .vs-project-tree-node-child[b-eincok09fq] {
         
     }
 /* /Components/ActivityBar/VsActivityBar.razor.rz.scp.css */
@@ -150,6 +150,235 @@
 
         overflow: auto;
     }
+/* /Components/Common/Menu/VsMenu.razor.rz.scp.css */
+/* CSS for VsMenu component */
+
+.vs-menu-root[b-qif7kzqyns] {
+    position: relative;
+    display: inline-block;
+
+    margin: 0 5px;
+    padding: 5px 10px;
+
+    font-size: 15px;
+    font-weight: 300;
+    color: white;
+
+    border-radius: var(--mud-default-borderradius);
+}
+
+    .vs-menu-root:hover[b-qif7kzqyns] {
+        background-color: var(--mud-palette-surface);
+    }
+
+    /*TODO надо сделать, чтобы когда меню было активно (содержимое dropdown открыто), то стиль был такой же как и у :hover*/
+
+.vs-menu-label[b-qif7kzqyns] {
+
+}
+
+.vs-menu-dropdown[b-qif7kzqyns] {
+    position: absolute;
+/*    top: 0;*/
+    left: 0;
+
+    min-width: 200px;
+    margin-top: 10px;
+    padding: 5px;
+
+    font-size: 12px;
+
+    background-color: var(--mud-palette-surface);
+        
+    border-radius: var(--mud-default-borderradius);
+    box-shadow: 0px 0px 2px 1px rgba(0, 0, 0, 0.3);
+
+    z-index: 999;
+}
+/* /Components/Common/Menu/VsMenuItem.razor.rz.scp.css */
+/* CSS for VsMenuItem component */
+
+.vs-menu-item-root[b-ufyt7likc9] {
+    display: inline-flex;
+    align-items: center;
+
+    width: stretch;
+
+    padding: 5px 10px;
+
+    border-radius: var(--mud-default-borderradius);
+}
+
+    .vs-menu-item-root:hover[b-ufyt7likc9] {
+        background-color: var(--mud-palette-action-disabled);
+    }
+
+[b-ufyt7likc9] .vs-menu-item-icon {
+    margin-right: 10px;
+    padding: 2px;
+}
+
+.vs-menu-item-text[b-ufyt7likc9] {
+    text-wrap: nowrap;
+}
+/* /Components/TabsBar/VsTabsBar.razor.rz.scp.css */
+/* CSS for VsTabsBar component */
+
+
+.vs-tabsbar-root[b-or0vghqh6p] {
+    position: relative;
+    display: flex;
+    flex-wrap: wrap;
+
+    min-height: 30px;
+
+    background: var(--mud-palette-surface);
+
+    border-top-left-radius: var(--mud-default-borderradius);
+    border-top-right-radius: var(--mud-default-borderradius);
+
+    z-index: 2;
+}
+
+    .vs-tabsbar-tab[b-or0vghqh6p] {
+        display: flex;
+        align-items: center;
+
+        font-size: 13px;
+        color: var(--mud-palette-text-secondary);
+
+        text-decoration: none;
+    }
+
+        .vs-tabsbar-tab:hover[b-or0vghqh6p] {
+            background-color: var(--mud-palette-gray-light);
+            border-radius: var(--mud-default-borderradius);
+        }
+
+
+        .vs-tabsbar-tab.active[b-or0vghqh6p] {
+            margin-bottom: -1px;
+
+            color: var(--mud-palette-white);
+
+            font-weight: 600;
+
+            border: 1px solid var(--mud-palette-primary);
+            border-bottom: 2px solid var(--mud-palette-surface);
+    
+            border-top-left-radius: var(--mud-default-borderradius);
+            border-top-right-radius: var(--mud-default-borderradius);
+    
+            z-index: 3;
+        }
+
+            .vs-tabsbar-tab.active:hover[b-or0vghqh6p] {
+                background-color: var(--mud-palette-surface);
+
+                border-radius: 0;
+                border-top-left-radius: var(--mud-default-borderradius);
+                border-top-right-radius: var(--mud-default-borderradius);
+            }
+
+            .vs-tabsbar-tab.active *[b-or0vghqh6p] {
+                visibility: visible;
+            }
+
+
+
+        .vs-tabsbar-tab-content[b-or0vghqh6p] {
+            padding: 5px 10px; 
+        }
+
+        .vs-tabsbar-tab-pin[b-or0vghqh6p] {
+            display: flex;
+            align-items: center;
+
+            visibility: hidden;
+
+            width: stretch;
+            height: stretch;
+
+            padding: 5px 10px;   
+        }
+
+            .vs-tabsbar-tab-pin:hover[b-or0vghqh6p] {
+                background-color: var(--mud-palette-action-disabled);
+                border-radius: var(--mud-default-borderradius);
+            }
+
+            .vs-tabsbar-tab:hover .vs-tabsbar-tab-pin[b-or0vghqh6p] {
+                visibility: visible;
+            }
+
+        .vs-tabsbar-tab-close[b-or0vghqh6p] {
+            display: flex;
+            align-items: center;
+
+            visibility: hidden;
+
+            width: stretch;
+            height: stretch;
+
+            padding: 5px 10px;   
+        }
+
+            .vs-tabsbar-tab-close:hover[b-or0vghqh6p] {
+                background-color: var(--mud-palette-action-disabled);
+                border-radius: var(--mud-default-borderradius);
+            }
+
+            .vs-tabsbar-tab:hover .vs-tabsbar-tab-close[b-or0vghqh6p] {
+                visibility: visible;
+            }
+/* /Components/ToolBar/VsToolbar.razor.rz.scp.css */
+/* CSS for VsToolbar component */
+
+
+.vs-toolbar[b-zfa69zytfz] {
+    display: flex;
+    flex-direction: row;
+
+    width: fit-content;
+
+    padding: 3px;
+
+    color: var(--mud-pallete-textprimary);
+
+    background: var(--mud-palette-surface);
+
+    border: 1px solid rgb(0, 0, 0);
+    border-left-width: 4px;
+    border-radius: var(--mud-default-borderradius);
+}
+/* /Components/ToolBar/VsToolbarButton.razor.rz.scp.css */
+/* CSS for VsIconButton component */
+
+.vs-toolbar-btn[b-07gfddklsg] {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+
+    min-width: 30px;
+    height: 30px;
+
+    padding: 1px;
+    margin: 0 5px;
+
+    box-sizing: border-box;
+
+    cursor: pointer;
+
+    border-radius: var(--mud-default-borderradius);
+}
+
+    .vs-toolbar-btn:hover[b-07gfddklsg] {
+        background-color: var(--mud-palette-action-disabled);
+    }
+
+.vs-toolbar-text[b-07gfddklsg] {
+    padding: 5px
+}
 /* /Components/VsCodeEditor.razor.rz.scp.css */
 /* CSS for VsCodeEditor component */
 
@@ -252,318 +481,11 @@
     [b-qsmi0xrggo] .vs-editor-content pre code {
         line-height: 20px !important;
     }
-/* /Components/VsMenu.razor.rz.scp.css */
-/* CSS for VsMenu component */
+/* /Pages/Home.razor.rz.scp.css */
+/* CSS for Home component */
 
-.vs-menu-root[b-sdoda66hoy] {
-    position: relative;
-    display: inline-block;
 
-    margin: 0 5px;
-    padding: 5px 10px;
-
-    font-size: 15px;
-    font-weight: 300;
-    color: white;
-
-    border-radius: var(--mud-default-borderradius);
-}
-
-    .vs-menu-root:hover[b-sdoda66hoy] {
-        background-color: var(--mud-palette-surface);
-    }
-
-    /*TODO надо сделать, чтобы когда меню было активно (содержимое dropdown открыто), то стиль был такой же как и у :hover*/
-
-.vs-menu-label[b-sdoda66hoy] {
-
-}
-
-.vs-menu-dropdown[b-sdoda66hoy] {
-    position: absolute;
-/*    top: 0;*/
-    left: 0;
-
-    min-width: 200px;
-    margin-top: 10px;
-    padding: 5px;
-
-    font-size: 12px;
-
-    background-color: var(--mud-palette-surface);
-        
-    border-radius: var(--mud-default-borderradius);
-    box-shadow: 0px 0px 2px 1px rgba(0, 0, 0, 0.3);
-
-    z-index: 999;
-}
-/* /Components/VsMenuItem.razor.rz.scp.css */
-/* CSS for VsMenuItem component */
-
-.vs-menu-item-root[b-tzfqst5hpt] {
-    display: inline-flex;
-    align-items: center;
-
-    width: stretch;
-
-    padding: 5px 10px;
-
-    border-radius: var(--mud-default-borderradius);
-}
-
-    .vs-menu-item-root:hover[b-tzfqst5hpt] {
-        background-color: var(--mud-palette-action-disabled);
-    }
-
-[b-tzfqst5hpt] .vs-menu-item-icon {
-    margin-right: 10px;
-    padding: 2px;
-}
-
-.vs-menu-item-text[b-tzfqst5hpt] {
-    text-wrap: nowrap;
-}
-/* /Components/VsTabsBar.razor.rz.scp.css */
-/* CSS for VsTabsBar component */
-
-
-.vs-tabsbar-root[b-ho2ynsgrb3] {
-    position: relative;
-    display: flex;
-    flex-wrap: wrap;
-
-    min-height: 30px;
-
-    background: var(--mud-palette-surface);
-
-    border-top-left-radius: var(--mud-default-borderradius);
-    border-top-right-radius: var(--mud-default-borderradius);
-
-    z-index: 2;
-}
-
-    .vs-tabsbar-tab[b-ho2ynsgrb3] {
-        display: flex;
-        align-items: center;
-
-        font-size: 13px;
-        color: var(--mud-palette-text-secondary);
-
-        text-decoration: none;
-    }
-
-        .vs-tabsbar-tab:hover[b-ho2ynsgrb3] {
-            background-color: var(--mud-palette-gray-light);
-            border-radius: var(--mud-default-borderradius);
-        }
-
-
-        .vs-tabsbar-tab.active[b-ho2ynsgrb3] {
-            margin-bottom: -1px;
-
-            color: var(--mud-palette-white);
-
-            font-weight: 600;
-
-            border: 1px solid var(--mud-palette-primary);
-            border-bottom: 2px solid var(--mud-palette-surface);
-    
-            border-top-left-radius: var(--mud-default-borderradius);
-            border-top-right-radius: var(--mud-default-borderradius);
-    
-            z-index: 3;
-        }
-
-            .vs-tabsbar-tab.active:hover[b-ho2ynsgrb3] {
-                background-color: var(--mud-palette-surface);
-
-                border-radius: 0;
-                border-top-left-radius: var(--mud-default-borderradius);
-                border-top-right-radius: var(--mud-default-borderradius);
-            }
-
-            .vs-tabsbar-tab.active *[b-ho2ynsgrb3] {
-                visibility: visible;
-            }
-
-
-
-        .vs-tabsbar-tab-content[b-ho2ynsgrb3] {
-            padding: 5px 10px; 
-        }
-
-        .vs-tabsbar-tab-pin[b-ho2ynsgrb3] {
-            display: flex;
-            align-items: center;
-
-            visibility: hidden;
-
-            width: stretch;
-            height: stretch;
-
-            padding: 5px 10px;   
-        }
-
-            .vs-tabsbar-tab-pin:hover[b-ho2ynsgrb3] {
-                background-color: var(--mud-palette-action-disabled);
-                border-radius: var(--mud-default-borderradius);
-            }
-
-            .vs-tabsbar-tab:hover .vs-tabsbar-tab-pin[b-ho2ynsgrb3] {
-                visibility: visible;
-            }
-
-        .vs-tabsbar-tab-close[b-ho2ynsgrb3] {
-            display: flex;
-            align-items: center;
-
-            visibility: hidden;
-
-            width: stretch;
-            height: stretch;
-
-            padding: 5px 10px;   
-        }
-
-            .vs-tabsbar-tab-close:hover[b-ho2ynsgrb3] {
-                background-color: var(--mud-palette-action-disabled);
-                border-radius: var(--mud-default-borderradius);
-            }
-
-            .vs-tabsbar-tab:hover .vs-tabsbar-tab-close[b-ho2ynsgrb3] {
-                visibility: visible;
-            }
-/* /Components/VsToolbar.razor.rz.scp.css */
-/* CSS for VsToolbar component */
-
-
-.vs-toolbar[b-j875o60wic] {
-    display: flex;
-    flex-direction: row;
-
-    width: fit-content;
-
-    padding: 3px;
-
-    color: var(--mud-pallete-textprimary);
-
-    background: var(--mud-palette-surface);
-
-    border: 1px solid rgb(0, 0, 0);
-    border-left-width: 4px;
-    border-radius: var(--mud-default-borderradius);
-}
-/* /Components/VsToolbarButton.razor.rz.scp.css */
-/* CSS for VsIconButton component */
-
-.vs-toolbar-btn[b-ienoxxvqq9] {
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-
-    min-width: 30px;
-    height: 30px;
-
-    padding: 1px;
-    margin: 0 5px;
-
-    box-sizing: border-box;
-
-    cursor: pointer;
-
-    border-radius: var(--mud-default-borderradius);
-}
-
-    .vs-toolbar-btn:hover[b-ienoxxvqq9] {
-        background-color: var(--mud-palette-action-disabled);
-    }
-
-.vs-toolbar-text[b-ienoxxvqq9] {
-    padding: 5px
-}
-/* /Layout/MainLayout.razor.rz.scp.css */
-.page[b-i4x3zxr084] {
-    position: relative;
-    display: flex;
-    flex-direction: column;
-}
-
-main[b-i4x3zxr084] {
-    flex: 1;
-}
-
-.sidebar[b-i4x3zxr084] {
-    background-image: linear-gradient(180deg, rgb(5, 39, 103) 0%, #3a0647 70%);
-}
-
-.top-row[b-i4x3zxr084] {
-    background-color: #f7f7f7;
-    border-bottom: 1px solid #d6d5d5;
-    justify-content: flex-end;
-    height: 3.5rem;
-    display: flex;
-    align-items: center;
-}
-
-    .top-row[b-i4x3zxr084]  a, .top-row[b-i4x3zxr084]  .btn-link {
-        white-space: nowrap;
-        margin-left: 1.5rem;
-        text-decoration: none;
-    }
-
-    .top-row[b-i4x3zxr084]  a:hover, .top-row[b-i4x3zxr084]  .btn-link:hover {
-        text-decoration: underline;
-    }
-
-    .top-row[b-i4x3zxr084]  a:first-child {
-        overflow: hidden;
-        text-overflow: ellipsis;
-    }
-
-@media (max-width: 640.98px) {
-    .top-row[b-i4x3zxr084] {
-        justify-content: space-between;
-    }
-
-    .top-row[b-i4x3zxr084]  a, .top-row[b-i4x3zxr084]  .btn-link {
-        margin-left: 0;
-    }
-}
-
-@media (min-width: 641px) {
-    .page[b-i4x3zxr084] {
-        flex-direction: row;
-    }
-
-    .sidebar[b-i4x3zxr084] {
-        width: 250px;
-        height: 100vh;
-        position: sticky;
-        top: 0;
-    }
-
-    .top-row[b-i4x3zxr084] {
-        position: sticky;
-        top: 0;
-        z-index: 1;
-    }
-
-    .top-row.auth[b-i4x3zxr084]  a:first-child {
-        flex: 1;
-        text-align: right;
-        width: 0;
-    }
-
-    .top-row[b-i4x3zxr084], article[b-i4x3zxr084] {
-        padding-left: 2rem !important;
-        padding-right: 1.5rem !important;
-    }
-}
-
-
-/* styles */
-
-.vs-window[b-i4x3zxr084] {
+.vs-window[b-i8ybeye7gv] {
     display: flex;
     flex-direction: column;
     overflow: hidden;
@@ -580,13 +502,13 @@ main[b-i4x3zxr084] {
 }
 
 
-.vs-header[b-i4x3zxr084] {
+.vs-header[b-i8ybeye7gv] {
     flex-shrink: 0;
         
     background: var(--mud-palette-background);
 }
 
-.vs-titlebar[b-i4x3zxr084] {
+.vs-titlebar[b-i8ybeye7gv] {
     display: flex;
     align-items: center;
     justify-content: space-between;
@@ -596,16 +518,16 @@ main[b-i4x3zxr084] {
     font-size: 12px;
 }
 
-    .vs-titlebar-left[b-i4x3zxr084] {
+    .vs-titlebar-left[b-i8ybeye7gv] {
         display: inline-flex;
         align-items: center;
     }
 
-        .vs-menu-list[b-i4x3zxr084] {
+        .vs-menu-list[b-i8ybeye7gv] {
 
         }
 
-        .vs-solution-name[b-i4x3zxr084] {
+        .vs-solution-name[b-i8ybeye7gv] {
             padding: 5px 10px;
 
             color: var(--mud-palette-textprimary);
@@ -616,25 +538,25 @@ main[b-i4x3zxr084] {
             border-radius: var(--mud-default-borderradius);
         }
 
-        [b-i4x3zxr084] .vs-close-btn {
+        [b-i8ybeye7gv] .vs-close-btn {
             margin-left: auto;
         }
 
 
 
-.vs-toolbars[b-i4x3zxr084] {
+.vs-toolbars[b-i8ybeye7gv] {
     display: flex;
     flex-wrap: wrap;
 
     margin-bottom: 20px;
 }
     
-    [b-i4x3zxr084] .vs-toolbar {
+    [b-i8ybeye7gv] .vs-toolbar {
         margin-right: 5px;
     }
 
 
-.vs-workbench[b-i4x3zxr084] {
+.vs-workbench[b-i8ybeye7gv] {
     position: relative;
     display: flex;
     flex-direction: row;
@@ -649,7 +571,7 @@ main[b-i4x3zxr084] {
 }
 
 
-    .vs-editor-viewport[b-i4x3zxr084] {
+    .vs-editor-viewport[b-i8ybeye7gv] {
         position: relative;
         display: flex;
         flex-direction: column;
@@ -662,14 +584,14 @@ main[b-i4x3zxr084] {
     }
 
     
-        .vs-tabsbar[b-i4x3zxr084] {
+        .vs-tabsbar[b-i8ybeye7gv] {
             position: relative;
 
             z-index: 2;
         }
 
 
-        .vs-editor-content[b-i4x3zxr084] {
+        .vs-editor-content[b-i8ybeye7gv] {
             position: relative;
 
             flex: 1;
@@ -687,12 +609,12 @@ main[b-i4x3zxr084] {
             border-bottom-right-radius: var(--mud-default-borderradius);
         }
 
-    .vs-activitybar[b-i4x3zxr084] {
+    .vs-activitybar[b-i8ybeye7gv] {
         flex-shrink: 0;
     }
 
 
-.vs-statusbar[b-i4x3zxr084] {
+.vs-statusbar[b-i8ybeye7gv] {
     height: 24px;
     background-color: #854cc7;
     color: #ffffff;
@@ -704,24 +626,14 @@ main[b-i4x3zxr084] {
     flex-shrink: 0;
 }
 
-.vs-footer[b-i4x3zxr084] {
+.vs-footer[b-i8ybeye7gv] {
     display: flex;
     flex-direction: row;
 
     justify-content: space-between;
 }
 
-.vs-footer-status-left[b-i4x3zxr084], .vs-footer-status-right[b-i4x3zxr084] {
+.vs-footer-status-left[b-i8ybeye7gv], .vs-footer-status-right[b-i8ybeye7gv] {
     display: flex;
     gap: 16px;
 }
-/* /Pages/About.razor.rz.scp.css */
-/* CSS for AboutSection component */
-/* /Pages/Contacts.razor.rz.scp.css */
-/* CSS for ContactsSection component */
-/* /Pages/Home.razor.rz.scp.css */
-/* CSS for Home component */
-/* /Pages/Projects.razor.rz.scp.css */
-/* CSS for ProjectsSection component */
-/* /Pages/Stack.razor.rz.scp.css */
-/* CSS for StackSection component */
