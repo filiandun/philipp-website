@@ -3,10 +3,9 @@ using Microsoft.AspNetCore.Components.WebAssembly.Hosting;
 
 using MudBlazor.Services;
 
-using PhilippWebsite.Services;
-using PhilippWebsite.Services.VsTabState;
-using PhilippWebsite.Services.GitHubFileContent;
-using PhilippWebsite.Services.GitHubProjectExplorer;
+using PhilippWebsite.Services.FileContent;
+using PhilippWebsite.Services.ProjectTree;
+using PhilippWebsite.Services.TabsBarState;
 
 
 namespace PhilippWebsite
@@ -23,12 +22,14 @@ namespace PhilippWebsite
             builder.RootComponents.Add<HeadOutlet>("head::after");
 
             builder.Services.AddMudServices();
+
             builder.Services.AddScoped(sp => new HttpClient { BaseAddress = new Uri(builder.HostEnvironment.BaseAddress) });
 
-            builder.Services.AddScoped<ResumeContentService>();
-            builder.Services.AddScoped<IProjectExplorerService, GitHubProjectExplorerService>();
-            builder.Services.AddScoped<VsTabStateService>();
-            builder.Services.AddScoped<GitHubFileContentService>();
+            builder.Services.AddScoped<IProjectTreeService, GitHubProjectTreeService>();
+            builder.Services.AddScoped<IFileContentService, GitHubFileContentService>();
+
+            builder.Services.AddScoped<TabsBarStateService>();
+
 
             await builder.Build().RunAsync();
         }

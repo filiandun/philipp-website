@@ -1,22 +1,21 @@
-﻿
+﻿using PhilippWebsite.Models;
 
-using System.Xml.Linq;
 
-namespace PhilippWebsite.Services.VsTabState
+namespace PhilippWebsite.Services.TabsBarState
 {
-    public class VsTabStateService
+    public class TabsBarStateService
     {
         public event Action? OnChange;
 
-        private ILogger<VsTabStateService> _logger;
+        private ILogger<TabsBarStateService> _logger;
 
-        private List<TabModel> _openTabs;
+        private readonly List<TabModel> _openTabs;
         public IReadOnlyList<TabModel> OpenTabs => this._openTabs;
 
         public TabModel? ActiveTab { get; private set; }
 
 
-        public VsTabStateService(ILogger<VsTabStateService> logger)
+        public TabsBarStateService(ILogger<TabsBarStateService> logger)
         {
             this._logger = logger;
 
@@ -34,11 +33,11 @@ namespace PhilippWebsite.Services.VsTabState
 
                 this.OnChange?.Invoke();
 
-                this._logger.LogInformation("TabModel '{0}' is now active", tabModel.Name);
+                this._logger.LogInformation("Tab '{TabName}' is now active.", tabModel.Name);
             }
             else
             {
-                this._logger.LogInformation("TabModel '{0}' not found for set active", tabModel.Name);
+                this._logger.LogInformation("Tab '{TabName}' not found for set active.", tabModel.Name);
             }
         }
 
@@ -51,11 +50,11 @@ namespace PhilippWebsite.Services.VsTabState
 
                 this.OnChange?.Invoke();
 
-                this._logger.LogInformation("TabModel '{0}' open", tabModel.Name);
+                this._logger.LogInformation("Tab '{TabName}' open.", tabModel.Name);
             }
             else
             {
-                this._logger.LogInformation("TabModel '{0}' already open", tabModel.Name);
+                this._logger.LogInformation("Tab '{TabName}' already open.", tabModel.Name);
             }
 
         }
@@ -64,13 +63,13 @@ namespace PhilippWebsite.Services.VsTabState
         {
             if (this._openTabs.Remove(tabModel))
             {
-                this._logger.LogInformation("TabModel '{0}' close", tabModel.Name);
+                this._logger.LogInformation("Tab '{TabName}' close.", tabModel.Name);
 
                 this.OnChange?.Invoke();
             } 
             else
             {
-                this._logger.LogInformation("TabModel '{0}' not found for close", tabModel.Name);
+                this._logger.LogInformation("Tab '{TabName}' not found for close.", tabModel.Name);
             }
         }
     }

@@ -1,9 +1,9 @@
 ﻿using System.Text.Json.Serialization;
 
 
-namespace PhilippWebsite.Services.GitHubProjectExplorer
+namespace PhilippWebsite.Services.ProjectTree
 {
-    public class GitHubProjectResponse
+    public class GitHubProjectTreeResponse
     {
         [JsonPropertyName("sha")]
         public string Sha { get; set; } = string.Empty;
@@ -13,7 +13,7 @@ namespace PhilippWebsite.Services.GitHubProjectExplorer
 
 
         [JsonPropertyName("tree")]
-        public List<GitHubTreeItem> Tree { get; set; } = new();
+        public List<GitHubTreeItem> LinearTree { get; set; } = new();
 
         [JsonPropertyName("truncated")]
         public bool Truncated { get; set; }

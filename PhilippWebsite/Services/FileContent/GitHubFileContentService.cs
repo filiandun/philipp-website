@@ -1,8 +1,8 @@
 ﻿
 
-namespace PhilippWebsite.Services.GitHubFileContent
+namespace PhilippWebsite.Services.FileContent
 {
-    public class GitHubFileContentService
+    public class GitHubFileContentService : IFileContentService
     {
         private const string URL = "https://raw.githubusercontent.com/filiandun/philipp-website/main";
 
@@ -21,11 +21,11 @@ namespace PhilippWebsite.Services.GitHubFileContent
 
         public async Task<string> GetFileContentAsync(string filePath)
         {
-            string url = $"{URL}/{filePath}";
+            string fileUrl = $"{URL}/{filePath}";
 
             try
             {
-                var response = await this._httpClient.GetAsync(url);
+                var response = await this._httpClient.GetAsync(fileUrl);
 
                 if (response.IsSuccessStatusCode)
                 {
@@ -34,11 +34,11 @@ namespace PhilippWebsite.Services.GitHubFileContent
                     return await response.Content.ReadAsStringAsync();
                 }
 
-                this._logger.LogWarning("Error '{StatusCode}' loading file content '{Url}'.", response.StatusCode, url);
+                this._logger.LogWarning("Error '{StatusCode}' loading file content '{FileUrl}'.", response.StatusCode, fileUrl);
             }
             catch (Exception ex)
             {
-                this._logger.LogError(ex, "Error loading file content '{Url}'.", url);
+                this._logger.LogError(ex, "Error loading file content '{FileUrl}'.", fileUrl);
 
             }
 
