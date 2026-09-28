@@ -1,23 +1,26 @@
 ﻿@* VsTabsBar.razor *@
 
+
+@using PhilippWebsite.Components.Common
 @using PhilippWebsite.Resources
-@using PhilippWebsite.Services.VsTabState
+
+@using PhilippWebsite.Services.TabsBarState
 
 
-@inject VsTabStateService VsTabStateService
+@inject TabsBarStateService TabsBarStateService
 
 
 <div class="vs-tabsbar-root">
-    @foreach (var tab in this.VsTabStateService.OpenTabs)
+    @foreach (var tab in this.TabsBarStateService.OpenTabs)
     {
-        <div class="vs-tabsbar-tab @(VsTabStateService.ActiveTab == tab ? "active" : "")" @onclick="() => this.VsTabStateService.SetActive(tab)">
+        <div class="vs-tabsbar-tab @(TabsBarStateService.ActiveTab == tab ? "active" : "")" @onclick="() => this.TabsBarStateService.SetActive(tab)">
             <span class="vs-tabsbar-tab-content">@tab.Name</span>
 
             <span class="vs-tabsbar-tab-pin" @onclick:stopPropagation="true">
                 <VsIcon Class="vs-tabsbar-tab-pin-icon" Icon="@VsIcons.PushPin" IconSize="16" />
             </span>
 
-            <span class="vs-tabsbar-tab-close" @onclick="() => this.VsTabStateService.Close(tab)" @onclick:stopPropagation="true">
+            <span class="vs-tabsbar-tab-close" @onclick="() => this.TabsBarStateService.Close(tab)" @onclick:stopPropagation="true">
                 <VsIcon Class="vs-tabsbar-tab-close-icon" Icon="@VsIcons.Close" IconSize="16" />
             </span>
         </div>        
@@ -28,11 +31,11 @@
 @code {
     protected override void OnInitialized()
     {
-        this.VsTabStateService.OnChange += this.StateHasChanged;
+        this.TabsBarStateService.OnChange += this.StateHasChanged;
     }
 
     public void Dispose()
     {
-        this.VsTabStateService.OnChange -= this.StateHasChanged;
+        this.TabsBarStateService.OnChange -= this.StateHasChanged;
     }
 }

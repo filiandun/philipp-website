@@ -4,12 +4,12 @@
 @using ColorCode
 @using ColorCode.Styling;
 
-@using PhilippWebsite.Services.VsTabState
-@using PhilippWebsite.Services.GitHubFileContent
+@using PhilippWebsite.Services.TabsBarState
+@using PhilippWebsite.Services.FileContent
 
 
-@inject VsTabStateService VsTabStateService
-@inject GitHubFileContentService FileContentService
+@inject TabsBarStateService TabsBarStateService
+@inject IFileContentService FileContentService
 
 
 <div class="vs-editor-root">
@@ -46,16 +46,16 @@
 
     protected override void OnInitialized()
     {
-        this.VsTabStateService.OnChange += this.OnTabChange;
+        this.TabsBarStateService.OnChange += this.OnTabChange;
     }
 
 
     // TODO надо сделать отдельное событие ActiveTabChange
     private async void OnTabChange()
     {
-        if (this.VsTabStateService.ActiveTab is null) return;
+        if (this.TabsBarStateService.ActiveTab is null) return;
 
-        string content = await this.FileContentService.GetFileContentAsync(this.VsTabStateService.ActiveTab.Content);
+        string content = await this.FileContentService.GetFileContentAsync(this.TabsBarStateService.ActiveTab.Path);
 
 
         this._lineCount = content.Split('\n').Length;
@@ -77,6 +77,6 @@
 
     public void Dispose()
     {
-        this.VsTabStateService.OnChange -= this.OnTabChange;
+        this.TabsBarStateService.OnChange -= this.OnTabChange;
     }
 } 

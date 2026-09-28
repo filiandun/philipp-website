@@ -1,28 +1,30 @@
 ﻿@* VsProjectTreeNode.razor *@
 
 
+@using PhilippWebsite.Components.Common
+
+@using PhilippWebsite.Models
+@using PhilippWebsite.Models.ProjectTree
+
 @using PhilippWebsite.Resources
 
-@using PhilippWebsite.Services.GitHubProjectExplorer
-@using PhilippWebsite.Services.VsTabState
+@using PhilippWebsite.Services.TabsBarState
 
 
-@inject ILogger<VsProjectTreeNode> Logger;
-
-@inject VsTabStateService VsTabStateService;
+@inject TabsBarStateService TabsBarStateService;
 
 
 <div class="vs-project-tree-node-root">
     <div class="vs-project-tree-node-head" style="padding-left: @(this.Depth * 15)px;">
         <div class="vs-project-tree-node-head-expand" @onclick="this.OnExpandClick">
-            @if (this.Node.Children.Any())
+            @if (this.Item.Children.Any())
             {
                 <VsIcon Icon="@(this._isExpanded ? VsIcons.ExpandDown : VsIcons.ExpandRight)" IconSize="16"></VsIcon>
             }
         </div>
 
         <div class="vs-project-tree-node-head-icon">
-            @if (this.Node.Type == ProjectNodeType.File)
+            @if (this.Item.Type == ProjectTreeItemType.File)
             {
                 <VsIcon Icon="@VsIcons.CSFileNode" IconSize="16"></VsIcon>
             } 
@@ -33,16 +35,16 @@
         </div>
 
         <div class="vs-project-tree-node-head-content" @onclick="this.OnContentClick">
-            <span>@this.Node.Name</span>
+            <span>@this.Item.Name</span>
         </div>
     </div>
 
     @if (this._isExpanded)
     {  
         <div class="vs-project-tree-node-child">
-            @foreach (var childNode in this.Node.Children)
+            @foreach (var childNode in this.Item.Children)
             {
-                <VsProjectTreeNode Node="childNode" Depth="(this.Depth + 1)"></VsProjectTreeNode>
+                <VsProjectTreeItem Item="childNode" Depth="(this.Depth + 1)"></VsProjectTreeItem>
             }
         </div>
     }
@@ -50,11 +52,11 @@
 
 
 @code {
-    [Parameter] public required ProjectNode Node { get; set; }
+    [Parameter] public required ProjectTreeItem Item { get; set; }
     [Parameter] public int Depth { get; set; } = 0;
 
     private bool _isExpanded = false;
 
     private void OnExpandClick() => this._isExpanded = !this._isExpanded;
-    private void OnContentClick() => this.VsTabStateService.Open(new TabModel() { Name = this.Node.Name, Content = this.Node.Path });
+    private void OnContentClick() => this.TabsBarStateService.Open(new TabModel() { Name = this.Item.Name, Path = this.Item.Path });
 }
