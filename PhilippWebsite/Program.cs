@@ -23,12 +23,36 @@ namespace PhilippWebsite
 
             builder.Services.AddMudServices();
 
+
+            // configs
+
+            builder.Services.Configure<GitHubApiConfig>(builder.Configuration.GetSection("GitHubApi"));
+            builder.Services.Configure<GitHubRawConfig>(builder.Configuration.GetSection("GitHubRaw"));
+
+            GitHubApiConfig? gitHubApiConfig = builder.Configuration.GetSection("GitHubApi").Get<GitHubApiConfig>();
+
+            if (gitHubApiConfig is null || string.IsNullOrEmpty(gitHubApiConfig.SolutionName) || string.IsNullOrEmpty(gitHubApiConfig.BaseUrl) || gitHubApiConfig.RepoList.Count == 0)
+            {
+                throw new InvalidOperationException("GitHub API config not found or section is empty");
+            }
+
+            GitHubRawConfig? gitHubRawConfig = builder.Configuration.GetSection("GitHubRaw").Get<GitHubRawConfig>();
+
+            if (gitHubRawConfig is null || string.IsNullOrEmpty(gitHubRawConfig.BaseUrl))
+            {
+                throw new InvalidOperationException("GitHub Raw config not found or section is empty");
+            }
+
+
+            // services
+
             builder.Services.AddScoped(sp => new HttpClient { BaseAddress = new Uri(builder.HostEnvironment.BaseAddress) });
 
             builder.Services.AddScoped<IProjectTreeService, GitHubProjectTreeService>();
             builder.Services.AddScoped<IFileContentService, GitHubFileContentService>();
 
             builder.Services.AddScoped<TabsBarStateService>();
+
 
 
             await builder.Build().RunAsync();

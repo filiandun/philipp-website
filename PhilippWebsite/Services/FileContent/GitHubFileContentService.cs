@@ -1,27 +1,30 @@
-﻿
+﻿using Microsoft.Extensions.Options;
+
 
 namespace PhilippWebsite.Services.FileContent
 {
     public class GitHubFileContentService : IFileContentService
     {
-        private const string URL = "https://raw.githubusercontent.com/filiandun/philipp-website/main";
-
         private readonly ILogger<GitHubFileContentService> _logger;
+
+        private readonly GitHubRawConfig _config;
 
         private readonly HttpClient _httpClient;
 
 
-        public GitHubFileContentService(ILogger<GitHubFileContentService> logger, HttpClient httpClient)
+        public GitHubFileContentService(ILogger<GitHubFileContentService> logger, IOptions<GitHubRawConfig> options, HttpClient httpClient)
         {
             this._logger = logger;
+
+            this._config = options.Value;
 
             this._httpClient = httpClient;  
         }
 
 
-        public async Task<string> GetFileContentAsync(string filePath)
+        public async Task<string> GetFileContentAsync(string repo, string filePath)
         {
-            string fileUrl = $"{URL}/{filePath}";
+            string fileUrl = this._config.BaseUrl.Replace("{repo}", repo).Replace("{file}", filePath);
 
             try
             {

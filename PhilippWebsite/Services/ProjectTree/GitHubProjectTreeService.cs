@@ -14,12 +14,17 @@ namespace PhilippWebsite.Services.ProjectTree
 
         private readonly ILogger<GitHubProjectTreeService> _logger;
 
+        private readonly GitHubApiConfig _config;
+
         private readonly HttpClient _httpClient;
 
 
-        public GitHubProjectTreeService(ILogger<GitHubProjectTreeService> logger, HttpClient httpClient)
+
+        public GitHubProjectTreeService(ILogger<GitHubProjectTreeService> logger, IOptions<GitHubApiConfig> options, HttpClient httpClient)
         {
             this._logger = logger;
+
+            this._config = options.Value;
 
             this._httpClient = httpClient;
 
