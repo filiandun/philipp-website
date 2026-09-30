@@ -1,4 +1,4 @@
-﻿namespace PhilippWebsite.Services.FileContent
+﻿namespace PhilippWebsite.Services.FileContent.GitHubFileContent
 {
     public class GitHubRawConfig
     {

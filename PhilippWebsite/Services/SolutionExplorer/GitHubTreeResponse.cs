@@ -1,9 +1,9 @@
 ﻿using System.Text.Json.Serialization;
 
 
-namespace PhilippWebsite.Services.ProjectTree
+namespace PhilippWebsite.Services.SolutionExplorer
 {
-    public class GitHubProjectTreeResponse
+    public class GitHubTreeResponse
     {
         [JsonPropertyName("sha")]
         public string Sha { get; set; } = string.Empty;

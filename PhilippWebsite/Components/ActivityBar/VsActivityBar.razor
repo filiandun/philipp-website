@@ -3,13 +3,6 @@
 
 @using PhilippWebsite.Components.ActivityBar.SolutionExplorer
 
-@using PhilippWebsite.Models.ProjectTree
-
-@using PhilippWebsite.Services.ProjectTree
-
-
-@inject IProjectTreeService ProjectTreeService
-
 
 <div class="vs-activitybar-root"> @* @onfocusout="this.Close" *@
     <VsActivityBarButton Class="vs-activity-btn" Text="Solution Explorer" OnClick="@this.Toggle"></VsActivityBarButton>
@@ -17,31 +10,13 @@
     @if (this._explorerIsOpen)
     {
         <VsActivityBarPanel Title="Solution Explorer" OnCloseClick="@this.Close">
-            @if (this._projectTree is not null)
-            {
-                @foreach (var node in this._projectTree)
-                {
-                    <VsProjectTreeItem Item="node"></VsProjectTreeItem>
-                }
-            }
-            else
-            {
-                <span>Не удалось загрузть контент</span>
-            }
+            <VsSolutionExplorerRoot></VsSolutionExplorerRoot>
         </VsActivityBarPanel>
     }
 </div>
 
 
 @code {
-    private ProjectTreeRoot? _projectTree;
-
-
-    protected override async Task OnInitializedAsync()
-    {
-        this._projectTree = await this.ProjectTreeService.GetProjectTreeAsync();
-    }
-
     private bool _explorerIsOpen = true;
 
     private void Toggle() => this._explorerIsOpen = !this._explorerIsOpen;

@@ -1,7 +1,7 @@
 ﻿using System.Text.Json.Serialization;
 
 
-namespace PhilippWebsite.Services.ProjectTree
+namespace PhilippWebsite.Services.SolutionExplorer
 {
     public class GitHubTreeItem
     {

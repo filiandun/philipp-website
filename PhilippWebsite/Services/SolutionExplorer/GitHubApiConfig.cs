@@ -1,5 +1,5 @@
 ﻿
-namespace PhilippWebsite.Services.ProjectTree
+namespace PhilippWebsite.Services.SolutionExplorer
 {
     public class GitHubApiConfig
     {

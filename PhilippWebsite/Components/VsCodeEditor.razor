@@ -55,7 +55,7 @@
     {
         if (this.TabsBarStateService.ActiveTab is null) return;
 
-        string content = await this.FileContentService.GetFileContentAsync(this.TabsBarStateService.ActiveTab.Path);
+        string content = await this.FileContentService.GetFileContentAsync(this.TabsBarStateService.ActiveTab.Repo, this.TabsBarStateService.ActiveTab.Path);
 
 
         this._lineCount = content.Split('\n').Length;

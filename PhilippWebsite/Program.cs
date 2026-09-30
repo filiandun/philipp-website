@@ -4,7 +4,8 @@ using Microsoft.AspNetCore.Components.WebAssembly.Hosting;
 using MudBlazor.Services;
 
 using PhilippWebsite.Services.FileContent;
-using PhilippWebsite.Services.ProjectTree;
+using PhilippWebsite.Services.FileContent.GitHubFileContent;
+using PhilippWebsite.Services.SolutionExplorer;
 using PhilippWebsite.Services.TabsBarState;
 
 
@@ -48,7 +49,7 @@ namespace PhilippWebsite
 
             builder.Services.AddScoped(sp => new HttpClient { BaseAddress = new Uri(builder.HostEnvironment.BaseAddress) });
 
-            builder.Services.AddScoped<IProjectTreeService, GitHubProjectTreeService>();
+            builder.Services.AddScoped<ISolutionExplorerService, GitHubSolutionExplorerService>();
             builder.Services.AddScoped<IFileContentService, GitHubFileContentService>();
 
             builder.Services.AddScoped<TabsBarStateService>();

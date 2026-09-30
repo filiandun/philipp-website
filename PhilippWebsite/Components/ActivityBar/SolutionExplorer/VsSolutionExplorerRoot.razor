@@ -1,0 +1,34 @@
+﻿@* VsProjectTreeRoot.razor *@
+
+
+@using PhilippWebsite.Models.SolutionExplorer
+
+@using PhilippWebsite.Services.SolutionExplorer
+
+
+@inject ISolutionExplorerService SolutionExplorerService;
+
+
+<div class="vs-project-tree-node-root">
+    @if (this._explorerRoot is not null)
+    {
+        @foreach (SolutionExplorerItem item in this._explorerRoot)
+        {
+            <VsSolutionExplorerItem Item="item"></VsSolutionExplorerItem>
+        }
+    }
+    else
+    {
+        <span>Надо потерпеть.</span>
+    }
+</div>
+
+
+@code {
+    private SolutionExplorerRoot? _explorerRoot;
+
+    protected override async Task OnInitializedAsync()
+    {
+        this._explorerRoot = await this.SolutionExplorerService.GetProjectTreeAsync();
+    }
+}

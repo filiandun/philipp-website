@@ -1,10 +1,10 @@
-﻿@* VsProjectTreeNode.razor *@
+﻿@* VsProjectTreeItem.razor *@
 
 
 @using PhilippWebsite.Components.Common
 
 @using PhilippWebsite.Models
-@using PhilippWebsite.Models.ProjectTree
+@using PhilippWebsite.Models.SolutionExplorer
 
 @using PhilippWebsite.Resources
 
@@ -17,21 +17,23 @@
 <div class="vs-project-tree-node-root">
     <div class="vs-project-tree-node-head" style="padding-left: @(this.Depth * 15)px;">
         <div class="vs-project-tree-node-head-expand" @onclick="this.OnExpandClick">
-            @if (this.Item.Children.Any())
+            @if (this.Item.Items.Count != 0)
             {
                 <VsIcon Icon="@(this._isExpanded ? VsIcons.ExpandDown : VsIcons.ExpandRight)" IconSize="16"></VsIcon>
             }
         </div>
 
         <div class="vs-project-tree-node-head-icon">
-            @if (this.Item.Type == ProjectTreeItemType.File)
+
+            @switch (this.Item.Type)
             {
-                <VsIcon Icon="@VsIcons.CSFileNode" IconSize="16"></VsIcon>
+                case SolutionExplorerItemType.Solution: <VsIcon Icon="@VsIcons.VisualStudio" IconSize="16"></VsIcon> break;
+
+                case SolutionExplorerItemType.Project: <VsIcon Icon="@VsIcons.AspProject" IconSize="16"></VsIcon> break;
+
+                case SolutionExplorerItemType.Folder: <VsIcon Icon="@VsIcons.Folder" IconSize="16"></VsIcon> break;
+                case SolutionExplorerItemType.File: <VsIcon Icon="@VsIcons.CSFileNode" IconSize="16"></VsIcon> break;
             } 
-            else
-            {
-                <VsIcon Icon="@VsIcons.Folder" IconSize="16"></VsIcon>
-            }
         </div>
 
         <div class="vs-project-tree-node-head-content" @onclick="this.OnContentClick">
@@ -42,9 +44,9 @@
     @if (this._isExpanded)
     {  
         <div class="vs-project-tree-node-child">
-            @foreach (var childNode in this.Item.Children)
+            @foreach (SolutionExplorerItem item in this.Item.Items)
             {
-                <VsProjectTreeItem Item="childNode" Depth="(this.Depth + 1)"></VsProjectTreeItem>
+                <VsSolutionExplorerItem Item="item" Depth="(this.Depth + 1)"></VsSolutionExplorerItem>
             }
         </div>
     }
@@ -52,11 +54,11 @@
 
 
 @code {
-    [Parameter] public required ProjectTreeItem Item { get; set; }
+    [Parameter] public required SolutionExplorerItem Item { get; set; }
     [Parameter] public int Depth { get; set; } = 0;
 
     private bool _isExpanded = false;
 
     private void OnExpandClick() => this._isExpanded = !this._isExpanded;
-    private void OnContentClick() => this.TabsBarStateService.Open(new TabModel() { Name = this.Item.Name, Path = this.Item.Path });
+    private void OnContentClick() => this.TabsBarStateService.Open(new TabModel() { Name = this.Item.Name, Path = this.Item.Path, Repo = this.Item.Repo });
 }
