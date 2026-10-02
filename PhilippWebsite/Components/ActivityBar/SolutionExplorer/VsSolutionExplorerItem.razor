@@ -14,17 +14,18 @@
 @inject TabsBarStateService TabsBarStateService;
 
 
-<div class="vs-project-tree-node-root">
-    <div class="vs-project-tree-node-head" style="padding-left: @(this.Depth * 15)px;">
-        <div class="vs-project-tree-node-head-expand" @onclick="this.OnExpandClick">
+<div class="vs-solution-explorer-item-root">
+
+    <div class="vs-solution-explorer-item-head" style="padding-left: @(this.Depth * 15);">
+
+        <div class="vs-solution-explorer-item-head-expand" @onclick="this.OnExpandClick">
             @if (this.Item.Items.Count != 0)
             {
                 <VsIcon Icon="@(this._isExpanded ? VsIcons.ExpandDown : VsIcons.ExpandRight)" IconSize="16"></VsIcon>
             }
         </div>
 
-        <div class="vs-project-tree-node-head-icon">
-
+        <div class="vs-solution-explorer-item-head-icon">
             @switch (this.Item.Type)
             {
                 case SolutionExplorerItemType.Solution: <VsIcon Icon="@VsIcons.VisualStudio" IconSize="16"></VsIcon> break;
@@ -36,14 +37,15 @@
             } 
         </div>
 
-        <div class="vs-project-tree-node-head-content" @onclick="this.OnContentClick">
+        <div class="vs-solution-explorer-item-head-content" @onclick="this.OnContentClick">
             <span>@this.Item.Name</span>
         </div>
+
     </div>
 
     @if (this._isExpanded)
     {  
-        <div class="vs-project-tree-node-child">
+        <div class="vs-solution-explorer-item-child">
             @foreach (SolutionExplorerItem item in this.Item.Items)
             {
                 <VsSolutionExplorerItem Item="item" Depth="(this.Depth + 1)"></VsSolutionExplorerItem>
@@ -60,5 +62,5 @@
     private bool _isExpanded = false;
 
     private void OnExpandClick() => this._isExpanded = !this._isExpanded;
-    private void OnContentClick() => this.TabsBarStateService.Open(new TabModel() { Name = this.Item.Name, Path = this.Item.Path, Repo = this.Item.Repo });
+    private void OnContentClick() => this.TabsBarStateService.Open(new TabModel() { Name = this.Item.Name, Path = this.Item.Path, Repo = this.Item.Repo, Source = this.Item.Source });
 }

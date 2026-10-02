@@ -1,13 +1,13 @@
 /* CSS for VsProjectTreeNode component */
 
 
-.vs-project-tree-node-root {
+.vs-solution-explorer-item-root {
     flex: 1;
     min-width: 100%;
     width: max-content;
 }
 
-    .vs-project-tree-node-head {
+    .vs-solution-explorer-item-head {
         display: flex;
         flex-direction: row;
         justify-content: start;
@@ -18,11 +18,11 @@
         border-radius: var(--mud-default-borderradius);
     }
 
-        .vs-project-tree-node-head:hover {
+        .vs-solution-explorer-item-head:hover {
             background-color: var(--mud-palette-action-disabled);
         }
 
-        .vs-project-tree-node-head-expand {
+        .vs-solution-explorer-item-head-expand {
             display: flex;
             justify-content: center;
             align-items: center;  
@@ -32,7 +32,7 @@
             flex-shrink: 0;
         }
 
-        .vs-project-tree-node-head-icon {
+        .vs-solution-explorer-item-head-icon {
             display: flex;
             justify-content: center;
             align-items: center;  
@@ -47,17 +47,17 @@
             Также надо сделать открытие по двум кликам, а не по одному.
         */
 
-        .vs-project-tree-node-head-content {
+        .vs-solution-explorer-item-head-content {
 
         }   
 
-            .vs-project-tree-node-head-content span {
+            .vs-solution-explorer-item-head-content span {
                 overflow: hidden;
 
                 white-space: nowrap;
                 text-overflow: ellipsis;
             }
 
-    .vs-project-tree-node-child {
+    .vs-solution-explorer-item-child {
         
     }

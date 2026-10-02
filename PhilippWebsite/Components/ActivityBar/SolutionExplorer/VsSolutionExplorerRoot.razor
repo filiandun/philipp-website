@@ -2,14 +2,14 @@
 
 
 @using PhilippWebsite.Models.SolutionExplorer
-
 @using PhilippWebsite.Services.SolutionExplorer
 
 
-@inject ISolutionExplorerService SolutionExplorerService;
+@inject SolutionExplorerService SolutionExplorerService;
 
 
-<div class="vs-project-tree-node-root">
+<div class="vs-solution-explorer-root">
+
     @if (this._explorerRoot is not null)
     {
         @foreach (SolutionExplorerItem item in this._explorerRoot)
@@ -21,6 +21,7 @@
     {
         <span>Надо потерпеть.</span>
     }
+
 </div>
 
 
@@ -29,6 +30,6 @@
 
     protected override async Task OnInitializedAsync()
     {
-        this._explorerRoot = await this.SolutionExplorerService.GetProjectTreeAsync();
+        this._explorerRoot = await this.SolutionExplorerService.GetTreeAsync();
     }
 }
