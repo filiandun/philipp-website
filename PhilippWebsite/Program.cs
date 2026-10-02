@@ -4,8 +4,11 @@ using Microsoft.AspNetCore.Components.WebAssembly.Hosting;
 using MudBlazor.Services;
 
 using PhilippWebsite.Services.FileContent;
-using PhilippWebsite.Services.FileContent.GitHubFileContent;
+
 using PhilippWebsite.Services.SolutionExplorer;
+using PhilippWebsite.Services.SolutionExplorer.Github;
+using PhilippWebsite.Services.SolutionExplorer.Local;
+
 using PhilippWebsite.Services.TabsBarState;
 
 
@@ -27,21 +30,31 @@ namespace PhilippWebsite
 
             // configs
 
-            builder.Services.Configure<GitHubApiConfig>(builder.Configuration.GetSection("GitHubApi"));
-            builder.Services.Configure<GitHubRawConfig>(builder.Configuration.GetSection("GitHubRaw"));
+            builder.Services.Configure<GitHubTreeConfig>(builder.Configuration.GetSection("GitHubTreeSource"));
+            builder.Services.Configure<LocalTreeConfig>(builder.Configuration.GetSection("LocalTreeSource"));
 
-            GitHubApiConfig? gitHubApiConfig = builder.Configuration.GetSection("GitHubApi").Get<GitHubApiConfig>();
+            builder.Services.Configure<FileContentConfig>(builder.Configuration.GetSection("FileContentSource"));
 
-            if (gitHubApiConfig is null || string.IsNullOrEmpty(gitHubApiConfig.SolutionName) || string.IsNullOrEmpty(gitHubApiConfig.BaseUrl) || gitHubApiConfig.RepoList.Count == 0)
+            GitHubTreeConfig? gitHubTreeConfig = builder.Configuration.GetSection("GitHubTreeSource").Get<GitHubTreeConfig>();
+
+            if (gitHubTreeConfig is null || string.IsNullOrEmpty(gitHubTreeConfig.SolutionName) || string.IsNullOrEmpty(gitHubTreeConfig.BaseUrl) || gitHubTreeConfig.RepoList.Count == 0)
             {
-                throw new InvalidOperationException("GitHub API config not found or section is empty");
+                throw new InvalidOperationException("GitHub Tree config not found or section is empty");
             }
 
-            GitHubRawConfig? gitHubRawConfig = builder.Configuration.GetSection("GitHubRaw").Get<GitHubRawConfig>();
+            LocalTreeConfig? localTreeConfig = builder.Configuration.GetSection("LocalTreeSource").Get<LocalTreeConfig>();
 
-            if (gitHubRawConfig is null || string.IsNullOrEmpty(gitHubRawConfig.BaseUrl))
+            if (localTreeConfig is null || string.IsNullOrEmpty(localTreeConfig.SolutionName) || string.IsNullOrEmpty(localTreeConfig.BaseUrl) || localTreeConfig.FileList.Count == 0)
             {
-                throw new InvalidOperationException("GitHub Raw config not found or section is empty");
+                throw new InvalidOperationException("Local Tree config not found or section is empty");
+            }
+
+
+            FileContentConfig? fileContentConfig = builder.Configuration.GetSection("FileContentSource").Get<FileContentConfig>();
+
+            if (fileContentConfig is null || string.IsNullOrEmpty(fileContentConfig.GitHubUrl) || string.IsNullOrEmpty(fileContentConfig.LocalUrl))
+            {
+                throw new InvalidOperationException("File Content config not found or section is empty");
             }
 
 
@@ -49,8 +62,12 @@ namespace PhilippWebsite
 
             builder.Services.AddScoped(sp => new HttpClient { BaseAddress = new Uri(builder.HostEnvironment.BaseAddress) });
 
-            builder.Services.AddScoped<ISolutionExplorerService, GitHubSolutionExplorerService>();
-            builder.Services.AddScoped<IFileContentService, GitHubFileContentService>();
+            builder.Services.AddScoped<ITreeProvider, GitHubTreeProvider>();
+            builder.Services.AddScoped<ITreeProvider, LocalTreeProvider>();
+            builder.Services.AddScoped<SolutionExplorerService>();
+
+            builder.Services.AddScoped<IFileContentService, FileContentService>();
+            builder.Services.AddScoped<IFileContentService, FileContentService>();
 
             builder.Services.AddScoped<TabsBarStateService>();
 
