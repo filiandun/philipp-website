@@ -1,14 +1,14 @@
-/* /Components/ActivityBar/SolutionExplorer/VsProjectTreeItem.razor.rz.scp.css */
+/* /Components/ActivityBar/SolutionExplorer/VsSolutionExplorerItem.razor.rz.scp.css */
 /* CSS for VsProjectTreeNode component */
 
 
-.vs-project-tree-node-root[b-eincok09fq] {
+.vs-solution-explorer-item-root[b-y72n2v6j0d] {
     flex: 1;
     min-width: 100%;
     width: max-content;
 }
 
-    .vs-project-tree-node-head[b-eincok09fq] {
+    .vs-solution-explorer-item-head[b-y72n2v6j0d] {
         display: flex;
         flex-direction: row;
         justify-content: start;
@@ -19,11 +19,11 @@
         border-radius: var(--mud-default-borderradius);
     }
 
-        .vs-project-tree-node-head:hover[b-eincok09fq] {
+        .vs-solution-explorer-item-head:hover[b-y72n2v6j0d] {
             background-color: var(--mud-palette-action-disabled);
         }
 
-        .vs-project-tree-node-head-expand[b-eincok09fq] {
+        .vs-solution-explorer-item-head-expand[b-y72n2v6j0d] {
             display: flex;
             justify-content: center;
             align-items: center;  
@@ -33,7 +33,7 @@
             flex-shrink: 0;
         }
 
-        .vs-project-tree-node-head-icon[b-eincok09fq] {
+        .vs-solution-explorer-item-head-icon[b-y72n2v6j0d] {
             display: flex;
             justify-content: center;
             align-items: center;  
@@ -48,20 +48,30 @@
             Также надо сделать открытие по двум кликам, а не по одному.
         */
 
-        .vs-project-tree-node-head-content[b-eincok09fq] {
+        .vs-solution-explorer-item-head-content[b-y72n2v6j0d] {
 
         }   
 
-            .vs-project-tree-node-head-content span[b-eincok09fq] {
+            .vs-solution-explorer-item-head-content span[b-y72n2v6j0d] {
                 overflow: hidden;
 
                 white-space: nowrap;
                 text-overflow: ellipsis;
             }
 
-    .vs-project-tree-node-child[b-eincok09fq] {
+    .vs-solution-explorer-item-child[b-y72n2v6j0d] {
         
     }
+/* /Components/ActivityBar/SolutionExplorer/VsSolutionExplorerRoot.razor.rz.scp.css */
+/* CSS for VsProjectTreeRoot component */
+
+
+.vs-solution-explorer-root[b-7btyfg9g2b] {
+    flex: 1;
+
+    min-width: 100%;
+    width: max-content;
+}
 /* /Components/ActivityBar/VsActivityBar.razor.rz.scp.css */
 /* CSS for VsActivityBar component */
 
