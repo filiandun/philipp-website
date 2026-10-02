@@ -62,8 +62,8 @@ namespace PhilippWebsite
 
             builder.Services.AddScoped(sp => new HttpClient { BaseAddress = new Uri(builder.HostEnvironment.BaseAddress) });
 
-            builder.Services.AddScoped<ITreeProvider, GitHubTreeProvider>();
             builder.Services.AddScoped<ITreeProvider, LocalTreeProvider>();
+            builder.Services.AddScoped<ITreeProvider, GitHubTreeProvider>();
             builder.Services.AddScoped<SolutionExplorerService>();
 
             builder.Services.AddScoped<IFileContentService, FileContentService>();

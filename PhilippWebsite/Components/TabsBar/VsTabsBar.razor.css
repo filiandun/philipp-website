@@ -20,6 +20,8 @@
         display: flex;
         align-items: center;
 
+        max-width: 400px;
+
         font-size: 13px;
         color: var(--mud-palette-text-secondary);
 
@@ -64,15 +66,20 @@
 
         .vs-tabsbar-tab-content {
             padding: 5px 10px; 
+
+            white-space: nowrap; 
+            overflow: hidden;
+            text-overflow: ellipsis;
         }
 
         .vs-tabsbar-tab-pin {
             display: flex;
             align-items: center;
+            justify-content: center;
 
             visibility: hidden;
 
-            width: stretch;
+            width: 36px;
             height: stretch;
 
             padding: 5px 10px;   
@@ -90,10 +97,11 @@
         .vs-tabsbar-tab-close {
             display: flex;
             align-items: center;
+            justify-content: center;
 
             visibility: hidden;
 
-            width: stretch;
+            width: 36px;
             height: stretch;
 
             padding: 5px 10px;   

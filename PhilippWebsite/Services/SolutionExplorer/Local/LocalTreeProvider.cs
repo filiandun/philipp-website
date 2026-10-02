@@ -47,7 +47,7 @@ namespace PhilippWebsite.Services.SolutionExplorer.Local
                     {
                         Name = file,
                         Path = file,
-                        Repo = this._config.SolutionName,
+                        Repo = string.Empty,
                         Type = SolutionExplorerItemType.File,
                         Source = _fileSource
                     };
