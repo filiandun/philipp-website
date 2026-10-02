@@ -3,8 +3,8 @@
 
 namespace PhilippWebsite.Services.SolutionExplorer
 {
-    public interface ISolutionExplorerService
+    public interface ITreeProvider
     {
-        public Task<SolutionExplorerRoot?> GetProjectTreeAsync();
+        public Task<SolutionExplorerItem?> GetTreeAsync();
     }
 }

@@ -1,25 +1,29 @@
 ﻿using System.Net.Http.Json;
+
 using Microsoft.Extensions.Options;
 
+using PhilippWebsite.Models;
 using PhilippWebsite.Models.SolutionExplorer;
 
 
-namespace PhilippWebsite.Services.SolutionExplorer
+namespace PhilippWebsite.Services.SolutionExplorer.Github
 {
-    public class GitHubSolutionExplorerService : ISolutionExplorerService
+    public class GitHubTreeProvider : ITreeProvider
     {
         private const string FOLDER_TYPE = "tree";
         private const string FILE_TYPE = "blob";
 
-        private readonly ILogger<GitHubSolutionExplorerService> _logger;
+        private static readonly FileSource _fileSource = FileSource.GitHub;
 
-        private readonly GitHubApiConfig _config;
+ 
+        private readonly ILogger<GitHubTreeProvider> _logger;
+
+        private readonly GitHubTreeConfig _config;
 
         private readonly HttpClient _httpClient;
 
 
-
-        public GitHubSolutionExplorerService(ILogger<GitHubSolutionExplorerService> logger, IOptions<GitHubApiConfig> options, HttpClient httpClient)
+        public GitHubTreeProvider(ILogger<GitHubTreeProvider> logger, IOptions<GitHubTreeConfig> options, HttpClient httpClient)
         {
             this._logger = logger;
 
@@ -34,15 +38,22 @@ namespace PhilippWebsite.Services.SolutionExplorer
         }
 
 
-        public async Task<SolutionExplorerRoot?> GetProjectTreeAsync()
+        public async Task<SolutionExplorerItem?> GetTreeAsync()
         {
             try
             {
-                SolutionExplorerRoot explorerRoot = new SolutionExplorerRoot();
+                SolutionExplorerItem explorerSolution = new SolutionExplorerItem()
+                {
+                    Name = this._config.SolutionName,
+                    Path = string.Empty,
+                    Repo = string.Empty,
+                    Type = SolutionExplorerItemType.Solution,
+                    Source = _fileSource
+                };
 
                 foreach (var repo in this._config.RepoList)
                 {
-                    string repoUrl = this._config.BaseUrl.Replace("{repo}", repo);
+                    string repoUrl = string.Format(this._config.BaseUrl, repo);
 
                     this._logger.LogDebug("Http request to '{RepoUrl}'.", repoUrl);
 
@@ -53,14 +64,14 @@ namespace PhilippWebsite.Services.SolutionExplorer
                     if (githubTree is null) throw new HttpRequestException("GitHubProjectTreeResponse is null");
 
                     SolutionExplorerItem explorerItem = this.BuildTree(githubTree, repo);
-                    explorerRoot.Items.Add(explorerItem);
+                    explorerSolution.Items.Add(explorerItem);
                 }
 
-                return explorerRoot;
+                return explorerSolution;
             }
             catch (HttpRequestException ex)
             {
-                this._logger.LogError(ex, "Error loading project from GitHub");
+                this._logger.LogError(ex, "Error loading tree from GitHub");
 
                 return null;
             }
@@ -78,7 +89,8 @@ namespace PhilippWebsite.Services.SolutionExplorer
                     Name = item.Path.Split('/').Last(), // TODO maybe exception
                     Path = item.Path,
                     Repo = repo,
-                    Type = item.Type == FOLDER_TYPE ? SolutionExplorerItemType.Folder : SolutionExplorerItemType.File
+                    Type = item.Type == FOLDER_TYPE ? SolutionExplorerItemType.Folder : SolutionExplorerItemType.File,
+                    Source = _fileSource
                 };
 
                 explorerItemDictionary[item.Path] = treeItem;
@@ -88,9 +100,10 @@ namespace PhilippWebsite.Services.SolutionExplorer
             SolutionExplorerItem treeRoot = new SolutionExplorerItem()
             {
                 Name = repo,
-                Path = "/",
+                Path = string.Empty,
                 Repo = repo,
-                Type = SolutionExplorerItemType.Project
+                Type = SolutionExplorerItemType.Project,
+                Source = _fileSource
             };
 
             foreach (var item in githubTree.LinearTree)

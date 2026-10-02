@@ -10,6 +10,8 @@ namespace PhilippWebsite.Models.SolutionExplorer
 
         public required SolutionExplorerItemType Type { get; init; }
 
+        public required FileSource Source { get; init; }
+
         public List<SolutionExplorerItem> Items { get; init; }
 
 
