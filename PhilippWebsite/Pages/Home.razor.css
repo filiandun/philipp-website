@@ -102,6 +102,7 @@
     
         .vs-tabsbar {
             position: relative;
+            flex-shrink: 0;
 
             z-index: 2;
         }
