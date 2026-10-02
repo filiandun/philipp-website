@@ -17,11 +17,11 @@
             <span class="vs-tabsbar-tab-content">@tab.Name</span>
 
             <span class="vs-tabsbar-tab-pin" @onclick:stopPropagation="true">
-                <VsIcon Class="vs-tabsbar-tab-pin-icon" Icon="@VsIcons.PushPin" IconSize="16" />
+                <VsIcon Class="vs-tabsbar-tab-pin-icon" Icon="@VsIcons.TabsBar.PushPin" IconSize="16" />
             </span>
 
             <span class="vs-tabsbar-tab-close" @onclick="() => this.TabsBarStateService.Close(tab)" @onclick:stopPropagation="true">
-                <VsIcon Class="vs-tabsbar-tab-close-icon" Icon="@VsIcons.Close" IconSize="16" />
+                <VsIcon Class="vs-tabsbar-tab-close-icon" Icon="@VsIcons.TabsBar.Close" IconSize="16" />
             </span>
         </div>        
     }

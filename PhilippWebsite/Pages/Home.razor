@@ -17,24 +17,24 @@
         <div class="vs-titlebar">
 
             <div class="vs-titlebar-left">
-                <VsIcon Icon="@VsIcons.VisualStudio" IconSize="32" IconColor="var(--mud-palette-primary)"></VsIcon>
+                <VsIcon Icon="@VsIcons.Common.VisualStudio" IconSize="32" IconColor="var(--mud-palette-primary)"></VsIcon>
 
                 <div class="vs-menu-list">
                     <VsMenu Label="File">
-                        <VsMenuItem ItemIcon="@VsIcons.RunOutline" ItemText="Download CV (.pdf)"></VsMenuItem>
-                        <VsMenuItem ItemIcon="@VsIcons.PushPin" ItemText="Print"></VsMenuItem>
+                        <VsMenuItem ItemIcon="@VsIcons.Common.VisualStudio" ItemText="Download CV (.pdf)"></VsMenuItem>
+                        <VsMenuItem ItemIcon="@VsIcons.Common.VisualStudio" ItemText="Print"></VsMenuItem>
                     </VsMenu>
 
                     <VsMenu Label="Git">
-                        <VsMenuItem ItemIcon="@VsIcons.Run" ItemText="Open GitHub"></VsMenuItem>
+                        <VsMenuItem ItemIcon="@VsIcons.Common.VisualStudio" ItemText="Open GitHub"></VsMenuItem>
                     </VsMenu>
 
                     <VsMenu Label="Help">
-                        <VsMenuItem ItemIcon="@VsIcons.Refresh" ItemText="About This Portfolio"></VsMenuItem>
+                        <VsMenuItem ItemIcon="@VsIcons.Common.VisualStudio" ItemText="About This Portfolio"></VsMenuItem>
                     </VsMenu>
 
                     <VsMenu Label="Search">
-                        <VsMenuItem ItemIcon="@VsIcons.Search" ItemText="PhilippWebsite (Ctrl+Q)"></VsMenuItem>
+                        <VsMenuItem ItemIcon="@VsIcons.Common.VisualStudio" ItemText="PhilippWebsite (Ctrl+Q)"></VsMenuItem>
                     </VsMenu>
                 </div>
 
@@ -42,31 +42,31 @@
             </div>
 
             <div class="vs-titlebar-rigth">
-                <VsToolBarButton Icon="@VsIcons.Close" IconSize="24" Class="vs-close-btn"></VsToolBarButton>
+                <VsToolBarButton Icon="@VsIcons.Common.Close" IconSize="24" Class="vs-close-btn"></VsToolBarButton>
             </div>
         </div>
 
         <div class="vs-toolbars">
             <VsToolBar Class="vs-toolbar"> @* TODO тут снаружи, и внутри, повторяются именна классов, тут класс нужен, так как margin добавляется, чтобы не липли друг к другу они*@
-                <VsToolBarButton Icon="@VsIcons.Backwards" IconColor="#3EA0E5"></VsToolBarButton>
-                <VsToolBarButton Icon="@VsIcons.Forwards" IconColor="#3EA0E5"></VsToolBarButton>
+                <VsToolBarButton Icon="@VsIcons.ToolBar.Backwards" IconColor="#3EA0E5"></VsToolBarButton>
+                <VsToolBarButton Icon="@VsIcons.ToolBar.Forwards" IconColor="#3EA0E5"></VsToolBarButton>
 
                 <MudDivider Vertical="true" FlexItem="true"></MudDivider>
 
-                <VsToolBarButton Icon="@VsIcons.Home"></VsToolBarButton>
+                <VsToolBarButton Icon="@VsIcons.ToolBar.Home"></VsToolBarButton>
 
                 <MudDivider Vertical="true" FlexItem="true"></MudDivider>
 
-                <VsToolBarButton Icon="@VsIcons.Save" IconColor="#3EA0E5"></VsToolBarButton>
+                <VsToolBarButton Icon="@VsIcons.ToolBar.Save" IconColor="#3EA0E5"></VsToolBarButton>
             </VsToolBar>
 
             <VsToolBar Class="vs-toolbar">
-                <VsToolBarButton Icon="@VsIcons.Run" Text="debug" IconColor="#85E876"></VsToolBarButton>
-                <VsToolBarButton Icon="@VsIcons.RunOutline" IconColor="#85E876"></VsToolBarButton>
+                <VsToolBarButton Icon="@VsIcons.ToolBar.Run" Text="debug" IconColor="#85E876"></VsToolBarButton>
+                <VsToolBarButton Icon="@VsIcons.ToolBar.RunOutline" IconColor="#85E876"></VsToolBarButton>
 
                 <MudDivider Vertical="true" FlexItem="true"></MudDivider>
 
-                <VsToolBarButton Icon="@VsIcons.Refresh"></VsToolBarButton>
+                <VsToolBarButton Icon="@VsIcons.ToolBar.Refresh"></VsToolBarButton>
             </VsToolBar>
         </div>
     </header>

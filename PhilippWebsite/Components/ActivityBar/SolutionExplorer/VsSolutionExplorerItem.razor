@@ -8,6 +8,7 @@
 
 @using PhilippWebsite.Resources
 
+@using PhilippWebsite.Services
 @using PhilippWebsite.Services.TabsBarState
 
 
@@ -21,19 +22,19 @@
         <div class="vs-solution-explorer-item-head-expand" @onclick="this.OnExpandClick">
             @if (this.Item.Items.Count != 0)
             {
-                <VsIcon Icon="@(this._isExpanded ? VsIcons.ExpandDown : VsIcons.ExpandRight)" IconSize="16"></VsIcon>
+                <VsIcon Icon="@(this._isExpanded ? VsIcons.SolutionExplorer.Expands.Down : VsIcons.SolutionExplorer.Expands.Right)" IconSize="16"></VsIcon>
             }
         </div>
 
         <div class="vs-solution-explorer-item-head-icon">
             @switch (this.Item.Type)
             {
-                case SolutionExplorerItemType.Solution: <VsIcon Icon="@VsIcons.VisualStudio" IconSize="16"></VsIcon> break;
+                case SolutionExplorerItemType.Solution: <VsIcon Icon="@IconResolver.GetSolutionIcon(this.Item.Name)" IconSize="16"></VsIcon> break;
 
-                case SolutionExplorerItemType.Project: <VsIcon Icon="@VsIcons.AspProject" IconSize="16"></VsIcon> break;
+                case SolutionExplorerItemType.Project: <VsIcon Icon="@IconResolver.GetProjectIcon(this.Item.Name)" IconSize="16"></VsIcon> break;
 
-                case SolutionExplorerItemType.Folder: <VsIcon Icon="@VsIcons.Folder" IconSize="16"></VsIcon> break;
-                case SolutionExplorerItemType.File: <VsIcon Icon="@VsIcons.CSFileNode" IconSize="16"></VsIcon> break;
+                case SolutionExplorerItemType.Folder: <VsIcon Icon="@IconResolver.GetFolderIcon(this.Item.Name)" IconSize="16"></VsIcon> break;
+                case SolutionExplorerItemType.File: <VsIcon Icon="@IconResolver.GetFileIcon(this.Item.Name)" IconSize="16"></VsIcon> break;
             } 
         </div>
 
