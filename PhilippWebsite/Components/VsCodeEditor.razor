@@ -7,23 +7,20 @@
 @using PhilippWebsite.Services.TabsBarState
 @using PhilippWebsite.Services.FileContent
 
+@inject IJSRuntime JS
 
 @inject TabsBarStateService TabsBarStateService
 @inject IFileContentService FileContentService
 
 
-<div class="vs-editor-root">
-    <div class="vs-editor-highlighter">
+<div class="vs-editor-root" @ref="this._editorRoot">
+    <div class="vs-editor-layers">
         @for (int i = 1; i <= this._lineCount; i++)
         {
-            <div class="vs-editor-highlighter-line">@i</div>
-        }
-    </div>
-
-    <div class="vs-editor-gutter">
-        @for (int i = 1; i <= this._lineCount; i++)
-        {
-            <div class="vs-editor-gutter-line">@i</div>
+            <div class="vs-editor-row">
+                <div class="vs-editor-gutter-cell">@i</div>
+                <div class="vs-editor-highlight-cell"></div>
+            </div>
         }
     </div>
 
@@ -43,12 +40,21 @@
 
     private string _htmlString = string.Empty;
 
+    private ElementReference _editorRoot;
+
 
     protected override void OnInitialized()
     {
         this.TabsBarStateService.OnChange += this.OnTabChange;
     }
 
+    protected override async Task OnAfterRenderAsync(bool firstRender)
+    {
+        if (firstRender)
+        {
+            await JS.InvokeVoidAsync("vsCodeEditor.initHighlight", _editorRoot);
+        }
+    }
 
     // TODO надо сделать отдельное событие ActiveTabChange
     private async void OnTabChange()
