@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Components.WebAssembly.Hosting;
 
 using MudBlazor.Services;
 
+using PhilippWebsite.Services.CodeHighlighter;
 using PhilippWebsite.Services.FileContent;
 
 using PhilippWebsite.Services.SolutionExplorer;
@@ -66,11 +67,12 @@ namespace PhilippWebsite
             builder.Services.AddScoped<ITreeProvider, GitHubTreeProvider>();
             builder.Services.AddScoped<SolutionExplorerService>();
 
-            builder.Services.AddScoped<IFileContentService, FileContentService>();
-            builder.Services.AddScoped<IFileContentService, FileContentService>();
-
             builder.Services.AddScoped<TabsBarStateService>();
 
+            builder.Services.AddScoped<IFileContentService, FileContentService>();
+            builder.Services.AddScoped<IFileContentService, FileContentService>();
+
+            builder.Services.AddSingleton<ICodeHighlighterService, ColorCodeHighlighterService>();
 
 
             await builder.Build().RunAsync();

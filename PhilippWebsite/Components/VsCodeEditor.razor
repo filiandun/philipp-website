@@ -1,16 +1,15 @@
 ﻿@* VsCodeEditor.razor *@
 
 
-@using ColorCode
-@using ColorCode.Styling;
-
-@using PhilippWebsite.Services.TabsBarState
+@using PhilippWebsite.Services.CodeHighlighter
 @using PhilippWebsite.Services.FileContent
+@using PhilippWebsite.Services.TabsBarState
 
 @inject IJSRuntime JS
 
 @inject TabsBarStateService TabsBarStateService
 @inject IFileContentService FileContentService
+@inject ICodeHighlighterService CodeHighlighterService
 
 
 <div class="vs-editor-root" @ref="this._editorRoot">
@@ -31,13 +30,7 @@
 
 
 @code {
-    [Parameter] public string Code { get; set; } = string.Empty;
-    [Parameter] public ILanguage Language { get; set; } = Languages.CSharp;
-
-    private static HtmlFormatter _formatter = new HtmlFormatter(StyleDictionary.DefaultDark);
-
     private int _lineCount;
-
     private string _htmlString = string.Empty;
 
     private ElementReference _editorRoot;
@@ -61,23 +54,13 @@
     {
         if (this.TabsBarStateService.ActiveTab is null) return;
 
-        string content = await this.FileContentService.GetContentAsync(this.TabsBarStateService.ActiveTab.Repo, this.TabsBarStateService.ActiveTab.Path, this.TabsBarStateService.ActiveTab.Source);
+        string fileContent = await this.FileContentService.GetContentAsync(this.TabsBarStateService.ActiveTab.Repo, this.TabsBarStateService.ActiveTab.Path, this.TabsBarStateService.ActiveTab.Source);
 
+        this._lineCount = fileContent.Split('\n').Length;
 
-        this._lineCount = content.Split('\n').Length;
-
-        this._htmlString = _formatter.GetHtmlString(content, this.Language);
+        this._htmlString = this.CodeHighlighterService.GetHighlightedHtml(fileContent, this.TabsBarStateService.ActiveTab.Path);
 
         this.StateHasChanged();
-    }
-
-    protected override void OnParametersSet()
-    {
-        if (string.IsNullOrEmpty(this.Code)) return;
-
-        this._lineCount = this.Code.Split('\n').Length;
-
-        this._htmlString = _formatter.GetHtmlString(this.Code, this.Language);
     }
 
 
