@@ -38,19 +38,19 @@
 
     protected override void OnInitialized()
     {
-        this.TabsBarStateService.OnChange += this.OnTabChange;
+        this.TabsBarStateService.OnActiveTabChange += this.OnActiveTabChange;
     }
 
     protected override async Task OnAfterRenderAsync(bool firstRender)
     {
         if (firstRender)
         {
-            await JS.InvokeVoidAsync("vsCodeEditor.initHighlight", _editorRoot);
+            await this.JS.InvokeVoidAsync("vsCodeEditor.initHighlight", _editorRoot);
         }
     }
 
-    // TODO надо сделать отдельное событие ActiveTabChange
-    private async void OnTabChange()
+
+    private async void OnActiveTabChange()
     {
         if (this.TabsBarStateService.ActiveTab is null) return;
 
@@ -66,6 +66,6 @@
 
     public void Dispose()
     {
-        this.TabsBarStateService.OnChange -= this.OnTabChange;
+        this.TabsBarStateService.OnOpenTabsChange -= this.OnActiveTabChange;
     }
 } 

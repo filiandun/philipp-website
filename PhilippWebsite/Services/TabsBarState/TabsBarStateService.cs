@@ -5,7 +5,8 @@ namespace PhilippWebsite.Services.TabsBarState
 {
     public class TabsBarStateService
     {
-        public event Action? OnChange;
+        public event Action? OnOpenTabsChange;
+        public event Action? OnActiveTabChange;
 
         private ILogger<TabsBarStateService> _logger;
 
@@ -31,13 +32,13 @@ namespace PhilippWebsite.Services.TabsBarState
             {
                 this.ActiveTab = tabModel;
 
-                this.OnChange?.Invoke();
+                this.OnActiveTabChange?.Invoke();
 
                 this._logger.LogInformation("Tab '{TabName}' is now active.", tabModel.Name);
             }
             else
             {
-                this._logger.LogInformation("Tab '{TabName}' not found for set active.", tabModel.Name);
+                this._logger.LogWarning("Tab '{TabName}' not found for set active.", tabModel.Name);
             }
         }
 
@@ -48,13 +49,15 @@ namespace PhilippWebsite.Services.TabsBarState
             {
                 this._openTabs.Add(tabModel);
 
-                this.OnChange?.Invoke();
+                this.OnOpenTabsChange?.Invoke();
 
                 this._logger.LogInformation("Tab '{TabName}' open.", tabModel.Name);
+
+                this.SetActive(tabModel);
             }
             else
             {
-                this._logger.LogInformation("Tab '{TabName}' already open.", tabModel.Name);
+                this._logger.LogDebug("Tab '{TabName}' already open.", tabModel.Name);
             }
 
         }
@@ -65,11 +68,11 @@ namespace PhilippWebsite.Services.TabsBarState
             {
                 this._logger.LogInformation("Tab '{TabName}' close.", tabModel.Name);
 
-                this.OnChange?.Invoke();
+                this.OnOpenTabsChange?.Invoke();
             } 
             else
             {
-                this._logger.LogInformation("Tab '{TabName}' not found for close.", tabModel.Name);
+                this._logger.LogWarning("Tab '{TabName}' not found for close.", tabModel.Name);
             }
         }
     }

@@ -31,11 +31,11 @@
 @code {
     protected override void OnInitialized()
     {
-        this.TabsBarStateService.OnChange += this.StateHasChanged;
+        this.TabsBarStateService.OnOpenTabsChange += this.StateHasChanged;
     }
 
     public void Dispose()
     {
-        this.TabsBarStateService.OnChange -= this.StateHasChanged;
+        this.TabsBarStateService.OnOpenTabsChange -= this.StateHasChanged;
     }
 }

@@ -1,11 +1,16 @@
 ﻿@* VsProjectTreeRoot.razor *@
 
 
+@using PhilippWebsite.Models
 @using PhilippWebsite.Models.SolutionExplorer
+
 @using PhilippWebsite.Services.SolutionExplorer
+@using PhilippWebsite.Services.TabsBarState
 
 
 @inject SolutionExplorerService SolutionExplorerService;
+
+@inject TabsBarStateService TabsBarStateService;
 
 
 <div class="vs-solution-explorer-root">
@@ -14,7 +19,7 @@
     {
         @foreach (SolutionExplorerItem item in this._explorerRoot)
         {
-            <VsSolutionExplorerItem Item="item"></VsSolutionExplorerItem>
+            <VsSolutionExplorerItem Item="item" OnItemClick="this.OnItemClick"></VsSolutionExplorerItem>
         }
     }
     else
@@ -31,5 +36,14 @@
     protected override async Task OnInitializedAsync()
     {
         this._explorerRoot = await this.SolutionExplorerService.GetTreeAsync();
+    }
+
+
+    private void OnItemClick(SolutionExplorerItem item)
+    {
+        if (item.Type == SolutionExplorerItemType.File)
+        {
+            this.TabsBarStateService.Open(new TabModel() { Name = item.Name, Path = item.Path, Repo = item.Repo, Source = item.Source });
+        }
     }
 }

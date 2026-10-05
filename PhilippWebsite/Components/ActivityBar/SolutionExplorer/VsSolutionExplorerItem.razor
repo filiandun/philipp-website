@@ -1,25 +1,20 @@
-﻿@* VsProjectTreeItem.razor *@
+﻿@* VsSolutionExplorerItem.razor *@
 
 
 @using PhilippWebsite.Components.Common
 
-@using PhilippWebsite.Models
 @using PhilippWebsite.Models.SolutionExplorer
 
 @using PhilippWebsite.Resources
 
 @using PhilippWebsite.Services
-@using PhilippWebsite.Services.TabsBarState
 
 
-@inject TabsBarStateService TabsBarStateService;
-
-
-<div class="vs-solution-explorer-item-root">
+<div class="vs-solution-explorer-item-root" @onclick="this.OnContentClick">
 
     <div class="vs-solution-explorer-item-head" style="padding-left: @(this.Depth * 15)px;">
 
-        <div class="vs-solution-explorer-item-head-expand" @onclick="this.OnExpandClick">
+        <div class="vs-solution-explorer-item-head-expand" @onclick="this.OnExpandClick" @onclick:stopPropagation="true">
             @if (this.Item.Items.Count != 0)
             {
                 <VsIcon Icon="@(this._isExpanded ? VsIcons.SolutionExplorer.Expands.Down : VsIcons.SolutionExplorer.Expands.Right)" IconSize="16"></VsIcon>
@@ -38,7 +33,7 @@
             } 
         </div>
 
-        <div class="vs-solution-explorer-item-head-content" @onclick="this.OnContentClick">
+        <div class="vs-solution-explorer-item-head-content">
             <span>@this.Item.Name</span>
         </div>
 
@@ -49,7 +44,7 @@
         <div class="vs-solution-explorer-item-child">
             @foreach (SolutionExplorerItem item in this.Item.Items)
             {
-                <VsSolutionExplorerItem Item="item" Depth="(this.Depth + 1)"></VsSolutionExplorerItem>
+                <VsSolutionExplorerItem Item="item" Depth="(this.Depth + 1)" OnItemClick="this.OnItemClick"></VsSolutionExplorerItem>
             }
         </div>
     }
@@ -57,11 +52,13 @@
 
 
 @code {
+    [Parameter] public EventCallback<SolutionExplorerItem> OnItemClick { get; set; }
+
     [Parameter] public required SolutionExplorerItem Item { get; set; }
     [Parameter] public int Depth { get; set; } = 0;
 
     private bool _isExpanded = false;
 
     private void OnExpandClick() => this._isExpanded = !this._isExpanded;
-    private void OnContentClick() => this.TabsBarStateService.Open(new TabModel() { Name = this.Item.Name, Path = this.Item.Path, Repo = this.Item.Repo, Source = this.Item.Source });
+    private void OnContentClick() => this.OnItemClick.InvokeAsync(this.Item);
 }
