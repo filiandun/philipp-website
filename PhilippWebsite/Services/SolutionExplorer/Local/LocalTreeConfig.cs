@@ -1,11 +1,11 @@
 ﻿
 namespace PhilippWebsite.Services.SolutionExplorer.Local
 {
-    public class LocalTreeConfig
+    public static class LocalTreeConfig
     {
-        public string BaseUrl { get; set; } = string.Empty;
+        public static readonly string SolutionName = "About Philipp";
+        public static readonly IReadOnlyList<string> FileList = [ "aboutme.md", "contacts.md" ];
 
-        public string SolutionName { get; set; } = string.Empty;
-        public List<string> FileList { get; set; } = new List<string>();
+        public static string GetBaseUrl(string path) => $"content/{path}";
     }
 }

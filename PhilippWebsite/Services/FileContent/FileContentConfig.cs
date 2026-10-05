@@ -1,9 +1,9 @@
 ﻿
 namespace PhilippWebsite.Services.FileContent
 {
-    public class FileContentConfig
+    public static class FileContentConfig
     {
-        public string GitHubUrl { get; set; } = string.Empty;
-        public string LocalUrl { get; set; } = string.Empty;
+        public static string GetGitHubUrl(string repo, string path) => $"https://raw.githubusercontent.com/filiandun/{repo}/main/{path}";
+        public static string GetLocalUrl(string path) => $"content/{path}";
     }
 }

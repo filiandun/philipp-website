@@ -1,6 +1,4 @@
-﻿using Microsoft.Extensions.Options;
-
-using PhilippWebsite.Models;
+﻿using PhilippWebsite.Models;
 using PhilippWebsite.Models.SolutionExplorer;
 
 
@@ -10,21 +8,12 @@ namespace PhilippWebsite.Services.SolutionExplorer.Local
     {
         private static readonly FileSource _fileSource = FileSource.Local;
 
-
         private readonly ILogger<LocalTreeProvider> _logger;
 
-        private readonly LocalTreeConfig _config;
 
-        private readonly HttpClient _httpClient;
-
-
-        public LocalTreeProvider(ILogger<LocalTreeProvider> logger, IOptions<LocalTreeConfig> options, HttpClient httpClient)
+        public LocalTreeProvider(ILogger<LocalTreeProvider> logger)
         {
             this._logger = logger;
-
-            this._config = options.Value;
-
-            this._httpClient = httpClient;
         }
 
 
@@ -34,14 +23,14 @@ namespace PhilippWebsite.Services.SolutionExplorer.Local
             {
                 SolutionExplorerItem explorerSolution = new SolutionExplorerItem()
                 {
-                    Name = this._config.SolutionName,
+                    Name = LocalTreeConfig.SolutionName,
                     Path = string.Empty,
                     Repo = string.Empty,
                     Type = SolutionExplorerItemType.Solution,
                     Source = _fileSource
                 };
 
-                foreach (string file in this._config.FileList)
+                foreach (string file in LocalTreeConfig.FileList)
                 {
                     SolutionExplorerItem explorerItem = new SolutionExplorerItem()
                     {

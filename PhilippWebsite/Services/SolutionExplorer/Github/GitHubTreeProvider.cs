@@ -1,7 +1,5 @@
 ﻿using System.Net.Http.Json;
 
-using Microsoft.Extensions.Options;
-
 using PhilippWebsite.Models;
 using PhilippWebsite.Models.SolutionExplorer;
 
@@ -18,16 +16,12 @@ namespace PhilippWebsite.Services.SolutionExplorer.Github
  
         private readonly ILogger<GitHubTreeProvider> _logger;
 
-        private readonly GitHubTreeConfig _config;
-
         private readonly HttpClient _httpClient;
 
 
-        public GitHubTreeProvider(ILogger<GitHubTreeProvider> logger, IOptions<GitHubTreeConfig> options, HttpClient httpClient)
+        public GitHubTreeProvider(ILogger<GitHubTreeProvider> logger, HttpClient httpClient)
         {
             this._logger = logger;
-
-            this._config = options.Value;
 
             this._httpClient = httpClient;
 
@@ -44,16 +38,16 @@ namespace PhilippWebsite.Services.SolutionExplorer.Github
             {
                 SolutionExplorerItem explorerSolution = new SolutionExplorerItem()
                 {
-                    Name = this._config.SolutionName,
+                    Name = GitHubTreeConfig.SolutionName,
                     Path = string.Empty,
                     Repo = string.Empty,
                     Type = SolutionExplorerItemType.Solution,
                     Source = _fileSource
                 };
 
-                foreach (var repo in this._config.RepoList)
+                foreach (var repo in GitHubTreeConfig.RepoList)
                 {
-                    string repoUrl = string.Format(this._config.BaseUrl, repo);
+                    string repoUrl = GitHubTreeConfig.GetBaseUrl(repo);
 
                     this._logger.LogDebug("Http request to '{RepoUrl}'.", repoUrl);
 

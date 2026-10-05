@@ -1,6 +1,4 @@
-﻿using Microsoft.Extensions.Options;
-
-using PhilippWebsite.Models;
+﻿using PhilippWebsite.Models;
 
 
 namespace PhilippWebsite.Services.FileContent
@@ -9,16 +7,12 @@ namespace PhilippWebsite.Services.FileContent
     {
         private readonly ILogger<FileContentService> _logger;
 
-        private readonly FileContentConfig _config;
-
         private readonly HttpClient _httpClient;
 
 
-        public FileContentService(ILogger<FileContentService> logger, IOptions<FileContentConfig> options, HttpClient httpClient)
+        public FileContentService(ILogger<FileContentService> logger, HttpClient httpClient)
         {
             this._logger = logger;
-
-            this._config = options.Value;
 
             this._httpClient = httpClient;  
         }
@@ -28,8 +22,8 @@ namespace PhilippWebsite.Services.FileContent
         {
             string fileUrl = source switch
             {
-                FileSource.GitHub => string.Format(this._config.GitHubUrl, repo, path),
-                FileSource.Local => string.Format(this._config.LocalUrl, path),
+                FileSource.GitHub => FileContentConfig.GetGitHubUrl(repo, path),
+                FileSource.Local => FileContentConfig.GetLocalUrl(path),
 
                 _ => throw new ArgumentOutOfRangeException(nameof(source))
             };
