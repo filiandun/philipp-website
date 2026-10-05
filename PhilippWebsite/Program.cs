@@ -72,10 +72,18 @@ namespace PhilippWebsite
             builder.Services.AddScoped<IFileContentService, FileContentService>();
             builder.Services.AddScoped<IFileContentService, FileContentService>();
 
-            builder.Services.AddSingleton<ICodeHighlighterService, ColorCodeHighlighterService>();
+            builder.Services.AddSingleton<ICodeHighlighterService, ShikiCodeHighlighterService>();
 
 
-            await builder.Build().RunAsync();
+            WebAssemblyHost host = builder.Build();
+
+
+            // preload
+
+            ICodeHighlighterService highlighter = host.Services.GetRequiredService<ICodeHighlighterService>();
+            _ = highlighter.PreloadAsync();
+
+            await host.RunAsync();
         }
     }
 }

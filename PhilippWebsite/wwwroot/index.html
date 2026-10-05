@@ -21,29 +21,6 @@
 
     <link href="PhilippWebsite.styles.css" rel="stylesheet" />
     <script src="js/vs-editor.js"></script>
-
-    <script>
-        let shikiHighlighter = null;
-
-        window.codeHighlighter = {
-            init: async function () {
-                shikiHighlighter = await shiki.getHighlighter({
-                    theme: 'dark-plus',
-                    langs: ['csharp', 'json', 'xml', 'html', 'css', 'javascript', 'typescript', 'markdown', 'razor']
-                });
-            },
-
-            highlight: function (code, lang) {
-                if (!shikiHighlighter) return "";
-
-                if (!shikiHighlighter.getLoadedLanguages().includes(lang)) {
-                    lang = 'csharp';
-                }
-
-                return shikiHighlighter.codeToHtml(code, { lang: lang });
-            }
-        };
-    </script>
 </head>
 
     <body>

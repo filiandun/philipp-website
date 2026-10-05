@@ -45,7 +45,7 @@
     {
         if (firstRender)
         {
-            await this.JS.InvokeVoidAsync("vsCodeEditor.initHighlight", _editorRoot);
+            await this.JS.InvokeVoidAsync("vsCodeEditor.initHighlight", this._editorRoot);
         }
     }
 
@@ -58,7 +58,7 @@
 
         this._lineCount = fileContent.Split('\n').Length;
 
-        this._htmlString = this.CodeHighlighterService.GetHighlightedHtml(fileContent, this.TabsBarStateService.ActiveTab.Path);
+        this._htmlString = await this.CodeHighlighterService.GetHighlightedHtml(fileContent, this.TabsBarStateService.ActiveTab.Path);
 
         this.StateHasChanged();
     }
