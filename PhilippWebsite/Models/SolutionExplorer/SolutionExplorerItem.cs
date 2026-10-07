@@ -12,12 +12,17 @@ namespace PhilippWebsite.Models.SolutionExplorer
 
         public required FileSource Source { get; init; }
 
+
+        public bool IsExpanded { get; set; }
         public List<SolutionExplorerItem> Items { get; init; }
+
 
 
         public SolutionExplorerItem()
         {
             this.Items = new List<SolutionExplorerItem>();
+
+            this.IsExpanded = false;
         }
     }
 }

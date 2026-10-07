@@ -2,14 +2,23 @@
 
 @using PhilippWebsite.Components
 @using PhilippWebsite.Components.ActivityBar
-
 @using PhilippWebsite.Components.Common
 @using PhilippWebsite.Components.Common.Menu
-
 @using PhilippWebsite.Components.TabsBar
 @using PhilippWebsite.Components.ToolBar
 
+@using PhilippWebsite.Models
+@using PhilippWebsite.Models.SolutionExplorer
+
 @using PhilippWebsite.Resources
+
+@using PhilippWebsite.Services.SolutionExplorer
+@using PhilippWebsite.Services.SolutionExplorer.Local
+@using PhilippWebsite.Services.TabsBarState
+
+
+@inject SolutionExplorerService SolutionExplorerService
+@inject TabsBarStateService TabsBarStateService
 
 
 <div class="vs-window">
@@ -104,4 +113,24 @@
 
 @code {
 
+    protected override async Task OnInitializedAsync()
+    {
+        SolutionExplorerRoot? solutionExplorerRoot = await this.SolutionExplorerService.GetTreeAsync();
+
+        if (solutionExplorerRoot is null) return;
+    
+        var firstSolution = solutionExplorerRoot.FirstOrDefault(x => x.Name == LocalTreeConfig.SolutionName);
+
+        if (firstSolution is not null) firstSolution.IsExpanded = true;
+
+        foreach (string fileName in LocalTreeConfig.FileList)
+        {
+            this.TabsBarStateService.Open(new TabModel { 
+                Name = fileName, 
+                Path = fileName, 
+                Repo = LocalTreeConfig.SolutionName,
+                Source = FileSource.Local
+            });
+        }
+    }
 }
