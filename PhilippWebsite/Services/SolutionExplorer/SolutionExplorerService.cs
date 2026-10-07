@@ -9,6 +9,8 @@ namespace PhilippWebsite.Services.SolutionExplorer
 
         private readonly IEnumerable<ITreeProvider> _treeProviders;
 
+        private SolutionExplorerRoot? _cachedExplorerRoot;
+
 
         public SolutionExplorerService(ILogger<SolutionExplorerService> logger, IEnumerable<ITreeProvider> treeProviders)
         {
@@ -20,6 +22,8 @@ namespace PhilippWebsite.Services.SolutionExplorer
 
         public async Task<SolutionExplorerRoot?> GetTreeAsync()
         {
+            if (this._cachedExplorerRoot is not null) return this._cachedExplorerRoot;
+
             SolutionExplorerRoot explorerRoot = new SolutionExplorerRoot();
 
             foreach (ITreeProvider treeProvider in this._treeProviders)
@@ -32,8 +36,10 @@ namespace PhilippWebsite.Services.SolutionExplorer
                     continue;
                 }
 
-                explorerRoot.Items.Add(explorerItem); // TODO костыли страшные
+                explorerRoot.Items.Add(explorerItem);
             }
+
+            this._cachedExplorerRoot = explorerRoot;
 
             return explorerRoot;
         }
