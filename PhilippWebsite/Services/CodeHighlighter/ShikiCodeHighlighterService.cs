@@ -23,42 +23,13 @@ namespace PhilippWebsite.Services.CodeHighlighter
         }
 
 
-        private Task LazyInitializedAsync()
+        public Task PreloadAsync()
         {
-            if (this._shikiInitTask is null)
-            {
-                this._shikiInitTask = LazyInitializedTaskAsync();
-            }
+            this._logger.LogDebug("Preload shiki.");
 
-            return this._shikiInitTask;
+            return this._shikiInitTask ??= this.LazyInitializedTaskAsync();
         }
 
-        private async Task LazyInitializedTaskAsync()
-        {
-            try
-            {
-                this._shikiModule = await this._jsRuntime.InvokeAsync<IJSObjectReference>("import", "./js/shiki-highlighter.js");
-                this._logger.LogDebug("Success to get shiki script.");
-
-                string theme = ShikiCodeHighlighterConfig.Theme;
-                string[] languages = ShikiCodeHighlighterConfig.ExtensionToLanguageMap.Values.Distinct().ToArray();
-
-                await this._shikiModule.InvokeVoidAsync("init", theme, languages);
-                this._logger.LogDebug("Success to init shiki script with '{Theme}' theme and '{LanguagesCount}' langs.", theme, languages.Length);
-            }
-            catch (Exception ex)
-            {
-                this._logger.LogError(ex,"Error to load shiki js.");
-            }
-        }
-
-
-        public async Task PreloadAsync()
-        {
-            this._logger.LogDebug("Preload shiki");
-
-            await this.LazyInitializedAsync();
-        }
 
         public async Task<string> GetHighlightedHtml(string code, string filePath)
         {
@@ -69,7 +40,7 @@ namespace PhilippWebsite.Services.CodeHighlighter
                 return string.Empty;
             }
 
-            await this.LazyInitializedAsync();
+            await this.PreloadAsync();
 
             if (this._shikiModule is null)
             {
@@ -88,6 +59,28 @@ namespace PhilippWebsite.Services.CodeHighlighter
 
 
         private string GetShikiLanguage(string extension) => ShikiCodeHighlighterConfig.ExtensionToLanguageMap.TryGetValue(extension, out var lang) ? lang : ShikiCodeHighlighterConfig.DefaultLanguage;
+
+
+        private async Task LazyInitializedTaskAsync()
+        {
+            try
+            {
+                this._shikiModule = await this._jsRuntime.InvokeAsync<IJSObjectReference>("import", "./js/shiki-highlighter.js");
+                this._logger.LogDebug("Success to get shiki script.");
+
+                string theme = ShikiCodeHighlighterConfig.Theme;
+                string[] languages = ShikiCodeHighlighterConfig.ExtensionToLanguageMap.Values.Distinct().ToArray();
+
+                await this._shikiModule.InvokeVoidAsync("init", theme, languages);
+                this._logger.LogDebug("Success to init shiki script with '{Theme}' theme and '{LanguagesCount}' langs.", theme, languages.Length);
+            }
+            catch (Exception ex)
+            {
+                this._logger.LogError(ex, "Error to load shiki js.");
+
+                this._shikiInitTask = null;
+            }
+        }
 
 
         public async ValueTask DisposeAsync()

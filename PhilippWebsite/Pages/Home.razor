@@ -112,14 +112,13 @@
 
 
 @code {
-
     protected override async Task OnInitializedAsync()
     {
         SolutionExplorerRoot? solutionExplorerRoot = await this.SolutionExplorerService.GetTreeAsync();
 
         if (solutionExplorerRoot is null) return;
     
-        var firstSolution = solutionExplorerRoot.FirstOrDefault(x => x.Name == LocalTreeConfig.SolutionName);
+        SolutionExplorerItem? firstSolution = solutionExplorerRoot.FirstOrDefault(x => x.Name == LocalTreeConfig.SolutionName);
 
         if (firstSolution is not null) firstSolution.IsExpanded = true;
 
