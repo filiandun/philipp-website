@@ -9,7 +9,7 @@ namespace PhilippWebsite.Services.SolutionExplorer
 
         private readonly IEnumerable<ITreeProvider> _treeProviders;
 
-        private SolutionExplorerRoot? _cachedExplorerRoot;
+        private Task<SolutionExplorerRoot>? _rootInitTask;
 
 
         public SolutionExplorerService(ILogger<SolutionExplorerService> logger, IEnumerable<ITreeProvider> treeProviders)
@@ -20,28 +20,51 @@ namespace PhilippWebsite.Services.SolutionExplorer
         }
 
 
-        public async Task<SolutionExplorerRoot?> GetTreeAsync()
+        public Task PreloadAsync()
         {
-            if (this._cachedExplorerRoot is not null) return this._cachedExplorerRoot;
+            this._logger.LogDebug("Preload Solution Explorer Root");
 
-            SolutionExplorerRoot explorerRoot = new SolutionExplorerRoot();
+            return this.GetOrStartInitTask();
+        }
 
-            foreach (ITreeProvider treeProvider in this._treeProviders)
+
+        public Task<SolutionExplorerRoot> GetTreeAsync()
+        {
+            this._logger.LogDebug("Get Solution Explorer Root.");
+
+            return this.GetOrStartInitTask();
+        }
+
+        public async Task<SolutionExplorerRoot> BuildTreeAsync()
+        {
+            try
             {
-                SolutionExplorerItem? explorerItem = await treeProvider.GetTreeAsync();
+                SolutionExplorerRoot explorerRoot = new SolutionExplorerRoot();
 
-                if (explorerItem is null) 
+                foreach (ITreeProvider treeProvider in this._treeProviders)
                 {
-                    this._logger.LogWarning("Tree Provider '{TreeProvider}' return null", treeProvider.GetType().Name);
-                    continue;
+                    SolutionExplorerItem? explorerItem = await treeProvider.GetTreeAsync();
+
+                    if (explorerItem is null)
+                    {
+                        this._logger.LogWarning("Tree Provider '{TreeProvider}' return null.", treeProvider.GetType().Name);
+                        continue;
+                    }
+
+                    explorerRoot.Items.Add(explorerItem);
                 }
 
-                explorerRoot.Items.Add(explorerItem);
+                return explorerRoot;
             }
+            catch (Exception ex)
+            {
+                this._logger.LogError(ex, "Error to load Solution Explorer Root.");
 
-            this._cachedExplorerRoot = explorerRoot;
-
-            return explorerRoot;
+                this._rootInitTask = null;
+                throw;
+            }
         }
+
+        private Task<SolutionExplorerRoot> GetOrStartInitTask() => this._rootInitTask ??= this.BuildTreeAsync();
     }
 }

@@ -46,8 +46,11 @@ namespace PhilippWebsite
 
             WebAssemblyHost host = builder.Build();
 
-            ICodeHighlighterService highlighter = host.Services.GetRequiredService<ICodeHighlighterService>();
-            _ = highlighter.PreloadAsync();
+            ICodeHighlighterService codeHighlighter = host.Services.GetRequiredService<ICodeHighlighterService>();
+            _ = codeHighlighter.PreloadAsync();
+
+            SolutionExplorerService solutionExplorer = host.Services.GetRequiredService<SolutionExplorerService>();
+            _ = solutionExplorer.PreloadAsync();
 
 
             await host.RunAsync();
