@@ -1,3 +1,5 @@
 <Solution>
-  <Project Path="PhilippWebsite.csproj" />
+  <Project Path="PhilippWebsite.Client/PhilippWebsite.Client.csproj" />
+  <Project Path="PhilippWebsite.Server/PhilippWebsite.Server.csproj" Id="40ac507c-a89b-4f6d-8479-3bb485a00498" />
+  <Project Path="PhilippWebsite.Shared/PhilippWebsite.Shared.csproj" Id="ae2b4158-deb8-4157-94a2-5720b28d80eb" />
 </Solution>

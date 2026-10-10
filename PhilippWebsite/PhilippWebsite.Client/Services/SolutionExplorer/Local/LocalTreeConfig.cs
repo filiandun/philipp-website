@@ -1,0 +1,10 @@
+﻿namespace PhilippWebsite.Client.Services.SolutionExplorer.Local
+{
+    public static class LocalTreeConfig
+    {
+        public static readonly string SolutionName = "About Philipp";
+        public static readonly IReadOnlyList<string> FileList = [ "AboutMe.md", "Contacts.md" ];
+
+        public static string GetBaseUrl(string path) => $"content/{path}";
+    }
+}

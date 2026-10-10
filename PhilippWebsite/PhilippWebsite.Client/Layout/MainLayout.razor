@@ -1,0 +1,26 @@
+﻿@using PhilippWebsite.Client.Resources
+
+
+@inherits LayoutComponentBase
+
+
+<MudThemeProvider Theme="@this._theme" IsDarkMode="true" />
+<MudPopoverProvider />
+<MudDialogProvider />
+<MudSnackbarProvider />
+
+
+@Body
+
+
+@code {
+    private MudTheme? _theme;
+
+
+    protected override async Task OnInitializedAsync()
+    {
+        base.OnInitialized();
+
+        this._theme = VsThemeConfiguration.GetTheme();
+    }
+}

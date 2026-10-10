@@ -1,0 +1,71 @@
+﻿@* VsCodeEditor.razor *@
+
+
+@using PhilippWebsite.Client.Services.CodeHighlighter
+@using PhilippWebsite.Client.Services.FileContent
+@using PhilippWebsite.Client.Services.TabsBarState
+
+@inject IJSRuntime JS
+
+@inject TabsBarStateService TabsBarStateService
+@inject IFileContentService FileContentService
+@inject ICodeHighlighterService CodeHighlighterService
+
+
+<div class="vs-editor-root" @ref="this._editorRoot">
+    <div class="vs-editor-layers">
+        @for (int i = 1; i <= this._lineCount; i++)
+        {
+            <div class="vs-editor-row">
+                <div class="vs-editor-gutter-cell">@i</div>
+                <div class="vs-editor-highlight-cell"></div>
+            </div>
+        }
+    </div>
+
+    <pre class="vs-editor-content" style="white-space: pre-wrap;">
+        @((MarkupString)this._htmlString)
+    </pre>
+</div>
+
+
+@code {
+    private int _lineCount;
+    private string _htmlString = string.Empty;
+
+    private ElementReference _editorRoot;
+
+
+    protected override void OnInitialized()
+    {
+        this.TabsBarStateService.OnActiveTabChange += this.OnActiveTabChange;
+    }
+
+    protected override async Task OnAfterRenderAsync(bool firstRender)
+    {
+        if (firstRender)
+        {
+            await this.JS.InvokeVoidAsync("vsCodeEditor.initHighlight", this._editorRoot);
+        }
+    }
+
+
+    private async void OnActiveTabChange()
+    {
+        if (this.TabsBarStateService.ActiveTab is null) return;
+
+        string fileContent = await this.FileContentService.GetContentAsync(this.TabsBarStateService.ActiveTab.Repo, this.TabsBarStateService.ActiveTab.Path, this.TabsBarStateService.ActiveTab.Source);
+
+        this._lineCount = fileContent.Split('\n').Length;
+
+        this._htmlString = await this.CodeHighlighterService.GetHighlightedHtml(fileContent, this.TabsBarStateService.ActiveTab.Path);
+
+        this.StateHasChanged();
+    }
+
+
+    public void Dispose()
+    {
+        this.TabsBarStateService.OnOpenTabsChange -= this.OnActiveTabChange;
+    }
+} 

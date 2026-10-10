@@ -1,0 +1,24 @@
+﻿@* VsActivityBar.razor *@
+
+
+@using PhilippWebsite.Client.Components.ActivityBar.SolutionExplorer
+
+
+<div class="vs-activitybar-root"> @* @onfocusout="this.Close" *@
+    <VsActivityBarButton Class="vs-activity-btn" Text="Solution Explorer" OnClick="@this.Toggle"></VsActivityBarButton>
+
+    @if (this._explorerIsOpen)
+    {
+        <VsActivityBarPanel Title="Solution Explorer" OnCloseClick="@this.Close">
+            <VsSolutionExplorerRoot></VsSolutionExplorerRoot>
+        </VsActivityBarPanel>
+    }
+</div>
+
+
+@code {
+    private bool _explorerIsOpen = true;
+
+    private void Toggle() => this._explorerIsOpen = !this._explorerIsOpen;
+    private void Close() => this._explorerIsOpen = false;
+}

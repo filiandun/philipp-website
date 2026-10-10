@@ -1,0 +1,49 @@
+﻿@* VsProjectTreeRoot.razor *@
+
+
+@using PhilippWebsite.Client.Models
+@using PhilippWebsite.Client.Models.SolutionExplorer
+
+@using PhilippWebsite.Client.Services.SolutionExplorer
+@using PhilippWebsite.Client.Services.TabsBarState
+
+
+@inject SolutionExplorerService SolutionExplorerService;
+
+@inject TabsBarStateService TabsBarStateService;
+
+
+<div class="vs-solution-explorer-root">
+
+    @if (this._explorerRoot is not null)
+    {
+        @foreach (SolutionExplorerItem item in this._explorerRoot)
+        {
+            <VsSolutionExplorerItem Item="item" OnItemClick="this.OnItemClick"></VsSolutionExplorerItem>
+        }
+    }
+    else
+    {
+        <span>Надо потерпеть.</span>
+    }
+
+</div>
+
+
+@code {
+    private SolutionExplorerRoot? _explorerRoot;
+
+    protected override async Task OnInitializedAsync()
+    {
+        this._explorerRoot = await this.SolutionExplorerService.GetTreeAsync();
+    }
+
+
+    private void OnItemClick(SolutionExplorerItem item)
+    {
+        if (item.Type == SolutionExplorerItemType.File)
+        {
+            this.TabsBarStateService.Open(new TabModel() { Name = item.Name, Path = item.Path, Repo = item.Repo, Source = item.Source });
+        }
+    }
+}
