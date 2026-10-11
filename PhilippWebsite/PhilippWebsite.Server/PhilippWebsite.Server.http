@@ -1,6 +1,6 @@
 @PhilippWebsite.Server_HostAddress = http://localhost:5155
 
-GET {{PhilippWebsite.Server_HostAddress}}/weatherforecast/
+GET {{PhilippWebsite.Server_HostAddress}}/ProjectTree/GetTree/
 Accept: application/json
 
 ###
