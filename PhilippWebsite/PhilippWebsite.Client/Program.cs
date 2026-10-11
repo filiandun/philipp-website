@@ -6,8 +6,6 @@ using MudBlazor.Services;
 using PhilippWebsite.Client.Services.CodeHighlighter;
 using PhilippWebsite.Client.Services.FileContent;
 using PhilippWebsite.Client.Services.SolutionExplorer;
-using PhilippWebsite.Client.Services.SolutionExplorer.Github;
-using PhilippWebsite.Client.Services.SolutionExplorer.Local;
 using PhilippWebsite.Client.Services.TabsBarState;
 
 
@@ -26,11 +24,11 @@ namespace PhilippWebsite.Client
 
             // services
 
-            builder.Services.AddScoped(sp => new HttpClient { BaseAddress = new Uri(builder.HostEnvironment.BaseAddress) });
+            string? apiBaseUrl = builder.Configuration.GetValue<string>("ApiBaseUrl") ?? string.Empty;
 
-            builder.Services.AddScoped<ITreeProvider, LocalTreeProvider>();
-            builder.Services.AddScoped<ITreeProvider, GitHubTreeProvider>();
-            builder.Services.AddScoped<SolutionExplorerService>();
+            builder.Services.AddScoped(sp => new HttpClient { BaseAddress = new Uri(apiBaseUrl) });
+
+            builder.Services.AddScoped<ISolutionExplorerService, SolutionExplorerService>();
 
             builder.Services.AddScoped<TabsBarStateService>();
 
@@ -46,9 +44,6 @@ namespace PhilippWebsite.Client
 
             ICodeHighlighterService codeHighlighter = host.Services.GetRequiredService<ICodeHighlighterService>();
             _ = codeHighlighter.PreloadAsync();
-
-            SolutionExplorerService solutionExplorer = host.Services.GetRequiredService<SolutionExplorerService>();
-            _ = solutionExplorer.PreloadAsync();
 
 
             await host.RunAsync();

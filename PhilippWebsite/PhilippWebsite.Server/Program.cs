@@ -14,8 +14,20 @@ namespace PhilippWebsite.Server
             // Add services to the container.
 
             builder.Services.AddControllers();
-            // Learn more about configuring OpenAPI at https://aka.ms/aspnet/openapi
             builder.Services.AddOpenApi();
+
+
+            // CORS
+            var allowedOrigins = builder.Configuration.GetSection("AllowedOrigins").Get<string[]>() ?? Array.Empty<string>();
+
+            builder.Services.AddCors(options =>
+            {
+                options.AddPolicy("AllowLocalFront", policy =>
+                {
+                    policy.WithOrigins(allowedOrigins).AllowAnyHeader().AllowAnyMethod();
+                });
+            });
+
 
             // 
             builder.Services.AddHttpClient<GitHubTreeProvider>(client =>
@@ -36,6 +48,10 @@ namespace PhilippWebsite.Server
             builder.Services.AddSingleton<IProjectTreeService, ProjectTreeService>();
 
             var app = builder.Build();
+
+
+            // CORS
+            app.UseCors("AllowLocalFront");
 
             // Configure the HTTP request pipeline.
             if (app.Environment.IsDevelopment())

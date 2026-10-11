@@ -1,9 +1,10 @@
 ﻿using PhilippWebsite.Client.Models.SolutionExplorer;
 
+
 namespace PhilippWebsite.Client.Services.SolutionExplorer
 {
-    public interface ITreeProvider
+    public interface ISolutionExplorerService
     {
-        public Task<SolutionExplorerItem?> GetTreeAsync();
+        public Task<SolutionExplorerRoot?> GetTreeAsync();
     }
 }

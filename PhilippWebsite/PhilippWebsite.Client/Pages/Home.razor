@@ -13,11 +13,10 @@
 @using PhilippWebsite.Client.Resources
 
 @using PhilippWebsite.Client.Services.SolutionExplorer
-@using PhilippWebsite.Client.Services.SolutionExplorer.Local
 @using PhilippWebsite.Client.Services.TabsBarState
 
 
-@inject SolutionExplorerService SolutionExplorerService
+@inject ISolutionExplorerService SolutionExplorerService
 @inject TabsBarStateService TabsBarStateService
 
 
@@ -114,20 +113,22 @@
 @code {
     protected override async Task OnInitializedAsync()
     {
-        SolutionExplorerRoot? solutionExplorerRoot = await this.SolutionExplorerService.GetTreeAsync();
+        SolutionExplorerRoot? explorerRoot = await this.SolutionExplorerService.GetTreeAsync();
 
-        if (solutionExplorerRoot is null) return;
-    
-        SolutionExplorerItem? firstSolution = solutionExplorerRoot.FirstOrDefault(x => x.Name == LocalTreeConfig.SolutionName);
+        if (explorerRoot is null) return;
 
-        if (firstSolution is not null) firstSolution.IsExpanded = true;
+        SolutionExplorerItem? firstSolution = explorerRoot.FirstOrDefault();
 
-        foreach (string fileName in LocalTreeConfig.FileList)
+        if (firstSolution is null) return; 
+
+        firstSolution.IsExpanded = true;
+
+        foreach (SolutionExplorerItem explorerItem in firstSolution.Items)
         {
             this.TabsBarStateService.Open(new TabModel { 
-                Name = fileName, 
-                Path = fileName, 
-                Repo = LocalTreeConfig.SolutionName,
+                Name = explorerItem.Name, 
+                Path = explorerItem.Path, 
+                Repo = explorerItem.Repo,
                 Source = FileSource.Local
             });
         }

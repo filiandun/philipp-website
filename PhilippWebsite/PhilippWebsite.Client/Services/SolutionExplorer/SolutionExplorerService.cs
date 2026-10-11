@@ -1,69 +1,92 @@
-﻿using PhilippWebsite.Client.Models.SolutionExplorer;
+﻿using System.Net.Http.Json;
+
+using PhilippWebsite.Client.Models;
+using PhilippWebsite.Client.Models.SolutionExplorer;
+
+using PhilippWebsite.Shared.ProjectTree;
+
 
 namespace PhilippWebsite.Client.Services.SolutionExplorer
 {
-    public class SolutionExplorerService
+    public class SolutionExplorerService : ISolutionExplorerService
     {
         private readonly ILogger<SolutionExplorerService> _logger;
 
-        private readonly IEnumerable<ITreeProvider> _treeProviders;
-
-        private Task<SolutionExplorerRoot>? _rootInitTask;
+        private readonly HttpClient _httpClient;
 
 
-        public SolutionExplorerService(ILogger<SolutionExplorerService> logger, IEnumerable<ITreeProvider> treeProviders)
+        public SolutionExplorerService(ILogger<SolutionExplorerService> logger, HttpClient httpClient)
         {
             this._logger = logger;
-            
-            this._treeProviders = treeProviders;
+
+            this._httpClient = httpClient;
         }
 
 
-        public Task PreloadAsync()
-        {
-            this._logger.LogDebug("Preload Solution Explorer Root");
-
-            return this.GetOrStartInitTask();
-        }
-
-
-        public Task<SolutionExplorerRoot> GetTreeAsync()
-        {
-            this._logger.LogDebug("Get Solution Explorer Root.");
-
-            return this.GetOrStartInitTask();
-        }
-
-        public async Task<SolutionExplorerRoot> BuildTreeAsync()
+        public async Task<SolutionExplorerRoot?> GetTreeAsync()
         {
             try
             {
-                SolutionExplorerRoot explorerRoot = new SolutionExplorerRoot();
+                SolutionExplorerRoot explorerRoot = new();
 
-                foreach (ITreeProvider treeProvider in this._treeProviders)
+                string url = "https://localhost:7210/ProjectTree/GetTree/";
+
+                ProjectTreeRoot? treeRoot = await this._httpClient.GetFromJsonAsync<ProjectTreeRoot>(url);
+
+                if (treeRoot is null) throw new HttpRequestException("Server return null Project Tree Root");
+
+                foreach (ProjectTreeItem treeItem in treeRoot.Items)
                 {
-                    SolutionExplorerItem? explorerItem = await treeProvider.GetTreeAsync();
-
-                    if (explorerItem is null)
-                    {
-                        this._logger.LogWarning("Tree Provider '{TreeProvider}' return null.", treeProvider.GetType().Name);
-                        continue;
-                    }
+                    SolutionExplorerItem explorerItem = this.BuildTree(treeItem);
 
                     explorerRoot.Items.Add(explorerItem);
                 }
 
                 return explorerRoot;
             }
-            catch (Exception ex)
+            catch (HttpRequestException ex)
             {
-                this._logger.LogError(ex, "Error to load Solution Explorer Root.");
+                this._logger.LogError(ex, "Error get tree");
 
-                this._rootInitTask = null;
-                throw;
+                return null;
             }
         }
 
-        private Task<SolutionExplorerRoot> GetOrStartInitTask() => this._rootInitTask ??= this.BuildTreeAsync();
+
+        private SolutionExplorerItem BuildTree(ProjectTreeItem treeItem)
+        {
+            SolutionExplorerItem explorerItem = new()
+            {
+                Name = treeItem.Name,
+                Path = treeItem.Path,
+                Type = (SolutionExplorerItemType)treeItem.Type,
+                Repo = "",
+                Source = FileSource.GitHub
+            };
+
+            foreach (ProjectTreeItem itemChild in treeItem.Children)
+            {
+                SolutionExplorerItem explorerItemChild = this.BuildTree(itemChild);
+
+                explorerItem.Items.Add(explorerItemChild);
+            }
+
+            return explorerItem;
+        }
+
+        private void SortTree(SolutionExplorerItem treeItem)
+        {
+            treeItem.Items.Sort((a, b) =>
+            {
+                if (a.Type != b.Type) return a.Type.CompareTo(b.Type);
+
+                return a.Name.CompareTo(b.Name);
+            });
+
+            foreach (var item in treeItem.Items.Where(n => n.Items.Any()))
+            {
+                this.SortTree(item);
+            }
+        }
     }
 }
