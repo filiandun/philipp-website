@@ -1,5 +1,5 @@
 ﻿
-namespace PhilippWebsite.Client.Services.FileContent
+namespace PhilippWebsite.Client.Clients.FileContent
 {
     public class FileContentClient : IFileContentClient
     {
@@ -18,13 +18,18 @@ namespace PhilippWebsite.Client.Services.FileContent
 
         public async Task<string> GetContentAsync(string path)
         {
-            string url = $"https://localhost:7210/FileContent/GetContent?path={path}";
+            string url = $"FileContent/GetContent?path={path}";
 
             try
             {
                 var response = await this._httpClient.GetAsync(url);
 
-                if (response is null) throw new HttpRequestException($"Server return null by '{url}'");
+                if (response is null)
+                {
+                    this._logger.LogWarning($"Request return null by '{url}'");
+
+                    return $"Error loading file content.";
+                }
 
                 if (response.IsSuccessStatusCode)
                 {

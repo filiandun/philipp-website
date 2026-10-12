@@ -1,5 +1,5 @@
 ﻿
-namespace PhilippWebsite.Client.Services.FileContent
+namespace PhilippWebsite.Client.Clients.FileContent
 {
     public interface IFileContentClient
     {
