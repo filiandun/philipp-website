@@ -33,7 +33,7 @@ jobs:
         folder: release/wwwroot
         branch: gh-pages
 
-    deploy-backend:
+  deploy-backend:
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v3
