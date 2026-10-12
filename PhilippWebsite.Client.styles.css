@@ -2,13 +2,13 @@
 /* CSS for VsProjectTreeNode component */
 
 
-.vs-solution-explorer-item-root[b-y72n2v6j0d] {
+.vs-solution-explorer-item-root[b-h86cud8mdw] {
     flex: 1;
     min-width: 100%;
     width: max-content;
 }
 
-    .vs-solution-explorer-item-head[b-y72n2v6j0d] {
+    .vs-solution-explorer-item-head[b-h86cud8mdw] {
         display: flex;
         flex-direction: row;
         justify-content: start;
@@ -19,11 +19,11 @@
         border-radius: var(--mud-default-borderradius);
     }
 
-        .vs-solution-explorer-item-head:hover[b-y72n2v6j0d] {
+        .vs-solution-explorer-item-head:hover[b-h86cud8mdw] {
             background-color: var(--mud-palette-action-disabled);
         }
 
-        .vs-solution-explorer-item-head-expand[b-y72n2v6j0d] {
+        .vs-solution-explorer-item-head-expand[b-h86cud8mdw] {
             display: flex;
             justify-content: center;
             align-items: center;  
@@ -33,7 +33,7 @@
             flex-shrink: 0;
         }
 
-        .vs-solution-explorer-item-head-icon[b-y72n2v6j0d] {
+        .vs-solution-explorer-item-head-icon[b-h86cud8mdw] {
             display: flex;
             justify-content: center;
             align-items: center;  
@@ -48,25 +48,25 @@
             Также надо сделать открытие по двум кликам, а не по одному.
         */
 
-        .vs-solution-explorer-item-head-content[b-y72n2v6j0d] {
+        .vs-solution-explorer-item-head-content[b-h86cud8mdw] {
 
         }   
 
-            .vs-solution-explorer-item-head-content span[b-y72n2v6j0d] {
+            .vs-solution-explorer-item-head-content span[b-h86cud8mdw] {
                 overflow: hidden;
 
                 white-space: nowrap;
                 text-overflow: ellipsis;
             }
 
-    .vs-solution-explorer-item-child[b-y72n2v6j0d] {
+    .vs-solution-explorer-item-child[b-h86cud8mdw] {
         
     }
 /* /Components/ActivityBar/SolutionExplorer/VsSolutionExplorerRoot.razor.rz.scp.css */
 /* CSS for VsProjectTreeRoot component */
 
 
-.vs-solution-explorer-root[b-7btyfg9g2b] {
+.vs-solution-explorer-root[b-9fetz9y2sw] {
     flex: 1;
 
     min-width: 100%;
@@ -75,7 +75,7 @@
 /* /Components/ActivityBar/VsActivityBar.razor.rz.scp.css */
 /* CSS for VsActivityBar component */
 
-.vs-activitybar-root[b-tmguwu5zve] {
+.vs-activitybar-root[b-6zlwtfbugx] {
     display: flex;
 
     padding: 0px;
@@ -85,7 +85,7 @@
 /* /Components/ActivityBar/VsActivityBarButton.razor.rz.scp.css */
 /* CSS for VsActivityBarButton component */
 
-.vs-activitybar-btn[b-hte1maj3s4] {
+.vs-activitybar-btn[b-ql32nwc42z] {
     display: inline-flex;
     align-items: center;
     justify-content: center;
@@ -105,14 +105,14 @@
 /*    border-radius: var(--mud-default-borderradius);*/
 }
 
-    .vs-activitybar-btn:hover[b-hte1maj3s4] {
+    .vs-activitybar-btn:hover[b-ql32nwc42z] {
         border-right: 5px solid var(--mud-palette-primary);
     }
 /* /Components/ActivityBar/VsActivityBarPanel.razor.rz.scp.css */
 /* CSS for VsSolutionExplorerPanel component */
 
 
-.vs-activitybar-panel-root[b-3w1rlpyva2] {
+.vs-activitybar-panel-root[b-3tx2fv4x6j] {
     position: absolute;
     top: 0;
     right: 30px;
@@ -136,7 +136,7 @@
     z-index: 10;
 }
 
-    .vs-activitybar-panel-header[b-3w1rlpyva2] {
+    .vs-activitybar-panel-header[b-3tx2fv4x6j] {
         display: flex;
         flex-direction: row;
         justify-content: space-between;
@@ -147,7 +147,7 @@
         background: var(--mud-palette-surface);
     }
 
-    .vs-activitybar-panel-content[b-3w1rlpyva2] {
+    .vs-activitybar-panel-content[b-3tx2fv4x6j] {
         position: relative;
 
         flex: 1;
@@ -163,7 +163,7 @@
 /* /Components/Common/Menu/VsMenu.razor.rz.scp.css */
 /* CSS for VsMenu component */
 
-.vs-menu-root[b-qif7kzqyns] {
+.vs-menu-root[b-8nw5ghj54f] {
     position: relative;
     display: inline-block;
 
@@ -177,17 +177,17 @@
     border-radius: var(--mud-default-borderradius);
 }
 
-    .vs-menu-root:hover[b-qif7kzqyns] {
+    .vs-menu-root:hover[b-8nw5ghj54f] {
         background-color: var(--mud-palette-surface);
     }
 
     /*TODO надо сделать, чтобы когда меню было активно (содержимое dropdown открыто), то стиль был такой же как и у :hover*/
 
-.vs-menu-label[b-qif7kzqyns] {
+.vs-menu-label[b-8nw5ghj54f] {
 
 }
 
-.vs-menu-dropdown[b-qif7kzqyns] {
+.vs-menu-dropdown[b-8nw5ghj54f] {
     position: absolute;
 /*    top: 0;*/
     left: 0;
@@ -208,7 +208,7 @@
 /* /Components/Common/Menu/VsMenuItem.razor.rz.scp.css */
 /* CSS for VsMenuItem component */
 
-.vs-menu-item-root[b-ufyt7likc9] {
+.vs-menu-item-root[b-4rosdnlvxr] {
     display: inline-flex;
     align-items: center;
 
@@ -219,23 +219,23 @@
     border-radius: var(--mud-default-borderradius);
 }
 
-    .vs-menu-item-root:hover[b-ufyt7likc9] {
+    .vs-menu-item-root:hover[b-4rosdnlvxr] {
         background-color: var(--mud-palette-action-disabled);
     }
 
-[b-ufyt7likc9] .vs-menu-item-icon {
+[b-4rosdnlvxr] .vs-menu-item-icon {
     margin-right: 10px;
     padding: 2px;
 }
 
-.vs-menu-item-text[b-ufyt7likc9] {
+.vs-menu-item-text[b-4rosdnlvxr] {
     text-wrap: nowrap;
 }
 /* /Components/TabsBar/VsTabsBar.razor.rz.scp.css */
 /* CSS for VsTabsBar component */
 
 
-.vs-tabsbar-root[b-or0vghqh6p] {
+.vs-tabsbar-root[b-v4hgzhx2fn] {
     position: relative;
     display: flex;
     flex-wrap: wrap;
@@ -250,7 +250,7 @@
     z-index: 2;
 }
 
-    .vs-tabsbar-tab[b-or0vghqh6p] {
+    .vs-tabsbar-tab[b-v4hgzhx2fn] {
         display: flex;
         align-items: center;
 
@@ -262,13 +262,13 @@
         text-decoration: none;
     }
 
-        .vs-tabsbar-tab:hover[b-or0vghqh6p] {
+        .vs-tabsbar-tab:hover[b-v4hgzhx2fn] {
             background-color: var(--mud-palette-gray-light);
             border-radius: var(--mud-default-borderradius);
         }
 
 
-        .vs-tabsbar-tab.active[b-or0vghqh6p] {
+        .vs-tabsbar-tab.active[b-v4hgzhx2fn] {
             margin-bottom: -1px;
 
             color: var(--mud-palette-white);
@@ -284,7 +284,7 @@
             z-index: 3;
         }
 
-            .vs-tabsbar-tab.active:hover[b-or0vghqh6p] {
+            .vs-tabsbar-tab.active:hover[b-v4hgzhx2fn] {
                 background-color: var(--mud-palette-surface);
 
                 border-radius: 0;
@@ -292,13 +292,13 @@
                 border-top-right-radius: var(--mud-default-borderradius);
             }
 
-            .vs-tabsbar-tab.active *[b-or0vghqh6p] {
+            .vs-tabsbar-tab.active *[b-v4hgzhx2fn] {
                 visibility: visible;
             }
 
 
 
-        .vs-tabsbar-tab-content[b-or0vghqh6p] {
+        .vs-tabsbar-tab-content[b-v4hgzhx2fn] {
             padding: 5px 10px; 
 
             white-space: nowrap; 
@@ -306,7 +306,7 @@
             text-overflow: ellipsis;
         }
 
-        .vs-tabsbar-tab-pin[b-or0vghqh6p] {
+        .vs-tabsbar-tab-pin[b-v4hgzhx2fn] {
             display: flex;
             align-items: center;
             justify-content: center;
@@ -319,16 +319,16 @@
             padding: 5px 10px;   
         }
 
-            .vs-tabsbar-tab-pin:hover[b-or0vghqh6p] {
+            .vs-tabsbar-tab-pin:hover[b-v4hgzhx2fn] {
                 background-color: var(--mud-palette-action-disabled);
                 border-radius: var(--mud-default-borderradius);
             }
 
-            .vs-tabsbar-tab:hover .vs-tabsbar-tab-pin[b-or0vghqh6p] {
+            .vs-tabsbar-tab:hover .vs-tabsbar-tab-pin[b-v4hgzhx2fn] {
                 visibility: visible;
             }
 
-        .vs-tabsbar-tab-close[b-or0vghqh6p] {
+        .vs-tabsbar-tab-close[b-v4hgzhx2fn] {
             display: flex;
             align-items: center;
             justify-content: center;
@@ -341,19 +341,19 @@
             padding: 5px 10px;   
         }
 
-            .vs-tabsbar-tab-close:hover[b-or0vghqh6p] {
+            .vs-tabsbar-tab-close:hover[b-v4hgzhx2fn] {
                 background-color: var(--mud-palette-action-disabled);
                 border-radius: var(--mud-default-borderradius);
             }
 
-            .vs-tabsbar-tab:hover .vs-tabsbar-tab-close[b-or0vghqh6p] {
+            .vs-tabsbar-tab:hover .vs-tabsbar-tab-close[b-v4hgzhx2fn] {
                 visibility: visible;
             }
 /* /Components/ToolBar/VsToolbar.razor.rz.scp.css */
 /* CSS for VsToolbar component */
 
 
-.vs-toolbar[b-zfa69zytfz] {
+.vs-toolbar[b-0earivh3l5] {
     display: flex;
     flex-direction: row;
 
@@ -372,7 +372,7 @@
 /* /Components/ToolBar/VsToolbarButton.razor.rz.scp.css */
 /* CSS for VsIconButton component */
 
-.vs-toolbar-btn[b-07gfddklsg] {
+.vs-toolbar-btn[b-r7l9yh0kb1] {
     display: inline-flex;
     align-items: center;
     justify-content: center;
@@ -390,18 +390,18 @@
     border-radius: var(--mud-default-borderradius);
 }
 
-    .vs-toolbar-btn:hover[b-07gfddklsg] {
+    .vs-toolbar-btn:hover[b-r7l9yh0kb1] {
         background-color: var(--mud-palette-action-disabled);
     }
 
-.vs-toolbar-text[b-07gfddklsg] {
+.vs-toolbar-text[b-r7l9yh0kb1] {
     padding: 5px
 }
 /* /Components/VsCodeEditor.razor.rz.scp.css */
 /* CSS for VsCodeEditor component */
 
 
-.vs-editor-root[b-qsmi0xrggo] {
+.vs-editor-root[b-tgm4apgeel] {
     position: relative;
     display: inline-block;
 
@@ -409,7 +409,7 @@
     min-height: 100%;
 }
 
-    .vs-editor-layers[b-qsmi0xrggo] {
+    .vs-editor-layers[b-tgm4apgeel] {
         position: absolute;
 
         min-width: 100%;
@@ -418,12 +418,12 @@
         user-select: none;
     }
 
-        .vs-editor-row[b-qsmi0xrggo] {
+        .vs-editor-row[b-tgm4apgeel] {
             display: flex;
             line-height: 20px;
         }
 
-            .vs-editor-gutter-cell[b-qsmi0xrggo] {
+            .vs-editor-gutter-cell[b-tgm4apgeel] {
                 position: sticky;
                 left: 0;
 
@@ -442,7 +442,7 @@
                 z-index: 2;
             }   
 
-                .vs-editor-row.hovered .vs-editor-gutter-cell[b-qsmi0xrggo] {
+                .vs-editor-row.hovered .vs-editor-gutter-cell[b-tgm4apgeel] {
                     color: var(--mud-palette-text-primary);
                     background-color: var(--mud-palette-surface);
 
@@ -450,16 +450,16 @@
                 }
 
 
-            .vs-editor-highlight-cell[b-qsmi0xrggo] {
+            .vs-editor-highlight-cell[b-tgm4apgeel] {
                 flex-grow: 1;
             }
 
-                .vs-editor-row.hovered .vs-editor-highlight-cell[b-qsmi0xrggo] {
+                .vs-editor-row.hovered .vs-editor-highlight-cell[b-tgm4apgeel] {
                     background-color: var(--mud-palette-surface);
                 }
 
 
-    .vs-editor-content[b-qsmi0xrggo] {
+    .vs-editor-content[b-tgm4apgeel] {
         position: relative;
 
         margin-left: 60px;
@@ -467,11 +467,11 @@
         z-index: 1;
     }
 
-        [b-qsmi0xrggo] .vs-editor-content > div {
+        [b-tgm4apgeel] .vs-editor-content > div {
             background-color: transparent !important;
         }
 
-        [b-qsmi0xrggo] .vs-editor-content pre {
+        [b-tgm4apgeel] .vs-editor-content pre {
             margin: 0 !important;
             padding: 0 !important;
 
@@ -480,14 +480,14 @@
             background: transparent !important;
         }
 
-            [b-qsmi0xrggo] .vs-editor-content pre code {
+            [b-tgm4apgeel] .vs-editor-content pre code {
                 line-height: 20px !important;
             }
 /* /Pages/Home.razor.rz.scp.css */
 /* CSS for Home component */
 
 
-.vs-window[b-i8ybeye7gv] {
+.vs-window[b-me5k47xywg] {
     display: flex;
     flex-direction: column;
     overflow: hidden;
@@ -504,13 +504,13 @@
 }
 
 
-.vs-header[b-i8ybeye7gv] {
+.vs-header[b-me5k47xywg] {
     flex-shrink: 0;
         
     background: var(--mud-palette-background);
 }
 
-.vs-titlebar[b-i8ybeye7gv] {
+.vs-titlebar[b-me5k47xywg] {
     display: flex;
     align-items: center;
     justify-content: space-between;
@@ -520,16 +520,16 @@
     font-size: 12px;
 }
 
-    .vs-titlebar-left[b-i8ybeye7gv] {
+    .vs-titlebar-left[b-me5k47xywg] {
         display: inline-flex;
         align-items: center;
     }
 
-        .vs-menu-list[b-i8ybeye7gv] {
+        .vs-menu-list[b-me5k47xywg] {
 
         }
 
-        .vs-solution-name[b-i8ybeye7gv] {
+        .vs-solution-name[b-me5k47xywg] {
             padding: 5px 10px;
 
             color: var(--mud-palette-textprimary);
@@ -540,25 +540,25 @@
             border-radius: var(--mud-default-borderradius);
         }
 
-        [b-i8ybeye7gv] .vs-close-btn {
+        [b-me5k47xywg] .vs-close-btn {
             margin-left: auto;
         }
 
 
 
-.vs-toolbars[b-i8ybeye7gv] {
+.vs-toolbars[b-me5k47xywg] {
     display: flex;
     flex-wrap: wrap;
 
     margin-bottom: 20px;
 }
     
-    [b-i8ybeye7gv] .vs-toolbar {
+    [b-me5k47xywg] .vs-toolbar {
         margin-right: 5px;
     }
 
 
-.vs-workbench[b-i8ybeye7gv] {
+.vs-workbench[b-me5k47xywg] {
     position: relative;
     display: flex;
     flex-direction: row;
@@ -573,7 +573,7 @@
 }
 
 
-    .vs-editor-viewport[b-i8ybeye7gv] {
+    .vs-editor-viewport[b-me5k47xywg] {
         position: relative;
         display: flex;
         flex-direction: column;
@@ -586,7 +586,7 @@
     }
 
     
-        .vs-tabsbar[b-i8ybeye7gv] {
+        .vs-tabsbar[b-me5k47xywg] {
             position: relative;
             flex-shrink: 0;
 
@@ -594,7 +594,7 @@
         }
 
 
-        .vs-editor-content[b-i8ybeye7gv] {
+        .vs-editor-content[b-me5k47xywg] {
             position: relative;
 
             flex: 1;
@@ -612,12 +612,12 @@
             border-bottom-right-radius: var(--mud-default-borderradius);
         }
 
-    .vs-activitybar[b-i8ybeye7gv] {
+    .vs-activitybar[b-me5k47xywg] {
         flex-shrink: 0;
     }
 
 
-.vs-statusbar[b-i8ybeye7gv] {
+.vs-statusbar[b-me5k47xywg] {
     height: 24px;
     background-color: #854cc7;
     color: #ffffff;
@@ -629,14 +629,14 @@
     flex-shrink: 0;
 }
 
-.vs-footer[b-i8ybeye7gv] {
+.vs-footer[b-me5k47xywg] {
     display: flex;
     flex-direction: row;
 
     justify-content: space-between;
 }
 
-.vs-footer-status-left[b-i8ybeye7gv], .vs-footer-status-right[b-i8ybeye7gv] {
+.vs-footer-status-left[b-me5k47xywg], .vs-footer-status-right[b-me5k47xywg] {
     display: flex;
     gap: 16px;
 }
