@@ -8,7 +8,7 @@
 @inject IJSRuntime JS
 
 @inject TabsBarStateService TabsBarStateService
-@inject IFileContentService FileContentService
+@inject IFileContentClient FileContentClient
 @inject ICodeHighlighterService CodeHighlighterService
 
 
@@ -54,7 +54,7 @@
     {
         if (this.TabsBarStateService.ActiveTab is null) return;
 
-        string fileContent = await this.FileContentService.GetContentAsync(this.TabsBarStateService.ActiveTab.Repo, this.TabsBarStateService.ActiveTab.Path, this.TabsBarStateService.ActiveTab.Source);
+        string fileContent = await this.FileContentClient.GetContentAsync(this.TabsBarStateService.ActiveTab.Path);
 
         this._lineCount = fileContent.Split('\n').Length;
 

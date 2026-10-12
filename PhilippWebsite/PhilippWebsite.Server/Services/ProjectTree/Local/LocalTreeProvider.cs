@@ -31,8 +31,8 @@ namespace PhilippWebsite.Server.Services.ProjectTree.Local
                     ProjectTreeItem treeItem = new()
                     {
                         Name = file,
-                        Path = file,
-                        
+                        Path = LocalTreeConfig.GetBaseUrl(file),
+
                         Type = ProjectTreeItemType.File,
                     };
 

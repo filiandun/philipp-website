@@ -16,11 +16,11 @@ namespace PhilippWebsite.Server.Controllers
         private readonly IProjectTreeService _projectTreeService;
 
 
-        public ProjectTreeController(ILogger<ProjectTreeController> logger, IProjectTreeService _projectTreeService)
+        public ProjectTreeController(ILogger<ProjectTreeController> logger, IProjectTreeService projectTreeService)
         {
             this._logger = logger;
 
-            this._projectTreeService = _projectTreeService;
+            this._projectTreeService = projectTreeService;
         }
 
 

@@ -1,4 +1,4 @@
-﻿namespace PhilippWebsite.Client.Services.FileContent
+﻿namespace PhilippWebsite.Server.Services.FileContent
 {
     public static class FileContentConfig
     {

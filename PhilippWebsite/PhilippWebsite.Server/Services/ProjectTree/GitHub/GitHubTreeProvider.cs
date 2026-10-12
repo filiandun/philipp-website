@@ -1,5 +1,6 @@
 ﻿using PhilippWebsite.Shared.ProjectTree;
 
+
 namespace PhilippWebsite.Server.Services.ProjectTree.GitHub
 {
     public class GitHubTreeProvider : ITreeProvider
@@ -40,7 +41,7 @@ namespace PhilippWebsite.Server.Services.ProjectTree.GitHub
 
                 foreach (var repo in GitHubTreeConfig.RepoList)
                 {
-                    string repoUrl = GitHubTreeConfig.GetBaseUrl(repo);
+                    string repoUrl = GitHubTreeConfig.GetApiUrl(repo);
 
                     this._logger.LogDebug("Http request to '{RepoUrl}'.", repoUrl);
 
@@ -73,7 +74,7 @@ namespace PhilippWebsite.Server.Services.ProjectTree.GitHub
                 ProjectTreeItem treeItem = new()
                 {
                     Name = githubTreeItem.Path.Split('/').Last(), // TODO maybe exception
-                    Path = githubTreeItem.Path,
+                    Path = GitHubTreeConfig.GetGitUrl(repo, githubTreeItem.Path),
 
                     Type = githubTreeItem.Type == FOLDER_TYPE ? ProjectTreeItemType.Folder : ProjectTreeItemType.File,
                 };

@@ -22,18 +22,22 @@ namespace PhilippWebsite.Client
 
             builder.Services.AddMudServices();
 
-            // services
 
             string? apiBaseUrl = builder.Configuration.GetValue<string>("ApiBaseUrl") ?? string.Empty;
 
             builder.Services.AddScoped(sp => new HttpClient { BaseAddress = new Uri(apiBaseUrl) });
 
+
+            // api clients
+
+            builder.Services.AddScoped<IFileContentClient, FileContentClient>();
+
+
+            // services
+
             builder.Services.AddScoped<ISolutionExplorerService, SolutionExplorerService>();
 
             builder.Services.AddScoped<TabsBarStateService>();
-
-            builder.Services.AddScoped<IFileContentService, FileContentService>();
-            builder.Services.AddScoped<IFileContentService, FileContentService>();
 
             builder.Services.AddSingleton<ICodeHighlighterService, ShikiCodeHighlighterService>();
 

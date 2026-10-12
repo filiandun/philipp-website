@@ -1,3 +1,4 @@
+using PhilippWebsite.Server.Services.FileContent;
 using PhilippWebsite.Server.Services.ProjectTree;
 using PhilippWebsite.Server.Services.ProjectTree.GitHub;
 using PhilippWebsite.Server.Services.ProjectTree.Local;
@@ -32,13 +33,13 @@ namespace PhilippWebsite.Server
             // 
             builder.Services.AddHttpClient<GitHubTreeProvider>(client =>
             {
-                client.BaseAddress = new Uri("https://api.github.com/");
+                client.BaseAddress = new Uri("https://api.github.com/"); // TODO можно указать сразу нужный
                 client.DefaultRequestHeaders.Add("User-Agent", "PhilippWebsite");
             });
 
             builder.Services.AddHttpClient<LocalTreeProvider>(client =>
             {
-                client.BaseAddress = new Uri("https://api.github.com/");
+                client.BaseAddress = new Uri("https://api.github.com/"); // TODO можно указать сразу нужный
                 client.DefaultRequestHeaders.Add("User-Agent", "PhilippWebsite");
             });
 
@@ -46,6 +47,9 @@ namespace PhilippWebsite.Server
             builder.Services.AddSingleton<ITreeProvider, GitHubTreeProvider>();
 
             builder.Services.AddSingleton<IProjectTreeService, ProjectTreeService>();
+
+            builder.Services.AddSingleton<IFileContentService, FileContentService>();
+
 
             var app = builder.Build();
 
