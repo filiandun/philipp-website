@@ -1,6 +1,5 @@
 ﻿using System.Net.Http.Json;
 
-using PhilippWebsite.Client.Models;
 using PhilippWebsite.Client.Models.SolutionExplorer;
 
 using PhilippWebsite.Shared.ProjectTree;
@@ -59,9 +58,8 @@ namespace PhilippWebsite.Client.Services.SolutionExplorer
             {
                 Name = treeItem.Name,
                 Path = treeItem.Path,
+
                 Type = (SolutionExplorerItemType)treeItem.Type,
-                Repo = "",
-                Source = FileSource.GitHub
             };
 
             foreach (ProjectTreeItem itemChild in treeItem.Children)
