@@ -3,7 +3,7 @@
 using PhilippWebsite.Shared.ProjectTree;
 
 
-namespace PhilippWebsite.Client.Services.FileContent
+namespace PhilippWebsite.Client.Clients.ProjectTree
 {
     public class ProjectTreeClient : IProjectTreeClient
     {

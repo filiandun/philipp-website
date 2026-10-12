@@ -3,6 +3,8 @@ using Microsoft.AspNetCore.Components.WebAssembly.Hosting;
 
 using MudBlazor.Services;
 
+using PhilippWebsite.Client.Clients.ProjectTree;
+
 using PhilippWebsite.Client.Services.CodeHighlighter;
 using PhilippWebsite.Client.Services.FileContent;
 using PhilippWebsite.Client.Services.SolutionExplorer;

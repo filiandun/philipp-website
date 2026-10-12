@@ -1,5 +1,5 @@
-﻿using PhilippWebsite.Client.Models.SolutionExplorer;
-using PhilippWebsite.Client.Services.FileContent;
+﻿using PhilippWebsite.Client.Clients.ProjectTree;
+using PhilippWebsite.Client.Models.SolutionExplorer;
 
 using PhilippWebsite.Shared.ProjectTree;
 
