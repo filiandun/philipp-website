@@ -5,6 +5,6 @@
         public static readonly string SolutionName = "About Philipp";
         public static readonly IReadOnlyList<string> FileList = [ "AboutMe.md", "Contacts.md" ];
 
-        public static string GetBaseUrl(string path) => $"content/{path}";
+        public static string GetBaseUrl(string path) => $"Content/{path}";
     }
 }
