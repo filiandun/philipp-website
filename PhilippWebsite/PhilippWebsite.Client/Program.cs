@@ -23,12 +23,11 @@ namespace PhilippWebsite.Client
             builder.Services.AddMudServices();
 
 
-            string? apiBaseUrl = builder.Configuration.GetValue<string>("ApiBaseUrl") ?? string.Empty;
-
-            builder.Services.AddScoped(sp => new HttpClient { BaseAddress = new Uri(apiBaseUrl) });
-
-
             // api clients
+
+            string apiBaseUrl = builder.Configuration["ApiBaseUrl"] ?? throw new InvalidOperationException("Missing configuration: 'ApiBaseUrl' is not set in appsettings.json.");
+
+            builder.Services.AddHttpClient<IProjectTreeClient, ProjectTreeClient>(client => client.BaseAddress = new Uri(apiBaseUrl));
 
             builder.Services.AddScoped<IFileContentClient, FileContentClient>();
 

@@ -1,6 +1,5 @@
-﻿using System.Net.Http.Json;
-
-using PhilippWebsite.Client.Models.SolutionExplorer;
+﻿using PhilippWebsite.Client.Models.SolutionExplorer;
+using PhilippWebsite.Client.Services.FileContent;
 
 using PhilippWebsite.Shared.ProjectTree;
 
@@ -11,14 +10,14 @@ namespace PhilippWebsite.Client.Services.SolutionExplorer
     {
         private readonly ILogger<SolutionExplorerService> _logger;
 
-        private readonly HttpClient _httpClient;
+        private readonly IProjectTreeClient _projectTreeClient;
 
 
-        public SolutionExplorerService(ILogger<SolutionExplorerService> logger, HttpClient httpClient)
+        public SolutionExplorerService(ILogger<SolutionExplorerService> logger, IProjectTreeClient projectTreeClient)
         {
             this._logger = logger;
 
-            this._httpClient = httpClient;
+            this._projectTreeClient = projectTreeClient;
         }
 
 
@@ -26,13 +25,15 @@ namespace PhilippWebsite.Client.Services.SolutionExplorer
         {
             try
             {
+                ProjectTreeRoot? treeRoot = await this._projectTreeClient.GetTreeAsync();
+                if (treeRoot is null)
+                {
+                    this._logger.LogWarning("Server return null Project Tree Root");
+
+                    return null;
+                }
+
                 SolutionExplorerRoot explorerRoot = new();
-
-                string url = "https://localhost:7210/ProjectTree/GetTree/";
-
-                ProjectTreeRoot? treeRoot = await this._httpClient.GetFromJsonAsync<ProjectTreeRoot>(url);
-
-                if (treeRoot is null) throw new HttpRequestException("Server return null Project Tree Root");
 
                 foreach (ProjectTreeItem treeItem in treeRoot.Items)
                 {
