@@ -1,4 +1,7 @@
-﻿using PhilippWebsite.Shared.ProjectTree;
+﻿using Microsoft.Extensions.Caching.Memory;
+
+using PhilippWebsite.Server.Models;
+using PhilippWebsite.Shared.ProjectTree;
 
 
 namespace PhilippWebsite.Server.Services.ProjectTree.Local
@@ -7,14 +10,44 @@ namespace PhilippWebsite.Server.Services.ProjectTree.Local
     {
         private readonly ILogger<LocalTreeProvider> _logger;
 
+        private readonly IMemoryCache _memoryCache;
 
-        public LocalTreeProvider(ILogger<LocalTreeProvider> logger)
+
+        public LocalTreeProvider(ILogger<LocalTreeProvider> logger, IMemoryCache memoryCache)
         {
             this._logger = logger;
+
+            this._memoryCache = memoryCache;
         }
 
 
         public async Task<ProjectTreeItem?> GetTreeAsync()
+        {
+            if (this._memoryCache.TryGetValue(CacheKeys.LOCAL_PROJECT_TREE, out ProjectTreeItem? cachedTree) && cachedTree is not null)
+            {
+                this._logger.LogInformation("Local tree loaded from cache.");
+
+                return cachedTree;
+            }
+
+            this._logger.LogInformation("Cache miss. Fetching Local tree from drive.");
+
+            ProjectTreeItem? projectTree = await this.BuildTree();
+
+            if (projectTree is not null)
+            {
+                this._memoryCache.Set(CacheKeys.LOCAL_PROJECT_TREE, projectTree, TimeSpan.FromHours(1));
+                this._logger.LogInformation("Local tree successfully fetched and cached.");
+            }
+            else
+            {
+                this._logger.LogInformation("BuildTree returned null. Local tree was not cached.");
+            }
+
+            return projectTree;
+        }
+
+        private async Task<ProjectTreeItem?> BuildTree()
         {
             try
             {

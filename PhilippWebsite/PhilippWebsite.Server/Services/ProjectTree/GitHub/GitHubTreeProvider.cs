@@ -1,4 +1,7 @@
-﻿using PhilippWebsite.Shared.ProjectTree;
+﻿using Microsoft.Extensions.Caching.Memory;
+
+using PhilippWebsite.Server.Models;
+using PhilippWebsite.Shared.ProjectTree;
 
 
 namespace PhilippWebsite.Server.Services.ProjectTree.GitHub
@@ -13,21 +16,47 @@ namespace PhilippWebsite.Server.Services.ProjectTree.GitHub
 
         private readonly HttpClient _httpClient;
 
+        private readonly IMemoryCache _memoryCache;
 
-        public GitHubTreeProvider(ILogger<GitHubTreeProvider> logger, HttpClient httpClient)
+
+        public GitHubTreeProvider(ILogger<GitHubTreeProvider> logger, HttpClient httpClient, IMemoryCache memoryCache)
         {
             this._logger = logger;
 
             this._httpClient = httpClient;
 
-            if (!this._httpClient.DefaultRequestHeaders.Contains("User-Agent"))
-            {
-                this._httpClient.DefaultRequestHeaders.Add("User-Agent", "PhilippPortfolioApp");
-            }
+            this._memoryCache = memoryCache;
         }
 
 
         public async Task<ProjectTreeItem?> GetTreeAsync()
+        {
+            if (this._memoryCache.TryGetValue(CacheKeys.GITHUB_PROJECT_TREE, out ProjectTreeItem? cachedTree) && cachedTree is not null)
+            {
+                this._logger.LogInformation("GitHub tree loaded from cache.");
+
+                return cachedTree;
+            }
+
+            this._logger.LogInformation("Cache miss. Fetching GitHub tree from API.");
+
+            ProjectTreeItem? projectTree = await this.BuildTree();
+
+            if (projectTree is not null)
+            {
+                this._memoryCache.Set(CacheKeys.GITHUB_PROJECT_TREE, projectTree, TimeSpan.FromHours(1));
+                this._logger.LogInformation("GitHub tree successfully fetched and cached.");
+            }
+            else
+            {
+                this._logger.LogInformation("BuildTree returned null. GitHub tree was not cached.");
+            }
+
+            return projectTree;
+        }
+
+
+        private async Task<ProjectTreeItem?> BuildTree()
         {
             try
             {
@@ -49,7 +78,7 @@ namespace PhilippWebsite.Server.Services.ProjectTree.GitHub
 
                     if (githubTree is null) throw new HttpRequestException("GitHubProjectTreeResponse is null");
 
-                    ProjectTreeItem explorerItem = this.BuildTree(githubTree, repo);
+                    ProjectTreeItem explorerItem = this.MapToProjectTreeItem(githubTree, repo);
                     treeSolution.Children.Add(explorerItem);
                 }
 
@@ -65,7 +94,7 @@ namespace PhilippWebsite.Server.Services.ProjectTree.GitHub
         }
 
 
-        private ProjectTreeItem BuildTree(GitHubTreeResponse githubTree, string repo)
+        private ProjectTreeItem MapToProjectTreeItem(GitHubTreeResponse githubTree, string repo)
         {
             Dictionary<string, ProjectTreeItem> treeItemDictionary = new();
 

@@ -1,4 +1,5 @@
 using PhilippWebsite.Server.Services.FileContent;
+
 using PhilippWebsite.Server.Services.ProjectTree;
 using PhilippWebsite.Server.Services.ProjectTree.GitHub;
 using PhilippWebsite.Server.Services.ProjectTree.Local;
@@ -12,13 +13,15 @@ namespace PhilippWebsite.Server
         {
             var builder = WebApplication.CreateBuilder(args);
 
-            // Add services to the container.
 
             builder.Services.AddControllers();
             builder.Services.AddOpenApi();
 
+            builder.Services.AddMemoryCache();
+
 
             // CORS
+
             var allowedOrigins = builder.Configuration.GetSection("AllowedOrigins").Get<string[]>() ?? Array.Empty<string>();
 
             builder.Services.AddCors(options =>
@@ -30,34 +33,31 @@ namespace PhilippWebsite.Server
             });
 
 
-            // 
-            builder.Services.AddHttpClient<GitHubTreeProvider>(client =>
+            // Services
+
+            builder.Services.AddScoped<ITreeProvider, LocalTreeProvider>();
+
+            builder.Services.AddHttpClient<ITreeProvider, GitHubTreeProvider>(client =>
             {
-                client.BaseAddress = new Uri("https://api.github.com/"); // TODO можно указать сразу нужный
+                client.BaseAddress = new Uri("https://api.github.com/");
                 client.DefaultRequestHeaders.Add("User-Agent", "PhilippWebsite");
             });
 
-            builder.Services.AddHttpClient<LocalTreeProvider>(client =>
-            {
-                client.BaseAddress = new Uri("https://api.github.com/"); // TODO можно указать сразу нужный
-                client.DefaultRequestHeaders.Add("User-Agent", "PhilippWebsite");
-            });
 
-            builder.Services.AddSingleton<ITreeProvider, LocalTreeProvider>();
-            builder.Services.AddSingleton<ITreeProvider, GitHubTreeProvider>();
+            builder.Services.AddScoped<IProjectTreeService, ProjectTreeService>();
 
-            builder.Services.AddSingleton<IProjectTreeService, ProjectTreeService>();
-
-            builder.Services.AddSingleton<IFileContentService, FileContentService>();
+            builder.Services.AddHttpClient<IFileContentService, FileContentService>();
 
 
             var app = builder.Build();
 
 
             // CORS
+
             app.UseCors("AllowLocalFront");
 
             // Configure the HTTP request pipeline.
+
             if (app.Environment.IsDevelopment())
             {
                 app.MapOpenApi();
