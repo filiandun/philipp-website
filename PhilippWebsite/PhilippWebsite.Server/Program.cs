@@ -4,6 +4,8 @@ using PhilippWebsite.Server.Services.ProjectTree;
 using PhilippWebsite.Server.Services.ProjectTree.GitHub;
 using PhilippWebsite.Server.Services.ProjectTree.Local;
 
+using PhilippWebsite.Server.Services.SyntaxHighlighter;
+
 
 namespace PhilippWebsite.Server
 {
@@ -50,6 +52,7 @@ namespace PhilippWebsite.Server
             builder.Services.AddHttpClient<IFileSource, GitHubFileSource>();
             builder.Services.AddScoped<IFileContentService, FileContentService>();
 
+            builder.Services.AddScoped<ISyntaxHighlighterService, SyntaxHighlighterService>();
 
             var app = builder.Build();
 
