@@ -1,5 +1,8 @@
+using PhilippWebsite.Server.Services.EditorContent;
+
 using PhilippWebsite.Server.Services.FileContent;
 using PhilippWebsite.Server.Services.FileContent.FileSource;
+
 using PhilippWebsite.Server.Services.ProjectTree;
 using PhilippWebsite.Server.Services.ProjectTree.GitHub;
 using PhilippWebsite.Server.Services.ProjectTree.Local;
@@ -54,6 +57,9 @@ namespace PhilippWebsite.Server
 
             builder.Services.AddScoped<ISyntaxHighlighterService, SyntaxHighlighterService>();
 
+            builder.Services.AddScoped<IEditorContentService, EditorContentService>();
+
+
             var app = builder.Build();
 
 
@@ -66,9 +72,9 @@ namespace PhilippWebsite.Server
             if (app.Environment.IsDevelopment())
             {
                 app.MapOpenApi();
+                app.UseHttpsRedirection();
             }
 
-            app.UseHttpsRedirection();
 
             app.UseAuthorization();
 
