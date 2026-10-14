@@ -1,5 +1,5 @@
 using PhilippWebsite.Server.Services.FileContent;
-
+using PhilippWebsite.Server.Services.FileContent.FileSource;
 using PhilippWebsite.Server.Services.ProjectTree;
 using PhilippWebsite.Server.Services.ProjectTree.GitHub;
 using PhilippWebsite.Server.Services.ProjectTree.Local;
@@ -46,7 +46,9 @@ namespace PhilippWebsite.Server
 
             builder.Services.AddScoped<IProjectTreeService, ProjectTreeService>();
 
-            builder.Services.AddHttpClient<IFileContentService, FileContentService>();
+            builder.Services.AddScoped<IFileSource, LocalFileSource>();
+            builder.Services.AddHttpClient<IFileSource, GitHubFileSource>();
+            builder.Services.AddScoped<IFileContentService, FileContentService>();
 
 
             var app = builder.Build();
