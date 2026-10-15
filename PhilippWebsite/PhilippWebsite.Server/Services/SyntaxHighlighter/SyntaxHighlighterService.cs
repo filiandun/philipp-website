@@ -1,7 +1,9 @@
-﻿using System.Text;
+﻿using System.Runtime.CompilerServices;
+using System.Text;
 using System.Web;
 
 using TextMateSharp.Grammars;
+using TextMateSharp.Internal.Themes.Reader;
 using TextMateSharp.Registry;
 using TextMateSharp.Themes;
 
@@ -25,8 +27,25 @@ namespace PhilippWebsite.Server.Services.SyntaxHighlighter
             this._registryOptions = new RegistryOptions(ThemeName.VisualStudioDark);
             this._registry = new Registry(this._registryOptions);
 
-            this._theme = this._registry.GetTheme();
+            string themePath = "LocalData/Resources/dark_vs.json";
 
+            if (File.Exists(themePath))
+            {
+                using FileStream stream = File.OpenRead(themePath);
+                using StreamReader reader = new StreamReader(stream);
+
+                IRawTheme customTheme = ThemeReader.ReadThemeSync(reader);
+
+                this._registry.SetTheme(customTheme);
+
+                this._logger.LogInformation("Set custom theme '{ThemeName}'.", customTheme.GetName());
+            } 
+            else
+            {
+                this._logger.LogWarning("Custom theme '{ThemePath}' not found. Set default.", themePath);
+            }
+
+            this._theme = this._registry.GetTheme();
         }
 
 
@@ -68,7 +87,7 @@ namespace PhilippWebsite.Server.Services.SyntaxHighlighter
                 {
                     int foregroundId = -1;
 
-                    foreach (var themeRule in _theme.Match(token.Scopes))
+                    foreach (var themeRule in this._theme.Match(token.Scopes))
                     {
                         if (foregroundId == -1 && themeRule.foreground > 0)
                         {
