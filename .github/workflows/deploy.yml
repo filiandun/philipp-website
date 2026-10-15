@@ -19,7 +19,7 @@ jobs:
         dotnet-version: '10.0'
 
     - name: Publish Frontend
-      run: dotnet publish PhilippWebsite/PhilippWebsite.Client/PhilippWebsite.Client.csproj -c Release -o release
+      run: dotnet publish PhilippWebsite.Client/PhilippWebsite.Client.csproj -c Release -o release
 
     - name: Add .nojekyll file
       run: touch release/wwwroot/.nojekyll
@@ -44,7 +44,7 @@ jobs:
         dotnet-version: '10.0'
 
     - name: Publish Backend
-      run: dotnet publish PhilippWebsite/PhilippWebsite.Server/PhilippWebsite.Server.csproj -c Release -o release-backend
+      run: dotnet publish PhilippWebsite.Server/PhilippWebsite.Server.csproj -c Release -o release-backend
 
     - name: Copy files and restart via SSH
       uses: appleboy/ssh-action@v1.0.3
