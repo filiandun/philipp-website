@@ -409,69 +409,64 @@
     min-height: 100%;
 }
 
-    .vs-editor-layers[b-tgm4apgeel] {
-        position: absolute;
-
-        min-width: 100%;
-        box-sizing: border-box;
-
-        user-select: none;
+    .vs-editor-lines[b-tgm4apgeel] {
+        white-space: pre;
+        font-family: Consolas, monospace;
     }
 
-        .vs-editor-row[b-tgm4apgeel] {
+        .vs-editor-line[b-tgm4apgeel] {
             display: flex;
-            line-height: 20px;
+
+            line-height: 20px;  
+            min-height: 20px;
+            text-wrap: nowrap;
         }
 
-            .vs-editor-gutter-cell[b-tgm4apgeel] {
+            .vs-editor-line:hover[b-tgm4apgeel] {
+                background-color: var(--mud-palette-surface);
+
+            }
+
+            .vs-editor-line-gutter[b-tgm4apgeel] {
                 position: sticky;
                 left: 0;
 
-                width: 60px;
+                min-width: 40px;
 
                 flex-shrink: 0;
 
-                padding-right: 20px;
+                padding-left: 10px;
+                margin-right: 30px;
 
                 text-align: right;
+                user-select: none;
+
                 box-sizing: border-box;
 
                 color: var(--mud-palette-text-secondary);
                 background-color: var(--mud-palette-background);
+            }  
 
-                z-index: 2;
-            }   
-
-                .vs-editor-row.hovered .vs-editor-gutter-cell[b-tgm4apgeel] {
+                .vs-editor-line:hover .vs-editor-line-gutter[b-tgm4apgeel] {
                     color: var(--mud-palette-text-primary);
-                    background-color: var(--mud-palette-surface);
 
+                    background-color: var(--mud-palette-surface);
                     box-shadow: inset 3px 0 0 0 var(--mud-palette-primary);
                 }
-
-
-            .vs-editor-highlight-cell[b-tgm4apgeel] {
-                flex-grow: 1;
+        
+            .vs-editor-line-content[b-tgm4apgeel] {
+                
             }
 
-                .vs-editor-row.hovered .vs-editor-highlight-cell[b-tgm4apgeel] {
-                    background-color: var(--mud-palette-surface);
-                }
 
 
-    .vs-editor-content[b-tgm4apgeel] {
-        position: relative;
 
-        margin-left: 60px;
 
-        z-index: 1;
-    }
-
-        [b-tgm4apgeel] .vs-editor-content > div {
+/*        ::deep .vs-editor-content > div {
             background-color: transparent !important;
         }
 
-        [b-tgm4apgeel] .vs-editor-content pre {
+        ::deep .vs-editor-content pre {
             margin: 0 !important;
             padding: 0 !important;
 
@@ -480,9 +475,10 @@
             background: transparent !important;
         }
 
-            [b-tgm4apgeel] .vs-editor-content pre code {
+            ::deep .vs-editor-content pre code {
                 line-height: 20px !important;
-            }
+            }*/
+
 /* /Pages/Home.razor.rz.scp.css */
 /* CSS for Home component */
 
