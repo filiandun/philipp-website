@@ -3,10 +3,9 @@ using Microsoft.AspNetCore.Components.WebAssembly.Hosting;
 
 using MudBlazor.Services;
 
-using PhilippWebsite.Client.Clients.FileContent;
+using PhilippWebsite.Client.Clients.EditorContent;
 using PhilippWebsite.Client.Clients.ProjectTree;
 
-using PhilippWebsite.Client.Services.CodeHighlighter;
 using PhilippWebsite.Client.Services.SolutionExplorer;
 using PhilippWebsite.Client.Services.TabsBarState;
 
@@ -31,7 +30,7 @@ namespace PhilippWebsite.Client
 
             builder.Services.AddHttpClient<IProjectTreeClient, ProjectTreeClient>(client => client.BaseAddress = new Uri(apiBaseUrl));
 
-            builder.Services.AddHttpClient<IFileContentClient, FileContentClient>(client => client.BaseAddress = new Uri(apiBaseUrl));
+            builder.Services.AddHttpClient<IEditorContentClient, EditorContentClient>(client => client.BaseAddress = new Uri(apiBaseUrl));
 
 
             // services
@@ -40,18 +39,8 @@ namespace PhilippWebsite.Client
 
             builder.Services.AddScoped<TabsBarStateService>();
 
-            builder.Services.AddSingleton<ICodeHighlighterService, ShikiCodeHighlighterService>();
 
-
-            // preloads
-
-            WebAssemblyHost host = builder.Build();
-
-            ICodeHighlighterService codeHighlighter = host.Services.GetRequiredService<ICodeHighlighterService>();
-            _ = codeHighlighter.PreloadAsync();
-
-
-            await host.RunAsync();
+            await builder.Build().RunAsync();
         }
     }
 }

@@ -9,65 +9,60 @@
     min-height: 100%;
 }
 
-    .vs-editor-layers {
-        position: absolute;
-
-        min-width: 100%;
-        box-sizing: border-box;
-
-        user-select: none;
+    .vs-editor-lines {
+        white-space: pre;
+        font-family: Consolas, monospace;
     }
 
-        .vs-editor-row {
+        .vs-editor-line {
             display: flex;
-            line-height: 20px;
+
+            line-height: 20px;  
+            min-height: 20px;
+            text-wrap: nowrap;
         }
 
-            .vs-editor-gutter-cell {
+            .vs-editor-line:hover {
+                background-color: var(--mud-palette-surface);
+
+            }
+
+            .vs-editor-line-gutter {
                 position: sticky;
                 left: 0;
 
-                width: 60px;
+                min-width: 40px;
 
                 flex-shrink: 0;
 
-                padding-right: 20px;
+                padding-left: 10px;
+                margin-right: 30px;
 
                 text-align: right;
+                user-select: none;
+
                 box-sizing: border-box;
 
                 color: var(--mud-palette-text-secondary);
                 background-color: var(--mud-palette-background);
+            }  
 
-                z-index: 2;
-            }   
-
-                .vs-editor-row.hovered .vs-editor-gutter-cell {
+                .vs-editor-line:hover .vs-editor-line-gutter {
                     color: var(--mud-palette-text-primary);
-                    background-color: var(--mud-palette-surface);
 
+                    background-color: var(--mud-palette-surface);
                     box-shadow: inset 3px 0 0 0 var(--mud-palette-primary);
                 }
-
-
-            .vs-editor-highlight-cell {
-                flex-grow: 1;
+        
+            .vs-editor-line-content {
+                
             }
 
-                .vs-editor-row.hovered .vs-editor-highlight-cell {
-                    background-color: var(--mud-palette-surface);
-                }
 
 
-    .vs-editor-content {
-        position: relative;
 
-        margin-left: 60px;
 
-        z-index: 1;
-    }
-
-        ::deep .vs-editor-content > div {
+/*        ::deep .vs-editor-content > div {
             background-color: transparent !important;
         }
 
@@ -82,4 +77,5 @@
 
             ::deep .vs-editor-content pre code {
                 line-height: 20px !important;
-            }
+            }*/
+

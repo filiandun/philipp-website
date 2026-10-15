@@ -1,40 +1,31 @@
 ﻿@* VsCodeEditor.razor *@
 
 
-@using PhilippWebsite.Client.Clients.FileContent
+@using PhilippWebsite.Client.Clients.EditorContent
 
-@using PhilippWebsite.Client.Services.CodeHighlighter
 @using PhilippWebsite.Client.Services.TabsBarState
 
-@inject IJSRuntime JS
 
 @inject TabsBarStateService TabsBarStateService
-@inject IFileContentClient FileContentClient
-@inject ICodeHighlighterService CodeHighlighterService
+
+@inject IEditorContentClient EditorContentClient
 
 
-<div class="vs-editor-root" @ref="this._editorRoot">
-    <div class="vs-editor-layers">
-        @for (int i = 1; i <= this._lineCount; i++)
+<div class="vs-editor-root">
+    <div class="vs-editor-lines">
+        @for (int i = 0; i < this._codeLines.Length; i++)
         {
-            <div class="vs-editor-row">
-                <div class="vs-editor-gutter-cell">@i</div>
-                <div class="vs-editor-highlight-cell"></div>
+            <div class="vs-editor-line">
+                <span class="vs-editor-line-gutter">@(i + 1)</span>
+                <span class="vs-editor-line-content">@((MarkupString)this._codeLines[i])</span>
             </div>
         }
     </div>
-
-    <pre class="vs-editor-content" style="white-space: pre-wrap;">
-        @((MarkupString)this._htmlString)
-    </pre>
 </div>
 
 
 @code {
-    private int _lineCount;
-    private string _htmlString = string.Empty;
-
-    private ElementReference _editorRoot;
+    private string[] _codeLines = [];
 
 
     protected override void OnInitialized()
@@ -42,24 +33,14 @@
         this.TabsBarStateService.OnActiveTabChange += this.OnActiveTabChange;
     }
 
-    protected override async Task OnAfterRenderAsync(bool firstRender)
-    {
-        if (firstRender)
-        {
-            await this.JS.InvokeVoidAsync("vsCodeEditor.initHighlight", this._editorRoot);
-        }
-    }
-
 
     private async void OnActiveTabChange()
     {
         if (this.TabsBarStateService.ActiveTab is null) return;
 
-        string fileContent = await this.FileContentClient.GetContentAsync(this.TabsBarStateService.ActiveTab.Path);
+        string filePath = this.TabsBarStateService.ActiveTab.Path;
 
-        this._lineCount = fileContent.Split('\n').Length;
-
-        this._htmlString = await this.CodeHighlighterService.GetHighlightedHtml(fileContent, this.TabsBarStateService.ActiveTab.Path);
+        this._codeLines = await this.EditorContentClient.GetCodeAsync(filePath);
 
         this.StateHasChanged();
     }
