@@ -1,5 +1,4 @@
-﻿using System.Runtime.CompilerServices;
-using System.Text;
+﻿using System.Text;
 using System.Web;
 
 using TextMateSharp.Grammars;
@@ -14,20 +13,25 @@ namespace PhilippWebsite.Server.Services.SyntaxHighlighter
     {
         private readonly ILogger<SyntaxHighlighterService> _logger;
 
+        private readonly IWebHostEnvironment _environment;
+
         private readonly RegistryOptions _registryOptions;
         private readonly Registry _registry;
 
         private readonly Theme _theme;
 
 
-        public SyntaxHighlighterService(ILogger<SyntaxHighlighterService> logger)
+        public SyntaxHighlighterService(ILogger<SyntaxHighlighterService> logger, IWebHostEnvironment environment)
         {
             this._logger = logger;
+
+            this._environment = environment;
 
             this._registryOptions = new RegistryOptions(ThemeName.VisualStudioDark);
             this._registry = new Registry(this._registryOptions);
 
-            string themePath = "LocalData/Resources/dark_vs.json";
+            string themeFile = "theme_dark_vs.json";
+            string themePath = Path.Combine(this._environment.ContentRootPath, "LocalData", "Resources", themeFile);
 
             if (File.Exists(themePath))
             {
