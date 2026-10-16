@@ -1,8 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 
 using PhilippWebsite.Server.Services.ProjectTree;
-
-using PhilippWebsite.Shared.ProjectTree;
+using PhilippWebsite.Shared.SolutionState;
 
 
 namespace PhilippWebsite.Server.Controllers
@@ -25,13 +24,13 @@ namespace PhilippWebsite.Server.Controllers
 
 
         [HttpGet("GetTree", Name = "GetProjectTree")]
-        public async Task<ActionResult<ProjectTreeRoot>> GetProjectTree()
+        public async Task<ActionResult<SolutionTreeRoot>> GetProjectTree()
         {
             this._logger.LogInformation("Request to Get Project Tree.");
 
             try
             {
-                ProjectTreeRoot projectTreeRoot = await this._projectTreeService.GetTreeAsync();
+                SolutionTreeRoot projectTreeRoot = await this._projectTreeService.GetTreeAsync();
 
                 return Ok(projectTreeRoot);
             }

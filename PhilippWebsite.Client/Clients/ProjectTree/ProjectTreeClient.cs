@@ -1,6 +1,6 @@
 ﻿using System.Net.Http.Json;
 
-using PhilippWebsite.Shared.ProjectTree;
+using PhilippWebsite.Shared.SolutionState;
 
 
 namespace PhilippWebsite.Client.Clients.ProjectTree
@@ -20,7 +20,7 @@ namespace PhilippWebsite.Client.Clients.ProjectTree
         }
 
 
-        public async Task<ProjectTreeRoot?> GetTreeAsync()
+        public async Task<SolutionTreeRoot?> GetTreeAsync()
         {
             string url = "ProjectTree/GetTree/";
 
@@ -39,7 +39,7 @@ namespace PhilippWebsite.Client.Clients.ProjectTree
                 {
                     this._logger.LogInformation("Success loading project tree '{Url}'.", url);
 
-                    return await response.Content.ReadFromJsonAsync<ProjectTreeRoot>();
+                    return await response.Content.ReadFromJsonAsync<SolutionTreeRoot>();
                 }
 
                 this._logger.LogWarning("Error '{StatusCode}' loading project tree '{Url}'.", response.StatusCode, url);

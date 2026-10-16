@@ -1,7 +1,6 @@
 ﻿using PhilippWebsite.Client.Clients.ProjectTree;
 using PhilippWebsite.Client.Models.SolutionExplorer;
-
-using PhilippWebsite.Shared.ProjectTree;
+using PhilippWebsite.Shared.SolutionState;
 
 
 namespace PhilippWebsite.Client.Services.SolutionExplorer
@@ -25,7 +24,7 @@ namespace PhilippWebsite.Client.Services.SolutionExplorer
         {
             try
             {
-                ProjectTreeRoot? treeRoot = await this._projectTreeClient.GetTreeAsync();
+                SolutionTreeRoot? treeRoot = await this._projectTreeClient.GetTreeAsync();
                 if (treeRoot is null)
                 {
                     this._logger.LogWarning("Server return null Project Tree Root");
@@ -35,7 +34,7 @@ namespace PhilippWebsite.Client.Services.SolutionExplorer
 
                 SolutionExplorerRoot explorerRoot = new();
 
-                foreach (ProjectTreeItem treeItem in treeRoot.Items)
+                foreach (SolutionTreeItem treeItem in treeRoot.Items)
                 {
                     SolutionExplorerItem explorerItem = this.BuildTree(treeItem);
 
@@ -53,7 +52,7 @@ namespace PhilippWebsite.Client.Services.SolutionExplorer
         }
 
 
-        private SolutionExplorerItem BuildTree(ProjectTreeItem treeItem)
+        private SolutionExplorerItem BuildTree(SolutionTreeItem treeItem)
         {
             SolutionExplorerItem explorerItem = new()
             {
@@ -63,7 +62,7 @@ namespace PhilippWebsite.Client.Services.SolutionExplorer
                 Type = (SolutionExplorerItemType)treeItem.Type,
             };
 
-            foreach (ProjectTreeItem itemChild in treeItem.Children)
+            foreach (SolutionTreeItem itemChild in treeItem.Children)
             {
                 SolutionExplorerItem explorerItemChild = this.BuildTree(itemChild);
 

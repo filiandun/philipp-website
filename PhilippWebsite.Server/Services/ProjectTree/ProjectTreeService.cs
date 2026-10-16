@@ -1,4 +1,4 @@
-﻿using PhilippWebsite.Shared.ProjectTree;
+﻿using PhilippWebsite.Shared.SolutionState;
 
 
 namespace PhilippWebsite.Server.Services.ProjectTree
@@ -9,7 +9,7 @@ namespace PhilippWebsite.Server.Services.ProjectTree
 
         private readonly IEnumerable<ITreeProvider> _treeProviders;
 
-        private Task<ProjectTreeRoot>? _rootInitTask;
+        private Task<SolutionTreeRoot>? _rootInitTask;
 
 
         public ProjectTreeService(ILogger<ProjectTreeService> logger, IEnumerable<ITreeProvider> treeProviders)
@@ -28,7 +28,7 @@ namespace PhilippWebsite.Server.Services.ProjectTree
         }
 
 
-        public Task<ProjectTreeRoot> GetTreeAsync()
+        public Task<SolutionTreeRoot> GetTreeAsync()
         {
             this._logger.LogDebug("Get Project Tree Root.");
 
@@ -36,15 +36,15 @@ namespace PhilippWebsite.Server.Services.ProjectTree
         }
 
         // TODO тут надо подумать над возвращаемым значением
-        public async Task<ProjectTreeRoot> BuildTreeAsync()
+        public async Task<SolutionTreeRoot> BuildTreeAsync()
         {
             try
             {
-                ProjectTreeRoot treeRoot = new ProjectTreeRoot();
+                SolutionTreeRoot treeRoot = new SolutionTreeRoot();
 
                 foreach (ITreeProvider treeProvider in this._treeProviders)
                 {
-                    ProjectTreeItem? treeItem = await treeProvider.GetTreeAsync();
+                    SolutionTreeItem? treeItem = await treeProvider.GetTreeAsync();
 
                     if (treeItem is null)
                     {
@@ -66,6 +66,6 @@ namespace PhilippWebsite.Server.Services.ProjectTree
             }
         }
 
-        private Task<ProjectTreeRoot> GetOrStartInitTask() => this._rootInitTask ??= this.BuildTreeAsync();
+        private Task<SolutionTreeRoot> GetOrStartInitTask() => this._rootInitTask ??= this.BuildTreeAsync();
     }
 }

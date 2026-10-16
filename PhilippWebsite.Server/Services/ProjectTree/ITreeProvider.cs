@@ -1,10 +1,10 @@
-﻿using PhilippWebsite.Shared.ProjectTree;
+﻿using PhilippWebsite.Shared.SolutionState;
 
 
 namespace PhilippWebsite.Server.Services.ProjectTree
 {
     public interface ITreeProvider
     {
-        public Task<ProjectTreeItem?> GetTreeAsync();
+        public Task<SolutionTreeItem?> GetTreeAsync();
     }
 }

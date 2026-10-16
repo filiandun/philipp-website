@@ -1,7 +1,7 @@
 ﻿using Microsoft.Extensions.Caching.Memory;
 
 using PhilippWebsite.Server.Models;
-using PhilippWebsite.Shared.ProjectTree;
+using PhilippWebsite.Shared.SolutionState;
 
 
 namespace PhilippWebsite.Server.Services.ProjectTree.Local
@@ -21,9 +21,9 @@ namespace PhilippWebsite.Server.Services.ProjectTree.Local
         }
 
 
-        public async Task<ProjectTreeItem?> GetTreeAsync()
+        public async Task<SolutionTreeItem?> GetTreeAsync()
         {
-            if (this._memoryCache.TryGetValue(CacheKeys.LOCAL_PROJECT_TREE, out ProjectTreeItem? cachedTree) && cachedTree is not null)
+            if (this._memoryCache.TryGetValue(CacheKeys.LOCAL_PROJECT_TREE, out SolutionTreeItem? cachedTree) && cachedTree is not null)
             {
                 this._logger.LogInformation("Local tree loaded from cache.");
 
@@ -32,7 +32,7 @@ namespace PhilippWebsite.Server.Services.ProjectTree.Local
 
             this._logger.LogInformation("Cache miss. Fetching Local tree from drive.");
 
-            ProjectTreeItem? projectTree = await this.BuildTree();
+            SolutionTreeItem? projectTree = await this.BuildTree();
 
             if (projectTree is not null)
             {
@@ -47,26 +47,26 @@ namespace PhilippWebsite.Server.Services.ProjectTree.Local
             return projectTree;
         }
 
-        private async Task<ProjectTreeItem?> BuildTree()
+        private async Task<SolutionTreeItem?> BuildTree()
         {
             try
             {
-                ProjectTreeItem treeSolution = new()
+                SolutionTreeItem treeSolution = new()
                 {
                     Name = LocalTreeConfig.SolutionName,
                     Path = string.Empty,
 
-                    Type = ProjectTreeItemType.Solution,
+                    Type = SolutionTreeItemType.Solution,
                 };
 
                 foreach (string file in LocalTreeConfig.FileList)
                 {
-                    ProjectTreeItem treeItem = new()
+                    SolutionTreeItem treeItem = new()
                     {
                         Name = file,
                         Path = LocalTreeConfig.GetBaseUrl(file),
 
-                        Type = ProjectTreeItemType.File,
+                        Type = SolutionTreeItemType.File,
                     };
 
                     treeSolution.Children.Add(treeItem);

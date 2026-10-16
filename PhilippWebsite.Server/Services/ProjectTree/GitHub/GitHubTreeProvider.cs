@@ -1,7 +1,7 @@
 ﻿using Microsoft.Extensions.Caching.Memory;
 
 using PhilippWebsite.Server.Models;
-using PhilippWebsite.Shared.ProjectTree;
+using PhilippWebsite.Shared.SolutionState;
 
 
 namespace PhilippWebsite.Server.Services.ProjectTree.GitHub
@@ -29,9 +29,9 @@ namespace PhilippWebsite.Server.Services.ProjectTree.GitHub
         }
 
 
-        public async Task<ProjectTreeItem?> GetTreeAsync()
+        public async Task<SolutionTreeItem?> GetTreeAsync()
         {
-            if (this._memoryCache.TryGetValue(CacheKeys.GITHUB_PROJECT_TREE, out ProjectTreeItem? cachedTree) && cachedTree is not null)
+            if (this._memoryCache.TryGetValue(CacheKeys.GITHUB_PROJECT_TREE, out SolutionTreeItem? cachedTree) && cachedTree is not null)
             {
                 this._logger.LogInformation("GitHub tree loaded from cache.");
 
@@ -40,7 +40,7 @@ namespace PhilippWebsite.Server.Services.ProjectTree.GitHub
 
             this._logger.LogInformation("Cache miss. Fetching GitHub tree from API.");
 
-            ProjectTreeItem? projectTree = await this.BuildTree();
+            SolutionTreeItem? projectTree = await this.BuildTree();
 
             if (projectTree is not null)
             {
@@ -56,16 +56,16 @@ namespace PhilippWebsite.Server.Services.ProjectTree.GitHub
         }
 
 
-        private async Task<ProjectTreeItem?> BuildTree()
+        private async Task<SolutionTreeItem?> BuildTree()
         {
             try
             {
-                ProjectTreeItem treeSolution = new()
+                SolutionTreeItem treeSolution = new()
                 {
                     Name = GitHubTreeConfig.SolutionName,
                     Path = string.Empty,
 
-                    Type = ProjectTreeItemType.Solution,
+                    Type = SolutionTreeItemType.Solution,
                 };
 
                 foreach (var repo in GitHubTreeConfig.RepoList)
@@ -78,7 +78,7 @@ namespace PhilippWebsite.Server.Services.ProjectTree.GitHub
 
                     if (githubTree is null) throw new HttpRequestException("GitHubProjectTreeResponse is null");
 
-                    ProjectTreeItem explorerItem = this.MapToProjectTreeItem(githubTree, repo);
+                    SolutionTreeItem explorerItem = this.MapToProjectTreeItem(githubTree, repo);
                     treeSolution.Children.Add(explorerItem);
                 }
 
@@ -94,35 +94,35 @@ namespace PhilippWebsite.Server.Services.ProjectTree.GitHub
         }
 
 
-        private ProjectTreeItem MapToProjectTreeItem(GitHubTreeResponse githubTree, string repo)
+        private SolutionTreeItem MapToProjectTreeItem(GitHubTreeResponse githubTree, string repo)
         {
-            Dictionary<string, ProjectTreeItem> treeItemDictionary = new();
+            Dictionary<string, SolutionTreeItem> treeItemDictionary = new();
 
             foreach (GitHubTreeItem githubTreeItem in githubTree.LinearTree)
             {
-                ProjectTreeItem treeItem = new()
+                SolutionTreeItem treeItem = new()
                 {
                     Name = githubTreeItem.Path.Split('/').Last(), // TODO maybe exception
                     Path = GitHubTreeConfig.GetGitUrl(repo, githubTreeItem.Path),
 
-                    Type = githubTreeItem.Type == FOLDER_TYPE ? ProjectTreeItemType.Folder : ProjectTreeItemType.File,
+                    Type = githubTreeItem.Type == FOLDER_TYPE ? SolutionTreeItemType.Folder : SolutionTreeItemType.File,
                 };
 
                 treeItemDictionary[githubTreeItem.Path] = treeItem;
             }
 
 
-            ProjectTreeItem treeRoot = new()
+            SolutionTreeItem treeRoot = new()
             {
                 Name = repo,
                 Path = string.Empty,
 
-                Type = ProjectTreeItemType.Project,
+                Type = SolutionTreeItemType.Project,
             };
 
             foreach (GitHubTreeItem githubTreeItem in githubTree.LinearTree)
             {
-                ProjectTreeItem treeItem = treeItemDictionary[githubTreeItem.Path];
+                SolutionTreeItem treeItem = treeItemDictionary[githubTreeItem.Path];
 
                 int lastSlashIndex = githubTreeItem.Path.LastIndexOf('/');
 
@@ -146,7 +146,7 @@ namespace PhilippWebsite.Server.Services.ProjectTree.GitHub
             return treeRoot;
         }
 
-        private void SortTree(ProjectTreeItem treeItem)
+        private void SortTree(SolutionTreeItem treeItem)
         {
             treeItem.Children.Sort((a, b) =>
             {
@@ -155,7 +155,7 @@ namespace PhilippWebsite.Server.Services.ProjectTree.GitHub
                 return a.Name.CompareTo(b.Name);
             });
 
-            foreach (ProjectTreeItem item in treeItem.Children.Where(n => n.Children.Any()))
+            foreach (SolutionTreeItem item in treeItem.Children.Where(n => n.Children.Any()))
             {
                 this.SortTree(item);
             }
