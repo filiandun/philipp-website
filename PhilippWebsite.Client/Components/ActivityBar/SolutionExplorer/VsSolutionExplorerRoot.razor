@@ -43,7 +43,7 @@
     {
         if (item.Type == SolutionExplorerItemType.File)
         {
-            this.TabsBarStateService.Open(new TabModel() { Name = item.Name, Path = item.Path });
+            this.TabsBarStateService.OpenAsActive(new TabModel() { Name = item.Name, Path = item.Path });
         }
     }
 }

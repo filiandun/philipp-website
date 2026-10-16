@@ -51,8 +51,6 @@ namespace PhilippWebsite.Client.Services.TabsBarState
                 this.OnOpenTabsChange?.Invoke();
 
                 this._logger.LogInformation("Tab '{TabName}' open.", tabModel.Name);
-
-                this.SetActive(tabModel);
             }
             else
             {
@@ -60,6 +58,22 @@ namespace PhilippWebsite.Client.Services.TabsBarState
             }
 
         }
+
+
+        public void OpenAsActive(TabModel tabModel)
+        {
+            if (!this._openTabs.Contains(tabModel))
+            {
+                this._openTabs.Add(tabModel);
+
+                this.OnOpenTabsChange?.Invoke();
+
+                this._logger.LogInformation("Tab '{TabName}' open as active.", tabModel.Name);
+            }
+
+            this.SetActive(tabModel);
+        }
+
 
         public void Close(TabModel tabModel)
         {

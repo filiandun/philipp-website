@@ -32,10 +32,12 @@
     protected override void OnInitialized()
     {
         this.TabsBarStateService.OnOpenTabsChange += this.StateHasChanged;
+        this.TabsBarStateService.OnActiveTabChange += this.StateHasChanged;
     }
 
     public void Dispose()
     {
         this.TabsBarStateService.OnOpenTabsChange -= this.StateHasChanged;
+        this.TabsBarStateService.OnActiveTabChange -= this.StateHasChanged;
     }
 }
