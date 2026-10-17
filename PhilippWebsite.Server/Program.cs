@@ -6,7 +6,7 @@ using PhilippWebsite.Server.Services.FileContent.FileSource;
 using PhilippWebsite.Server.Services.ProjectTree;
 using PhilippWebsite.Server.Services.ProjectTree.GitHub;
 using PhilippWebsite.Server.Services.ProjectTree.Local;
-
+using PhilippWebsite.Server.Services.SolutionState;
 using PhilippWebsite.Server.Services.SyntaxHighlighter;
 
 
@@ -48,8 +48,10 @@ namespace PhilippWebsite.Server
                 client.DefaultRequestHeaders.Add("User-Agent", "PhilippWebsite");
             });
 
-
             builder.Services.AddScoped<IProjectTreeService, ProjectTreeService>();
+
+            builder.Services.AddScoped<ISolutionStateService, SolutionStateService>();
+
 
             builder.Services.AddScoped<IFileSource, LocalFileSource>();
             builder.Services.AddHttpClient<IFileSource, GitHubFileSource>();

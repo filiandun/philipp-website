@@ -1,10 +1,10 @@
-﻿using PhilippWebsite.Client.Models.SolutionExplorer;
+﻿using PhilippWebsite.Shared.SolutionState;
 
 
 namespace PhilippWebsite.Client.Services.SolutionExplorer
 {
     public interface ISolutionExplorerService
     {
-        public Task<SolutionExplorerRoot?> GetTreeAsync();
+        public Task<SolutionTreeRoot?> GetTreeAsync();
     }
 }

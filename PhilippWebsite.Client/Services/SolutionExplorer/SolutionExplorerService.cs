@@ -1,5 +1,5 @@
-﻿using PhilippWebsite.Client.Clients.ProjectTree;
-using PhilippWebsite.Client.Models.SolutionExplorer;
+﻿using PhilippWebsite.Client.State;
+
 using PhilippWebsite.Shared.SolutionState;
 
 
@@ -9,82 +9,27 @@ namespace PhilippWebsite.Client.Services.SolutionExplorer
     {
         private readonly ILogger<SolutionExplorerService> _logger;
 
-        private readonly IProjectTreeClient _projectTreeClient;
+        private readonly SolutionStateContainer _solutionStateContainer;
 
 
-        public SolutionExplorerService(ILogger<SolutionExplorerService> logger, IProjectTreeClient projectTreeClient)
+        public SolutionExplorerService(ILogger<SolutionExplorerService> logger, SolutionStateContainer solutionStateContainer)
         {
             this._logger = logger;
 
-            this._projectTreeClient = projectTreeClient;
+            this._solutionStateContainer = solutionStateContainer;
         }
 
 
-        public async Task<SolutionExplorerRoot?> GetTreeAsync()
+        public async Task<SolutionTreeRoot?> GetTreeAsync()
         {
-            try
+            SolutionTreeRoot? solutionTreeRoot = await this._solutionStateContainer.GetTreeAsync();
+
+            if (solutionTreeRoot is null)
             {
-                SolutionTreeRoot? treeRoot = await this._projectTreeClient.GetTreeAsync();
-                if (treeRoot is null)
-                {
-                    this._logger.LogWarning("Server return null Project Tree Root");
-
-                    return null;
-                }
-
-                SolutionExplorerRoot explorerRoot = new();
-
-                foreach (SolutionTreeItem treeItem in treeRoot.Items)
-                {
-                    SolutionExplorerItem explorerItem = this.BuildTree(treeItem);
-
-                    explorerRoot.Items.Add(explorerItem);
-                }
-
-                return explorerRoot;
-            }
-            catch (HttpRequestException ex)
-            {
-                this._logger.LogError(ex, "Error get tree");
-
-                return null;
-            }
-        }
-
-
-        private SolutionExplorerItem BuildTree(SolutionTreeItem treeItem)
-        {
-            SolutionExplorerItem explorerItem = new()
-            {
-                Name = treeItem.Name,
-                Path = treeItem.Path,
-
-                Type = (SolutionExplorerItemType)treeItem.Type,
-            };
-
-            foreach (SolutionTreeItem itemChild in treeItem.Children)
-            {
-                SolutionExplorerItem explorerItemChild = this.BuildTree(itemChild);
-
-                explorerItem.Items.Add(explorerItemChild);
+                this._logger.LogWarning("Solution State Container return null Solution Tree Root.");
             }
 
-            return explorerItem;
-        }
-
-        private void SortTree(SolutionExplorerItem treeItem)
-        {
-            treeItem.Items.Sort((a, b) =>
-            {
-                if (a.Type != b.Type) return a.Type.CompareTo(b.Type);
-
-                return a.Name.CompareTo(b.Name);
-            });
-
-            foreach (var item in treeItem.Items.Where(n => n.Items.Any()))
-            {
-                this.SortTree(item);
-            }
+            return solutionTreeRoot;
         }
     }
 }

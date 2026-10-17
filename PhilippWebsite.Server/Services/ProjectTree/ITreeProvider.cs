@@ -5,6 +5,6 @@ namespace PhilippWebsite.Server.Services.ProjectTree
 {
     public interface ITreeProvider
     {
-        public Task<SolutionTreeItem?> GetTreeAsync();
+        public Task<SolutionTreeItem> GetTreeAsync();
     }
 }

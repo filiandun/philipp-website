@@ -4,10 +4,13 @@ using Microsoft.AspNetCore.Components.WebAssembly.Hosting;
 using MudBlazor.Services;
 
 using PhilippWebsite.Client.Clients.EditorContent;
-using PhilippWebsite.Client.Clients.ProjectTree;
+using PhilippWebsite.Client.Clients.SolutionState;
 
+using PhilippWebsite.Client.Services.EditorContent;
 using PhilippWebsite.Client.Services.SolutionExplorer;
 using PhilippWebsite.Client.Services.TabsBarState;
+
+using PhilippWebsite.Client.State;
 
 
 namespace PhilippWebsite.Client
@@ -28,19 +31,27 @@ namespace PhilippWebsite.Client
 
             string apiBaseUrl = builder.Configuration["ApiBaseUrl"] ?? throw new InvalidOperationException("Missing configuration: 'ApiBaseUrl' is not set in appsettings.json.");
 
-            builder.Services.AddHttpClient<IProjectTreeClient, ProjectTreeClient>(client => client.BaseAddress = new Uri(apiBaseUrl));
+            builder.Services.AddHttpClient<ISolutionStateClient, SolutionStateClient>(client => client.BaseAddress = new Uri(apiBaseUrl));
 
             builder.Services.AddHttpClient<IEditorContentClient, EditorContentClient>(client => client.BaseAddress = new Uri(apiBaseUrl));
 
 
             // services
 
+            builder.Services.AddScoped<SolutionStateContainer>();
+
             builder.Services.AddScoped<ISolutionExplorerService, SolutionExplorerService>();
 
             builder.Services.AddScoped<TabsBarStateService>();
 
+            builder.Services.AddScoped<IEditorContentService, EditorContentService>();
 
-            await builder.Build().RunAsync();
+
+            // init
+
+            var host = builder.Build();
+
+            await host.RunAsync();
         }
     }
 }

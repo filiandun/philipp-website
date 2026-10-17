@@ -2,6 +2,6 @@
 {
     public interface IEditorContentClient
     {
-        public Task<string[]> GetCodeAsync(string path);
+        public Task<string[]?> GetContentAsync(string path);
     }
 }

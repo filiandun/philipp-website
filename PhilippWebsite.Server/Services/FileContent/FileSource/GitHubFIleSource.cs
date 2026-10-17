@@ -25,30 +25,23 @@ namespace PhilippWebsite.Server.Services.FileContent.FileSource
             {
                 this._logger.LogWarning("SSRF attempt detected '{Url}'", url);
 
-                return $"Access Denied '{url}'.";
+                throw new UnauthorizedAccessException("Invalid GitHub URL scope.");
             }
 
             string rawUrl = url.Replace("https://github.com/", "https://raw.githubusercontent.com/").Replace("/blob/", "/");
 
-            try
+            var response = await this._httpClient.GetAsync(rawUrl);
+
+            if (response.IsSuccessStatusCode)
             {
-                var response = await this._httpClient.GetAsync(rawUrl);
+                this._logger.LogInformation("Success loading GitHub file content '{Url}'.", rawUrl);
 
-                if (response.IsSuccessStatusCode)
-                {
-                    this._logger.LogInformation("Success loading GitHub file content '{Url}'.", rawUrl);
-
-                    return await response.Content.ReadAsStringAsync();
-                }
-
-                this._logger.LogWarning("Error '{StatusCode}' loading GitHub file content '{Url}'.", response.StatusCode, rawUrl);
-            }
-            catch (Exception ex)
-            {
-                this._logger.LogError(ex, "Error loading GitHub file content '{Url}'.", rawUrl);
+                return await response.Content.ReadAsStringAsync();
             }
 
-            return $"Error loading GitHub file content '{rawUrl}'.";
+            this._logger.LogWarning("GitHub returned {StatusCode} for '{Url}'.", response.StatusCode, rawUrl);
+
+            throw new HttpRequestException($"GitHub returned error {response.StatusCode}");
         }
     }
 }

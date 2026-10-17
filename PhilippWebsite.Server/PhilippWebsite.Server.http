@@ -12,7 +12,14 @@ GET {{PhilippWebsite.Server_HostAddress}}/FileContent/GetContent?path={{file}}
 Accept: application/json
 
 ###
+
 @file = Content/AboutMe.md
 
 GET {{PhilippWebsite.Server_HostAddress}}/EditorContent/GetContent?path={{file}}
+Accept: application/json
+
+
+###
+
+GET {{PhilippWebsite.Server_HostAddress}}/SolutionState/GetModel
 Accept: application/json

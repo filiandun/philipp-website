@@ -3,11 +3,11 @@
 
 @using PhilippWebsite.Client.Components.Common
 
-@using PhilippWebsite.Client.Models.SolutionExplorer
-
 @using PhilippWebsite.Client.Resources
 
 @using PhilippWebsite.Client.Services
+
+@using PhilippWebsite.Shared.SolutionState
 
 
 <div class="vs-solution-explorer-item-root" @onclick="this.OnContentClick">
@@ -15,7 +15,7 @@
     <div class="vs-solution-explorer-item-head" style="padding-left: @(this.Depth * 15)px;">
 
         <div class="vs-solution-explorer-item-head-expand" @onclick="this.OnExpandClick" @onclick:stopPropagation="true">
-            @if (this.Item.Items.Count != 0)
+            @if (this.Item.Children.Count != 0)
             {
                 <VsIcon Icon="@(this.Item.IsExpanded ? VsIcons.SolutionExplorer.Expands.Down : VsIcons.SolutionExplorer.Expands.Right)" IconSize="16"></VsIcon>
             }
@@ -24,12 +24,12 @@
         <div class="vs-solution-explorer-item-head-icon">
             @switch (this.Item.Type)
             {
-                case SolutionExplorerItemType.Solution: <VsIcon Icon="@IconResolver.GetSolutionIcon(this.Item.Name)" IconSize="16"></VsIcon> break;
+                case SolutionTreeItemType.Solution: <VsIcon Icon="@IconResolver.GetSolutionIcon(this.Item.Name)" IconSize="16"></VsIcon> break;
 
-                case SolutionExplorerItemType.Project: <VsIcon Icon="@IconResolver.GetProjectIcon(this.Item.Name)" IconSize="16"></VsIcon> break;
+                case SolutionTreeItemType.Project: <VsIcon Icon="@IconResolver.GetProjectIcon(this.Item.Name)" IconSize="16"></VsIcon> break;
 
-                case SolutionExplorerItemType.Folder: <VsIcon Icon="@IconResolver.GetFolderIcon(this.Item.Name)" IconSize="16"></VsIcon> break;
-                case SolutionExplorerItemType.File: <VsIcon Icon="@IconResolver.GetFileIcon(this.Item.Name)" IconSize="16"></VsIcon> break;
+                case SolutionTreeItemType.Folder: <VsIcon Icon="@IconResolver.GetFolderIcon(this.Item.Name)" IconSize="16"></VsIcon> break;
+                case SolutionTreeItemType.File: <VsIcon Icon="@IconResolver.GetFileIcon(this.Item.Name)" IconSize="16"></VsIcon> break;
             } 
         </div>
 
@@ -42,7 +42,7 @@
     @if (this.Item.IsExpanded)
     {  
         <div class="vs-solution-explorer-item-child">
-            @foreach (SolutionExplorerItem item in this.Item.Items)
+            @foreach (SolutionTreeItem item in this.Item.Children)
             {
                 <VsSolutionExplorerItem Item="item" Depth="(this.Depth + 1)" OnItemClick="this.OnItemClick"></VsSolutionExplorerItem>
             }
@@ -52,9 +52,9 @@
 
 
 @code {
-    [Parameter] public EventCallback<SolutionExplorerItem> OnItemClick { get; set; }
+    [Parameter] public EventCallback<SolutionTreeItem> OnItemClick { get; set; }
 
-    [Parameter] public required SolutionExplorerItem Item { get; set; }
+    [Parameter] public required SolutionTreeItem Item { get; set; }
     [Parameter] public int Depth { get; set; } = 0;
 
     private void OnExpandClick() => this.Item.IsExpanded = !this.Item.IsExpanded;

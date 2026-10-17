@@ -18,7 +18,7 @@ namespace PhilippWebsite.Client.Clients.EditorContent
         }
 
 
-        public async Task<string[]> GetCodeAsync(string path)
+        public async Task<string[]?> GetContentAsync(string path)
         {
             string url = $"EditorContent/GetContent?path={path}";
 
@@ -26,18 +26,11 @@ namespace PhilippWebsite.Client.Clients.EditorContent
             {
                 var response = await this._httpClient.GetAsync(url);
 
-                //if (response is null) // TODO null невозможен вроде бы, надо убрать
-                //{
-                //    this._logger.LogWarning($"Request return null by '{url}'");
-
-                //    return Array.Empty<string>();
-                //}
-
                 if (response.IsSuccessStatusCode)
                 {
                     this._logger.LogInformation("Success loading editor content '{Url}'.", url);
 
-                    return await response.Content.ReadFromJsonAsync<string[]>() ?? Array.Empty<string>();
+                    return await response.Content.ReadFromJsonAsync<string[]>();
                 }
 
                 this._logger.LogWarning("Error '{StatusCode}' loading editor content '{Url}'.", response.StatusCode, url);
@@ -47,7 +40,7 @@ namespace PhilippWebsite.Client.Clients.EditorContent
                 this._logger.LogError(ex, "Error loading editor content '{Url}'.", url);
             }
 
-            return Array.Empty<string>();
+            return null;
         }
     }
 }

@@ -30,30 +30,21 @@ namespace PhilippWebsite.Server.Services.FileContent.FileSource
             {
                 this._logger.LogWarning("Path traversal attempt detected '{Path}'", targetPath);
 
-                return $"Access Denied '{targetPath}'.";
+                throw new UnauthorizedAccessException("Invalid local path.");
             }
 
             if (!File.Exists(targetPath))
             {
                 this._logger.LogWarning("Local file not found '{Path}'.", targetPath);
 
-                return $"File not found '{targetPath}'.";
+                throw new FileNotFoundException($"File not found.", targetPath);
             }
 
-            try
-            {
-                string fileContent = await File.ReadAllTextAsync(targetPath);
+            string fileContent = await File.ReadAllTextAsync(targetPath);
 
-                this._logger.LogInformation("Success loading local file content '{Path}'.", targetPath);
+            this._logger.LogInformation("Success loading local file content '{Path}'.", targetPath);
 
-                return fileContent;
-            }
-            catch (Exception ex)
-            {
-                this._logger.LogError(ex, "Error loading local file content '{Path}'.", targetPath);
-            }
-
-            return $"Error loading local file content '{targetPath}'.";
+            return fileContent;
         }
     }
 }

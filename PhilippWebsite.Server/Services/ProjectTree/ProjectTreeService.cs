@@ -35,35 +35,21 @@ namespace PhilippWebsite.Server.Services.ProjectTree
             return this.GetOrStartInitTask();
         }
 
-        // TODO тут надо подумать над возвращаемым значением
+
         public async Task<SolutionTreeRoot> BuildTreeAsync()
         {
-            try
+            SolutionTreeRoot treeRoot = new SolutionTreeRoot();
+
+            foreach (ITreeProvider treeProvider in this._treeProviders)
             {
-                SolutionTreeRoot treeRoot = new SolutionTreeRoot();
+                SolutionTreeItem treeItem = await treeProvider.GetTreeAsync();
 
-                foreach (ITreeProvider treeProvider in this._treeProviders)
-                {
-                    SolutionTreeItem? treeItem = await treeProvider.GetTreeAsync();
+                this._logger.LogDebug("Tree Provider '{TreeProvider}' return tree.", treeProvider.GetType().Name);
 
-                    if (treeItem is null)
-                    {
-                        this._logger.LogWarning("Tree Provider '{TreeProvider}' return null.", treeProvider.GetType().Name);
-                        continue;
-                    }
-
-                    treeRoot.Items.Add(treeItem);
-                }
-
-                return treeRoot;
+                treeRoot.Items.Add(treeItem);
             }
-            catch (Exception ex)
-            {
-                this._logger.LogError(ex, "Error to load Project Tree Root.");
 
-                this._rootInitTask = null;
-                throw;
-            }
+            return treeRoot;
         }
 
         private Task<SolutionTreeRoot> GetOrStartInitTask() => this._rootInitTask ??= this.BuildTreeAsync();

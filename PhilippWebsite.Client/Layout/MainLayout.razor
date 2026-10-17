@@ -1,7 +1,14 @@
 ﻿@using PhilippWebsite.Client.Resources
 
+@using PhilippWebsite.Client.Services.TabsBarState;
+
+@using PhilippWebsite.Client.State;
+
 
 @inherits LayoutComponentBase
+
+@inject TabsBarStateService TabsBarStateService;
+@inject SolutionStateContainer SolutionStateContainer;
 
 
 <MudThemeProvider Theme="@this._theme" IsDarkMode="true" />
@@ -20,6 +27,9 @@
     protected override async Task OnInitializedAsync()
     {
         base.OnInitialized();
+
+        await this.SolutionStateContainer.InitializeAsync();
+        await this.TabsBarStateService.InitializeAsync();
 
         this._theme = VsThemeConfiguration.GetTheme();
     }

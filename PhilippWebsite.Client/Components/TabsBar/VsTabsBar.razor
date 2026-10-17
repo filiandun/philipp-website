@@ -7,6 +7,9 @@
 @using PhilippWebsite.Client.Services.TabsBarState
 
 
+@implements IDisposable
+
+
 @inject TabsBarStateService TabsBarStateService
 
 
@@ -31,13 +34,13 @@
 @code {
     protected override void OnInitialized()
     {
-        this.TabsBarStateService.OnOpenTabsChange += this.StateHasChanged;
-        this.TabsBarStateService.OnActiveTabChange += this.StateHasChanged;
+        this.TabsBarStateService.OnOpenTabsChanged += this.StateHasChanged;
+        this.TabsBarStateService.OnActiveTabChanged += this.StateHasChanged;
     }
 
     public void Dispose()
     {
-        this.TabsBarStateService.OnOpenTabsChange -= this.StateHasChanged;
-        this.TabsBarStateService.OnActiveTabChange -= this.StateHasChanged;
+        this.TabsBarStateService.OnOpenTabsChanged -= this.StateHasChanged;
+        this.TabsBarStateService.OnActiveTabChanged -= this.StateHasChanged;
     }
 }

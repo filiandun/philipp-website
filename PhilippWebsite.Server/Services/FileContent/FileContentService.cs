@@ -24,9 +24,9 @@ namespace PhilippWebsite.Server.Services.FileContent
 
             if (fileSource is null)
             {
-                this._logger.LogWarning("No source registered to handle path '{FilePath}'.", filePath);
+                this._logger.LogWarning("No file source registered to handle path '{FilePath}'.", filePath);
 
-                throw new InvalidOperationException($"No source registered to handle path '{filePath}'");
+                throw new InvalidOperationException($"No file source registered to handle path '{filePath}'");
             }
 
             this._logger.LogDebug("FileSource '{FileSource}' to handling path '{FilePath}'.", fileSource.GetType().Name, filePath);

@@ -29,7 +29,7 @@ namespace PhilippWebsite.Server.Services.ProjectTree.GitHub
         }
 
 
-        public async Task<SolutionTreeItem?> GetTreeAsync()
+        public async Task<SolutionTreeItem> GetTreeAsync()
         {
             if (this._memoryCache.TryGetValue(CacheKeys.GITHUB_PROJECT_TREE, out SolutionTreeItem? cachedTree) && cachedTree is not null)
             {
@@ -40,57 +40,42 @@ namespace PhilippWebsite.Server.Services.ProjectTree.GitHub
 
             this._logger.LogInformation("Cache miss. Fetching GitHub tree from API.");
 
-            SolutionTreeItem? projectTree = await this.BuildTree();
+            SolutionTreeItem solutionTree = await this.BuildTree();
 
-            if (projectTree is not null)
-            {
-                this._memoryCache.Set(CacheKeys.GITHUB_PROJECT_TREE, projectTree, TimeSpan.FromHours(1));
-                this._logger.LogInformation("GitHub tree successfully fetched and cached.");
-            }
-            else
-            {
-                this._logger.LogInformation("BuildTree returned null. GitHub tree was not cached.");
-            }
-
-            return projectTree;
+            this._memoryCache.Set(CacheKeys.GITHUB_PROJECT_TREE, solutionTree, TimeSpan.FromHours(1));
+            this._logger.LogInformation("GitHub tree successfully fetched and cached.");
+ 
+            return solutionTree;
         }
 
 
-        private async Task<SolutionTreeItem?> BuildTree()
+        private async Task<SolutionTreeItem> BuildTree()
         {
-            try
+            SolutionTreeItem solutionTree = new()
             {
-                SolutionTreeItem treeSolution = new()
-                {
-                    Name = GitHubTreeConfig.SolutionName,
-                    Path = string.Empty,
+                Name = GitHubTreeConfig.SolutionName,
+                Path = string.Empty,
 
-                    Type = SolutionTreeItemType.Solution,
-                };
+                Type = SolutionTreeItemType.Solution,
+            };
 
-                foreach (var repo in GitHubTreeConfig.RepoList)
-                {
-                    string repoUrl = GitHubTreeConfig.GetApiUrl(repo);
-
-                    this._logger.LogDebug("Http request to '{RepoUrl}'.", repoUrl);
-
-                    GitHubTreeResponse? githubTree = await this._httpClient.GetFromJsonAsync<GitHubTreeResponse>(repoUrl);
-
-                    if (githubTree is null) throw new HttpRequestException("GitHubProjectTreeResponse is null");
-
-                    SolutionTreeItem explorerItem = this.MapToProjectTreeItem(githubTree, repo);
-                    treeSolution.Children.Add(explorerItem);
-                }
-
-                this._logger.LogDebug("Root items count {ItemsCount}", treeSolution.Children.Count);
-
-                return treeSolution;
-            }
-            catch (HttpRequestException ex)
+            foreach (var repo in GitHubTreeConfig.RepoList)
             {
-                this._logger.LogError(ex, "Error loading tree from GitHub");
-                throw;
+                string repoUrl = GitHubTreeConfig.GetApiUrl(repo);
+
+                this._logger.LogDebug("Http request to '{RepoUrl}'.", repoUrl);
+
+                GitHubTreeResponse? githubTree = await this._httpClient.GetFromJsonAsync<GitHubTreeResponse>(repoUrl);
+
+                if (githubTree is null) throw new HttpRequestException("GitHubProjectTreeResponse is null");
+
+                SolutionTreeItem solutionItem = this.MapToProjectTreeItem(githubTree, repo);
+                solutionTree.Children.Add(solutionItem);
             }
+
+            this._logger.LogDebug("Root items count {ItemsCount}", solutionTree.Children.Count);
+
+            return solutionTree;
         }
 
 

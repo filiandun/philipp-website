@@ -25,7 +25,11 @@ namespace PhilippWebsite.Server.Services.EditorContent
         {
             string fileContent = await this._fileContentService.GetContentAsync(filePath);
 
+            this._logger.LogInformation("Get file content '{FileContentLength}' length by '{FilePath}'", fileContent.Length, filePath);
+
             string[] highlightedLines = this._codeHighlighterService.GetHighlightedHtml(fileContent, filePath);
+
+            this._logger.LogInformation("Make highlighted content '{HighlightedLines}' lines by '{FilePath}'", highlightedLines.Length, filePath);
 
             return highlightedLines;
         }

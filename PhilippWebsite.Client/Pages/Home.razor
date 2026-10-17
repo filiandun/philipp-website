@@ -8,12 +8,13 @@
 @using PhilippWebsite.Client.Components.ToolBar
 
 @using PhilippWebsite.Client.Models
-@using PhilippWebsite.Client.Models.SolutionExplorer
 
 @using PhilippWebsite.Client.Resources
 
 @using PhilippWebsite.Client.Services.SolutionExplorer
 @using PhilippWebsite.Client.Services.TabsBarState
+
+@using PhilippWebsite.Shared.SolutionState
 
 
 @inject ISolutionExplorerService SolutionExplorerService
@@ -110,33 +111,5 @@
 
 
 @code {
-    protected override async Task OnInitializedAsync()
-    {
-        SolutionExplorerRoot? explorerRoot = await this.SolutionExplorerService.GetTreeAsync();
 
-        if (explorerRoot is null) return;
-
-        SolutionExplorerItem? firstSolution = explorerRoot.FirstOrDefault();
-
-        if (firstSolution is null) return; 
-
-        firstSolution.IsExpanded = true;
-
-        SolutionExplorerItem? firstItem = firstSolution.Items.FirstOrDefault();
-
-        if (firstItem is null) return; 
-
-        this.TabsBarStateService.OpenAsActive(new TabModel { 
-                Name = firstItem.Name, 
-                Path = firstItem.Path, 
-        });
-
-        for (int i = 1; i < firstSolution.Items.Count; i++)
-        {
-            this.TabsBarStateService.Open(new TabModel { 
-                Name = firstSolution.Items[i].Name, 
-                Path = firstSolution.Items[i].Path, 
-            });
-        }
-    }
 }

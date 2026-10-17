@@ -9,10 +9,14 @@
 
         public List<SolutionTreeItem> Children { get; init; }
 
+        public bool IsExpanded { get; set; }
+
 
         public SolutionTreeItem()
         {
             this.Children = new List<SolutionTreeItem>();
+
+            this.IsExpanded = false;
         }
     }
 }

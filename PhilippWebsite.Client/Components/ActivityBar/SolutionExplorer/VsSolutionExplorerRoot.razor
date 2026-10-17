@@ -2,10 +2,10 @@
 
 
 @using PhilippWebsite.Client.Models
-@using PhilippWebsite.Client.Models.SolutionExplorer
-
 @using PhilippWebsite.Client.Services.SolutionExplorer
 @using PhilippWebsite.Client.Services.TabsBarState
+
+@using PhilippWebsite.Shared.SolutionState
 
 
 @inject ISolutionExplorerService SolutionExplorerService;
@@ -17,7 +17,7 @@
 
     @if (this._explorerRoot is not null)
     {
-        @foreach (SolutionExplorerItem item in this._explorerRoot)
+        @foreach (SolutionTreeItem item in this._explorerRoot.Items)
         {
             <VsSolutionExplorerItem Item="item" OnItemClick="this.OnItemClick"></VsSolutionExplorerItem>
         }
@@ -31,7 +31,7 @@
 
 
 @code {
-    private SolutionExplorerRoot? _explorerRoot;
+    private SolutionTreeRoot? _explorerRoot;
 
     protected override async Task OnInitializedAsync()
     {
@@ -39,9 +39,9 @@
     }
 
 
-    private void OnItemClick(SolutionExplorerItem item)
+    private void OnItemClick(SolutionTreeItem item)
     {
-        if (item.Type == SolutionExplorerItemType.File)
+        if (item.Type == SolutionTreeItemType.File)
         {
             this.TabsBarStateService.OpenAsActive(new TabModel() { Name = item.Name, Path = item.Path });
         }

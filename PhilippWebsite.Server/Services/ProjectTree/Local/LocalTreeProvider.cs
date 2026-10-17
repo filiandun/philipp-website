@@ -21,7 +21,7 @@ namespace PhilippWebsite.Server.Services.ProjectTree.Local
         }
 
 
-        public async Task<SolutionTreeItem?> GetTreeAsync()
+        public async Task<SolutionTreeItem> GetTreeAsync()
         {
             if (this._memoryCache.TryGetValue(CacheKeys.LOCAL_PROJECT_TREE, out SolutionTreeItem? cachedTree) && cachedTree is not null)
             {
@@ -32,55 +32,40 @@ namespace PhilippWebsite.Server.Services.ProjectTree.Local
 
             this._logger.LogInformation("Cache miss. Fetching Local tree from drive.");
 
-            SolutionTreeItem? projectTree = await this.BuildTree();
+            SolutionTreeItem? solutionTree = await this.BuildTree();
 
-            if (projectTree is not null)
-            {
-                this._memoryCache.Set(CacheKeys.LOCAL_PROJECT_TREE, projectTree, TimeSpan.FromHours(1));
-                this._logger.LogInformation("Local tree successfully fetched and cached.");
-            }
-            else
-            {
-                this._logger.LogInformation("BuildTree returned null. Local tree was not cached.");
-            }
+            this._memoryCache.Set(CacheKeys.LOCAL_PROJECT_TREE, solutionTree, TimeSpan.FromHours(1));
+            this._logger.LogInformation("Local tree successfully fetched and cached.");
 
-            return projectTree;
+            return solutionTree;
         }
 
-        private async Task<SolutionTreeItem?> BuildTree()
+        private async Task<SolutionTreeItem> BuildTree()
         {
-            try
+            SolutionTreeItem solutionTree = new()
             {
-                SolutionTreeItem treeSolution = new()
-                {
-                    Name = LocalTreeConfig.SolutionName,
-                    Path = string.Empty,
+                Name = LocalTreeConfig.SolutionName,
+                Path = string.Empty,
 
-                    Type = SolutionTreeItemType.Solution,
+                Type = SolutionTreeItemType.Solution,
+            };
+
+            foreach (string file in LocalTreeConfig.FileList)
+            {
+                SolutionTreeItem treeItem = new()
+                {
+                    Name = file,
+                    Path = LocalTreeConfig.GetBaseUrl(file),
+
+                    Type = SolutionTreeItemType.File,
                 };
 
-                foreach (string file in LocalTreeConfig.FileList)
-                {
-                    SolutionTreeItem treeItem = new()
-                    {
-                        Name = file,
-                        Path = LocalTreeConfig.GetBaseUrl(file),
-
-                        Type = SolutionTreeItemType.File,
-                    };
-
-                    treeSolution.Children.Add(treeItem);
-                }
-
-                this._logger.LogDebug("Root items count {ItemsCount}", treeSolution.Children.Count);
-
-                return treeSolution;
+                solutionTree.Children.Add(treeItem);
             }
-            catch (Exception ex)
-            {
-                this._logger.LogError(ex, "Error loading tree from local");
-                throw;
-            }
+
+            this._logger.LogDebug("Root items count {ItemsCount}", solutionTree.Children.Count);
+
+            return solutionTree;
         }
     }
 }

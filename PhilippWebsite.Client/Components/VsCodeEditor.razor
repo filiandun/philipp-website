@@ -1,53 +1,55 @@
 ﻿@* VsCodeEditor.razor *@
 
 
-@using PhilippWebsite.Client.Clients.EditorContent
-
-@using PhilippWebsite.Client.Services.TabsBarState
+@using PhilippWebsite.Client.Services.EditorContent
 
 
-@inject TabsBarStateService TabsBarStateService
+@implements IDisposable
 
-@inject IEditorContentClient EditorContentClient
+
+@inject IEditorContentService EditorContentService
 
 
 <div class="vs-editor-root">
-    <div class="vs-editor-lines">
-        @for (int i = 0; i < this._codeLines.Length; i++)
-        {
-            <div class="vs-editor-line">
-                <span class="vs-editor-line-gutter">@(i + 1)</span>
-                <span class="vs-editor-line-content">@((MarkupString)this._codeLines[i])</span>
-            </div>
-        }
-    </div>
+    @if (this.EditorContentService.IsLoading)
+    {
+        <span>Loading..</span>
+    }
+    else if (this.EditorContentService.HasError)
+    {
+        <span>Error to load file.</span>
+    }
+    else if (this.EditorContentService.NothingSelected)
+    {
+        <span>Nothing selected.</span>
+    }
+    else if (this.EditorContentService.CurrentContent.Length == 0)
+    {
+        <span>File is empty.</span>
+    }
+    else
+    {
+        <div class="vs-editor-lines">
+            @for (int i = 0; i < this.EditorContentService.CurrentContent.Length; i++)
+            {
+                <div class="vs-editor-line">
+                    <span class="vs-editor-line-gutter">@(i + 1)</span>
+                    <span class="vs-editor-line-content">@((MarkupString)this.EditorContentService.CurrentContent[i])</span>
+                </div>
+            }
+        </div>
+    }
 </div>
 
 
 @code {
-    private string[] _codeLines = [];
-
-
     protected override void OnInitialized()
     {
-        this.TabsBarStateService.OnActiveTabChange += this.OnActiveTabChange;
+        this.EditorContentService.OnContentChanged += this.StateHasChanged;
     }
-
-
-    private async void OnActiveTabChange()
-    {
-        if (this.TabsBarStateService.ActiveTab is null) return;
-
-        string filePath = this.TabsBarStateService.ActiveTab.Path;
-
-        this._codeLines = await this.EditorContentClient.GetCodeAsync(filePath);
-
-        this.StateHasChanged();
-    }
-
 
     public void Dispose()
     {
-        this.TabsBarStateService.OnOpenTabsChange -= this.OnActiveTabChange;
+        this.EditorContentService.OnContentChanged -= this.StateHasChanged;
     }
-} 
+}
