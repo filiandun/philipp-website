@@ -1,3 +1,4 @@
+using PhilippWebsite.Server.Options;
 using PhilippWebsite.Server.Services.EditorContent;
 
 using PhilippWebsite.Server.Services.FileContent;
@@ -36,6 +37,14 @@ namespace PhilippWebsite.Server
                     policy.WithOrigins(allowedOrigins).AllowAnyHeader().AllowAnyMethod();
                 });
             });
+
+
+            // Options
+
+            builder.Services.AddOptions<LocalContentOptions>().Bind(builder.Configuration.GetSection("LocalContent")).ValidateDataAnnotations().ValidateOnStart();
+            builder.Services.AddOptions<GitHubContentOptions>().Bind(builder.Configuration.GetSection("GitHubContent")).ValidateDataAnnotations().ValidateOnStart();
+
+            builder.Services.AddOptions<SolutionStateOptions>().Bind(builder.Configuration.GetSection("SolutionState")).ValidateDataAnnotations().ValidateOnStart();
 
 
             // Services

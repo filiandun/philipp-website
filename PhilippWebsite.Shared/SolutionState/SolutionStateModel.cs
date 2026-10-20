@@ -10,6 +10,6 @@ namespace PhilippWebsite.Shared.SolutionState
 
         public required List<SolutionTreeItem> InitialOpenItems { get; set; }
 
-        public SolutionTreeItem? ActiveItem { get; set; } = null;
+        public SolutionTreeItem? InitialActiveItem { get; set; } = null;
     }
 }

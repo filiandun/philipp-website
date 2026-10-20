@@ -1,0 +1,21 @@
+﻿using System.ComponentModel.DataAnnotations;
+
+
+namespace PhilippWebsite.Server.Options
+{
+    public class LocalContentOptions
+    {
+        [Required]
+        public required string SectionName { get; init; }
+
+        [Required]
+        public required string StorageFolder { get; init; }
+        [Required]
+        public required string BasePath { get; init; }
+
+        [Required]
+        public required List<string> Files { get; init; }
+
+        public string GetPath(string file) => $"{this.BasePath}/{file}";
+    }
+}

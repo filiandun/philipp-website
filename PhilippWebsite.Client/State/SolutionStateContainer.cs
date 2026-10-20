@@ -61,7 +61,7 @@ namespace PhilippWebsite.Client.State
         {
             await this.InitializeAsync();
 
-            return this._solutionState?.ActiveItem;
+            return this._solutionState?.InitialActiveItem;
         }
     }
 }

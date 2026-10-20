@@ -1,6 +1,9 @@
 ﻿using Microsoft.Extensions.Caching.Memory;
+using Microsoft.Extensions.Options;
 
 using PhilippWebsite.Server.Models;
+using PhilippWebsite.Server.Options;
+
 using PhilippWebsite.Shared.SolutionState;
 
 
@@ -18,14 +21,18 @@ namespace PhilippWebsite.Server.Services.ProjectTree.GitHub
 
         private readonly IMemoryCache _memoryCache;
 
+        private readonly GitHubContentOptions _options;
 
-        public GitHubTreeProvider(ILogger<GitHubTreeProvider> logger, HttpClient httpClient, IMemoryCache memoryCache)
+
+        public GitHubTreeProvider(ILogger<GitHubTreeProvider> logger, HttpClient httpClient, IMemoryCache memoryCache, IOptions<GitHubContentOptions> options)
         {
             this._logger = logger;
 
             this._httpClient = httpClient;
 
             this._memoryCache = memoryCache;
+
+            this._options = options.Value;
         }
 
 
@@ -51,17 +58,17 @@ namespace PhilippWebsite.Server.Services.ProjectTree.GitHub
 
         private async Task<SolutionTreeItem> BuildTree()
         {
-            SolutionTreeItem solutionTree = new()
+            SolutionTreeItem rootTree = new()
             {
-                Name = GitHubTreeConfig.SolutionName,
+                Name = this._options.SectionName,
                 Path = string.Empty,
 
                 Type = SolutionTreeItemType.Solution,
             };
 
-            foreach (var repo in GitHubTreeConfig.RepoList)
+            foreach (var repo in this._options.Repositories)
             {
-                string repoUrl = GitHubTreeConfig.GetApiUrl(repo);
+                string repoUrl = this._options.GetApiUrl(repo);
 
                 this._logger.LogDebug("Http request to '{RepoUrl}'.", repoUrl);
 
@@ -70,12 +77,12 @@ namespace PhilippWebsite.Server.Services.ProjectTree.GitHub
                 if (githubTree is null) throw new HttpRequestException("GitHubProjectTreeResponse is null");
 
                 SolutionTreeItem solutionItem = this.MapToProjectTreeItem(githubTree, repo);
-                solutionTree.Children.Add(solutionItem);
+                rootTree.Children.Add(solutionItem);
             }
 
-            this._logger.LogDebug("Root items count {ItemsCount}", solutionTree.Children.Count);
+            this._logger.LogDebug("Root items count {ItemsCount}", rootTree.Children.Count);
 
-            return solutionTree;
+            return rootTree;
         }
 
 
@@ -88,7 +95,7 @@ namespace PhilippWebsite.Server.Services.ProjectTree.GitHub
                 SolutionTreeItem treeItem = new()
                 {
                     Name = githubTreeItem.Path.Split('/').Last(), // TODO maybe exception
-                    Path = GitHubTreeConfig.GetGitUrl(repo, githubTreeItem.Path),
+                    Path = this._options.GetWebUrl(repo, githubTreeItem.Path),
 
                     Type = githubTreeItem.Type == FOLDER_TYPE ? SolutionTreeItemType.Folder : SolutionTreeItemType.File,
                 };

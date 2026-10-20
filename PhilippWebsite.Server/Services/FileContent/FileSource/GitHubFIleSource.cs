@@ -1,4 +1,8 @@
-﻿
+﻿using Microsoft.Extensions.Options;
+
+using PhilippWebsite.Server.Options;
+
+
 namespace PhilippWebsite.Server.Services.FileContent.FileSource
 {
     public class GitHubFileSource : IFileSource
@@ -7,28 +11,32 @@ namespace PhilippWebsite.Server.Services.FileContent.FileSource
 
         private readonly HttpClient _httpClient;
 
+        private readonly GitHubContentOptions _options;
 
-        public GitHubFileSource(ILogger<GitHubFileSource> logger, HttpClient httpClient)
+        public GitHubFileSource(ILogger<GitHubFileSource> logger, HttpClient httpClient, IOptions<GitHubContentOptions> options)
         {
             this._logger = logger;
 
             this._httpClient = httpClient;
+
+            this._options = options.Value;
         }
 
 
-        public bool CanHandle(string url) => url.StartsWith("https://github.com/filiandun/");
+        public bool CanHandle(string url) => url.StartsWith(GitHubContentOptions.WebBaseUrl);
 
 
         public async Task<string> GetRawContentAsync(string url)
         {
-            if (!url.StartsWith("https://github.com/filiandun/"))
+            if (!this.IsValidUrl(url))
             {
                 this._logger.LogWarning("SSRF attempt detected '{Url}'", url);
 
                 throw new UnauthorizedAccessException("Invalid GitHub URL scope.");
             }
 
-            string rawUrl = url.Replace("https://github.com/", "https://raw.githubusercontent.com/").Replace("/blob/", "/");
+            string rawUrl = url.Replace(GitHubContentOptions.WebBaseUrl, GitHubContentOptions.RawBaseUrl).Replace("/blob/", "/");
+            this._logger.LogDebug(rawUrl);
 
             var response = await this._httpClient.GetAsync(rawUrl);
 
@@ -42,6 +50,20 @@ namespace PhilippWebsite.Server.Services.FileContent.FileSource
             this._logger.LogWarning("GitHub returned {StatusCode} for '{Url}'.", response.StatusCode, rawUrl);
 
             throw new HttpRequestException($"GitHub returned error {response.StatusCode}");
+        }
+
+
+        private bool IsValidUrl(string url)
+        {
+            string baseUrl = $"{GitHubContentOptions.WebBaseUrl}/{this._options.Username}/";
+
+            int count = 0;
+            foreach (string repo in this._options.Repositories)
+            {
+                if (!url.StartsWith($"{baseUrl}/{repo}")) count++;
+            }
+
+            return count != this._options.Repositories.Count - 1;
         }
     }
 }

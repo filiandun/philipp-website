@@ -1,6 +1,8 @@
 ﻿using Microsoft.Extensions.Caching.Memory;
+using Microsoft.Extensions.Options;
 
 using PhilippWebsite.Server.Models;
+using PhilippWebsite.Server.Options;
 using PhilippWebsite.Shared.SolutionState;
 
 
@@ -12,12 +14,16 @@ namespace PhilippWebsite.Server.Services.ProjectTree.Local
 
         private readonly IMemoryCache _memoryCache;
 
+        private readonly LocalContentOptions _options;
 
-        public LocalTreeProvider(ILogger<LocalTreeProvider> logger, IMemoryCache memoryCache)
+
+        public LocalTreeProvider(ILogger<LocalTreeProvider> logger, IMemoryCache memoryCache, IOptions<LocalContentOptions> options)
         {
             this._logger = logger;
 
             this._memoryCache = memoryCache;
+
+            this._options = options.Value;
         }
 
 
@@ -42,30 +48,30 @@ namespace PhilippWebsite.Server.Services.ProjectTree.Local
 
         private async Task<SolutionTreeItem> BuildTree()
         {
-            SolutionTreeItem solutionTree = new()
+            SolutionTreeItem rootTree = new()
             {
-                Name = LocalTreeConfig.SolutionName,
+                Name = this._options.SectionName,
                 Path = string.Empty,
 
                 Type = SolutionTreeItemType.Solution,
             };
 
-            foreach (string file in LocalTreeConfig.FileList)
+            foreach (string file in this._options.Files)
             {
                 SolutionTreeItem treeItem = new()
                 {
                     Name = file,
-                    Path = LocalTreeConfig.GetBaseUrl(file),
+                    Path = this._options.GetPath(file),
 
                     Type = SolutionTreeItemType.File,
                 };
 
-                solutionTree.Children.Add(treeItem);
+                rootTree.Children.Add(treeItem);
             }
 
-            this._logger.LogDebug("Root items count {ItemsCount}", solutionTree.Children.Count);
+            this._logger.LogDebug("Root items count {ItemsCount}", rootTree.Children.Count);
 
-            return solutionTree;
+            return rootTree;
         }
     }
 }
