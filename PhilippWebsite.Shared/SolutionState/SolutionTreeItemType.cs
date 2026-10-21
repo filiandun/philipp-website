@@ -4,7 +4,14 @@
     {
         Solution,
 
+        PortfolioSolutionFolder,
+        PetProjectsSolutionFolder,
+
         Project,
+
+        AspProject,
+        WpfProject,
+        ExtensionProject,
 
         Folder,
         File

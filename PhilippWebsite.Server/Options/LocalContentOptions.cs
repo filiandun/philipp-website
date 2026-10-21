@@ -1,4 +1,6 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using PhilippWebsite.Shared.SolutionState;
+
+using System.ComponentModel.DataAnnotations;
 
 
 namespace PhilippWebsite.Server.Options
@@ -7,6 +9,8 @@ namespace PhilippWebsite.Server.Options
     {
         [Required]
         public required string SectionName { get; init; }
+        [Required]
+        public required SolutionTreeItemType SectionType { get; init; }
 
         [Required]
         public required string StorageFolder { get; init; }

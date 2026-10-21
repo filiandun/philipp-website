@@ -58,7 +58,7 @@ namespace PhilippWebsite.Server.Services.FileContent.FileSource
             string baseUrl = $"{GitHubContentOptions.WebBaseUrl}/{this._options.Username}/";
 
             int count = 0;
-            foreach (string repo in this._options.Repositories)
+            foreach (string repo in this._options.Repositories.Keys)
             {
                 if (!url.StartsWith($"{baseUrl}/{repo}")) count++;
             }

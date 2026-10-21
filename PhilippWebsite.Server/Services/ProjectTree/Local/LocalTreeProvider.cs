@@ -53,7 +53,7 @@ namespace PhilippWebsite.Server.Services.ProjectTree.Local
                 Name = this._options.SectionName,
                 Path = string.Empty,
 
-                Type = SolutionTreeItemType.Solution,
+                Type = this._options.SectionType,
             };
 
             foreach (string file in this._options.Files)

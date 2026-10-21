@@ -68,15 +68,27 @@ namespace PhilippWebsite.Server.Services.ProjectTree.GitHub
 
             foreach (var repo in this._options.Repositories)
             {
-                string repoUrl = this._options.GetApiUrl(repo);
+                string repoUrl = this._options.GetApiUrl(repo.Key);
 
                 this._logger.LogDebug("Http request to '{RepoUrl}'.", repoUrl);
+                
+                HttpResponseMessage response = await this._httpClient.GetAsync(repoUrl);
 
-                GitHubTreeResponse? githubTree = await this._httpClient.GetFromJsonAsync<GitHubTreeResponse>(repoUrl);
+                if (!response.IsSuccessStatusCode)
+                {
+                    this._logger.LogWarning("Skip repo '{Repo}'. GitHub returned {StatusCode}.", repo.Key, response.StatusCode);
+                    continue;
+                }
 
-                if (githubTree is null) throw new HttpRequestException("GitHubProjectTreeResponse is null");
+                GitHubTreeResponse? githubTree = await response.Content.ReadFromJsonAsync<GitHubTreeResponse>();
 
-                SolutionTreeItem solutionItem = this.MapToProjectTreeItem(githubTree, repo);
+                if (githubTree is null)
+                {
+                    this._logger.LogWarning("Skip repo '{Repo}'. GitHub tree is null.", repo.Key);
+                    continue;
+                }
+
+                SolutionTreeItem solutionItem = this.MapToSolutionTreeItem(githubTree, repo);
                 rootTree.Children.Add(solutionItem);
             }
 
@@ -86,7 +98,7 @@ namespace PhilippWebsite.Server.Services.ProjectTree.GitHub
         }
 
 
-        private SolutionTreeItem MapToProjectTreeItem(GitHubTreeResponse githubTree, string repo)
+        private SolutionTreeItem MapToSolutionTreeItem(GitHubTreeResponse githubTree, KeyValuePair<string, SolutionTreeItemType> repo)
         {
             Dictionary<string, SolutionTreeItem> treeItemDictionary = new();
 
@@ -95,7 +107,7 @@ namespace PhilippWebsite.Server.Services.ProjectTree.GitHub
                 SolutionTreeItem treeItem = new()
                 {
                     Name = githubTreeItem.Path.Split('/').Last(), // TODO maybe exception
-                    Path = this._options.GetWebUrl(repo, githubTreeItem.Path),
+                    Path = this._options.GetWebUrl(repo.Key, githubTreeItem.Path),
 
                     Type = githubTreeItem.Type == FOLDER_TYPE ? SolutionTreeItemType.Folder : SolutionTreeItemType.File,
                 };
@@ -106,10 +118,10 @@ namespace PhilippWebsite.Server.Services.ProjectTree.GitHub
 
             SolutionTreeItem treeRoot = new()
             {
-                Name = repo,
+                Name = repo.Key,
                 Path = string.Empty,
 
-                Type = SolutionTreeItemType.Project,
+                Type = repo.Value,
             };
 
             foreach (GitHubTreeItem githubTreeItem in githubTree.LinearTree)

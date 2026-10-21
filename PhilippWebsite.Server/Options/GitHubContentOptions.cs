@@ -1,4 +1,6 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using PhilippWebsite.Shared.SolutionState;
+
+using System.ComponentModel.DataAnnotations;
 
 
 namespace PhilippWebsite.Server.Options
@@ -18,7 +20,7 @@ namespace PhilippWebsite.Server.Options
         public required string Branch { get; init; }
 
         [Required]
-        public required List<string> Repositories { get; init; }
+        public required Dictionary<string, SolutionTreeItemType> Repositories { get; init; }
 
         public string GetApiUrl(string repo) => $"{ApiBaseUrl}/repos/{this.Username}/{repo}/git/trees/{this.Branch}?recursive=1";
         public string GetWebUrl(string repo, string file) => $"{WebBaseUrl}/{this.Username}/{repo}/blob/{this.Branch}/{file}";

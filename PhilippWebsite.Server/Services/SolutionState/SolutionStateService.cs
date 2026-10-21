@@ -40,7 +40,7 @@ namespace PhilippWebsite.Server.Services.SolutionState
 
             SolutionStateModel solutionModel = new()
             {
-                Name = "PhilippPortfolio",
+                Name = this._options.SolutionName,
                 Tree = treeRoot,
                 InitialOpenItems = initialOpenItems,
                 InitialActiveItem = initialActiveItem
