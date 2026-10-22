@@ -13,6 +13,8 @@ namespace PhilippWebsite.Server.Options
 
         [Required]
         public required string SectionName { get; init; }
+        [Required]
+        public required SolutionTreeItemType SectionType { get; init; }
 
         [Required]
         public required string Username { get; init; }

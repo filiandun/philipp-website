@@ -9,7 +9,7 @@ Accept: application/json
 @file = https://github.com/filiandun/philipp-website/blob/main/PhilippWebsite/Components/ActivityBar/VsActivityBarPanel.razor
 
 GET {{PhilippWebsite.Server_HostAddress}}/FileContent/GetContent?path={{file}}
-Accept: application/json
+Accept: application/json+
 
 ###
 

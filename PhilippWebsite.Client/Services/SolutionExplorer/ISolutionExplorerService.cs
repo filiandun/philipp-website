@@ -5,6 +5,13 @@ namespace PhilippWebsite.Client.Services.SolutionExplorer
 {
     public interface ISolutionExplorerService
     {
-        public Task<SolutionTreeRoot?> GetTreeAsync();
+        public event Action? OnTreeChanged;
+
+        public SolutionTreeItem? Tree { get; }
+
+        public bool IsLoading { get; }
+        public bool HasError { get; }
+
+        public void SetTree(SolutionTreeItem? tree);
     }
 }

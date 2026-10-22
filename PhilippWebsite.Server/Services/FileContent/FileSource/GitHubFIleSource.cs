@@ -55,15 +55,14 @@ namespace PhilippWebsite.Server.Services.FileContent.FileSource
 
         private bool IsValidUrl(string url)
         {
-            string baseUrl = $"{GitHubContentOptions.WebBaseUrl}/{this._options.Username}/";
+            string baseUrl = PathHelper.Combine(GitHubContentOptions.WebBaseUrl, this._options.Username);
 
-            int count = 0;
             foreach (string repo in this._options.Repositories.Keys)
             {
-                if (!url.StartsWith($"{baseUrl}/{repo}")) count++;
+                if (url.StartsWith(PathHelper.Combine(baseUrl, repo))) return true;
             }
 
-            return count != this._options.Repositories.Count - 1;
+            return false;
         }
     }
 }

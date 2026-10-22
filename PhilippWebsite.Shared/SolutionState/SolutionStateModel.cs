@@ -6,7 +6,7 @@ namespace PhilippWebsite.Shared.SolutionState
         public required string Name { get; set; }
 
 
-        public required SolutionTreeRoot Tree { get; set; }
+        public required SolutionTreeItem Tree { get; set; }
 
         public required List<SolutionTreeItem> InitialOpenItems { get; set; }
 

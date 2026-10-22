@@ -6,7 +6,7 @@ using PhilippWebsite.Server.Options;
 using PhilippWebsite.Shared.SolutionState;
 
 
-namespace PhilippWebsite.Server.Services.ProjectTree.Local
+namespace PhilippWebsite.Server.Services.SolutionTree.TreeProvider.Local
 {
     public class LocalTreeProvider : ITreeProvider
     {
@@ -38,7 +38,7 @@ namespace PhilippWebsite.Server.Services.ProjectTree.Local
 
             this._logger.LogInformation("Cache miss. Fetching Local tree from drive.");
 
-            SolutionTreeItem? solutionTree = await this.BuildTree();
+            SolutionTreeItem solutionTree = await this.BuildTree();
 
             this._memoryCache.Set(CacheKeys.LOCAL_PROJECT_TREE, solutionTree, TimeSpan.FromHours(1));
             this._logger.LogInformation("Local tree successfully fetched and cached.");
@@ -48,10 +48,10 @@ namespace PhilippWebsite.Server.Services.ProjectTree.Local
 
         private async Task<SolutionTreeItem> BuildTree()
         {
-            SolutionTreeItem rootTree = new()
+            SolutionTreeItem solutionTree = new()
             {
                 Name = this._options.SectionName,
-                Path = string.Empty,
+                TreePath = this._options.SectionName,
 
                 Type = this._options.SectionType,
             };
@@ -61,17 +61,19 @@ namespace PhilippWebsite.Server.Services.ProjectTree.Local
                 SolutionTreeItem treeItem = new()
                 {
                     Name = file,
-                    Path = this._options.GetPath(file),
+                    TreePath = PathHelper.Combine(solutionTree.TreePath, file),
 
                     Type = SolutionTreeItemType.File,
+
+                    ContentPath = this._options.GetPath(file),
                 };
 
-                rootTree.Children.Add(treeItem);
+                solutionTree.Children.Add(treeItem);
             }
 
-            this._logger.LogDebug("Root items count {ItemsCount}", rootTree.Children.Count);
+            this._logger.LogDebug("Solution items count {ItemsCount}", solutionTree.Children.Count);
 
-            return rootTree;
+            return solutionTree;
         }
     }
 }

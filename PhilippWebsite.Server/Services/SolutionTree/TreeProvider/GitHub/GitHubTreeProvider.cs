@@ -3,11 +3,11 @@ using Microsoft.Extensions.Options;
 
 using PhilippWebsite.Server.Models;
 using PhilippWebsite.Server.Options;
-
+using PhilippWebsite.Server.Services.SolutionTree.TreeProvider;
 using PhilippWebsite.Shared.SolutionState;
 
 
-namespace PhilippWebsite.Server.Services.ProjectTree.GitHub
+namespace PhilippWebsite.Server.Services.SolutionTree.TreeProvider.GitHub
 {
     public class GitHubTreeProvider : ITreeProvider
     {
@@ -58,12 +58,12 @@ namespace PhilippWebsite.Server.Services.ProjectTree.GitHub
 
         private async Task<SolutionTreeItem> BuildTree()
         {
-            SolutionTreeItem rootTree = new()
+            SolutionTreeItem solutionTree = new()
             {
                 Name = this._options.SectionName,
-                Path = string.Empty,
+                TreePath = this._options.SectionName,
 
-                Type = SolutionTreeItemType.Solution,
+                Type = this._options.SectionType,
             };
 
             foreach (var repo in this._options.Repositories)
@@ -71,7 +71,7 @@ namespace PhilippWebsite.Server.Services.ProjectTree.GitHub
                 string repoUrl = this._options.GetApiUrl(repo.Key);
 
                 this._logger.LogDebug("Http request to '{RepoUrl}'.", repoUrl);
-                
+
                 HttpResponseMessage response = await this._httpClient.GetAsync(repoUrl);
 
                 if (!response.IsSuccessStatusCode)
@@ -89,12 +89,12 @@ namespace PhilippWebsite.Server.Services.ProjectTree.GitHub
                 }
 
                 SolutionTreeItem solutionItem = this.MapToSolutionTreeItem(githubTree, repo);
-                rootTree.Children.Add(solutionItem);
+                solutionTree.Children.Add(solutionItem);
             }
 
-            this._logger.LogDebug("Root items count {ItemsCount}", rootTree.Children.Count);
+            this._logger.LogDebug("Solution items count {ItemsCount}", solutionTree.Children.Count);
 
-            return rootTree;
+            return solutionTree;
         }
 
 
@@ -104,10 +104,13 @@ namespace PhilippWebsite.Server.Services.ProjectTree.GitHub
 
             foreach (GitHubTreeItem githubTreeItem in githubTree.LinearTree)
             {
+                string itemName = githubTreeItem.Path.Split('/').Last(); // TODO maybe exception
+
                 SolutionTreeItem treeItem = new()
                 {
-                    Name = githubTreeItem.Path.Split('/').Last(), // TODO maybe exception
-                    Path = this._options.GetWebUrl(repo.Key, githubTreeItem.Path),
+                    Name = itemName, 
+                    TreePath = PathHelper.Combine(this._options.SectionName, itemName), // githubTreeItem.Path
+                    ContentPath = this._options.GetWebUrl(repo.Key, githubTreeItem.Path),
 
                     Type = githubTreeItem.Type == FOLDER_TYPE ? SolutionTreeItemType.Folder : SolutionTreeItemType.File,
                 };
@@ -116,10 +119,10 @@ namespace PhilippWebsite.Server.Services.ProjectTree.GitHub
             }
 
 
-            SolutionTreeItem treeRoot = new()
+            SolutionTreeItem solutionTree = new()
             {
                 Name = repo.Key,
-                Path = string.Empty,
+                TreePath = PathHelper.Combine(this._options.SectionName, repo.Key),
 
                 Type = repo.Value,
             };
@@ -132,7 +135,7 @@ namespace PhilippWebsite.Server.Services.ProjectTree.GitHub
 
                 if (lastSlashIndex == -1)
                 {
-                    treeRoot.Children.Add(treeItem);
+                    solutionTree.Children.Add(treeItem);
                 }
                 else
                 {
@@ -145,9 +148,9 @@ namespace PhilippWebsite.Server.Services.ProjectTree.GitHub
                 }
             }
 
-            this.SortTree(treeRoot);
+            this.SortTree(solutionTree);
 
-            return treeRoot;
+            return solutionTree;
         }
 
         private void SortTree(SolutionTreeItem treeItem)

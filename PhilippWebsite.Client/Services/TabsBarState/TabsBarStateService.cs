@@ -1,8 +1,5 @@
 ﻿using PhilippWebsite.Client.Models;
 
-using PhilippWebsite.Client.State;
-using PhilippWebsite.Shared.SolutionState;
-
 
 namespace PhilippWebsite.Client.Services.TabsBarState
 {
@@ -13,43 +10,19 @@ namespace PhilippWebsite.Client.Services.TabsBarState
 
         private readonly ILogger<TabsBarStateService> _logger;
 
-        private readonly SolutionStateContainer _solutionStateContainer;
-
-
         private readonly List<TabModel> _openTabs;
         public IReadOnlyList<TabModel> OpenTabs => this._openTabs;
 
         public TabModel? ActiveTab { get; private set; }
 
 
-        public TabsBarStateService(ILogger<TabsBarStateService> logger, SolutionStateContainer solutionStateContainer)
+        public TabsBarStateService(ILogger<TabsBarStateService> logger)
         {
             this._logger = logger;
-
-            this._solutionStateContainer = solutionStateContainer;
 
             this._openTabs = new List<TabModel>();
 
             this.ActiveTab = null;
-        }
-
-
-        public async Task InitializeAsync()
-        {
-            IEnumerable<SolutionTreeItem>? openedTreeItems = await this._solutionStateContainer.GetInitialOpenItems();
-
-            if (openedTreeItems is null) return;
-
-            foreach (SolutionTreeItem treeItem in openedTreeItems)
-            {
-                this.Open(new TabModel() { Name = treeItem.Name, Path = treeItem.Path });
-            }
-
-            SolutionTreeItem? activeTreeItem = await this._solutionStateContainer.GetActiveItem();
-
-            if (activeTreeItem is null) return;
-
-            this.OpenAsActive(new TabModel() { Name = activeTreeItem.Name, Path = activeTreeItem.Path });
         }
 
 

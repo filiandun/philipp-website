@@ -1,35 +1,48 @@
-﻿using PhilippWebsite.Client.State;
-
-using PhilippWebsite.Shared.SolutionState;
+﻿using PhilippWebsite.Shared.SolutionState;
 
 
 namespace PhilippWebsite.Client.Services.SolutionExplorer
 {
     public class SolutionExplorerService : ISolutionExplorerService
     {
+        public event Action? OnTreeChanged;
+
         private readonly ILogger<SolutionExplorerService> _logger;
 
-        private readonly SolutionStateContainer _solutionStateContainer;
+        public SolutionTreeItem? Tree { get; private set; }
+
+        public bool IsLoading { get; private set; }
+        public bool HasError { get; private set; }
 
 
-        public SolutionExplorerService(ILogger<SolutionExplorerService> logger, SolutionStateContainer solutionStateContainer)
+        public SolutionExplorerService(ILogger<SolutionExplorerService> logger)
         {
             this._logger = logger;
 
-            this._solutionStateContainer = solutionStateContainer;
+            this.IsLoading = true;
+            this.HasError = false;
         }
 
 
-        public async Task<SolutionTreeRoot?> GetTreeAsync()
+        public void SetTree(SolutionTreeItem? tree)
         {
-            SolutionTreeRoot? solutionTreeRoot = await this._solutionStateContainer.GetTreeAsync();
-
-            if (solutionTreeRoot is null)
+            if (tree is null)
             {
-                this._logger.LogWarning("Solution State Container return null Solution Tree Root.");
+                this._logger.LogWarning("Set tree as null");
+
+                this.HasError = true;
+            } 
+            else
+            {
+                this._logger.LogInformation("Set tree with root name '{RootName}'", tree.Name);
+
+                this.HasError = false;
             }
 
-            return solutionTreeRoot;
+            this.Tree = tree;
+            this.IsLoading = false;
+
+            this.OnTreeChanged?.Invoke();
         }
     }
 }

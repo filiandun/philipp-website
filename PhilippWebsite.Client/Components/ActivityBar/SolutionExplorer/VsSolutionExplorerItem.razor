@@ -22,15 +22,7 @@
         </div>
 
         <div class="vs-solution-explorer-item-head-icon">
-            @switch (this.Item.Type)
-            {
-                case SolutionTreeItemType.Solution: <VsIcon Icon="@IconResolver.GetSolutionIcon(this.Item.Name)" IconSize="16"></VsIcon> break;
-
-                case SolutionTreeItemType.Project: <VsIcon Icon="@IconResolver.GetProjectIcon(this.Item.Name)" IconSize="16"></VsIcon> break;
-
-                case SolutionTreeItemType.Folder: <VsIcon Icon="@IconResolver.GetFolderIcon(this.Item.Name)" IconSize="16"></VsIcon> break;
-                case SolutionTreeItemType.File: <VsIcon Icon="@IconResolver.GetFileIcon(this.Item.Name)" IconSize="16"></VsIcon> break;
-            } 
+            <VsIcon Icon="@IconResolver.GetIcon(this.Item)" IconSize="16"></VsIcon>
         </div>
 
         <div class="vs-solution-explorer-item-head-content">

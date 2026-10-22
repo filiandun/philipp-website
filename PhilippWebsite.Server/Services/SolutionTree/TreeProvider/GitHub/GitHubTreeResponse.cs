@@ -1,7 +1,7 @@
 ﻿using System.Text.Json.Serialization;
 
 
-namespace PhilippWebsite.Server.Services.ProjectTree.GitHub
+namespace PhilippWebsite.Server.Services.SolutionTree.TreeProvider.GitHub
 {
     public class GitHubTreeResponse
     {

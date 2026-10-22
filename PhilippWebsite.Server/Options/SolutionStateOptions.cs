@@ -8,10 +8,10 @@ namespace PhilippWebsite.Server.Options
         [Required]
         public required string SolutionName { get; init; }
 
-        public List<string> InitialExpandedItems { get; init; } = new();
+        public List<string> InitialExpandedPathes { get; init; } = new();
 
-        public List<string> InitialOpenItems { get; init; } = new();
+        public List<string> InitialOpenPathes { get; init; } = new();
 
-        public string? InitialActiveItem { get; init; } = null;
+        public string? InitialActivePath { get; init; } = null;
     }
 }

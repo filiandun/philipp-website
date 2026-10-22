@@ -1,11 +1,15 @@
-﻿@* VsProjectTreeRoot.razor *@
+﻿@* VsSolutionExplorerTreeRoot.razor *@
 
 
 @using PhilippWebsite.Client.Models
+
 @using PhilippWebsite.Client.Services.SolutionExplorer
 @using PhilippWebsite.Client.Services.TabsBarState
 
 @using PhilippWebsite.Shared.SolutionState
+
+
+@implements IDisposable
 
 
 @inject ISolutionExplorerService SolutionExplorerService;
@@ -15,27 +19,25 @@
 
 <div class="vs-solution-explorer-root">
 
-    @if (this._explorerRoot is not null)
+    @if (this.SolutionExplorerService.IsLoading)
     {
-        @foreach (SolutionTreeItem item in this._explorerRoot.Items)
-        {
-            <VsSolutionExplorerItem Item="item" OnItemClick="this.OnItemClick"></VsSolutionExplorerItem>
-        }
+        <span>Loading..</span>
+    }
+    else if (this.SolutionExplorerService.HasError || this.SolutionExplorerService.Tree is null)
+    {
+        <span>Error to load tree.</span>
     }
     else
     {
-        <span>Надо потерпеть.</span>
+        <VsSolutionExplorerItem Item="this.SolutionExplorerService.Tree" OnItemClick="this.OnItemClick"></VsSolutionExplorerItem>
     }
-
 </div>
 
 
 @code {
-    private SolutionTreeRoot? _explorerRoot;
-
-    protected override async Task OnInitializedAsync()
+    protected override void OnInitialized()
     {
-        this._explorerRoot = await this.SolutionExplorerService.GetTreeAsync();
+        this.SolutionExplorerService.OnTreeChanged += this.StateHasChanged;
     }
 
 
@@ -43,7 +45,13 @@
     {
         if (item.Type == SolutionTreeItemType.File)
         {
-            this.TabsBarStateService.OpenAsActive(new TabModel() { Name = item.Name, Path = item.Path });
+            this.TabsBarStateService.OpenAsActive(new TabModel() { Name = item.Name, Path = item.ContentPath });
         }
+    }
+
+
+    public void Dispose()
+    {
+        this.SolutionExplorerService.OnTreeChanged -= this.StateHasChanged;
     }
 }

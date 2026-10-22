@@ -1,7 +1,5 @@
 ﻿using PhilippWebsite.Client.Clients.EditorContent;
 
-using PhilippWebsite.Client.Models;
-
 using PhilippWebsite.Client.Services.TabsBarState;
 
 
@@ -57,6 +55,19 @@ namespace PhilippWebsite.Client.Services.EditorContent
 
                 this.HasError = false;
                 this.NothingSelected = true;
+
+                return;
+            }
+
+            if (this._tabsBarStateService.ActiveTab.Path is null)
+            {
+                this._logger.LogWarning("Active Tab Path is null, current content set empty.");
+
+                this.CurrentContent = [];
+                this.OnContentChanged?.Invoke();
+
+                this.HasError = true;
+                this.NothingSelected = false;
 
                 return;
             }

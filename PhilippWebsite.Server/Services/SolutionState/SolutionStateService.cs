@@ -2,8 +2,7 @@
 
 using PhilippWebsite.Server.Extensions;
 using PhilippWebsite.Server.Options;
-using PhilippWebsite.Server.Services.ProjectTree;
-
+using PhilippWebsite.Server.Services.SolutionTree;
 using PhilippWebsite.Shared.SolutionState;
 
 
@@ -13,12 +12,12 @@ namespace PhilippWebsite.Server.Services.SolutionState
     {
         private readonly ILogger<SolutionStateService> _logger;
 
-        private readonly IProjectTreeService _projectTreeService;
+        private readonly ISolutionTreeService _projectTreeService;
 
         private readonly SolutionStateOptions _options;
 
 
-        public SolutionStateService(ILogger<SolutionStateService> logger, IProjectTreeService projectTreeService, IOptions<SolutionStateOptions> options)
+        public SolutionStateService(ILogger<SolutionStateService> logger, ISolutionTreeService projectTreeService, IOptions<SolutionStateOptions> options)
         {
             this._logger = logger;
 
@@ -30,18 +29,18 @@ namespace PhilippWebsite.Server.Services.SolutionState
 
         public async Task<SolutionStateModel> GetModel()
         {
-            SolutionTreeRoot treeRoot = await this._projectTreeService.GetTreeAsync();
+            SolutionTreeItem solutionTree = await this._projectTreeService.GetTreeAsync();
 
-            List<SolutionTreeItem> treeFlat = treeRoot.Items.Flatten().ToList();
+            List<SolutionTreeItem> treeFlat = solutionTree.Flatten().ToList();
 
             this.MakeExpanded(treeFlat);
             List<SolutionTreeItem> initialOpenItems = this.GetOpenedItems(treeFlat);
-            SolutionTreeItem? initialActiveItem = treeFlat.FirstOrDefault(i => i.Name == this._options.InitialActiveItem);
+            SolutionTreeItem? initialActiveItem = treeFlat.FirstOrDefault(i => i.TreePath == this._options.InitialActivePath);
 
             SolutionStateModel solutionModel = new()
             {
                 Name = this._options.SolutionName,
-                Tree = treeRoot,
+                Tree = solutionTree,
                 InitialOpenItems = initialOpenItems,
                 InitialActiveItem = initialActiveItem
             };
@@ -52,18 +51,18 @@ namespace PhilippWebsite.Server.Services.SolutionState
 
         private void MakeExpanded(List<SolutionTreeItem> treeFlat)
         {
-            foreach (string item in this._options.InitialExpandedItems)
+            foreach (string path in this._options.InitialExpandedPathes)
             {
-                SolutionTreeItem? expandedItem = treeFlat.FirstOrDefault(i => i.Name == item);
+                SolutionTreeItem? expandedItem = treeFlat.FirstOrDefault(i => i.TreePath == path);
                 if (expandedItem is not null)
                 {
                     expandedItem.IsExpanded = true;
 
-                    this._logger.LogInformation("Item '{Item}' from Solution Tree was expand.", item);
+                    this._logger.LogInformation("Item '{Item}' from Solution Tree was expand.", path);
                 }
                 else
                 {
-                    this._logger.LogWarning("Expanded item '{Item}' from configurations not found in Solution Tree.", item);
+                    this._logger.LogWarning("Expanded item '{Item}' from configurations not found in Solution Tree.", path);
                 }
             }
         }
@@ -72,18 +71,18 @@ namespace PhilippWebsite.Server.Services.SolutionState
         {
             List<SolutionTreeItem> openedItems = new();
 
-            foreach (string item in this._options.InitialOpenItems)
+            foreach (string path in this._options.InitialOpenPathes)
             {
-                SolutionTreeItem? openedItem = treeFlat.FirstOrDefault(i => i.Name == item);
+                SolutionTreeItem? openedItem = treeFlat.FirstOrDefault(i => i.TreePath == path);
                 if (openedItem is not null)
                 {
                     openedItems.Add(openedItem);
 
-                    this._logger.LogInformation("Item '{Item}' from Solution Tree was opened.", item);
+                    this._logger.LogInformation("Item '{Item}' from Solution Tree was opened.", path);
                 }
                 else
                 {
-                    this._logger.LogWarning("Opened item '{Item}' from configurations not found in Solution Tree.", item);
+                    this._logger.LogWarning("Opened item '{Item}' from configurations not found in Solution Tree.", path);
                 }
             }
 

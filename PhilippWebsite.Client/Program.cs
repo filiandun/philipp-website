@@ -8,9 +8,8 @@ using PhilippWebsite.Client.Clients.SolutionState;
 
 using PhilippWebsite.Client.Services.EditorContent;
 using PhilippWebsite.Client.Services.SolutionExplorer;
+using PhilippWebsite.Client.Services.SolutionState;
 using PhilippWebsite.Client.Services.TabsBarState;
-
-using PhilippWebsite.Client.State;
 
 
 namespace PhilippWebsite.Client
@@ -38,7 +37,7 @@ namespace PhilippWebsite.Client
 
             // services
 
-            builder.Services.AddScoped<SolutionStateContainer>();
+            builder.Services.AddScoped<ISolutionStateInitializer, SolutionStateInitializer>();
 
             builder.Services.AddScoped<ISolutionExplorerService, SolutionExplorerService>();
 

@@ -4,10 +4,13 @@ using PhilippWebsite.Server.Services.EditorContent;
 using PhilippWebsite.Server.Services.FileContent;
 using PhilippWebsite.Server.Services.FileContent.FileSource;
 
-using PhilippWebsite.Server.Services.ProjectTree;
-using PhilippWebsite.Server.Services.ProjectTree.GitHub;
-using PhilippWebsite.Server.Services.ProjectTree.Local;
 using PhilippWebsite.Server.Services.SolutionState;
+
+using PhilippWebsite.Server.Services.SolutionTree;
+using PhilippWebsite.Server.Services.SolutionTree.TreeProvider;
+using PhilippWebsite.Server.Services.SolutionTree.TreeProvider.GitHub;
+using PhilippWebsite.Server.Services.SolutionTree.TreeProvider.Local;
+
 using PhilippWebsite.Server.Services.SyntaxHighlighter;
 
 
@@ -57,7 +60,7 @@ namespace PhilippWebsite.Server
                 client.DefaultRequestHeaders.Add("User-Agent", "PhilippWebsite");
             });
 
-            builder.Services.AddScoped<IProjectTreeService, ProjectTreeService>();
+            builder.Services.AddScoped<ISolutionTreeService, SolutionTreeService>();
 
             builder.Services.AddScoped<ISolutionStateService, SolutionStateService>();
 
