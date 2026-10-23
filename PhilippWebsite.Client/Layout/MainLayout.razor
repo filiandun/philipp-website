@@ -1,6 +1,4 @@
-﻿@using PhilippWebsite.Client.Resources
-
-@using PhilippWebsite.Client.Services.SolutionState;
+﻿@using PhilippWebsite.Client.Services.SolutionState;
 
 
 @inherits LayoutComponentBase
@@ -8,25 +6,14 @@
 @inject ISolutionStateInitializer SolutionStateInitializer;
 
 
-<MudThemeProvider Theme="@this._theme" IsDarkMode="true" />
-<MudPopoverProvider />
-<MudDialogProvider />
-<MudSnackbarProvider />
-
-
 @Body
 
 
 @code {
-    private MudTheme? _theme;
-
-
     protected override async Task OnInitializedAsync()
     {
         base.OnInitialized();
 
         await this.SolutionStateInitializer.InitializeAsync();
-
-        this._theme = VsThemeConfiguration.GetTheme();
     }
 }

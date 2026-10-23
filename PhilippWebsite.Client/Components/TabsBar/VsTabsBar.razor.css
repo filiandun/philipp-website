@@ -8,10 +8,10 @@
 
     min-height: 30px;
 
-    background: var(--mud-palette-surface);
+    background: var(--vs-palette-surface);
 
-    border-top-left-radius: var(--mud-default-borderradius);
-    border-top-right-radius: var(--mud-default-borderradius);
+    border-top-left-radius: var(--vs-default-borderradius);
+    border-top-right-radius: var(--vs-default-borderradius);
 
     z-index: 2;
 }
@@ -23,39 +23,39 @@
         max-width: 400px;
 
         font-size: 13px;
-        color: var(--mud-palette-text-secondary);
+        color: var(--vs-palette-text-secondary);
 
         text-decoration: none;
     }
 
         .vs-tabsbar-tab:hover {
-            background-color: var(--mud-palette-gray-light);
-            border-radius: var(--mud-default-borderradius);
+            background-color: var(--vs-palette-gray-light);
+            border-radius: var(--vs-default-borderradius);
         }
 
 
         .vs-tabsbar-tab.active {
             margin-bottom: -1px;
 
-            color: var(--mud-palette-white);
+            color: var(--vs-palette-white);
 
             font-weight: 600;
 
-            border: 1px solid var(--mud-palette-primary);
-            border-bottom: 2px solid var(--mud-palette-surface);
+            border: 1px solid var(--vs-palette-primary);
+            border-bottom: 2px solid var(--vs-palette-surface);
     
-            border-top-left-radius: var(--mud-default-borderradius);
-            border-top-right-radius: var(--mud-default-borderradius);
+            border-top-left-radius: var(--vs-default-borderradius);
+            border-top-right-radius: var(--vs-default-borderradius);
     
             z-index: 3;
         }
 
             .vs-tabsbar-tab.active:hover {
-                background-color: var(--mud-palette-surface);
+                background-color: var(--vs-palette-surface);
 
                 border-radius: 0;
-                border-top-left-radius: var(--mud-default-borderradius);
-                border-top-right-radius: var(--mud-default-borderradius);
+                border-top-left-radius: var(--vs-default-borderradius);
+                border-top-right-radius: var(--vs-default-borderradius);
             }
 
             .vs-tabsbar-tab.active * {
@@ -86,8 +86,8 @@
         }
 
             .vs-tabsbar-tab-pin:hover {
-                background-color: var(--mud-palette-action-disabled);
-                border-radius: var(--mud-default-borderradius);
+                background-color: var(--vs-palette-action-disabled);
+                border-radius: var(--vs-default-borderradius);
             }
 
             .vs-tabsbar-tab:hover .vs-tabsbar-tab-pin {
@@ -108,8 +108,8 @@
         }
 
             .vs-tabsbar-tab-close:hover {
-                background-color: var(--mud-palette-action-disabled);
-                border-radius: var(--mud-default-borderradius);
+                background-color: var(--vs-palette-action-disabled);
+                border-radius: var(--vs-default-borderradius);
             }
 
             .vs-tabsbar-tab:hover .vs-tabsbar-tab-close {

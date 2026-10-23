@@ -1,8 +1,6 @@
 using Microsoft.AspNetCore.Components.Web;
 using Microsoft.AspNetCore.Components.WebAssembly.Hosting;
 
-using MudBlazor.Services;
-
 using PhilippWebsite.Client.Clients.EditorContent;
 using PhilippWebsite.Client.Clients.SolutionState;
 
@@ -22,8 +20,6 @@ namespace PhilippWebsite.Client
 
             builder.RootComponents.Add<App>("#app");
             builder.RootComponents.Add<HeadOutlet>("head::after");
-
-            builder.Services.AddMudServices();
 
 
             // api clients

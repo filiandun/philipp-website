@@ -15,11 +15,11 @@
 
         padding: 0 50px;
 
-        border-radius: var(--mud-default-borderradius);
+        border-radius: var(--vs-default-borderradius);
     }
 
         .vs-solution-explorer-item-head:hover {
-            background-color: var(--mud-palette-action-disabled);
+            background-color: var(--vs-palette-action-disabled);
         }
 
         .vs-solution-explorer-item-head-expand {

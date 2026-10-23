@@ -1,26 +1,37 @@
+*, *::before, *::after {
+    box-sizing: border-box;
+}
+
 html, body {
-    font-family: 'Roboto', Helvetica, Arial, sans-serif;
+    margin: 0;
+    padding: 0; 
+
+    width: 100vw;
+    height: 100vh;
+
+    font-family: var(--vs-typography-default-family);
+    font-size: 14px;
+    color: var(--vs-palette-text-primary);
+
+    background-color: var(--vs-palette-background);
 
     overscroll-behavior: none;
 }
 
-body {
+button {
     margin: 0;
-    padding: 0; 
+    padding: 0;
 
-    background-color: rgba(26, 26, 39, 1);
+    font: inherit;
+    color: inherit;
+    cursor: default;
+
+    background: none;
+    border: none;
+
+    outline: none;
 }
 
-/* 
-    есть баг с тем, что два колеса прокрутки справа
-    а это его фикс.
-*/
-.mud-main-content {
-    height: 100vh;
-
-    margin: 0px;
-    padding: 0px;
-}
 
 #blazor-error-ui {
     color-scheme: light;
@@ -83,30 +94,47 @@ body {
     }
 
 
-.skeleton {
-    width: 100vw;
-    height: 100vh;
-
-    background: linear-gradient(90deg, rgba(30, 30, 45, 1) 25%, rgba(26, 26, 39, 1) 50%, rgba(30, 30, 45, 1) 75%);
-    background-size: 200% 100%;
-
-    animation: skeleton-loading 1s infinite;
+.load-screen {
+    display: flex;
+    flex-direction: column; 
+    
+    align-items: center; 
+    justify-content: center; 
+    
+    height: 100vh; 
+    
+    background-color: #1e1e1e;
 }
 
-    @keyframes skeleton-loading {
-        0% {
-            background-position: 200% 0;
-        }
-
-        100% {
-            background-position: -200% 0;
-        }
+    .load-screen-icon {
+        width: 150px;
+        margin-bottom: 20px;
     }
 
+    .load-screen-text {
+        color: #cccccc; 
+        font-family: sans-serif;
+    }
 
-code {
-    color: #c02d76;
-}
+    .load-screen-progress-bar {
+        width: 300px; 
+
+        margin-top: 20px; 
+
+        background: #333; 
+        border-radius: 20px
+    }
+
+        .blazor-progress-bar {
+            height: 10px;
+            width: var(--blazor-load-percentage, 0%);
+
+            background-color: var(--vs-palette-primary);
+
+            border-radius: 20px;
+            transition: width 0.1s ease;
+        }
+
 
 .form-floating > .form-control-plaintext::placeholder, .form-floating > .form-control::placeholder {
     color: var(--bs-secondary-color);

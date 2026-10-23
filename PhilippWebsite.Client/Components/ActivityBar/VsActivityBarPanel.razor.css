@@ -15,12 +15,12 @@
 
     overflow: hidden;
 
-    background: var(--mud-palette-surface);
+    background: var(--vs-palette-surface);
 
-    border: 1px solid var(--mud-palette-primary);
-    border-radius: var(--mud-default-borderradius);
+    border: 1px solid var(--vs-palette-primary);
+    border-radius: var(--vs-default-borderradius);
 
-    box-shadow: -5px 0 0 2.5px var(--mud-palette-background);
+    box-shadow: -5px 0 0 2.5px var(--vs-palette-background);
 
     z-index: 10;
 }
@@ -33,7 +33,7 @@
 
         padding: 5px 10px;
 
-        background: var(--mud-palette-surface);
+        background: var(--vs-palette-surface);
     }
 
     .vs-activitybar-panel-content {

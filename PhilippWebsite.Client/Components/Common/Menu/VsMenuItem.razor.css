@@ -8,11 +8,11 @@
 
     padding: 5px 10px;
 
-    border-radius: var(--mud-default-borderradius);
+    border-radius: var(--vs-default-borderradius);
 }
 
     .vs-menu-item-root:hover {
-        background-color: var(--mud-palette-action-disabled);
+        background-color: var(--vs-palette-action-disabled);
     }
 
 ::deep .vs-menu-item-icon {

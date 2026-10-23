@@ -5,15 +5,18 @@
     display: flex;
     flex-direction: column;
     overflow: hidden;
-
     padding: 10px 5px 10px 10px;
 
     height: 100vh;
     width: 100vw;
 
-    color: #d4d4d4;
+    color: var(--vs-palette-textprimary);
 
-    background-color: #1e1e1e;
+    background-color: var(--vs-palette-background);
+
+    border: 1px solid var(--vs-palette-primary);
+    border-radius: 10px;
+
     user-select: none;
 }
 
@@ -21,7 +24,7 @@
 .vs-header {
     flex-shrink: 0;
         
-    background: var(--mud-palette-background);
+    background: var(--vs-palette-background);
 }
 
 .vs-titlebar {
@@ -46,12 +49,12 @@
         .vs-solution-name {
             padding: 5px 10px;
 
-            color: var(--mud-palette-textprimary);
+            color: var(--vs-palette-textprimary);
 
-            background: var(--mud-palette-surface);
+            background: var(--vs-palette-surface);
 
             border: 1px solid rgb(0, 0, 0);
-            border-radius: var(--mud-default-borderradius);
+            border-radius: var(--vs-default-borderradius);
         }
 
         ::deep .vs-close-btn {
@@ -120,10 +123,10 @@
 
             user-select: text;
 
-            border: 1px solid var(--mud-palette-primary);
+            border: 1px solid var(--vs-palette-primary);
 
-            border-bottom-left-radius: var(--mud-default-borderradius);
-            border-bottom-right-radius: var(--mud-default-borderradius);
+            border-bottom-left-radius: var(--vs-default-borderradius);
+            border-bottom-right-radius: var(--vs-default-borderradius);
         }
 
     .vs-activitybar {

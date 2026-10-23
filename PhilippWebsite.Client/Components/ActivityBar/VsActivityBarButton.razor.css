@@ -16,10 +16,10 @@
 
     cursor: pointer;
 
-    border-right: 5px solid var(--mud-palette-surface);
-/*    border-radius: var(--mud-default-borderradius);*/
+    border-right: 5px solid var(--vs-palette-surface);
+/*    border-radius: var(--vs-default-borderradius);*/
 }
 
     .vs-activitybar-btn:hover {
-        border-right: 5px solid var(--mud-palette-primary);
+        border-right: 5px solid var(--vs-palette-primary);
     }

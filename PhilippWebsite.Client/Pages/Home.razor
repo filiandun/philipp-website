@@ -7,14 +7,10 @@
 @using PhilippWebsite.Client.Components.TabsBar
 @using PhilippWebsite.Client.Components.ToolBar
 
-@using PhilippWebsite.Client.Models
-
 @using PhilippWebsite.Client.Resources
 
 @using PhilippWebsite.Client.Services.SolutionExplorer
 @using PhilippWebsite.Client.Services.TabsBarState
-
-@using PhilippWebsite.Shared.SolutionState
 
 
 @inject ISolutionExplorerService SolutionExplorerService
@@ -26,7 +22,7 @@
         <div class="vs-titlebar">
 
             <div class="vs-titlebar-left">
-                <VsIcon Icon="@VsIcons.Common.VisualStudio" IconSize="32" IconColor="var(--mud-palette-primary)"></VsIcon>
+                <VsIcon Icon="@VsIcons.Common.VisualStudio" IconSize="32" IconColor="var(--vs-palette-primary)"></VsIcon>
 
                 <div class="vs-menu-list">
                     <VsMenu Label="File">
@@ -60,11 +56,11 @@
                 <VsToolBarButton Icon="@VsIcons.ToolBar.Backwards" IconColor="#3EA0E5"></VsToolBarButton>
                 <VsToolBarButton Icon="@VsIcons.ToolBar.Forwards" IconColor="#3EA0E5"></VsToolBarButton>
 
-                <MudDivider Vertical="true" FlexItem="true"></MudDivider>
+                @* <MudDivider Vertical="true" FlexItem="true"></MudDivider> *@
 
                 <VsToolBarButton Icon="@VsIcons.ToolBar.Home"></VsToolBarButton>
 
-                <MudDivider Vertical="true" FlexItem="true"></MudDivider>
+                @* <MudDivider Vertical="true" FlexItem="true"></MudDivider> *@
 
                 <VsToolBarButton Icon="@VsIcons.ToolBar.Save" IconColor="#3EA0E5"></VsToolBarButton>
             </VsToolBar>
@@ -73,7 +69,7 @@
                 <VsToolBarButton Icon="@VsIcons.ToolBar.Run" Text="debug" IconColor="#85E876"></VsToolBarButton>
                 <VsToolBarButton Icon="@VsIcons.ToolBar.RunOutline" IconColor="#85E876"></VsToolBarButton>
 
-                <MudDivider Vertical="true" FlexItem="true"></MudDivider>
+                @* <MudDivider Vertical="true" FlexItem="true"></MudDivider> *@
 
                 <VsToolBarButton Icon="@VsIcons.ToolBar.Refresh"></VsToolBarButton>
             </VsToolBar>

@@ -23,7 +23,7 @@
         }
 
             .vs-editor-line:hover {
-                background-color: var(--mud-palette-surface);
+                background-color: var(--vs-palette-surface);
 
             }
 
@@ -43,15 +43,15 @@
 
                 box-sizing: border-box;
 
-                color: var(--mud-palette-text-secondary);
-                background-color: var(--mud-palette-background);
+                color: var(--vs-palette-text-secondary);
+                background-color: var(--vs-palette-background);
             }  
 
                 .vs-editor-line:hover .vs-editor-line-gutter {
-                    color: var(--mud-palette-text-primary);
+                    color: var(--vs-palette-text-primary);
 
-                    background-color: var(--mud-palette-surface);
-                    box-shadow: inset 3px 0 0 0 var(--mud-palette-primary);
+                    background-color: var(--vs-palette-surface);
+                    box-shadow: inset 3px 0 0 0 var(--vs-palette-primary);
                 }
         
             .vs-editor-line-content {
