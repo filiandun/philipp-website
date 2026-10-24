@@ -37,9 +37,9 @@
         .vs-tabsbar-tab.active {
             margin-bottom: -1px;
 
-            color: var(--vs-palette-white);
+            color: var(--vs-palette-text-active);
 
-            font-weight: 600;
+            font-weight: var(--vs-typography-active-weight);
 
             border: 1px solid var(--vs-palette-primary);
             border-bottom: 2px solid var(--vs-palette-surface);

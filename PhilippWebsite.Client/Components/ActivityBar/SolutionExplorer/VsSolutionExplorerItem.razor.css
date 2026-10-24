@@ -49,7 +49,12 @@
 
         .vs-solution-explorer-item-head-content {
 
-        }   
+        }
+            .vs-solution-explorer-item-head-content.active {
+                font-weight: var(--vs-typography-active-weight);
+                color: var(--vs-palette-text-active);
+            }
+
 
             .vs-solution-explorer-item-head-content span {
                 overflow: hidden;
