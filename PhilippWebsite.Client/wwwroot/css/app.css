@@ -11,6 +11,8 @@ html, body {
 
     font-family: var(--vs-typography-default-family);
     font-size: 14px;
+    font-weight: var(--vs-typography-default-weight);
+
     color: var(--vs-palette-text-primary);
 
     background-color: var(--vs-palette-background);

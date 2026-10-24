@@ -1,4 +1,12 @@
 ﻿
+@font-face {
+    font-family: 'Cascadia Mono';
+    src: url('../fonts/CascadiaMono.woff2') format('woff2');
+    font-weight: 400;
+    font-style: normal;
+    font-display: swap;
+}
+
 :root {
     --vs-palette-black: rgba(39,39,47,1);
     --vs-palette-white: rgba(255,255,255,1);
@@ -20,9 +28,9 @@
 
     --vs-palette-gray-light: #333337;
 
-    --vs-typography-default-family: "Segoe UI", -apple-system, sans-serif;
+    --vs-typography-default-family: "Segoe UI Variable Text", "Segoe UI Variable", "Segoe UI", -apple-system, BlinkMacSystemFont, sans-serif;
 
-    --vs-typography-default-weight: 300;
+    --vs-typography-default-weight: 400;
     --vs-typography-active-weight: 600;
 
     /* нет, но будто бы можно использовать */
@@ -48,7 +56,6 @@
     --vs-palette-border-opacity: 1;
 
     --vs-typography-default-size: .875rem;
-    --vs-typography-default-weight: 400;
     --vs-typography-default-lineheight: 1.43;
     --vs-typography-default-letterspacing: .01071em;
     --vs-typography-default-text-transform: none;

@@ -8,17 +8,22 @@
     min-width: 100%;
     min-height: 100%;
 }
-
+    
     .vs-editor-lines {
         white-space: pre;
-        font-family: Consolas, monospace;
+
+        font-family: "Cascadia Mono", "Cascadia Code", Consolas, monospace;
+
+        font-size: 13px;
+        font-weight: 400;
     }
 
         .vs-editor-line {
             display: flex;
 
-            line-height: 20px;  
-            min-height: 20px;
+            line-height: 18px;  
+            height: 18px;
+
             text-wrap: nowrap;
         }
 
@@ -31,11 +36,12 @@
                 position: sticky;
                 left: 0;
 
-                min-width: 40px;
+                min-width: 50px;
 
                 flex-shrink: 0;
 
-                padding-left: 10px;
+                padding-left: 20px;
+                padding-right: 15px;
                 margin-right: 30px;
 
                 text-align: right;
@@ -57,25 +63,3 @@
             .vs-editor-line-content {
                 
             }
-
-
-
-
-
-/*        ::deep .vs-editor-content > div {
-            background-color: transparent !important;
-        }
-
-        ::deep .vs-editor-content pre {
-            margin: 0 !important;
-            padding: 0 !important;
-
-            line-height: 20px !important;
-
-            background: transparent !important;
-        }
-
-            ::deep .vs-editor-content pre code {
-                line-height: 20px !important;
-            }*/
-
