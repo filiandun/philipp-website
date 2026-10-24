@@ -16,11 +16,11 @@
 
         padding: 0 50px;
 
-        border-radius: var(--mud-default-borderradius);
+        border-radius: var(--vs-default-borderradius);
     }
 
         .vs-solution-explorer-item-head:hover[b-h86cud8mdw] {
-            background-color: var(--mud-palette-action-disabled);
+            background-color: var(--vs-palette-action-disabled);
         }
 
         .vs-solution-explorer-item-head-expand[b-h86cud8mdw] {
@@ -50,7 +50,12 @@
 
         .vs-solution-explorer-item-head-content[b-h86cud8mdw] {
 
-        }   
+        }
+            .vs-solution-explorer-item-head-content.active[b-h86cud8mdw] {
+                font-weight: var(--vs-typography-active-weight);
+                color: var(--vs-palette-text-active);
+            }
+
 
             .vs-solution-explorer-item-head-content span[b-h86cud8mdw] {
                 overflow: hidden;
@@ -101,12 +106,12 @@
 
     cursor: pointer;
 
-    border-right: 5px solid var(--mud-palette-surface);
-/*    border-radius: var(--mud-default-borderradius);*/
+    border-right: 5px solid var(--vs-palette-surface);
+/*    border-radius: var(--vs-default-borderradius);*/
 }
 
     .vs-activitybar-btn:hover[b-ql32nwc42z] {
-        border-right: 5px solid var(--mud-palette-primary);
+        border-right: 5px solid var(--vs-palette-primary);
     }
 /* /Components/ActivityBar/VsActivityBarPanel.razor.rz.scp.css */
 /* CSS for VsSolutionExplorerPanel component */
@@ -126,12 +131,12 @@
 
     overflow: hidden;
 
-    background: var(--mud-palette-surface);
+    background: var(--vs-palette-surface);
 
-    border: 1px solid var(--mud-palette-primary);
-    border-radius: var(--mud-default-borderradius);
+    border: 1px solid var(--vs-palette-primary);
+    border-radius: var(--vs-default-borderradius);
 
-    box-shadow: -5px 0 0 2.5px var(--mud-palette-background);
+    box-shadow: -5px 0 0 2.5px var(--vs-palette-background);
 
     z-index: 10;
 }
@@ -144,7 +149,7 @@
 
         padding: 5px 10px;
 
-        background: var(--mud-palette-surface);
+        background: var(--vs-palette-surface);
     }
 
     .vs-activitybar-panel-content[b-3tx2fv4x6j] {
@@ -174,11 +179,11 @@
     font-weight: 300;
     color: white;
 
-    border-radius: var(--mud-default-borderradius);
+    border-radius: var(--vs-default-borderradius);
 }
 
     .vs-menu-root:hover[b-8nw5ghj54f] {
-        background-color: var(--mud-palette-surface);
+        background-color: var(--vs-palette-surface);
     }
 
     /*TODO надо сделать, чтобы когда меню было активно (содержимое dropdown открыто), то стиль был такой же как и у :hover*/
@@ -198,9 +203,9 @@
 
     font-size: 12px;
 
-    background-color: var(--mud-palette-surface);
+    background-color: var(--vs-palette-surface);
         
-    border-radius: var(--mud-default-borderradius);
+    border-radius: var(--vs-default-borderradius);
     box-shadow: 0px 0px 2px 1px rgba(0, 0, 0, 0.3);
 
     z-index: 999;
@@ -216,11 +221,11 @@
 
     padding: 5px 10px;
 
-    border-radius: var(--mud-default-borderradius);
+    border-radius: var(--vs-default-borderradius);
 }
 
     .vs-menu-item-root:hover[b-4rosdnlvxr] {
-        background-color: var(--mud-palette-action-disabled);
+        background-color: var(--vs-palette-action-disabled);
     }
 
 [b-4rosdnlvxr] .vs-menu-item-icon {
@@ -242,10 +247,10 @@
 
     min-height: 30px;
 
-    background: var(--mud-palette-surface);
+    background: var(--vs-palette-surface);
 
-    border-top-left-radius: var(--mud-default-borderradius);
-    border-top-right-radius: var(--mud-default-borderradius);
+    border-top-left-radius: var(--vs-default-borderradius);
+    border-top-right-radius: var(--vs-default-borderradius);
 
     z-index: 2;
 }
@@ -257,39 +262,39 @@
         max-width: 400px;
 
         font-size: 13px;
-        color: var(--mud-palette-text-secondary);
+        color: var(--vs-palette-text-secondary);
 
         text-decoration: none;
     }
 
         .vs-tabsbar-tab:hover[b-v4hgzhx2fn] {
-            background-color: var(--mud-palette-gray-light);
-            border-radius: var(--mud-default-borderradius);
+            background-color: var(--vs-palette-gray-light);
+            border-radius: var(--vs-default-borderradius);
         }
 
 
         .vs-tabsbar-tab.active[b-v4hgzhx2fn] {
             margin-bottom: -1px;
 
-            color: var(--mud-palette-white);
+            color: var(--vs-palette-text-active);
 
-            font-weight: 600;
+            font-weight: var(--vs-typography-active-weight);
 
-            border: 1px solid var(--mud-palette-primary);
-            border-bottom: 2px solid var(--mud-palette-surface);
+            border: 1px solid var(--vs-palette-primary);
+            border-bottom: 2px solid var(--vs-palette-surface);
     
-            border-top-left-radius: var(--mud-default-borderradius);
-            border-top-right-radius: var(--mud-default-borderradius);
+            border-top-left-radius: var(--vs-default-borderradius);
+            border-top-right-radius: var(--vs-default-borderradius);
     
             z-index: 3;
         }
 
             .vs-tabsbar-tab.active:hover[b-v4hgzhx2fn] {
-                background-color: var(--mud-palette-surface);
+                background-color: var(--vs-palette-surface);
 
                 border-radius: 0;
-                border-top-left-radius: var(--mud-default-borderradius);
-                border-top-right-radius: var(--mud-default-borderradius);
+                border-top-left-radius: var(--vs-default-borderradius);
+                border-top-right-radius: var(--vs-default-borderradius);
             }
 
             .vs-tabsbar-tab.active *[b-v4hgzhx2fn] {
@@ -320,8 +325,8 @@
         }
 
             .vs-tabsbar-tab-pin:hover[b-v4hgzhx2fn] {
-                background-color: var(--mud-palette-action-disabled);
-                border-radius: var(--mud-default-borderradius);
+                background-color: var(--vs-palette-action-disabled);
+                border-radius: var(--vs-default-borderradius);
             }
 
             .vs-tabsbar-tab:hover .vs-tabsbar-tab-pin[b-v4hgzhx2fn] {
@@ -342,8 +347,8 @@
         }
 
             .vs-tabsbar-tab-close:hover[b-v4hgzhx2fn] {
-                background-color: var(--mud-palette-action-disabled);
-                border-radius: var(--mud-default-borderradius);
+                background-color: var(--vs-palette-action-disabled);
+                border-radius: var(--vs-default-borderradius);
             }
 
             .vs-tabsbar-tab:hover .vs-tabsbar-tab-close[b-v4hgzhx2fn] {
@@ -361,13 +366,13 @@
 
     padding: 3px;
 
-    color: var(--mud-pallete-textprimary);
+    color: var(--vs-pallete-textprimary);
 
-    background: var(--mud-palette-surface);
+    background: var(--vs-palette-surface);
 
     border: 1px solid rgb(0, 0, 0);
     border-left-width: 4px;
-    border-radius: var(--mud-default-borderradius);
+    border-radius: var(--vs-default-borderradius);
 }
 /* /Components/ToolBar/VsToolbarButton.razor.rz.scp.css */
 /* CSS for VsIconButton component */
@@ -387,11 +392,11 @@
 
     cursor: pointer;
 
-    border-radius: var(--mud-default-borderradius);
+    border-radius: var(--vs-default-borderradius);
 }
 
     .vs-toolbar-btn:hover[b-r7l9yh0kb1] {
-        background-color: var(--mud-palette-action-disabled);
+        background-color: var(--vs-palette-action-disabled);
     }
 
 .vs-toolbar-text[b-r7l9yh0kb1] {
@@ -423,7 +428,7 @@
         }
 
             .vs-editor-line:hover[b-tgm4apgeel] {
-                background-color: var(--mud-palette-surface);
+                background-color: var(--vs-palette-surface);
 
             }
 
@@ -443,15 +448,15 @@
 
                 box-sizing: border-box;
 
-                color: var(--mud-palette-text-secondary);
-                background-color: var(--mud-palette-background);
+                color: var(--vs-palette-text-secondary);
+                background-color: var(--vs-palette-background);
             }  
 
                 .vs-editor-line:hover .vs-editor-line-gutter[b-tgm4apgeel] {
-                    color: var(--mud-palette-text-primary);
+                    color: var(--vs-palette-text-primary);
 
-                    background-color: var(--mud-palette-surface);
-                    box-shadow: inset 3px 0 0 0 var(--mud-palette-primary);
+                    background-color: var(--vs-palette-surface);
+                    box-shadow: inset 3px 0 0 0 var(--vs-palette-primary);
                 }
         
             .vs-editor-line-content[b-tgm4apgeel] {
@@ -487,15 +492,18 @@
     display: flex;
     flex-direction: column;
     overflow: hidden;
-
     padding: 10px 5px 10px 10px;
 
     height: 100vh;
     width: 100vw;
 
-    color: #d4d4d4;
+    color: var(--vs-palette-textprimary);
 
-    background-color: #1e1e1e;
+    background-color: var(--vs-palette-background);
+
+    border: 1px solid var(--vs-palette-primary);
+    border-radius: 10px;
+
     user-select: none;
 }
 
@@ -503,7 +511,7 @@
 .vs-header[b-me5k47xywg] {
     flex-shrink: 0;
         
-    background: var(--mud-palette-background);
+    background: var(--vs-palette-background);
 }
 
 .vs-titlebar[b-me5k47xywg] {
@@ -528,12 +536,12 @@
         .vs-solution-name[b-me5k47xywg] {
             padding: 5px 10px;
 
-            color: var(--mud-palette-textprimary);
+            color: var(--vs-palette-textprimary);
 
-            background: var(--mud-palette-surface);
+            background: var(--vs-palette-surface);
 
             border: 1px solid rgb(0, 0, 0);
-            border-radius: var(--mud-default-borderradius);
+            border-radius: var(--vs-default-borderradius);
         }
 
         [b-me5k47xywg] .vs-close-btn {
@@ -602,10 +610,10 @@
 
             user-select: text;
 
-            border: 1px solid var(--mud-palette-primary);
+            border: 1px solid var(--vs-palette-primary);
 
-            border-bottom-left-radius: var(--mud-default-borderradius);
-            border-bottom-right-radius: var(--mud-default-borderradius);
+            border-bottom-left-radius: var(--vs-default-borderradius);
+            border-bottom-right-radius: var(--vs-default-borderradius);
         }
 
     .vs-activitybar[b-me5k47xywg] {

@@ -1,0 +1,55 @@
+﻿
+:root {
+    --vs-palette-black: rgba(39,39,47,1);
+    --vs-palette-white: rgba(255,255,255,1);
+
+    --vs-palette-primary: rgba(145,132,238,1);
+    --vs-palette-secondary: rgba(255,64,129,1); 
+
+    --vs-palette-text-primary: rgba(212,212,212,1);
+    --vs-palette-text-secondary: rgba(133,133,133,1);
+
+    --vs-palette-text-active: rgba(255,255,255,1);
+
+    --vs-palette-action-disabled: rgba(77,77,77,1);
+
+    --vs-palette-surface: rgba(37,37,38,1);
+    --vs-palette-background: rgba(30,30,30,1);
+
+    --vs-default-borderradius: 4px;
+
+    --vs-palette-gray-light: #333337;
+
+    --vs-typography-default-family: "Segoe UI", -apple-system, sans-serif;
+
+    --vs-typography-default-weight: 300;
+    --vs-typography-active-weight: 600;
+
+    /* нет, но будто бы можно использовать */
+    --vs-palette-tertiary: rgba(30,200,165,1);
+
+    --vs-palette-primary-text: rgba(255,255,255,1); 
+    --vs-palette-secondary-text: rgba(255,255,255,1);
+    --vs-palette-tertiary-text: rgba(255,255,255,1);
+
+    --vs-palette-info: rgba(117,190,255,1);
+    --vs-palette-info-text: rgba(255,255,255,1);
+
+    --vs-palette-success: rgba(78,201,176,1);
+    --vs-palette-success-text: rgba(255,255,255,1);
+
+    --vs-palette-warning: rgba(204,167,0,1);
+    --vs-palette-warning-text: rgba(255,255,255,1);
+
+    --vs-palette-error: rgba(241,76,76,1);
+    --vs-palette-error-text: rgba(255,255,255,1);
+
+    --vs-palette-divider: rgba(62,62,66,1);
+    --vs-palette-border-opacity: 1;
+
+    --vs-typography-default-size: .875rem;
+    --vs-typography-default-weight: 400;
+    --vs-typography-default-lineheight: 1.43;
+    --vs-typography-default-letterspacing: .01071em;
+    --vs-typography-default-text-transform: none;
+}
