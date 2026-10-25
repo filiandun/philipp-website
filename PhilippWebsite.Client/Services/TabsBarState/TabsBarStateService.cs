@@ -80,9 +80,23 @@ namespace PhilippWebsite.Client.Services.TabsBarState
         {
             if (this._openTabs.Remove(tabModel))
             {
-                this._logger.LogInformation("Tab '{TabName}' close.", tabModel.Name);
+                if (this.ActiveTab == tabModel)
+                {
+                    this._logger.LogInformation("Active Tab '{TabName}' close.", tabModel.Name);
 
-                this.OnOpenTabsChanged?.Invoke();
+                    TabModel? newActiveTab = this._openTabs.LastOrDefault();
+                    this.ActiveTab = newActiveTab;
+
+                    this._logger.LogInformation("Active Tab set as '{TabName}'.", newActiveTab?.Name);
+
+                    this.OnActiveTabChanged?.Invoke();
+                }
+                else
+                {
+                    this._logger.LogInformation("Tab '{TabName}' close.", tabModel.Name);
+
+                    this.OnOpenTabsChanged?.Invoke();
+                }
             } 
             else
             {
