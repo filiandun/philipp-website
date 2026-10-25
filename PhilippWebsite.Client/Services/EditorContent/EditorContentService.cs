@@ -39,9 +39,9 @@ namespace PhilippWebsite.Client.Services.EditorContent
 
             this.CurrentContent = [];
 
-            this.IsLoading = false;
+            this.IsLoading = true;
             this.HasError = false;
-            this.NothingSelected = true;
+            this.NothingSelected = false;
         }
 
         private async void OnActiveTabChange()

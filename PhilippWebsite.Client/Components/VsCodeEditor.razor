@@ -1,6 +1,8 @@
 ﻿@* VsCodeEditor.razor *@
 
 
+@using System.Globalization
+
 @using PhilippWebsite.Client.Services.EditorContent
 
 
@@ -13,7 +15,7 @@
 <div class="vs-editor-root">
     @if (this.EditorContentService.IsLoading)
     {
-        <span>Loading..</span>
+        <div class="vs-editor-skeleton"></div>
     }
     else if (this.EditorContentService.HasError)
     {
@@ -32,7 +34,13 @@
         <div class="vs-editor-lines">
             @for (int i = 0; i < this.EditorContentService.CurrentContent.Length; i++)
             {
-                <div class="vs-editor-line">
+                double maxTotalDelay = 1.5;
+
+                double step = Math.Min(0.03, maxTotalDelay / this.EditorContentService.CurrentContent.Length);
+
+                string delayValue = (i * step).ToString("0.###", CultureInfo.InvariantCulture);
+
+                <div @key="i" class="vs-editor-line" style="--line-anim-duration: @(delayValue)s;">
                     <span class="vs-editor-line-gutter">@(i + 1)</span>
                     <span class="vs-editor-line-content">@((MarkupString)this.EditorContentService.CurrentContent[i])</span>
                 </div>
