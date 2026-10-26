@@ -21,7 +21,7 @@
 
     @if (this.SolutionExplorerService.IsLoading)
     {
-        <span>Loading..</span>
+        <div class="vs-solution-explorer-skeleton"></div>
     }
     else if (this.SolutionExplorerService.HasError || this.SolutionExplorerService.Tree is null)
     {
