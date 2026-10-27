@@ -1,3 +1,7 @@
+using Microsoft.EntityFrameworkCore;
+
+using PhilippWebsite.Server.Infrastructure;
+using PhilippWebsite.Server.Infrastructure.Storage;
 using PhilippWebsite.Server.Options;
 using PhilippWebsite.Server.Services.EditorContent;
 
@@ -40,6 +44,16 @@ namespace PhilippWebsite.Server
                     policy.WithOrigins(allowedOrigins).AllowAnyHeader().AllowAnyMethod();
                 });
             });
+
+
+            // Database
+
+            builder.Services.AddDbContext<RepositoryDbContext>(options => options.UseNpgsql(builder.Configuration.GetConnectionString("DatabaseConnection") ?? throw new InvalidOperationException("Connection string 'DatabaseConnection' not found")));
+
+            builder.Services.AddScoped<RepositoryStorage>();
+
+            builder.Services.AddScoped<IRepositoryReader>(provider => provider.GetRequiredService<RepositoryStorage>());
+            builder.Services.AddScoped<IRepositoryWriter>(provider => provider.GetRequiredService<RepositoryStorage>());
 
 
             // Options
