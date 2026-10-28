@@ -30,9 +30,9 @@ namespace PhilippWebsite.Server.Migrations
                     b.Property<int>("Size")
                         .HasColumnType("integer");
 
-                    b.PrimitiveCollection<string[]>("Text")
+                    b.Property<string>("Text")
                         .IsRequired()
-                        .HasColumnType("text[]");
+                        .HasColumnType("text");
 
                     b.HasKey("NodeId");
 

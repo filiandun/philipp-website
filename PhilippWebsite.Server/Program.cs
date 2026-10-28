@@ -7,7 +7,7 @@ using PhilippWebsite.Server.Services.EditorContent;
 
 using PhilippWebsite.Server.Services.FileContent;
 using PhilippWebsite.Server.Services.FileContent.FileSource;
-
+using PhilippWebsite.Server.Services.RepositorySync;
 using PhilippWebsite.Server.Services.SolutionState;
 
 using PhilippWebsite.Server.Services.SolutionTree;
@@ -66,18 +66,32 @@ namespace PhilippWebsite.Server
 
             // Services
 
+            // cache
+
+            builder.Services.AddHttpClient<IRepositorySyncService, GitHubSyncService>(httpClient =>
+            {
+                httpClient.BaseAddress = new Uri("https://api.github.com/");
+                httpClient.DefaultRequestHeaders.Add("User-Agent", "PhilippWebsite");
+            });
+
+            builder.Services.AddHttpClient<GitHubContentService>(httpClient =>
+            {
+                httpClient.DefaultRequestHeaders.Add("User-Agent", "PhilippWebsite");
+            });
+
+            // tree
+
             builder.Services.AddScoped<ITreeProvider, LocalTreeProvider>();
 
-            builder.Services.AddHttpClient<ITreeProvider, GitHubTreeProvider>(client =>
+            builder.Services.AddHttpClient<ITreeProvider, GitHubTreeProvider>(httpClient =>
             {
-                client.BaseAddress = new Uri("https://api.github.com/");
-                client.DefaultRequestHeaders.Add("User-Agent", "PhilippWebsite");
+                httpClient.BaseAddress = new Uri("https://api.github.com/");
+                httpClient.DefaultRequestHeaders.Add("User-Agent", "PhilippWebsite");
             });
 
             builder.Services.AddScoped<ISolutionTreeService, SolutionTreeService>();
 
-            builder.Services.AddScoped<ISolutionStateService, SolutionStateService>();
-
+            // file content
 
             builder.Services.AddScoped<IFileSource, LocalFileSource>();
             builder.Services.AddHttpClient<IFileSource, GitHubFileSource>();
@@ -86,6 +100,10 @@ namespace PhilippWebsite.Server
             builder.Services.AddScoped<ISyntaxHighlighterService, SyntaxHighlighterService>();
 
             builder.Services.AddScoped<IEditorContentService, EditorContentService>();
+
+            // state
+
+            builder.Services.AddScoped<ISolutionStateService, SolutionStateService>();
 
 
             var app = builder.Build();
