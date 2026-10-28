@@ -77,6 +77,31 @@
     min-width: 100%;
     width: max-content;
 }
+
+.vs-solution-explorer-skeleton[b-9fetz9y2sw] {
+    position: absolute;
+    inset: 0;
+
+    overflow: hidden;
+}
+
+    .vs-solution-explorer-skeleton[b-9fetz9y2sw]::after {
+        content: "";
+        position: absolute;
+        inset: 0;
+        background: linear-gradient(90deg, transparent, var(--vs-palette-background), transparent);
+        animation: shimmer-b-9fetz9y2sw 1.5s infinite;
+    }
+
+@keyframes shimmer-b-9fetz9y2sw {
+    0% {
+        transform: translateX(-100%);
+    }
+
+    100% {
+        transform: translateX(100%);
+    }
+}
 /* /Components/ActivityBar/VsActivityBar.razor.rz.scp.css */
 /* CSS for VsActivityBar component */
 
