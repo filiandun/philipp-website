@@ -83,11 +83,7 @@ namespace PhilippWebsite.Server
 
             builder.Services.AddScoped<ITreeProvider, LocalTreeProvider>();
 
-            builder.Services.AddHttpClient<ITreeProvider, GitHubTreeProvider>(httpClient =>
-            {
-                httpClient.BaseAddress = new Uri("https://api.github.com/");
-                httpClient.DefaultRequestHeaders.Add("User-Agent", "PhilippWebsite");
-            });
+            builder.Services.AddScoped<ITreeProvider, GitHubTreeProvider>();
 
             builder.Services.AddScoped<ISolutionTreeService, SolutionTreeService>();
 

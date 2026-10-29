@@ -36,12 +36,17 @@ namespace PhilippWebsite.Server.Services.RepositorySync
 
         public async Task<Repository> SyncRepoAsync(string repo)
         {
+            this._logger.LogInformation("Get GitHub tree by repo '{Repo}'.", repo);
             GitHubTreeResponse gitHubTree = await this.GetGitHubTreeAsync(repo);
 
+            this._logger.LogInformation("Get GitHub content by repo '{Repo}' sha '{Sha}'.", repo, gitHubTree.Sha);
             Dictionary<string, string> githubContent = await this._gitHubContentService.GetContentAsync(repo, gitHubTree.Sha);
 
+            this._logger.LogInformation("Map GitHub tree repo '{Repo}' sha '{Sha}' to database model.", repo, gitHubTree.Sha);
             Repository repository = this.MapGitHubTreeToRepository(repo, gitHubTree, githubContent);
 
+            this._logger.LogInformation("Update databse for repo '{Repo}' sha '{Sha}'", repository.Name, repository.LastCommitSha);
+            await this._repositoryWriter.UpdateRepositoryAsync(repository);
 
             return repository;
         }

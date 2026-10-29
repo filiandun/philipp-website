@@ -1,58 +1,37 @@
 ﻿using Microsoft.Extensions.Caching.Memory;
 using Microsoft.Extensions.Options;
 
+using PhilippWebsite.Server.Infrastructure.Storage;
 using PhilippWebsite.Server.Models;
 using PhilippWebsite.Server.Options;
-using PhilippWebsite.Server.Services.SolutionTree.TreeProvider;
+
 using PhilippWebsite.Shared.SolutionState;
 
 
 namespace PhilippWebsite.Server.Services.SolutionTree.TreeProvider.GitHub
 {
     public class GitHubTreeProvider : ITreeProvider
-    {
-        private const string FOLDER_TYPE = "tree";
-        private const string FILE_TYPE = "blob";
-
- 
+    { 
         private readonly ILogger<GitHubTreeProvider> _logger;
-
-        private readonly HttpClient _httpClient;
-
-        private readonly IMemoryCache _memoryCache;
 
         private readonly GitHubContentOptions _options;
 
+        private readonly IRepositoryReader _repositoryReader;
 
-        public GitHubTreeProvider(ILogger<GitHubTreeProvider> logger, HttpClient httpClient, IMemoryCache memoryCache, IOptions<GitHubContentOptions> options)
+
+        public GitHubTreeProvider(ILogger<GitHubTreeProvider> logger, IOptions<GitHubContentOptions> options, IRepositoryReader repositoryReader)
         {
             this._logger = logger;
 
-            this._httpClient = httpClient;
-
-            this._memoryCache = memoryCache;
-
             this._options = options.Value;
+
+            this._repositoryReader = repositoryReader;
         }
 
 
         public async Task<SolutionTreeItem> GetTreeAsync()
         {
-            if (this._memoryCache.TryGetValue(CacheKeys.GITHUB_PROJECT_TREE, out SolutionTreeItem? cachedTree) && cachedTree is not null)
-            {
-                this._logger.LogInformation("GitHub tree loaded from cache.");
-
-                return cachedTree;
-            }
-
-            this._logger.LogInformation("Cache miss. Fetching GitHub tree from API.");
-
-            SolutionTreeItem solutionTree = await this.BuildTree();
-
-            this._memoryCache.Set(CacheKeys.GITHUB_PROJECT_TREE, solutionTree, TimeSpan.FromHours(1));
-            this._logger.LogInformation("GitHub tree successfully fetched and cached.");
- 
-            return solutionTree;
+            return await this.BuildTree();
         }
 
 
@@ -68,28 +47,27 @@ namespace PhilippWebsite.Server.Services.SolutionTree.TreeProvider.GitHub
 
             foreach (var repo in this._options.Repositories)
             {
-                string repoUrl = this._options.GetApiUrl(repo.Key);
+                this._logger.LogDebug("Request to database for get repo '{Repo}'.", repo);
 
-                this._logger.LogDebug("Http request to '{RepoUrl}'.", repoUrl);
+                Repository? repository = await this._repositoryReader.GetRepositoryAsync(repo.Key);
 
-                HttpResponseMessage response = await this._httpClient.GetAsync(repoUrl);
-
-                if (!response.IsSuccessStatusCode)
+                if (repository is null)
                 {
-                    this._logger.LogWarning("Skip repo '{Repo}'. GitHub returned {StatusCode}.", repo.Key, response.StatusCode);
+                    this._logger.LogWarning("Skip repo '{Repo}'. Database return null.", repo.Key);
                     continue;
                 }
 
-                GitHubTreeResponse? githubTree = await response.Content.ReadFromJsonAsync<GitHubTreeResponse>();
-
-                if (githubTree is null)
+                SolutionTreeItem repoTree = new()
                 {
-                    this._logger.LogWarning("Skip repo '{Repo}'. GitHub tree is null.", repo.Key);
-                    continue;
-                }
+                    Name = repo.Key,
+                    TreePath = PathHelper.Combine(this._options.SectionName, repo.Key),
 
-                SolutionTreeItem solutionItem = this.MapToSolutionTreeItem(githubTree, repo);
-                solutionTree.Children.Add(solutionItem);
+                    Type = repo.Value,
+
+                    Children = this.MapRepositoryToSolutionTree(repository.Nodes.Where(n => n.ParentId is null), repo.Key)
+                };
+
+                solutionTree.Children.Add(repoTree);
             }
 
             this._logger.LogDebug("Solution items count {ItemsCount}", solutionTree.Children.Count);
@@ -98,74 +76,19 @@ namespace PhilippWebsite.Server.Services.SolutionTree.TreeProvider.GitHub
         }
 
 
-        private SolutionTreeItem MapToSolutionTreeItem(GitHubTreeResponse githubTree, KeyValuePair<string, SolutionTreeItemType> repo)
+        private List<SolutionTreeItem> MapRepositoryToSolutionTree(IEnumerable<FileNode> fileNodes, string repo)
         {
-            Dictionary<string, SolutionTreeItem> treeItemDictionary = new();
-
-            foreach (GitHubTreeItem githubTreeItem in githubTree.LinearTree)
-            {
-                string itemName = githubTreeItem.Path.Split('/').Last(); // TODO maybe exception
-
-                SolutionTreeItem treeItem = new()
-                {
-                    Name = itemName, 
-                    TreePath = PathHelper.Combine(this._options.SectionName, itemName), // githubTreeItem.Path
-                    ContentPath = this._options.GetWebUrl(repo.Key, githubTreeItem.Path),
-
-                    Type = githubTreeItem.Type == FOLDER_TYPE ? SolutionTreeItemType.Folder : SolutionTreeItemType.File,
-                };
-
-                treeItemDictionary[githubTreeItem.Path] = treeItem;
-            }
-
-
-            SolutionTreeItem solutionTree = new()
-            {
-                Name = repo.Key,
-                TreePath = PathHelper.Combine(this._options.SectionName, repo.Key),
-
-                Type = repo.Value,
-            };
-
-            foreach (GitHubTreeItem githubTreeItem in githubTree.LinearTree)
-            {
-                SolutionTreeItem treeItem = treeItemDictionary[githubTreeItem.Path];
-
-                int lastSlashIndex = githubTreeItem.Path.LastIndexOf('/');
-
-                if (lastSlashIndex == -1)
-                {
-                    solutionTree.Children.Add(treeItem);
-                }
-                else
-                {
-                    string parentPath = githubTreeItem.Path.Substring(0, lastSlashIndex);
-
-                    if (treeItemDictionary.TryGetValue(parentPath, out var parentItem))
+            return fileNodes.OrderByDescending(f => f.IsDirectory).ThenBy(f => f.Name).Select(fileNode => new SolutionTreeItem
                     {
-                        parentItem.Children.Add(treeItem);
-                    }
-                }
-            }
+                        Name = fileNode.Name,
+                        TreePath = PathHelper.Combine(this._options.SectionName, fileNode.Path),
 
-            this.SortTree(solutionTree);
+                        ContentPath = this._options.GetWebUrl(repo, fileNode.Path),
 
-            return solutionTree;
-        }
+                        Type = fileNode.IsDirectory ? SolutionTreeItemType.Folder : SolutionTreeItemType.File,
 
-        private void SortTree(SolutionTreeItem treeItem)
-        {
-            treeItem.Children.Sort((a, b) =>
-            {
-                if (a.Type != b.Type) return a.Type.CompareTo(b.Type);
-
-                return a.Name.CompareTo(b.Name);
-            });
-
-            foreach (SolutionTreeItem item in treeItem.Children.Where(n => n.Children.Any()))
-            {
-                this.SortTree(item);
-            }
+                        Children = this.MapRepositoryToSolutionTree(fileNode.Children, repo)
+                    }).ToList();
         }
     }
 }
