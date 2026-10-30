@@ -3,11 +3,12 @@ using Microsoft.Extensions.Options;
 
 using PhilippWebsite.Server.Models;
 using PhilippWebsite.Server.Options;
+using PhilippWebsite.Server.Services.Common;
 
 using PhilippWebsite.Shared.SolutionState;
 
 
-namespace PhilippWebsite.Server.Services.SolutionTree.TreeProvider.Local
+namespace PhilippWebsite.Server.Services.SolutionState.Tree.Providers.Local
 {
     public class LocalTreeProvider : ITreeProvider
     {

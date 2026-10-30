@@ -19,7 +19,7 @@ Accept: application/json
 
 ###
 
-@repo = philipp-website
+@repo = docx-markdown-editor
 
 POST {{PhilippWebsite.Server_HostAddress}}/RepositorySync/PostSync?repo={{repo}}
 Accept: application/json

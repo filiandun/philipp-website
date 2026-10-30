@@ -1,5 +1,5 @@
-﻿using PhilippWebsite.Server.Services.FileContent;
-using PhilippWebsite.Server.Services.SyntaxHighlighter;
+﻿using PhilippWebsite.Server.Services.EditorContent.Content;
+using PhilippWebsite.Server.Services.EditorContent.Syntax;
 
 
 namespace PhilippWebsite.Server.Services.EditorContent

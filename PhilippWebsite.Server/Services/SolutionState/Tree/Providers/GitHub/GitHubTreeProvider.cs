@@ -3,11 +3,12 @@
 using PhilippWebsite.Server.Infrastructure.Storage;
 using PhilippWebsite.Server.Models;
 using PhilippWebsite.Server.Options;
-
+using PhilippWebsite.Server.Services.Common;
+using PhilippWebsite.Server.Services.SolutionState.Tree.Providers;
 using PhilippWebsite.Shared.SolutionState;
 
 
-namespace PhilippWebsite.Server.Services.SolutionTree.TreeProvider.GitHub
+namespace PhilippWebsite.Server.Services.SolutionState.Tree.Providers.GitHub
 {
     public class GitHubTreeProvider : ITreeProvider
     { 

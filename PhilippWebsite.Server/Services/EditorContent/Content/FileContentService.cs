@@ -1,7 +1,6 @@
-﻿using PhilippWebsite.Server.Services.FileContent.FileSource;
+﻿using PhilippWebsite.Server.Services.EditorContent.Content.Source;
 
-
-namespace PhilippWebsite.Server.Services.FileContent
+namespace PhilippWebsite.Server.Services.EditorContent.Content
 {
     public class FileContentService : IFileContentService
     {

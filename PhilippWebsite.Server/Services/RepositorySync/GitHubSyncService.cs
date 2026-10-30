@@ -4,7 +4,8 @@ using PhilippWebsite.Server.Infrastructure.Storage;
 
 using PhilippWebsite.Server.Models;
 using PhilippWebsite.Server.Options;
-using PhilippWebsite.Server.Services.SolutionTree.TreeProvider.GitHub;
+using PhilippWebsite.Server.Services.RepositorySync.Content;
+using PhilippWebsite.Server.Services.SolutionState.Tree.Providers.GitHub;
 
 
 namespace PhilippWebsite.Server.Services.RepositorySync
@@ -18,10 +19,10 @@ namespace PhilippWebsite.Server.Services.RepositorySync
 
         private readonly IRepositoryWriter _repositoryWriter;
 
-        private readonly GitHubContentService _gitHubContentService;
+        private readonly IRepositoryContentService _gitHubContentService;
 
 
-        public GitHubSyncService(ILogger<GitHubSyncService> logger, HttpClient httpClient, IOptions<GitHubContentOptions> options, IRepositoryWriter repositoryWriter, GitHubContentService gitHubContentService)
+        public GitHubSyncService(ILogger<GitHubSyncService> logger, HttpClient httpClient, IOptions<GitHubContentOptions> options, IRepositoryWriter repositoryWriter, IRepositoryContentService gitHubContentService)
         {
             this._logger = logger;
 

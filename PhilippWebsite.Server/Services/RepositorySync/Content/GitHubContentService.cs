@@ -6,9 +6,9 @@ using System.Text;
 using PhilippWebsite.Server.Options;
 
 
-namespace PhilippWebsite.Server.Services.RepositorySync
+namespace PhilippWebsite.Server.Services.RepositorySync.Content
 {
-    public class GitHubContentService
+    public class GitHubContentService : IRepositoryContentService
     {
         private static readonly HashSet<string> _allowedFileExtensions = new(StringComparer.OrdinalIgnoreCase) // TODO вынести отсюда в статический класс типа options
         {

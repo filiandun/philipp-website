@@ -1,5 +1,5 @@
 ﻿
-namespace PhilippWebsite.Server.Services
+namespace PhilippWebsite.Server.Services.Common
 {
     public static class PathHelper
     {

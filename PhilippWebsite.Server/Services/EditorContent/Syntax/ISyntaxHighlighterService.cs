@@ -1,4 +1,4 @@
-﻿namespace PhilippWebsite.Server.Services.SyntaxHighlighter
+﻿namespace PhilippWebsite.Server.Services.EditorContent.Syntax
 {
     public interface ISyntaxHighlighterService
     {

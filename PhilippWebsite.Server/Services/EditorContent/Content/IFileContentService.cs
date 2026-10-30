@@ -1,5 +1,4 @@
-﻿
-namespace PhilippWebsite.Server.Services.FileContent
+﻿namespace PhilippWebsite.Server.Services.EditorContent.Content
 {
     public interface IFileContentService
     {

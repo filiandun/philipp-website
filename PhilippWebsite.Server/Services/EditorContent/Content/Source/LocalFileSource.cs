@@ -3,7 +3,7 @@
 using PhilippWebsite.Server.Options;
 
 
-namespace PhilippWebsite.Server.Services.FileContent.FileSource
+namespace PhilippWebsite.Server.Services.EditorContent.Content.Source
 {
     public class LocalFileSource : IFileSource
     {
@@ -12,7 +12,7 @@ namespace PhilippWebsite.Server.Services.FileContent.FileSource
         private readonly IWebHostEnvironment _environment;
 
         private readonly LocalContentOptions _options;
-
+         
 
         public LocalFileSource(ILogger<LocalFileSource> logger, IWebHostEnvironment environment, IOptions<LocalContentOptions> options)
         {

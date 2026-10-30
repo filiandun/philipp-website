@@ -4,7 +4,7 @@ using PhilippWebsite.Server.Infrastructure.Storage;
 using PhilippWebsite.Server.Options;
 
 
-namespace PhilippWebsite.Server.Services.FileContent.FileSource
+namespace PhilippWebsite.Server.Services.EditorContent.Content.Source
 {
     public class GitHubFileSource : IFileSource
     {

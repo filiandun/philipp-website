@@ -4,19 +4,19 @@ using PhilippWebsite.Server.Infrastructure;
 using PhilippWebsite.Server.Infrastructure.Storage;
 
 using PhilippWebsite.Server.Options;
-
 using PhilippWebsite.Server.Services.EditorContent;
-using PhilippWebsite.Server.Services.FileContent;
-using PhilippWebsite.Server.Services.FileContent.FileSource;
+using PhilippWebsite.Server.Services.EditorContent.Content;
+using PhilippWebsite.Server.Services.EditorContent.Content.Source;
+using PhilippWebsite.Server.Services.EditorContent.Syntax;
+
 using PhilippWebsite.Server.Services.RepositorySync;
+using PhilippWebsite.Server.Services.RepositorySync.Content;
+
 using PhilippWebsite.Server.Services.SolutionState;
-
-using PhilippWebsite.Server.Services.SolutionTree;
-using PhilippWebsite.Server.Services.SolutionTree.TreeProvider;
-using PhilippWebsite.Server.Services.SolutionTree.TreeProvider.GitHub;
-using PhilippWebsite.Server.Services.SolutionTree.TreeProvider.Local;
-
-using PhilippWebsite.Server.Services.SyntaxHighlighter;
+using PhilippWebsite.Server.Services.SolutionState.Tree;
+using PhilippWebsite.Server.Services.SolutionState.Tree.Providers;
+using PhilippWebsite.Server.Services.SolutionState.Tree.Providers.GitHub;
+using PhilippWebsite.Server.Services.SolutionState.Tree.Providers.Local;
 
 
 namespace PhilippWebsite.Server
@@ -75,7 +75,7 @@ namespace PhilippWebsite.Server
                 httpClient.DefaultRequestHeaders.Add("User-Agent", "PhilippWebsite");
             });
 
-            builder.Services.AddHttpClient<GitHubContentService>(httpClient =>
+            builder.Services.AddHttpClient<IRepositoryContentService, GitHubContentService>(httpClient =>
             {
                 httpClient.DefaultRequestHeaders.Add("User-Agent", "PhilippWebsite");
             });

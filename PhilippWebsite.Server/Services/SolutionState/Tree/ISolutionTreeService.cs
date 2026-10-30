@@ -1,7 +1,7 @@
 ﻿using PhilippWebsite.Shared.SolutionState;
 
 
-namespace PhilippWebsite.Server.Services.SolutionTree
+namespace PhilippWebsite.Server.Services.SolutionState.Tree
 {
     public interface ISolutionTreeService
     {

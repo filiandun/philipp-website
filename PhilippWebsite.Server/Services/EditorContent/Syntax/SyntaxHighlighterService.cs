@@ -7,7 +7,7 @@ using TextMateSharp.Registry;
 using TextMateSharp.Themes;
 
 
-namespace PhilippWebsite.Server.Services.SyntaxHighlighter
+namespace PhilippWebsite.Server.Services.EditorContent.Syntax
 {
     public class SyntaxHighlighterService : ISyntaxHighlighterService
     {

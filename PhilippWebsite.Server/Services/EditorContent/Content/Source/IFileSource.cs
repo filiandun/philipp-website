@@ -1,4 +1,4 @@
-﻿namespace PhilippWebsite.Server.Services.FileContent.FileSource
+﻿namespace PhilippWebsite.Server.Services.EditorContent.Content.Source
 {
     public interface IFileSource
     {

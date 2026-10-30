@@ -1,11 +1,11 @@
 ﻿using Microsoft.Extensions.Options;
 
 using PhilippWebsite.Server.Options;
-using PhilippWebsite.Server.Services.SolutionTree.TreeProvider;
+using PhilippWebsite.Server.Services.SolutionState.Tree.Providers;
 using PhilippWebsite.Shared.SolutionState;
 
 
-namespace PhilippWebsite.Server.Services.SolutionTree
+namespace PhilippWebsite.Server.Services.SolutionState.Tree
 {
     public class SolutionTreeService : ISolutionTreeService
     {
