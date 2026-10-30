@@ -1,5 +1,4 @@
-﻿using Microsoft.Extensions.Caching.Memory;
-using Microsoft.Extensions.Options;
+﻿using Microsoft.Extensions.Options;
 
 using PhilippWebsite.Server.Infrastructure.Storage;
 using PhilippWebsite.Server.Models;
@@ -14,18 +13,18 @@ namespace PhilippWebsite.Server.Services.SolutionTree.TreeProvider.GitHub
     { 
         private readonly ILogger<GitHubTreeProvider> _logger;
 
-        private readonly GitHubContentOptions _options;
-
         private readonly IRepositoryReader _repositoryReader;
 
+        private readonly GitHubContentOptions _options;
 
-        public GitHubTreeProvider(ILogger<GitHubTreeProvider> logger, IOptions<GitHubContentOptions> options, IRepositoryReader repositoryReader)
+
+        public GitHubTreeProvider(ILogger<GitHubTreeProvider> logger, IRepositoryReader repositoryReader, IOptions<GitHubContentOptions> options)
         {
             this._logger = logger;
 
-            this._options = options.Value;
-
             this._repositoryReader = repositoryReader;
+
+            this._options = options.Value;
         }
 
 
@@ -82,8 +81,6 @@ namespace PhilippWebsite.Server.Services.SolutionTree.TreeProvider.GitHub
                     {
                         Name = fileNode.Name,
                         TreePath = PathHelper.Combine(this._options.SectionName, fileNode.Path),
-
-                        ContentPath = this._options.GetWebUrl(repo, fileNode.Path),
 
                         Type = fileNode.IsDirectory ? SolutionTreeItemType.Folder : SolutionTreeItemType.File,
 

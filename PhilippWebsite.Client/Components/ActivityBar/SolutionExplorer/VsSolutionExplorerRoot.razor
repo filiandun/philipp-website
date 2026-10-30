@@ -45,7 +45,7 @@
     {
         if (item.Type == SolutionTreeItemType.File)
         {
-            this.TabsBarStateService.OpenAsActive(new TabModel() { Name = item.Name, Path = item.ContentPath });
+            this.TabsBarStateService.OpenAsActive(new TabModel() { Name = item.Name, Path = item.TreePath });
         }
     }
 

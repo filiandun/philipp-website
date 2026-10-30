@@ -30,8 +30,7 @@ namespace PhilippWebsite.Server.Infrastructure.Storage
 
         public Task<FileContent?> GetFileContentAsync(string path)
         {
-            //return this._dbContext.FileContents.AsNoTracking().FirstOrDefault(c => c.Node.Path == Path);
-            throw new NotImplementedException();
+            return this._dbContext.FileContents.Include(c => c.Node).AsNoTracking().FirstOrDefaultAsync(c => c.Node.Path == path);
         }
 
 

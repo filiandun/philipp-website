@@ -2,9 +2,10 @@ using Microsoft.EntityFrameworkCore;
 
 using PhilippWebsite.Server.Infrastructure;
 using PhilippWebsite.Server.Infrastructure.Storage;
-using PhilippWebsite.Server.Options;
-using PhilippWebsite.Server.Services.EditorContent;
 
+using PhilippWebsite.Server.Options;
+
+using PhilippWebsite.Server.Services.EditorContent;
 using PhilippWebsite.Server.Services.FileContent;
 using PhilippWebsite.Server.Services.FileContent.FileSource;
 using PhilippWebsite.Server.Services.RepositorySync;
@@ -82,7 +83,6 @@ namespace PhilippWebsite.Server
             // tree
 
             builder.Services.AddScoped<ITreeProvider, LocalTreeProvider>();
-
             builder.Services.AddScoped<ITreeProvider, GitHubTreeProvider>();
 
             builder.Services.AddScoped<ISolutionTreeService, SolutionTreeService>();
@@ -90,8 +90,10 @@ namespace PhilippWebsite.Server
             // file content
 
             builder.Services.AddScoped<IFileSource, LocalFileSource>();
-            builder.Services.AddHttpClient<IFileSource, GitHubFileSource>();
+            builder.Services.AddScoped<IFileSource, GitHubFileSource>();
+
             builder.Services.AddScoped<IFileContentService, FileContentService>();
+
 
             builder.Services.AddScoped<ISyntaxHighlighterService, SyntaxHighlighterService>();
 
@@ -117,9 +119,7 @@ namespace PhilippWebsite.Server
                 app.UseHttpsRedirection();
             }
 
-
             app.UseAuthorization();
-
 
             app.MapControllers();
 

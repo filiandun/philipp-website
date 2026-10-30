@@ -58,14 +58,14 @@ namespace PhilippWebsite.Client.Services.SolutionState
             foreach (SolutionTreeItem treeItem in this._solutionState.InitialOpenItems)
             {
                 this._logger.LogDebug("Set '{ItemName}' tree item as opened.", treeItem.Name);
-                this._tabsBarStateService.Open(new TabModel() { Name = treeItem.Name, Path = treeItem.ContentPath });
+                this._tabsBarStateService.Open(new TabModel() { Name = treeItem.Name, Path = treeItem.TreePath });
             }
 
             if (this._solutionState.InitialActiveItem is null) return;
 
             this._logger.LogDebug("Set '{ItemName}' tree item as active.", this._solutionState.InitialActiveItem.Name);
 
-            this._tabsBarStateService.OpenAsActive(new TabModel() { Name = this._solutionState.InitialActiveItem.Name, Path = this._solutionState.InitialActiveItem.ContentPath });
+            this._tabsBarStateService.OpenAsActive(new TabModel() { Name = this._solutionState.InitialActiveItem.Name, Path = this._solutionState.InitialActiveItem.TreePath });
         }
     }
 }

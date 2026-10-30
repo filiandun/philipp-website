@@ -5,15 +5,8 @@ Accept: application/json
 
 ###
 
-# @file = content/AboutMe.md
-@file = https://github.com/filiandun/philipp-website/blob/main/PhilippWebsite/Components/ActivityBar/VsActivityBarPanel.razor
-
-GET {{PhilippWebsite.Server_HostAddress}}/FileContent/GetContent?path={{file}}
-Accept: application/json+
-
-###
-
-@file = Content/AboutMe.md
+# @file = Content/AboutMe.md
+@file = d
 
 GET {{PhilippWebsite.Server_HostAddress}}/EditorContent/GetContent?path={{file}}
 Accept: application/json
@@ -22,4 +15,11 @@ Accept: application/json
 ###
 
 GET {{PhilippWebsite.Server_HostAddress}}/SolutionState/GetModel
+Accept: application/json
+
+###
+
+@repo = philipp-website
+
+POST {{PhilippWebsite.Server_HostAddress}}/RepositorySync/PostSync?repo={{repo}}
 Accept: application/json

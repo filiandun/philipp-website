@@ -1,5 +1,6 @@
 ﻿using Microsoft.Extensions.Options;
 
+using PhilippWebsite.Server.Infrastructure.Storage;
 using PhilippWebsite.Server.Options;
 
 
@@ -9,60 +10,42 @@ namespace PhilippWebsite.Server.Services.FileContent.FileSource
     {
         private readonly ILogger<GitHubFileSource> _logger;
 
-        private readonly HttpClient _httpClient;
+        private readonly IRepositoryReader _repositoryReader;
 
         private readonly GitHubContentOptions _options;
 
-        public GitHubFileSource(ILogger<GitHubFileSource> logger, HttpClient httpClient, IOptions<GitHubContentOptions> options)
+
+        public GitHubFileSource(ILogger<GitHubFileSource> logger, IOptions<GitHubContentOptions> options, IRepositoryReader repositoryReader)
         {
             this._logger = logger;
 
-            this._httpClient = httpClient;
+            this._repositoryReader = repositoryReader;
 
             this._options = options.Value;
         }
 
 
-        public bool CanHandle(string url) => url.StartsWith(GitHubContentOptions.WebBaseUrl);
+        public bool CanHandle(string url) => url.StartsWith(this._options.SectionName);
 
 
-        public async Task<string> GetRawContentAsync(string url)
+        public async Task<string> GetRawContentAsync(string path)
         {
-            if (!this.IsValidUrl(url))
-            {
-                this._logger.LogWarning("SSRF attempt detected '{Url}'", url);
+            string subPath = path.Substring(this._options.SectionName.Length + 1);
 
-                throw new UnauthorizedAccessException("Invalid GitHub URL scope.");
+            this._logger.LogDebug("Path '{Path}' GitHub file content cut to '{SubPath}'.", path, subPath);
+
+            Models.FileContent? fileContent = await this._repositoryReader.GetFileContentAsync(subPath);
+
+            if (fileContent is null)
+            {
+                this._logger.LogWarning("Database return null for GitHub file content by '{Path}'.", subPath);
+
+                throw new FileNotFoundException($"Database return null for GitHub file content by '{subPath}'.");
             }
 
-            string rawUrl = url.Replace(GitHubContentOptions.WebBaseUrl, GitHubContentOptions.RawBaseUrl).Replace("/blob/", "/");
-            this._logger.LogDebug(rawUrl);
+            this._logger.LogInformation("Success loading from databse GitHub file content '{Path}'.", path);
 
-            var response = await this._httpClient.GetAsync(rawUrl);
-
-            if (response.IsSuccessStatusCode)
-            {
-                this._logger.LogInformation("Success loading GitHub file content '{Url}'.", rawUrl);
-
-                return await response.Content.ReadAsStringAsync();
-            }
-
-            this._logger.LogWarning("GitHub returned {StatusCode} for '{Url}'.", response.StatusCode, rawUrl);
-
-            throw new HttpRequestException($"GitHub returned error {response.StatusCode}");
-        }
-
-
-        private bool IsValidUrl(string url)
-        {
-            string baseUrl = PathHelper.Combine(GitHubContentOptions.WebBaseUrl, this._options.Username);
-
-            foreach (string repo in this._options.Repositories.Keys)
-            {
-                if (url.StartsWith(PathHelper.Combine(baseUrl, repo))) return true;
-            }
-
-            return false;
+            return fileContent.Text;
         }
     }
 }

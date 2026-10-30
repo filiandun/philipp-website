@@ -3,6 +3,7 @@ using Microsoft.Extensions.Options;
 
 using PhilippWebsite.Server.Models;
 using PhilippWebsite.Server.Options;
+
 using PhilippWebsite.Shared.SolutionState;
 
 
@@ -64,8 +65,6 @@ namespace PhilippWebsite.Server.Services.SolutionTree.TreeProvider.Local
                     TreePath = PathHelper.Combine(solutionTree.TreePath, file),
 
                     Type = SolutionTreeItemType.File,
-
-                    ContentPath = this._options.GetPath(file),
                 };
 
                 solutionTree.Children.Add(treeItem);
