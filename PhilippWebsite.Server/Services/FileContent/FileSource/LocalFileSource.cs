@@ -29,7 +29,7 @@ namespace PhilippWebsite.Server.Services.FileContent.FileSource
 
         public async Task<string> GetRawContentAsync(string path)
         {
-            string safePath = Path.GetFullPath(Path.Combine(this._environment.ContentRootPath, "LocalData", "Content"));
+            string safePath = Path.GetFullPath(Path.Combine(this._environment.ContentRootPath, this._options.StorageFolder));
             if (!safePath.EndsWith(Path.DirectorySeparatorChar)) safePath += Path.DirectorySeparatorChar;
 
             string subPath = path.Substring(this._options.SectionName.Length + 1);

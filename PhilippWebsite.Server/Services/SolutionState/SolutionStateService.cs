@@ -12,16 +12,16 @@ namespace PhilippWebsite.Server.Services.SolutionState
     {
         private readonly ILogger<SolutionStateService> _logger;
 
-        private readonly ISolutionTreeService _projectTreeService;
+        private readonly ISolutionTreeService _solutionTreeService;
 
         private readonly SolutionStateOptions _options;
 
 
-        public SolutionStateService(ILogger<SolutionStateService> logger, ISolutionTreeService projectTreeService, IOptions<SolutionStateOptions> options)
+        public SolutionStateService(ILogger<SolutionStateService> logger, ISolutionTreeService solutionTreeService, IOptions<SolutionStateOptions> options)
         {
             this._logger = logger;
 
-            this._projectTreeService = projectTreeService;
+            this._solutionTreeService = solutionTreeService;
 
             this._options = options.Value;
         }
@@ -29,7 +29,7 @@ namespace PhilippWebsite.Server.Services.SolutionState
 
         public async Task<SolutionStateModel> GetModel()
         {
-            SolutionTreeItem solutionTree = await this._projectTreeService.GetTreeAsync();
+            SolutionTreeItem solutionTree = await this._solutionTreeService.GetTreeAsync();
 
             List<SolutionTreeItem> treeFlat = solutionTree.Flatten().ToList();
 

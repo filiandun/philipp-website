@@ -29,7 +29,7 @@ namespace PhilippWebsite.Server.Controllers
 
             try
             {
-                string[] fileCode = await this._codeViewerService.GetHighlightedLines(path);
+                string[] fileCode = await this._codeViewerService.GetContent(path);
 
                 return Ok(fileCode);
             }

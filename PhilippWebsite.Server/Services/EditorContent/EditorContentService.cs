@@ -21,7 +21,7 @@ namespace PhilippWebsite.Server.Services.EditorContent
         }
 
 
-        public async Task<string[]> GetHighlightedLines(string filePath)
+        public async Task<string[]> GetContent(string filePath)
         {
             string fileContent = await this._fileContentService.GetContentAsync(filePath);
 

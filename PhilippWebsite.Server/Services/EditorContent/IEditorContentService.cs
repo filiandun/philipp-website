@@ -2,6 +2,6 @@
 {
     public interface IEditorContentService
     {
-        public Task<string[]> GetHighlightedLines(string filePath);
+        public Task<string[]> GetContent(string filePath);
     }
 }
