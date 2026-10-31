@@ -1,0 +1,15 @@
+# System 
+.git/
+.vs/
+.vscode/
+
+# Local exe
+**/bin/
+**/obj/
+
+# Settins
+*.user
+*.suo
+
+*.db
+*.sqlite

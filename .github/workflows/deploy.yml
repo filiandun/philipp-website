@@ -6,6 +6,7 @@ on:
 
 permissions:
   contents: write
+  packages: write
 
 jobs:
   deploy-frontend:
@@ -38,40 +39,49 @@ jobs:
     steps:
     - uses: actions/checkout@v3
 
-    - name: Setup .NET
-      uses: actions/setup-dotnet@v3
+    - name: Log in to the Container registry
+      uses: docker/login-action@v3
       with:
-        dotnet-version: '10.0'
+        registry: ghcr.io
+        username: ${{ github.actor }}
+        password: ${{ secrets.GITHUB_TOKEN }}
 
-    - name: Publish Backend
-      run: dotnet publish PhilippWebsite.Server/PhilippWebsite.Server.csproj -c Release -o release-backend
+    - name: Lowercase repository owner
+      run: |
+        echo "REPO_OWNER=${GITHUB_REPOSITORY_OWNER,,}" >>${GITHUB_ENV}
 
-    - name: Copy files and restart via SSH
-      uses: appleboy/ssh-action@v1.0.3
+    - name: Build and push Docker image
+      uses: docker/build-push-action@v5
       with:
-        host: ${{ secrets.VPS_HOST }}
-        username: ${{ secrets.VPS_USERNAME }}
-        key: ${{ secrets.VPS_SSH_KEY }}
-        script: |
-          mkdir -p /var/www/philipp-api
+        context: .
+        file: ./Dockerfile
+        push: true
+        tags: ghcr.io/${{ env.REPO_OWNER }}/philipp-website:latest
 
-    - name: Copy build artifacts
+    - name: Copy docker-compose to VPS
       uses: appleboy/scp-action@v0.1.7
       with:
         host: ${{ secrets.VPS_HOST }}
         username: ${{ secrets.VPS_USERNAME }}
         key: ${{ secrets.VPS_SSH_KEY }}
-        source: "release-backend/*"
+        source: "docker-compose.yml"
         target: "/var/www/philipp-api/"
-        strip_components: 1
 
-    - name: Restart systemd service
+    - name: Deploy via SSH
       uses: appleboy/ssh-action@v1.0.3
       with:
         host: ${{ secrets.VPS_HOST }}
         username: ${{ secrets.VPS_USERNAME }}
         key: ${{ secrets.VPS_SSH_KEY }}
         script: |
-          chown -R www-data:www-data /var/www/philipp-api
-          systemctl restart philipp-api
+          cd /var/www/philipp-api
+
+          echo "DB_NAME=${{ secrets.DB_NAME }}" > .env
+          echo "DB_USERNAME=${{ secrets.DB_USERNAME }}" >> .env
+          echo "DB_PASSWORD=${{ secrets.DB_PASSWORD }}" >> .env
+
+          docker compose pull
           
+          docker compose up -d
+
+          docker image prune -af

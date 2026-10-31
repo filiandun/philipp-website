@@ -1,6 +1,10 @@
 <Solution>
   <Folder Name="/Solution Items/">
+    <File Path=".dockerignore" />
+    <File Path=".env" />
+    <File Path="docker-compose.override.yml" />
     <File Path="docker-compose.yml" />
+    <File Path="Dockerfile" />
   </Folder>
   <Project Path="PhilippWebsite.Client/PhilippWebsite.Client.csproj" />
   <Project Path="PhilippWebsite.Server/PhilippWebsite.Server.csproj" Id="40ac507c-a89b-4f6d-8479-3bb485a00498" />

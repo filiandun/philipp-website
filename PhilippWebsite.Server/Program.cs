@@ -111,6 +111,17 @@ namespace PhilippWebsite.Server
 
             app.UseCors("AllowLocalFront");
 
+
+            // Db auto migration
+
+            using (var scope = app.Services.CreateScope())
+            {
+                var context = scope.ServiceProvider.GetRequiredService<RepositoryDbContext>();
+
+                context.Database.Migrate();
+            }
+
+
             // Configure the HTTP request pipeline.
 
             if (app.Environment.IsDevelopment())

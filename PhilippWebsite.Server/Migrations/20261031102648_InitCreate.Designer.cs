@@ -12,8 +12,8 @@ using PhilippWebsite.Server.Infrastructure;
 namespace PhilippWebsite.Server.Migrations
 {
     [DbContext(typeof(RepositoryDbContext))]
-    [Migration("20261027100935_init_create")]
-    partial class init_create
+    [Migration("20261031102648_InitCreate")]
+    partial class InitCreate
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -33,9 +33,9 @@ namespace PhilippWebsite.Server.Migrations
                     b.Property<int>("Size")
                         .HasColumnType("integer");
 
-                    b.PrimitiveCollection<string[]>("Text")
+                    b.Property<string>("Text")
                         .IsRequired()
-                        .HasColumnType("text[]");
+                        .HasColumnType("text");
 
                     b.HasKey("NodeId");
 

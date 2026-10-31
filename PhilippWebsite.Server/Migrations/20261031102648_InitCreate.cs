@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace PhilippWebsite.Server.Migrations
 {
     /// <inheritdoc />
-    public partial class init_create : Migration
+    public partial class InitCreate : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -57,7 +57,7 @@ namespace PhilippWebsite.Server.Migrations
                 columns: table => new
                 {
                     NodeId = table.Column<Guid>(type: "uuid", nullable: false),
-                    Text = table.Column<string[]>(type: "text[]", nullable: false),
+                    Text = table.Column<string>(type: "text", nullable: false),
                     Size = table.Column<int>(type: "integer", nullable: false)
                 },
                 constraints: table =>
