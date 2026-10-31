@@ -74,6 +74,7 @@ jobs:
         username: ${{ secrets.VPS_USERNAME }}
         key: ${{ secrets.VPS_SSH_KEY }}
         script: |
+          set -e
           cd /var/www/philipp-api
 
           echo "DB_NAME=${{ secrets.DB_NAME }}" > .env
@@ -81,7 +82,6 @@ jobs:
           echo "DB_PASSWORD=${{ secrets.DB_PASSWORD }}" >> .env
 
           docker compose pull
-          
           docker compose up -d
 
-          docker image prune -af
+          docker image prune -f
