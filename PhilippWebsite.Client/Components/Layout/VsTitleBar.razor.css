@@ -1,0 +1,42 @@
+/* CSS for VsTitleBar component */
+
+
+.vs-title-bar-root {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    font-size: 12px;
+}
+
+    .vs-title-bar-header {
+        display: inline-flex;
+        align-items: center;
+    }
+
+        .vs-title-bar-menu {
+
+        }
+
+        .vs-title-bar-solution-name {
+            align-content: center;
+            padding: 5px 10px;
+            margin-left: 30px;
+
+            min-width: 100px;
+
+            color: var(--vs-palette-text-active);
+
+            background: var(--vs-palette-surface);
+
+            border: 1px solid rgb(0, 0, 0);
+            border-radius: var(--vs-default-borderradius);
+        }
+
+        .vs-title-bar-close {
+
+        }
+
+            ::deep .vs-close-btn {
+                margin-left: auto;
+            }

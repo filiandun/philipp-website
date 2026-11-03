@@ -1,4 +1,12 @@
-﻿@using PhilippWebsite.Client.Services.SolutionState;
+﻿@* MainLayout.razor *@
+
+
+@using PhilippWebsite.Client.Components.ActivityBar
+@using PhilippWebsite.Client.Components.Layout
+@using PhilippWebsite.Client.Components.Layout.ToolBar
+@using PhilippWebsite.Client.Components.TabsBar
+
+@using PhilippWebsite.Client.Services.SolutionState;
 
 
 @inherits LayoutComponentBase
@@ -6,7 +14,27 @@
 @inject ISolutionStateInitializer SolutionStateInitializer;
 
 
-@Body
+<div class="vs-window">
+    <header class="vs-header">
+        <VsTitleBar SolutionName="Solution 'PhilippPortfolio.sln' - Microsoft Visual Studio"/>
+        <VsToolBar/>
+    </header>
+
+    <main class="vs-workbench">
+        <div class="vs-workbench-viewport">
+            <VsTabsBar/>
+            <div class="vs-workbench-viewport-content">@Body</div>
+        </div>
+
+        <VsActivityBar/>
+        @* <VsBottomBar/> *@
+    </main>
+
+    <footer class="vs-footer">
+        <VsStatusBar/>
+    </footer>
+</div>
+
 
 
 @code {

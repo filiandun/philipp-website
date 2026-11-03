@@ -1,0 +1,17 @@
+/* CSS for VsStatusBar component */
+
+
+.vs-status-bar-root {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+
+    padding: 5px 10px;
+
+    background: var(--vs-palette-black);
+}
+
+.vs-status-bar-root-left, .vs-status-bar-root-right {
+    display: flex;
+    gap: 16px;
+}

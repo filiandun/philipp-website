@@ -1,0 +1,34 @@
+﻿@* VsToolbar.razor *@
+
+
+@using PhilippWebsite.Client.Resources
+
+
+<div class="vs-tool-bar-root @(this.IsDisabled ? "disabled" : "")">
+    <div class="vs-tool-bar-panel">
+        <VsToolBarButton Icon="@VsIcons.ToolBar.Backwards" IconColor="#3EA0E5"></VsToolBarButton>
+        <VsToolBarButton Icon="@VsIcons.ToolBar.Forwards" IconColor="#3EA0E5"></VsToolBarButton>
+
+        <div class="vs-tool-bar-divider"></div>
+
+        <VsToolBarButton Icon="@VsIcons.ToolBar.Home"></VsToolBarButton>
+
+        <div class="vs-tool-bar-divider"></div>
+
+        <VsToolBarButton Icon="@VsIcons.ToolBar.Save" IconColor="#3EA0E5"></VsToolBarButton>
+    </div>
+
+    <div class="vs-tool-bar-panel">
+        <VsToolBarButton Icon="@VsIcons.ToolBar.Run" Text="debug" IconColor="#85E876"></VsToolBarButton>
+        <VsToolBarButton Icon="@VsIcons.ToolBar.RunOutline" IconColor="#85E876"></VsToolBarButton>
+
+        <div class="vs-tool-bar-divider"></div>
+
+        <VsToolBarButton Icon="@VsIcons.ToolBar.Refresh"></VsToolBarButton>
+    </div>
+</div>
+
+
+@code {
+    [Parameter] public bool IsDisabled { get; set; } = false;
+}

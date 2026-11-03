@@ -1,0 +1,55 @@
+﻿@* VsTitleBar.razor *@
+
+
+@using PhilippWebsite.Client.Components.Common
+@using PhilippWebsite.Client.Components.Common.Menu
+@using PhilippWebsite.Client.Components.Layout.ToolBar
+
+@using PhilippWebsite.Client.Resources
+
+
+<div class="vs-title-bar-root">
+    <div class="vs-title-bar-header">
+        <VsIcon Icon="@VsIcons.Common.VisualStudio" IconSize="32" IconColor="var(--vs-palette-primary)"></VsIcon>
+
+        <div class="vs-title-bar-menu">
+            <VsMenu Label="File">
+                <VsMenuItem ItemIcon="@VsIcons.Common.VisualStudio" ItemText="Download CV (.pdf)"></VsMenuItem>
+                <VsMenuItem ItemIcon="@VsIcons.Common.VisualStudio" ItemText="Print"></VsMenuItem>
+            </VsMenu>
+
+            <VsMenu Label="Git">
+                <VsMenuItem ItemIcon="@VsIcons.Common.VisualStudio" ItemText="Open GitHub"></VsMenuItem>
+            </VsMenu>
+
+            <VsMenu Label="Help">
+                <VsMenuItem ItemIcon="@VsIcons.Common.VisualStudio" ItemText="About This Portfolio"></VsMenuItem>
+            </VsMenu>
+
+            <VsMenu Label="Search">
+                <VsMenuItem ItemIcon="@VsIcons.Common.VisualStudio" ItemText="PhilippWebsite (Ctrl+Q)"></VsMenuItem>
+            </VsMenu>
+        </div>
+
+        <div class="vs-title-bar-solution-name">
+            @if (this.SolutionName is null) 
+            {
+                @* TODO anim for loading without label *@
+                <span>Loading..</span>
+            } 
+            else
+            {
+                <span>@this.SolutionName</span>
+            }
+        </div>
+    </div>
+
+    <div class="vs-title-bar-close">
+        <VsToolBarButton Icon="@VsIcons.Common.Close" IconSize="24" Class="vs-close-btn"></VsToolBarButton>
+    </div>
+</div>
+
+
+@code {
+    [Parameter] public string? SolutionName { get; set; } = null;
+}

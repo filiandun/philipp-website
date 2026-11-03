@@ -1,0 +1,44 @@
+/* CSS for VsToolbar component */
+
+.vs-tool-bar-root {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+/*    .vs-tool-bar-root.disabled {
+        pointer-events: none;
+        cursor: not-allowed;
+    }*/
+
+/*    .vs-tool-bar-root::after {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+
+        background-color: rgba(0, 0, 0, 0.35);
+        border-radius: var(--vs-default-borderradius);
+
+        pointer-events: auto;
+        z-index: 10;
+    }*/
+
+    .vs-tool-bar-panel {
+        display: flex;
+        flex-direction: row;
+
+        width: fit-content;
+
+        padding: 3px;
+        margin-right: 10px;
+
+        color: var(--vs-pallete-textprimary);
+
+        background: var(--vs-palette-surface);
+
+        border: 1px solid var(--vs-palette-black);
+        border-left-width: 5px;
+        border-radius: var(--vs-default-borderradius);
+    }
