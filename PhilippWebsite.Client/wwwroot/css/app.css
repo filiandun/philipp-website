@@ -35,6 +35,45 @@ button {
 }
 
 
+/* scrollbar */
+
+* {
+    scrollbar-width: auto;
+    scrollbar-color: var(--vs-palette-text-secondary) transparent;
+}
+
+::-webkit-scrollbar {
+    width: 20px;
+    height: 20px;
+
+    border-radius: 20px;
+}
+
+    ::-webkit-scrollbar:hover {
+        background: var(--vs-palette-surface)
+    }
+
+    ::-webkit-scrollbar:active {
+        background: var(--vs-palette-surface)
+    }
+
+::-webkit-scrollbar-thumb {
+    background: var(--vs-palette-text-secondary);
+    background-clip: padding-box;
+
+    border: 6px solid transparent;
+    border-radius: 20px;
+}
+
+::-webkit-scrollbar-track {
+    background: transparent;
+}
+
+::-webkit-scrollbar-corner {
+    background: transparent;
+}
+
+
 #blazor-error-ui {
     color-scheme: light;
     background: rgba(30, 30, 45, 0.95);

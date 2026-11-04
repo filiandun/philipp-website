@@ -1,6 +1,28 @@
 /* CSS for VsSolutionExplorerPanel component */
 
 
+* {
+    scrollbar-width: thin;
+}
+
+::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
+}
+
+    ::-webkit-scrollbar:hover {
+        background: var(--vs-palette-gray-light)
+    }
+
+    ::-webkit-scrollbar:active {
+        background: var(--vs-palette-gray-light)
+    }
+
+::-webkit-scrollbar-thumb {
+    border: 2px solid transparent;
+}
+
+
 .vs-activitybar-panel-root {
     position: absolute;
     top: 0;
