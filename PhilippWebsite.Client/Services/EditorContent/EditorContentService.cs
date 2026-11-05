@@ -73,6 +73,7 @@ namespace PhilippWebsite.Client.Services.EditorContent
             }
 
             this.IsLoading = true;
+            this.HasError = false;
             this.OnContentChanged?.Invoke();
 
             this.CurrentContent = await this.GetContentAsync(this._tabsBarStateService.ActiveTab.Path);

@@ -19,7 +19,7 @@
 }
 
     .vs-toolbar-btn:hover {
-        background-color: var(--vs-palette-action-disabled);
+        background-color: var(--vs-palette-gray-light);
     }
 
 .vs-toolbar-text {

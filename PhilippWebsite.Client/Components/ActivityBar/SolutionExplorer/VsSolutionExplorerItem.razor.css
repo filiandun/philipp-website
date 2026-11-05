@@ -19,7 +19,7 @@
     }
 
         .vs-solution-explorer-item-head:hover {
-            background-color: var(--vs-palette-action-disabled);
+            background-color: var(--vs-palette-gray-light);
         }
 
         .vs-solution-explorer-item-head-expand {

@@ -12,7 +12,7 @@
 }
 
     .vs-menu-item-root:hover {
-        background-color: var(--vs-palette-action-disabled);
+        background-color: var(--vs-palette-gray-light);
     }
 
 ::deep .vs-menu-item-icon {
