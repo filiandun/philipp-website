@@ -5,6 +5,7 @@ using PhilippWebsite.Client.Clients.EditorContent;
 using PhilippWebsite.Client.Clients.SolutionState;
 
 using PhilippWebsite.Client.Services.EditorContent;
+using PhilippWebsite.Client.Services.OutputLogger;
 using PhilippWebsite.Client.Services.SolutionExplorer;
 using PhilippWebsite.Client.Services.SolutionState;
 using PhilippWebsite.Client.Services.TabsBarState;
@@ -21,6 +22,12 @@ namespace PhilippWebsite.Client
             builder.RootComponents.Add<App>("#app");
             builder.RootComponents.Add<HeadOutlet>("head::after");
 
+
+            // logging 
+
+            builder.Services.AddSingleton<OutputLogStore>();
+
+            builder.Logging.AddOutpurLogger();
 
             // api clients
 
