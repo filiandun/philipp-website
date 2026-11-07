@@ -2,16 +2,18 @@
 
 
 @using PhilippWebsite.Client.Components.ActivityBar
+@using PhilippWebsite.Client.Components.BottomBar
 @using PhilippWebsite.Client.Components.Layout
 @using PhilippWebsite.Client.Components.Layout.ToolBar
 @using PhilippWebsite.Client.Components.TabsBar
 
 @using PhilippWebsite.Client.Services.SolutionState;
+@using PhilippWebsite.Client.Services.WorkbenchState
 
 
 @inherits LayoutComponentBase
 
-@inject ISolutionStateInitializer SolutionStateInitializer;
+@inject ISolutionStateInitializer SolutionStateInitializer
 
 
 <div class="vs-window">
@@ -24,10 +26,13 @@
         <div class="vs-workbench-viewport">
             <VsTabsBar/>
             <div class="vs-workbench-viewport-content">@Body</div>
+
+            <VsActivityBarPanel/>             
+            <VsBottomBarPanel/> 
         </div>
 
         <VsActivityBar/>
-        @* <VsBottomBar/> *@
+        <VsBottomBar/>
     </main>
 
     <footer class="vs-footer">

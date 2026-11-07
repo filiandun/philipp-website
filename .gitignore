@@ -430,3 +430,4 @@ FodyWeavers.xsd
 
 # Local dev
 /docker-compose.override.yml
+/settings.VisualStudio.json
