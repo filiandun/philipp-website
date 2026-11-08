@@ -10,7 +10,7 @@
 
 
 <div class="vs-activity-bar-root">
-    <button class="vs-activity-bar-btn" @onclick="() => this.ActivityBarStateService.Toggle(ActivityBarSection.SolutionExplorer)">Solution Explorer</button>
+    <button class="vs-activity-bar-btn" @onclick="() => this.ActivityBarStateService.Toggle(ActivityBarSection.SolutionExplorer)">@ActivityBarSection.SolutionExplorer.GetTitle()</button>
 </div>
 
 

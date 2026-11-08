@@ -45,18 +45,8 @@
 
 
 @code {
-    private string Title
-    {
-        get
-        {
-            return this.ActivityBarStateService.ActiveSection switch
-            {
-                ActivityBarSection.SolutionExplorer => "Solution Explorer",
+    private string Title => this.ActivityBarStateService.ActiveSection?.GetTitle() ?? string.Empty;
 
-                _ => string.Empty
-            };
-        }
-    }
 
     protected override void OnInitialized() 
     { 

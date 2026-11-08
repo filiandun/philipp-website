@@ -42,18 +42,8 @@
 
 
 @code {
-    private string Title
-    {
-        get
-        {
-            return this.BottomBarStateService.ActiveSection switch
-            {
-                BottomBarSection.Output=> "Output",
+    private string Title => this.BottomBarStateService.ActiveSection?.GetTitle() ?? string.Empty;
 
-                _ => string.Empty
-            };
-        }
-    }
 
     protected override void OnInitialized()
     {

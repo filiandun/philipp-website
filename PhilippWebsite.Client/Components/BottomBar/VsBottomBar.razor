@@ -10,7 +10,7 @@
 
 
 <div class="vs-bottom-bar-panel">
-    <button class="vs-bottom-bar-btn" @onclick="() => this.BottomBarStateService.Toggle(BottomBarSection.Output)">Output</button>
+    <button class="vs-bottom-bar-btn" @onclick="() => this.BottomBarStateService.Toggle(BottomBarSection.Output)">@BottomBarSection.Output.GetTitle()</button>
 </div>
 
 
