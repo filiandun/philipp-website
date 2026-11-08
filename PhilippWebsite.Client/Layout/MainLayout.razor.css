@@ -98,7 +98,7 @@
                 border-bottom-right-radius: var(--vs-default-borderradius);
             }
 
-            ::deep .vs-acitvity-bar-panel-root {
+            ::deep .vs-activity-bar-panel-root {
                 grid-area: activitybarpanel;
             }
 

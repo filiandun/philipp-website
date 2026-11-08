@@ -1,0 +1,57 @@
+﻿@* VsOutput.razor *@
+
+
+@using PhilippWebsite.Client.Components.Common.Menu
+
+@using PhilippWebsite.Client.Services.OutputLogger
+
+
+@inject OutputLogStore OutputLogStore
+
+
+<div class="vs-output-root">
+    <div class="vs-output-settings">
+        <span class="vs-output-settings-title">Logging minimal level:</span>
+
+        <VsMenu Label="@this._currentLoggingLevel">
+            <VsMenuItem ItemText="Information" OnClick="@(() => this.SetLoggingLevel("Information"))" />
+            <VsMenuItem ItemText="Debug" OnClick="@(() => this.SetLoggingLevel("Debug"))" />
+            <VsMenuItem ItemText="Trace" OnClick="@(() => this.SetLoggingLevel("Trace"))" />
+        </VsMenu>
+    </div>
+
+    <div class="vs-output-logs">
+        @foreach (string log in this._logs)
+        {
+            <span class="vs-output-logs-line">@log</span>
+        }
+    </div>
+</div>
+
+
+@code {
+    private string _currentLoggingLevel = "Information";
+
+    private IEnumerable<string> _logs = [];
+
+
+    protected override void OnInitialized()
+    {
+        this.OutputLogStore.OnLogAdded += this.OnLogAdded;
+
+        this.OnLogAdded();
+    }
+
+
+    private void SetLoggingLevel(string loggingLevel)
+    {
+        this._currentLoggingLevel = loggingLevel;
+    }
+
+    private void OnLogAdded()
+    {
+        this._logs = this.OutputLogStore.GetLogs();
+
+        this.StateHasChanged();
+    }
+}

@@ -1,0 +1,33 @@
+/* CSS for VsOutput component */
+
+
+.vs-output-root {
+    display: flex;
+    flex-direction: column;
+
+    height: 100%;
+    width: 100%;
+
+    gap: 5px;
+
+    overflow: hidden;
+}
+
+    .vs-output-settings {
+        flex-shrink: 0;
+    }
+
+        ::deep .vs-menu-root {
+            background: var(--vs-palette-gray-light);
+        }
+
+    .vs-output-logs {
+        display: flex;
+        flex-direction: column;
+
+        overflow: auto;
+
+        text-wrap: nowrap;
+        font-size: 13px;
+        font-family: Consolas, monospace;
+    }

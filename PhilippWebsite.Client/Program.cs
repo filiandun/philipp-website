@@ -3,12 +3,13 @@ using Microsoft.AspNetCore.Components.WebAssembly.Hosting;
 
 using PhilippWebsite.Client.Clients.EditorContent;
 using PhilippWebsite.Client.Clients.SolutionState;
-
+using PhilippWebsite.Client.Models.BarSections;
 using PhilippWebsite.Client.Services.EditorContent;
 using PhilippWebsite.Client.Services.OutputLogger;
 using PhilippWebsite.Client.Services.SolutionExplorer;
 using PhilippWebsite.Client.Services.SolutionState;
 using PhilippWebsite.Client.Services.TabsBarState;
+using PhilippWebsite.Client.Services.WorkbenchState;
 
 
 namespace PhilippWebsite.Client
@@ -41,6 +42,9 @@ namespace PhilippWebsite.Client
             // services
 
             builder.Services.AddScoped<ISolutionStateInitializer, SolutionStateInitializer>();
+
+            builder.Services.AddScoped<IBarStateService<ActivityBarSection>>(sp => new BarStateService<ActivityBarSection>(sp.GetRequiredService<ILogger<BarStateService<ActivityBarSection>>>(), ActivityBarSection.SolutionExplorer, true));
+            builder.Services.AddScoped<IBarStateService<BottomBarSection>>(sp => new BarStateService<BottomBarSection>(sp.GetRequiredService<ILogger<BarStateService<BottomBarSection>>>()));
 
             builder.Services.AddScoped<ISolutionExplorerService, SolutionExplorerService>();
 

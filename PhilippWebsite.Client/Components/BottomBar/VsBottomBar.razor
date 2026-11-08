@@ -1,0 +1,19 @@
+﻿@* VsBottomBar.razor *@
+
+
+@using PhilippWebsite.Client.Models.BarSections
+
+@using PhilippWebsite.Client.Services.WorkbenchState
+
+
+@inject IBarStateService<BottomBarSection> BottomBarStateService
+
+
+<div class="vs-bottom-bar-panel">
+    <button class="vs-bottom-bar-btn" @onclick="() => this.BottomBarStateService.Toggle(BottomBarSection.Output)">Output</button>
+</div>
+
+
+@code {
+
+}

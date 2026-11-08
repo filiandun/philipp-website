@@ -1,0 +1,73 @@
+@* VsBottomBarPanel.razor *@
+
+
+@using PhilippWebsite.Client.Components.BottomBar.Content
+@using PhilippWebsite.Client.Components.Common
+
+@using PhilippWebsite.Client.Models.BarSections
+
+@using PhilippWebsite.Client.Resources
+
+@using PhilippWebsite.Client.Services.WorkbenchState
+
+
+@implements IDisposable
+
+
+@inject IBarStateService<BottomBarSection> BottomBarStateService;
+
+
+@if (this.BottomBarStateService.IsOpen)
+{
+    <div class="vs-bottom-bar-panel-root @(this.BottomBarStateService.IsPinned ? string.Empty : "absolute")">
+        <div class="vs-bottom-bar-panel-header">
+            <span class="vs-bottom-bar-panel-header-title">@this.Title</span>
+            
+            <div class="vs-bottom-bar-panel-header-controls">
+                <button class="vs-bottom-bar-panel-header-controls-pin" @onclick="this.OnPinClick">
+                    <VsIcon Icon="@(this.BottomBarStateService.IsPinned ? VsIcons.Common.PushPin : VsIcons.Common.Pin)" IconSize="16" />
+                </button>
+
+                <button class="vs-bottom-bar-panel-header-controls-close" @onclick="this.OnCloseClick">
+                    <VsIcon Icon="@VsIcons.Common.Close" IconSize="16" />
+                </button>
+            </div>
+        </div>
+
+        <div class="vs-bottom-bar-panel-content">
+            <VsOutput />
+        </div>
+    </div>
+}
+
+
+@code {
+    private string Title
+    {
+        get
+        {
+            return this.BottomBarStateService.ActiveSection switch
+            {
+                BottomBarSection.Output=> "Output",
+
+                _ => string.Empty
+            };
+        }
+    }
+
+    protected override void OnInitialized()
+    {
+        this.BottomBarStateService.OnChanged += this.StateHasChanged;
+    }
+
+
+    private void OnPinClick() => this.BottomBarStateService.TogglePin();
+
+    private void OnCloseClick() => this.BottomBarStateService.Close();
+
+
+    public void Dispose()
+    {
+        this.BottomBarStateService.OnChanged -= this.StateHasChanged;
+    }
+}
