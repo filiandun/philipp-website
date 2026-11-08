@@ -20,7 +20,7 @@
     }
 
         .vs-solution-explorer-item-head:hover[b-h86cud8mdw] {
-            background-color: var(--vs-palette-action-disabled);
+            background-color: var(--vs-palette-gray-light);
         }
 
         .vs-solution-explorer-item-head-expand[b-h86cud8mdw] {
@@ -105,48 +105,65 @@
 /* /Components/ActivityBar/VsActivityBar.razor.rz.scp.css */
 /* CSS for VsActivityBar component */
 
-.vs-activitybar-root[b-6zlwtfbugx] {
+
+.vs-activity-bar-root[b-6zlwtfbugx] {
     display: flex;
 
     padding: 0px;
 
     flex-shrink: 0;
 }
-/* /Components/ActivityBar/VsActivityBarButton.razor.rz.scp.css */
-/* CSS for VsActivityBarButton component */
 
-.vs-activitybar-btn[b-ql32nwc42z] {
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
+    .vs-activity-bar-btn[b-6zlwtfbugx] {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
 
-    margin-bottom: 5px;
+        margin-bottom: 5px;
 
-    width: 30px;
-    min-height: 30px;
+        width: 30px;
+        min-height: 30px;
 
-    writing-mode: vertical-rl;
+        writing-mode: vertical-rl;
 
-    box-sizing: border-box;
+        box-sizing: border-box;
 
-    cursor: pointer;
+        cursor: pointer;
 
-    border-right: 5px solid var(--vs-palette-surface);
-/*    border-radius: var(--vs-default-borderradius);*/
-}
-
-    .vs-activitybar-btn:hover[b-ql32nwc42z] {
-        border-right: 5px solid var(--vs-palette-primary);
+        border-right: 5px solid var(--vs-palette-surface);
+    /*    border-radius: var(--vs-default-borderradius);*/
     }
+
+        .vs-activity-bar-btn:hover[b-6zlwtfbugx] {
+            border-right: 5px solid var(--vs-palette-primary);
+        }
 /* /Components/ActivityBar/VsActivityBarPanel.razor.rz.scp.css */
 /* CSS for VsSolutionExplorerPanel component */
 
 
-.vs-activitybar-panel-root[b-3tx2fv4x6j] {
-    position: absolute;
-    top: 0;
-    right: 30px;
+*[b-3tx2fv4x6j] {
+    scrollbar-width: thin;
+}
 
+[b-3tx2fv4x6j]::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
+}
+
+    [b-3tx2fv4x6j]::-webkit-scrollbar:hover {
+        background: var(--vs-palette-gray-light)
+    }
+
+    [b-3tx2fv4x6j]::-webkit-scrollbar:active {
+        background: var(--vs-palette-gray-light)
+    }
+
+[b-3tx2fv4x6j]::-webkit-scrollbar-thumb {
+    border: 2px solid transparent;
+}
+
+
+.vs-activity-bar-panel-root[b-3tx2fv4x6j] {
     display: flex;
     flex-direction: column;
 
@@ -154,19 +171,29 @@
     height: 100%;
     min-width: 0;
 
+    margin-left: 5px;
+
     overflow: hidden;
 
     background: var(--vs-palette-surface);
 
     border: 1px solid var(--vs-palette-primary);
     border-radius: var(--vs-default-borderradius);
-
-    box-shadow: -5px 0 0 2.5px var(--vs-palette-background);
-
-    z-index: 10;
 }
 
-    .vs-activitybar-panel-header[b-3tx2fv4x6j] {
+    .vs-activity-bar-panel-root.absolute[b-3tx2fv4x6j] {
+        position: absolute;
+        top: 0;
+        right: 0;
+
+        margin-left: 5px;
+
+        box-shadow: -5px 0 0 2.5px var(--vs-palette-background);
+
+        z-index: 10;
+    }
+
+    .vs-activity-bar-panel-header[b-3tx2fv4x6j] {
         display: flex;
         flex-direction: row;
         justify-content: space-between;
@@ -177,12 +204,150 @@
         background: var(--vs-palette-surface);
     }
 
-    .vs-activitybar-panel-content[b-3tx2fv4x6j] {
+        .vs-activity-bar-panel-header-controls[b-3tx2fv4x6j] {
+            display: flex;
+            gap: 10px;
+        }
+
+    .vs-activity-bar-panel-content[b-3tx2fv4x6j] {
         position: relative;
 
         flex: 1;
         width: 100%;
         height: 100%;
+
+        padding: 5px 10px;
+
+        box-sizing: padding-box;
+
+        overflow: auto;
+    }
+/* /Components/BottomBar/Content/VsOutput.razor.rz.scp.css */
+/* CSS for VsOutput component */
+
+
+.vs-output-root[b-7sm4glt2dz] {
+    display: flex;
+    flex-direction: column;
+
+    height: 100%;
+    width: 100%;
+
+    gap: 5px;
+
+    overflow: hidden;
+}
+
+    .vs-output-settings[b-7sm4glt2dz] {
+        flex-shrink: 0;
+    }
+
+        [b-7sm4glt2dz] .vs-menu-root {
+            background: var(--vs-palette-gray-light);
+        }
+
+    .vs-output-logs[b-7sm4glt2dz] {
+        display: flex;
+        flex-direction: column;
+
+        overflow: auto;
+
+        text-wrap: nowrap;
+        font-size: 13px;
+        font-family: Consolas, monospace;
+    }
+/* /Components/BottomBar/VsBottomBar.razor.rz.scp.css */
+/* CSS for VsBottomBar component */
+
+
+.vs-bottom-bar-root[b-2gp9ezkoy7] {
+    display: flex;
+    padding: 0px;
+
+    flex-shrink: 0;
+}
+
+
+    .vs-bottom-bar-btn[b-2gp9ezkoy7] {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+
+        margin-bottom: 5px;
+
+        min-width: 30px;
+        height: 30px;
+
+        text-wrap: nowrap;
+
+        box-sizing: border-box;
+
+        cursor: pointer;
+
+        border-bottom: 5px solid var(--vs-palette-surface);
+    /*    border-radius: var(--mud-default-borderradius);*/
+    }
+
+        .vs-bottom-bar-btn:hover[b-2gp9ezkoy7] {
+            border-bottom: 5px solid var(--vs-palette-primary);
+        }
+/* /Components/BottomBar/VsBottomBarPanel.razor.rz.scp.css */
+/* CSS for VsBottomBarPanel component */
+
+
+.vs-bottom-bar-panel-root[b-u0ehibn7sm] {
+    display: flex;
+    flex-direction: column;
+
+    width: 100%;
+    height: 200px;
+
+    margin-top: 5px;
+
+    overflow: hidden;
+
+    background: var(--vs-palette-surface);
+
+    border: 1px solid var(--vs-palette-primary);
+    border-radius: var(--vs-default-borderradius);
+
+    z-index: 11;
+}
+
+    .vs-bottom-bar-panel-root.absolute[b-u0ehibn7sm] {
+        position: absolute;
+        left: 0;
+        bottom: 0;
+
+        margin-top: 0px;
+
+        box-shadow: -5px 0 0 8px var(--vs-palette-background);
+
+        z-index: 11;
+    }
+
+    .vs-bottom-bar-panel-header[b-u0ehibn7sm] {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        flex-shrink: 0; 
+
+        padding: 5px 10px;
+
+        background: var(--vs-palette-surface);
+    }
+
+        .vs-bottom-bar-panel-header-controls[b-u0ehibn7sm] {
+            display: flex;
+            gap: 10px;
+        }
+
+    .vs-bottom-bar-panel-content[b-u0ehibn7sm] {
+        position: relative;
+
+        flex: 1;
+        width: 100%;
+        height: 100px;
 
         padding: 5px 10px;
 
@@ -201,8 +366,6 @@
     padding: 5px 10px;
 
     font-size: 15px;
-    font-weight: 300;
-    color: white;
 
     border-radius: var(--vs-default-borderradius);
 }
@@ -250,7 +413,7 @@
 }
 
     .vs-menu-item-root:hover[b-4rosdnlvxr] {
-        background-color: var(--vs-palette-action-disabled);
+        background-color: var(--vs-palette-gray-light);
     }
 
 [b-4rosdnlvxr] .vs-menu-item-icon {
@@ -261,6 +424,252 @@
 .vs-menu-item-text[b-4rosdnlvxr] {
     text-wrap: nowrap;
 }
+/* /Components/Editor/VsCodeEditor.razor.rz.scp.css */
+/* CSS for VsCodeEditor component */
+
+
+.vs-editor-root[b-qozms2bgte] {
+    position: relative;
+    display: inline-block;
+
+    min-width: 100%;
+    min-height: 100%;
+}
+    
+    .vs-editor-lines[b-qozms2bgte] {
+        white-space: pre;
+
+        font-family: "Cascadia Mono", "Cascadia Code", Consolas, monospace;
+
+        font-size: 13px;
+        font-weight: 400;
+    }
+
+
+        .vs-editor-line[b-qozms2bgte] {
+            display: flex;
+
+            line-height: 18px;  
+            height: 18px;
+
+            text-wrap: nowrap;
+
+            mask-image: linear-gradient(to right, #000 2px, #000 2px);
+            mask-repeat: no-repeat;
+  
+            mask-size: 100% 0px; 
+
+            animation: revealByPixelsRight-b-qozms2bgte 0.5s linear var(--line-anim-duration, 0s) forwards;
+        }
+
+            @keyframes revealByPixelsRight-b-qozms2bgte {
+                from {
+                    mask-size: 0px 100%;
+                }
+
+                to {
+                    mask-size: 100% 100%;
+                }
+            }
+
+            .vs-editor-line:hover[b-qozms2bgte] {
+                background-color: var(--vs-palette-surface);
+
+            }
+
+            .vs-editor-line-gutter[b-qozms2bgte] {
+                position: sticky;
+                left: 0;
+
+                min-width: 50px;
+
+                flex-shrink: 0;
+
+                padding-left: 20px;
+                padding-right: 15px;
+                margin-right: 10px;
+
+                text-align: right;
+                user-select: none;
+
+                box-sizing: border-box;
+
+                color: var(--vs-palette-text-secondary);
+                background-color: var(--vs-palette-background);
+            }  
+
+                .vs-editor-line:hover .vs-editor-line-gutter[b-qozms2bgte] {
+                    color: var(--vs-palette-text-primary);
+
+                    background-color: var(--vs-palette-surface);
+                    box-shadow: inset 3px 0 0 0 var(--vs-palette-primary);
+                }
+        
+            .vs-editor-line-content[b-qozms2bgte] {
+       
+            }
+
+
+
+.vs-editor-skeleton[b-qozms2bgte] {
+    position: absolute;
+    inset: 0;
+
+    overflow: hidden;
+}
+
+    .vs-editor-skeleton[b-qozms2bgte]::after {
+        content: "";
+        position: absolute;
+        inset: 0;
+
+        background: linear-gradient(90deg, transparent, var(--vs-palette-surface), transparent);
+        animation: shimmer-b-qozms2bgte 1.5s infinite;
+    }
+
+@keyframes shimmer-b-qozms2bgte {
+    0% {
+        transform: translateX(-100%);
+    }
+
+    100% {
+        transform: translateX(100%);
+    }
+}
+/* /Components/Layout/ToolBar/VsToolbar.razor.rz.scp.css */
+/* CSS for VsToolbar component */
+
+.vs-tool-bar-root[b-2tqyvddai0] {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+/*    .vs-tool-bar-root.disabled {
+        pointer-events: none;
+        cursor: not-allowed;
+    }*/
+
+/*    .vs-tool-bar-root::after {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+
+        background-color: rgba(0, 0, 0, 0.35);
+        border-radius: var(--vs-default-borderradius);
+
+        pointer-events: auto;
+        z-index: 10;
+    }*/
+
+    .vs-tool-bar-panel[b-2tqyvddai0] {
+        display: flex;
+        flex-direction: row;
+
+        width: fit-content;
+
+        padding: 3px;
+        margin-right: 10px;
+
+        color: var(--vs-pallete-textprimary);
+
+        background: var(--vs-palette-surface);
+
+        border: 1px solid var(--vs-palette-black);
+        border-left-width: 5px;
+        border-radius: var(--vs-default-borderradius);
+    }
+/* /Components/Layout/ToolBar/VsToolbarButton.razor.rz.scp.css */
+/* CSS for VsIconButton component */
+
+.vs-toolbar-btn[b-nbndkl18tf] {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+
+    min-width: 30px;
+    height: 30px;
+
+    padding: 1px;
+    margin: 0 5px;
+
+    box-sizing: border-box;
+
+    cursor: pointer;
+
+    border-radius: var(--vs-default-borderradius);
+}
+
+    .vs-toolbar-btn:hover[b-nbndkl18tf] {
+        background-color: var(--vs-palette-gray-light);
+    }
+
+.vs-toolbar-text[b-nbndkl18tf] {
+    padding: 5px
+}
+/* /Components/Layout/VsStatusBar.razor.rz.scp.css */
+/* CSS for VsStatusBar component */
+
+
+.vs-status-bar-root[b-ioci6qk0s5] {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+
+    padding: 5px 10px;
+
+    background: var(--vs-palette-black);
+}
+
+.vs-status-bar-root-left[b-ioci6qk0s5], .vs-status-bar-root-right[b-ioci6qk0s5] {
+    display: flex;
+    gap: 16px;
+}
+/* /Components/Layout/VsTitleBar.razor.rz.scp.css */
+/* CSS for VsTitleBar component */
+
+
+.vs-title-bar-root[b-6h90q3mnrn] {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    font-size: 12px;
+}
+
+    .vs-title-bar-header[b-6h90q3mnrn] {
+        display: inline-flex;
+        align-items: center;
+    }
+
+        .vs-title-bar-menu[b-6h90q3mnrn] {
+            margin-left: 20px;
+        }
+
+        .vs-title-bar-solution-name[b-6h90q3mnrn] {
+            align-content: center;
+            padding: 5px 10px;
+            margin-left: 30px;
+
+            min-width: 100px;
+
+            color: var(--vs-palette-text-active);
+
+            background: var(--vs-palette-surface);
+
+            border: 1px solid rgb(0, 0, 0);
+            border-radius: var(--vs-default-borderradius);
+        }
+
+        .vs-title-bar-close[b-6h90q3mnrn] {
+
+        }
+
+            [b-6h90q3mnrn] .vs-close-btn {
+                margin-left: auto;
+            }
 /* /Components/TabsBar/VsTabsBar.razor.rz.scp.css */
 /* CSS for VsTabsBar component */
 
@@ -379,175 +788,21 @@
             .vs-tabsbar-tab:hover .vs-tabsbar-tab-close[b-v4hgzhx2fn] {
                 visibility: visible;
             }
-/* /Components/ToolBar/VsToolbar.razor.rz.scp.css */
-/* CSS for VsToolbar component */
+/* /Layout/MainLayout.razor.rz.scp.css */
+/* CSS for MainLayout component */
 
 
-.vs-toolbar[b-0earivh3l5] {
-    display: flex;
-    flex-direction: row;
+.vs-window[b-m2z3qs3z9j] {
+    display: grid; 
 
-    width: fit-content;
-
-    padding: 3px;
-
-    color: var(--vs-pallete-textprimary);
-
-    background: var(--vs-palette-surface);
-
-    border: 1px solid rgb(0, 0, 0);
-    border-left-width: 4px;
-    border-radius: var(--vs-default-borderradius);
-}
-/* /Components/ToolBar/VsToolbarButton.razor.rz.scp.css */
-/* CSS for VsIconButton component */
-
-.vs-toolbar-btn[b-r7l9yh0kb1] {
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-
-    min-width: 30px;
-    height: 30px;
-
-    padding: 1px;
-    margin: 0 5px;
-
-    box-sizing: border-box;
-
-    cursor: pointer;
-
-    border-radius: var(--vs-default-borderradius);
-}
-
-    .vs-toolbar-btn:hover[b-r7l9yh0kb1] {
-        background-color: var(--vs-palette-action-disabled);
-    }
-
-.vs-toolbar-text[b-r7l9yh0kb1] {
-    padding: 5px
-}
-/* /Components/VsCodeEditor.razor.rz.scp.css */
-/* CSS for VsCodeEditor component */
-
-
-.vs-editor-root[b-tgm4apgeel] {
-    position: relative;
-    display: inline-block;
-
-    min-width: 100%;
-    min-height: 100%;
-}
-    
-    .vs-editor-lines[b-tgm4apgeel] {
-        white-space: pre;
-
-        font-family: "Cascadia Mono", "Cascadia Code", Consolas, monospace;
-
-        font-size: 13px;
-        font-weight: 400;
-    }
-
-
-        .vs-editor-line[b-tgm4apgeel] {
-            display: flex;
-
-            line-height: 18px;  
-            height: 18px;
-
-            text-wrap: nowrap;
-
-            mask-image: linear-gradient(to right, #000 2px, #000 2px);
-            mask-repeat: no-repeat;
-  
-            mask-size: 100% 0px; 
-
-            animation: revealByPixelsRight-b-tgm4apgeel 0.5s linear var(--line-anim-duration, 0s) forwards;
-        }
-
-            @keyframes revealByPixelsRight-b-tgm4apgeel {
-                from {
-                    mask-size: 0px 100%;
-                }
-
-                to {
-                    mask-size: 100% 100%;
-                }
-            }
-
-            .vs-editor-line:hover[b-tgm4apgeel] {
-                background-color: var(--vs-palette-surface);
-
-            }
-
-            .vs-editor-line-gutter[b-tgm4apgeel] {
-                position: sticky;
-                left: 0;
-
-                min-width: 50px;
-
-                flex-shrink: 0;
-
-                padding-left: 20px;
-                padding-right: 15px;
-                margin-right: 10px;
-
-                text-align: right;
-                user-select: none;
-
-                box-sizing: border-box;
-
-                color: var(--vs-palette-text-secondary);
-                background-color: var(--vs-palette-background);
-            }  
-
-                .vs-editor-line:hover .vs-editor-line-gutter[b-tgm4apgeel] {
-                    color: var(--vs-palette-text-primary);
-
-                    background-color: var(--vs-palette-surface);
-                    box-shadow: inset 3px 0 0 0 var(--vs-palette-primary);
-                }
-        
-            .vs-editor-line-content[b-tgm4apgeel] {
-       
-            }
-
-
-
-.vs-editor-skeleton[b-tgm4apgeel] {
-    position: absolute;
-    inset: 0;
+    grid-template-rows: auto 1fr auto;
+    grid-template-areas: 
+        "header"
+        "workbench" 
+        "footer";
 
     overflow: hidden;
-}
-
-    .vs-editor-skeleton[b-tgm4apgeel]::after {
-        content: "";
-        position: absolute;
-        inset: 0;
-
-        background: linear-gradient(90deg, transparent, var(--vs-palette-surface), transparent);
-        animation: shimmer-b-tgm4apgeel 1.5s infinite;
-    }
-
-@keyframes shimmer-b-tgm4apgeel {
-    0% {
-        transform: translateX(-100%);
-    }
-
-    100% {
-        transform: translateX(100%);
-    }
-}
-/* /Pages/Home.razor.rz.scp.css */
-/* CSS for Home component */
-
-
-.vs-window[b-me5k47xywg] {
-    display: flex;
-    flex-direction: column;
-    overflow: hidden;
-    padding: 10px 5px 10px 10px;
+    flex-shrink: 0;
 
     height: 100vh;
     width: 100vw;
@@ -562,140 +817,103 @@
     user-select: none;
 }
 
+    .vs-header[b-m2z3qs3z9j] {
+        grid-area: header;
 
-.vs-header[b-me5k47xywg] {
-    flex-shrink: 0;
-        
-    background: var(--vs-palette-background);
-}
-
-.vs-titlebar[b-me5k47xywg] {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    
-    margin-bottom: 10px;
-
-    font-size: 12px;
-}
-
-    .vs-titlebar-left[b-me5k47xywg] {
-        display: inline-flex;
-        align-items: center;
-    }
-
-        .vs-menu-list[b-me5k47xywg] {
-
-        }
-
-        .vs-solution-name[b-me5k47xywg] {
-            padding: 5px 10px;
-
-            color: var(--vs-palette-textprimary);
-
-            background: var(--vs-palette-surface);
-
-            border: 1px solid rgb(0, 0, 0);
-            border-radius: var(--vs-default-borderradius);
-        }
-
-        [b-me5k47xywg] .vs-close-btn {
-            margin-left: auto;
-        }
-
-
-
-.vs-toolbars[b-me5k47xywg] {
-    display: flex;
-    flex-wrap: wrap;
-
-    margin-bottom: 20px;
-}
-    
-    [b-me5k47xywg] .vs-toolbar {
-        margin-right: 5px;
-    }
-
-
-.vs-workbench[b-me5k47xywg] {
-    position: relative;
-    display: flex;
-    flex-direction: row;
-
-    margin-bottom: 5px;
-
-    flex: 1;
-    min-width: 0;
-    min-height: 0;
-
-    overflow: hidden;
-}
-
-
-    .vs-editor-viewport[b-me5k47xywg] {
-        position: relative;
-        display: flex;
+        display: flex; 
         flex-direction: column;
+        flex-shrink: 0;
+        
+        gap: 15px;
+        padding: 10px 10px 0px 10px;
 
-        flex: 1;
-        min-width: 0;
-        min-height: 0;
+        margin-bottom: 20px;
+
+        background: var(--vs-palette-background);
+    }
+
+    .vs-workbench[b-m2z3qs3z9j] {
+        display: grid;
+        grid-area: workbench;
+
+        grid-template-columns: 1fr auto;
+        grid-template-rows: 1fr auto;
+        grid-template-areas: 
+            "viewport activitybar"
+            "bottombar bottombar";
+
+        gap: 5px;
+
+        position: relative;
+
+        padding: 0px 5px 0px 10px;
 
         box-sizing: padding-box;
+
+        overflow: hidden;
     }
 
-    
-        .vs-tabsbar[b-me5k47xywg] {
-            position: relative;
-            flex-shrink: 0;
+        .vs-workbench-viewport[b-m2z3qs3z9j] {
+            grid-area: viewport;
 
-            z-index: 2;
-        }
-
-
-        .vs-editor-content[b-me5k47xywg] {
+            display: grid;
             position: relative;
 
-            flex: 1;
-            width: 100%;
-            height: 100%;
+            grid-template-columns: 1fr auto;
+            grid-template-rows: auto 1fr auto;
+            grid-template-areas: 
+                "tabsbar        activitybarpanel"
+                "content        activitybarpanel"
+                "bottombarpanel activitybarpanel";
 
-            overflow-y: auto;
-            overflow-x: auto;
+            overflow: hidden;
+        }
+        
+            [b-m2z3qs3z9j] .vs-tabsbar-root {
+                grid-area: tabsbar;
+            }
 
-            user-select: text;
+            .vs-workbench-viewport-content[b-m2z3qs3z9j] {
+                grid-area: content;
 
-            border: 1px solid var(--vs-palette-primary);
+                flex: 1;
+                width: 100%;
+                height: 100%;
 
-            border-bottom-left-radius: var(--vs-default-borderradius);
-            border-bottom-right-radius: var(--vs-default-borderradius);
+                overflow: auto;
+                user-select: text;
+
+                border: 1px solid var(--vs-palette-primary);
+
+                border-bottom-left-radius: var(--vs-default-borderradius);
+                border-bottom-right-radius: var(--vs-default-borderradius);
+            }
+
+            [b-m2z3qs3z9j] .vs-activity-bar-panel-root {
+                grid-area: activitybarpanel;
+            }
+
+            [b-m2z3qs3z9j] .vs-bottom-bar-panel-root {
+                grid-area: bottombarpanel;
+            }
+
+
+        [b-m2z3qs3z9j] .vs-activity-bar-root {
+            grid-area: activitybar;
+            
+            justify-self: start;
+            align-self: start; 
         }
 
-    .vs-activitybar[b-me5k47xywg] {
-        flex-shrink: 0;
+        [b-m2z3qs3z9j] .vs-bottom-bar-panel {
+            grid-area: bottombar;
+            
+            justify-self: start;
+            align-self: start; 
+        }
+
+    .vs-footer[b-m2z3qs3z9j] {
+        grid-area: footer;
+
     }
-
-
-.vs-statusbar[b-me5k47xywg] {
-    height: 24px;
-    background-color: #854cc7;
-    color: #ffffff;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 0 10px;
-    font-size: 12px;
-    flex-shrink: 0;
-}
-
-.vs-footer[b-me5k47xywg] {
-    display: flex;
-    flex-direction: row;
-
-    justify-content: space-between;
-}
-
-.vs-footer-status-left[b-me5k47xywg], .vs-footer-status-right[b-me5k47xywg] {
-    display: flex;
-    gap: 16px;
-}
+/* /Pages/Home.razor.rz.scp.css */
